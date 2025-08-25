@@ -100,4 +100,5 @@ MOVGT r1, r2           ; Move if greater than
 
 ## Documentation
 
+- [**Processor Specification**](https://docs.google.com/document/d/1DuiCx4umcvke7nLoEkwZ88nDAkik9E7XjcUhpIfQXF0/edit?usp=sharing) - Processor Specification
 - [**Module 1**](https://docs.google.com/document/d/1V2ExKlazTVMAgaIZj6pLaYQdCW4eW_aBg_MQCaqPaZ8/edit?usp=sharing) - Module 1 Specifications
