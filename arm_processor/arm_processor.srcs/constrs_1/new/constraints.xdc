@@ -8,3 +8,4 @@ set_property IOSTANDARD LVCMOS33 [get_ports reset]
 # LED outputs for debugging (optional)
 set_property PACKAGE_PIN M14 [get_ports pc_current[0]]
 set_property IOSTANDARD LVCMOS33 [get_ports pc_current[0]]
+
