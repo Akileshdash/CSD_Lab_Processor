@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Mon Aug 25 14:48:55 2025
+# Process ID: 5320
+# Current directory: /home/ssl53/csd/CSD_Lab_Processor
+# Command line: vivado
+# Log file: /home/ssl53/csd/CSD_Lab_Processor/vivado.log
+# Journal file: /home/ssl53/csd/CSD_Lab_Processor/vivado.jou
+# Running On: CSE-SSL-53, OS: Linux, CPU Frequency: 800.000 MHz, CPU Physical cores: 24, Host memory: 67093 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/ssl53/csd/CSD_Lab_Processor/arm_processor/arm_processor.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source tb_instruction_fetch.tcl
