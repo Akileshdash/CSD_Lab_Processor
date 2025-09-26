@@ -9,10 +9,10 @@
 <ENTRY>
 {
  "type": "ET_CmdStep",
- "dateTimestamp": "Fri Sep 26 16:02:54 2025",
- "timestampMillis": "1758882774580",
+ "dateTimestamp": "Fri Sep 26 19:19:50 2025",
+ "timestampMillis": "1758894590971",
  "buildStep": {
-  "cmdId": "ab614a31-0657-48ea-b160-0ad33a39c805",
+  "cmdId": "f765ef05-d447-44ed-bae7-542483cf03e1",
   "name": "vitis-run",
   "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/logs/CortexM0_IP.steps.log",
   "commandLine": "/tools/2025.1/Vitis/bin/unwrapped/lnx64.o/vitis-run  --mode hls --csim --config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg --work_dir CortexM0_IP ",
@@ -33,10 +33,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Fri Sep 26 16:02:54 2025",
- "timestampMillis": "1758882774580",
+ "dateTimestamp": "Fri Sep 26 19:19:50 2025",
+ "timestampMillis": "1758894590971",
  "status": {
-  "cmdId": "ab614a31-0657-48ea-b160-0ad33a39c805",
+  "cmdId": "f765ef05-d447-44ed-bae7-542483cf03e1",
   "state": "CS_RUNNING"
  }
 }
@@ -44,8 +44,8 @@
 <ENTRY>
 {
  "type": "ET_FlowMetaData",
- "dateTimestamp": "Fri Sep 26 16:02:56 2025",
- "timestampMillis": "1758882776009",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592408",
  "buildSummary": {
   "hardwarePlatform": "",
   "hardwareDsa": "",
@@ -72,7 +72,9 @@
      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h",
      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c",
      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h",
-     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c"
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c"
     ],
     "psSources": [],
     "cuNames": [],
@@ -88,10 +90,10 @@
 <ENTRY>
 {
  "type": "ET_SubCmdStep",
- "dateTimestamp": "Fri Sep 26 16:02:56 2025",
- "timestampMillis": "1758882776010",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592409",
  "buildStep": {
-  "cmdId": "89c2a25b-3bcb-4d6a-8ed2-0f223be91feb",
+  "cmdId": "05c7abd0-533d-46dd-8182-bd7ad2b3b5ef",
   "name": "",
   "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/hls.log",
   "commandLine": "",
@@ -104,10 +106,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Fri Sep 26 16:02:56 2025",
- "timestampMillis": "1758882776010",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592409",
  "status": {
-  "cmdId": "89c2a25b-3bcb-4d6a-8ed2-0f223be91feb",
+  "cmdId": "05c7abd0-533d-46dd-8182-bd7ad2b3b5ef",
   "state": "CS_RUNNING"
  }
 }
@@ -115,10 +117,10 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Fri Sep 26 16:02:57 2025",
- "timestampMillis": "1758882777369",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592641",
  "status": {
-  "cmdId": "89c2a25b-3bcb-4d6a-8ed2-0f223be91feb",
+  "cmdId": "05c7abd0-533d-46dd-8182-bd7ad2b3b5ef",
   "state": "CS_PASSED"
  }
 }
@@ -126,19 +128,19 @@
 <ENTRY>
 {
  "type": "ET_Status",
- "dateTimestamp": "Fri Sep 26 16:02:57 2025",
- "timestampMillis": "1758882777405",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592677",
  "status": {
-  "cmdId": "ab614a31-0657-48ea-b160-0ad33a39c805",
-  "state": "CS_FAILED"
+  "cmdId": "f765ef05-d447-44ed-bae7-542483cf03e1",
+  "state": "CS_PASSED"
  }
 }
 </ENTRY>
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "Fri Sep 26 16:02:57 2025",
- "timestampMillis": "1758882777405",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592678",
  "report": {
   "path": "",
   "name": "",
@@ -151,8 +153,8 @@
 <ENTRY>
 {
  "type": "ET_Report",
- "dateTimestamp": "Fri Sep 26 16:02:57 2025",
- "timestampMillis": "1758882777405",
+ "dateTimestamp": "Fri Sep 26 19:19:52 2025",
+ "timestampMillis": "1758894592678",
  "report": {
   "path": "",
   "name": "",

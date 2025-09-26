@@ -3,10 +3,11 @@
 
 #include <stdint.h>
 #include "regfile.h"
+#include "decode.h"   // for thumb_operation_t
 
 // EX stage input structure
 typedef struct {
-    uint32_t opcode;
+    thumb_operation_t opcode;  // Now we use the Thumb enum
     uint32_t reg_data1;
     uint32_t reg_data2;
     uint32_t rd;

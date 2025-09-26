@@ -2,57 +2,108 @@
 #include "alu.h"
 #include "regfile.h"
 #include <stdint.h>
-#include "stdio.h"
+#include <stdio.h>
 
 EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
     EX_output_t out = {0};
 
-    // Get carry flag for ADCS/SBCS
-    uint32_t carry_in = (regs->apsr & 0x20000000) ? 1 : 0; // Example: C flag in APSR bit 29
+    uint32_t carry_in = (regs->apsr & 0x20000000) ? 1 : 0; // C flag
 
-    // Debug: Print input operands
-    printf("[DEBUG] EXECUTE: Opcode=%u, Rd=%u, Operand1=0x%08X, Operand2=0x%08X, CarryIn=%u\n",
-           input.opcode, input.rd, input.reg_data1, input.reg_data2, carry_in);
-    // Compute ALU result
-    out.alu_result = alu_compute(input.opcode, input.reg_data1, input.reg_data2, carry_in);
+    printf("[DEBUG] EXECUTE: Opcode=%s, Rd=%u, Operand1=0x%08X, Operand2=0x%08X, CarryIn=%u\n",
+           get_operation_name(input.opcode), input.rd, input.reg_data1, input.reg_data2, carry_in);
 
-    // Update flags only for arithmetic instructions that end with S
-    switch(input.opcode) {
-        case 1: // ADDS
-        case 2: // ADCS
-        case 3: // RSBS
-        case 4: // SUBS
-        case 5: // SBCS
+    switch (input.opcode) {
+        // ---------------- Arithmetic ----------------
+        case THUMB_ADD_REG:
+        case THUMB_ADD_IMM3:
+        case THUMB_ADD_IMM8:
         {
-            uint32_t carry = 0;
-            uint32_t overflow = 0;
-
-            if(input.opcode == 1 || input.opcode == 2) { // ADD / ADCS
-                uint64_t temp = (uint64_t)input.reg_data1 + (uint64_t)input.reg_data2 + (input.opcode==2 ? carry_in : 0);
-                carry = (temp > 0xFFFFFFFF) ? 1 : 0;
-
-                // Overflow: same sign operands, different sign result
-                if(((input.reg_data1 ^ out.alu_result) & (input.reg_data2 ^ out.alu_result)) & 0x80000000)
-                    overflow = 1;
-
-            } else if(input.opcode == 3) { // RSBS
-                carry = (out.alu_result <= 0xFFFFFFFF) ? 1 : 0;
-                overflow = ((0 ^ input.reg_data2) & (0 ^ out.alu_result)) & 0x80000000 ? 1 : 0;
-
-            } else { // SUB / SBC
-                uint64_t temp = (uint64_t)input.reg_data1 - (uint64_t)input.reg_data2 - (input.opcode==5 ? (1 - carry_in) : 0);
-                carry = (temp <= 0xFFFFFFFF) ? 1 : 0;
-                if(((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ out.alu_result)) & 0x80000000)
-                    overflow = 1;
-            }
-
-            // Update APSR flags
+            uint64_t temp = (uint64_t)input.reg_data1 + input.reg_data2;
+            out.alu_result = (uint32_t)temp;
+            uint32_t carry = (temp > 0xFFFFFFFF);
+            uint32_t overflow = (((input.reg_data1 ^ out.alu_result) & (input.reg_data2 ^ out.alu_result)) & 0x80000000) != 0;
             regfile_update_flags(regs, out.alu_result, carry, overflow);
             out.carry = carry;
             out.overflow = overflow;
             break;
         }
+        case THUMB_SUB_REG:
+        case THUMB_SUB_IMM3:
+        case THUMB_SUB_IMM8:
+        {
+            int64_t temp = (int64_t)input.reg_data1 - (int64_t)input.reg_data2;
+            out.alu_result = (uint32_t)temp;
+            uint32_t carry = (input.reg_data1 >= input.reg_data2);
+            uint32_t overflow = (((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ out.alu_result)) & 0x80000000) != 0;
+            regfile_update_flags(regs, out.alu_result, carry, overflow);
+            out.carry = carry;
+            out.overflow = overflow;
+            break;
+        }
+
+        // ---------------- Logical ----------------
+        case THUMB_AND:
+            out.alu_result = input.reg_data1 & input.reg_data2;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        case THUMB_ORR:
+            out.alu_result = input.reg_data1 | input.reg_data2;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        case THUMB_EOR:
+            out.alu_result = input.reg_data1 ^ input.reg_data2;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        case THUMB_MVN:
+            out.alu_result = ~input.reg_data2;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+
+        // ---------------- Move/compare ----------------
+        case THUMB_MOV_REG:
+        case THUMB_MOV_IMM:
+            out.alu_result = input.reg_data2; // MOV just copies operand2
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        case THUMB_CMP_REG:
+        case THUMB_CMP_IMM:
+        {
+            uint32_t result = input.reg_data1 - input.reg_data2;
+            uint32_t carry = (input.reg_data1 >= input.reg_data2);
+            uint32_t overflow = (((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ result)) & 0x80000000) != 0;
+            regfile_update_flags(regs, result, carry, overflow);
+            out.alu_result = result; // but not written back
+            break;
+        }
+
+        // ---------------- Load/Store (address calculation only here) ----------------
+        case THUMB_LDR_IMM:
+        case THUMB_LDR_REG:
+        case THUMB_STR_IMM:
+        case THUMB_STR_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2; // effective address
+            break;
+
+        // ---------------- Branches (PC will be updated in processor.c) ----------------
+        case THUMB_B:
+        case THUMB_BCC:   // conditional, condition check should be done earlier
+        {
+            // NOTE: input.reg_data1 could carry PC if we decide that in ID stage
+            // Here, assume regs->pc contains current PC (byte address)
+            uint32_t pc = regfile_get_pc(regs);
+            out.alu_result = pc + (int32_t)input.reg_data2;  // reg_data2 holds imm offset
+            break;
+        }
+
+        case THUMB_BX:
+        case THUMB_BLX_REG:
+            out.alu_result = input.reg_data1 & ~1U; // align to halfword
+            break;
+
+        // ---------------- Default ----------------
         default:
+            printf("[WARN] EXECUTE: Unhandled opcode %s\n", get_operation_name(input.opcode));
+            out.alu_result = 0;
             break;
     }
 

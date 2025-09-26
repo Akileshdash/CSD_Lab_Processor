@@ -5,6 +5,64 @@
 #include "decode.h"
 #include "regfile.h"
 
+static inline int thumb_writes_register(thumb_operation_t op) {
+    switch (op) {
+        // Arithmetic / data-processing (that write Rd)
+        case THUMB_MOV_REG:
+        case THUMB_MOV_IMM:
+        case THUMB_ADD_REG:
+        case THUMB_ADD_IMM3:
+        case THUMB_ADD_IMM8:
+        case THUMB_SUB_REG:
+        case THUMB_SUB_IMM3:
+        case THUMB_SUB_IMM8:
+        case THUMB_AND:
+        case THUMB_EOR:
+        case THUMB_ORR:
+        case THUMB_BIC:
+        case THUMB_MVN:
+        case THUMB_LSL_IMM:
+        case THUMB_LSR_IMM:
+        case THUMB_ASR_IMM:
+        case THUMB_LSL_REG:
+        case THUMB_LSR_REG:
+        case THUMB_ASR_REG:
+        case THUMB_ADC:
+        case THUMB_SBC:
+        case THUMB_ROR:
+        case THUMB_RSB:
+            return 1;
+
+        // Memory loads
+        case THUMB_LDR_IMM:
+        case THUMB_LDR_REG:
+        case THUMB_LDRB_IMM:
+        case THUMB_LDRB_REG:
+        case THUMB_LDRH_IMM:
+        case THUMB_LDRH_REG:
+        case THUMB_LDRSB_REG:
+        case THUMB_LDRSH_REG:
+        case THUMB_LDR_LIT:
+            return 1;
+
+        // Special high register ops
+        case THUMB_MOV_HIGH:
+        case THUMB_ADD_HIGH:
+            return 1;
+
+        // Branches / PC-affecting ops handled separately in WB stage
+        case THUMB_B:
+        case THUMB_BCC:
+        case THUMB_BX:
+        case THUMB_BLX_REG:
+        case THUMB_POP:
+            return 0;
+
+        default:
+            return 0;
+    }
+}
+
 void cortex_m0_top(
     volatile uint32_t* instr_mem,
     volatile uint32_t* data_mem,
@@ -27,12 +85,38 @@ void cortex_m0_top(
     static cortex_m0_registers_t core_regs;
 
     if(reset) {
-        // Reset all pipeline stages
+        // Reset IF stage
         IF.pc = 0;
-        ID = (ID_stage){0};
-        EX = (EX_stage){0};
-        MEM = (MEM_stage){0};
-        WB = (WB_stage){0};
+        IF.instr = 0;
+
+        // Reset ID stage
+        ID.pc = 0;
+        ID.instr = 0;
+        ID.reg_data1 = 0;
+        ID.reg_data2 = 0;
+        ID.opcode = THUMB_INVALID;
+        ID.rd = 0;
+        ID.rs1 = 0;
+        ID.rs2 = 0;
+        ID.immediate_flag = 0;
+        ID.imm_value = 0;
+
+        // Reset EX stage
+        EX.opcode = THUMB_INVALID;
+        EX.alu_result = 0;
+        EX.reg_data2 = 0;
+        EX.rd = 0;
+
+        // Reset MEM stage
+        MEM.opcode = THUMB_INVALID;
+        MEM.alu_result = 0;
+        MEM.mem_data = 0;
+        MEM.rd = 0;
+
+        // Reset WB stage
+        WB.opcode = THUMB_INVALID;
+        WB.write_data = 0;
+        WB.rd = 0;
         
         // Initialize core registers according to ARM spec
         // MSP loaded from address 0x00000000, PC from 0x00000004
@@ -57,9 +141,32 @@ void cortex_m0_top(
     WB_stage next_WB = WB;
 
     // -------- Write Back Stage --------
-    if(WB.rd != 0) {  // Don't write to R0 if it's supposed to be hardwired zero (optional)
-        regfile_write(WB.rd, WB.write_data, &core_regs);
+    switch (WB.opcode) {
+        // ---- Branches ----
+        case THUMB_B:
+        case THUMB_BCC:
+        case THUMB_BX:
+        case THUMB_BLX_REG:
+            // PC update
+            regfile_set_pc(WB.write_data, &core_regs);
+            IF.pc = WB.write_data >> 2;   // convert byte addr → word index
+            break;
+
+        // ---- Normal register-writing instructions ----
+        default:
+            if (thumb_writes_register(WB.opcode) && WB.rd != 0) {
+                if (WB.rd == 15) {
+                    // Special case: write PC
+                    regfile_set_pc(WB.write_data, &core_regs);
+                    IF.pc = WB.write_data >> 2;
+                } else {
+                    // General-purpose register write
+                    regfile_write(WB.rd, WB.write_data, &core_regs);
+                }
+            }
+            break;
     }
+
 
     // -------- Memory Stage --------
     next_MEM.opcode = EX.opcode;
@@ -96,24 +203,37 @@ void cortex_m0_top(
     // -------- Instruction Decode Stage --------
     next_ID.pc = IF.pc;
     next_ID.instr = IF.instr;
-    next_ID.opcode = (IF.instr >> 28) & 0xF;
-    next_ID.rd     = (IF.instr >> 24) & 0xF;
-    next_ID.rs1    = (IF.instr >> 20) & 0xF;
-    next_ID.rs2    = (IF.instr >> 16) & 0xF;
 
-    // Determine if instruction has an immediate operand
-    // Let's assume lower 16 bits hold immediate if bit 16 of instruction is 1
-    next_ID.immediate_flag = ((IF.instr >> 15) & 0x1); 
-    next_ID.imm_value      = IF.instr & 0xFFFF;
+    // Use our Thumb instruction decoder
+    decode_result_t dres = decode_thumb_instruction(IF.instr);
 
-    // Read operand1 from register file
-    next_ID.reg_data1 = regfile_read(next_ID.rs1, &core_regs);
-
-    // Select operand2: either from register or immediate
-    if(next_ID.immediate_flag) {
-        next_ID.reg_data2 = next_ID.imm_value;
+    if (!dres.valid) {
+        // Unknown/invalid instruction — you might want to stall, trap, or NOP
+        next_ID.opcode = THUMB_INVALID;
+        next_ID.rd = 0;
+        next_ID.rs1 = 0;
+        next_ID.rs2 = 0;
+        next_ID.immediate_flag = 0;
+        next_ID.imm_value = 0;
+        next_ID.reg_data1 = 0;
+        next_ID.reg_data2 = 0;
     } else {
-        next_ID.reg_data2 = regfile_read(next_ID.rs2, &core_regs);
+        // Fill ID stage with decoded values
+        next_ID.opcode = dres.operation;
+        next_ID.rd     = dres.rd;
+        next_ID.rs1    = dres.rs1;
+        next_ID.rs2    = dres.rs2;
+        next_ID.immediate_flag = dres.immediate_flag;
+        next_ID.imm_value      = dres.imm_value;
+
+        // Read operands from register file
+        next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
+
+        if (dres.immediate_flag) {
+            next_ID.reg_data2 = dres.imm_value;
+        } else {
+            next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
+        }
     }
 
     // -------- Instruction Fetch Stage --------

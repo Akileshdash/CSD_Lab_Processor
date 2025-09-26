@@ -23,7 +23,7 @@ __USE_VCXX_CLANG__ = 1
 
 ObjDir = obj
 
-HLS_SOURCES = ../../../../tb_processor.c ../../../../execute.c ../../../../regfile.c ../../../../alu.c ../../../../processor.c
+HLS_SOURCES = ../../../../tb_processor.c ../../../../decode.c ../../../../execute.c ../../../../regfile.c ../../../../alu.c ../../../../processor.c
 
 override TARGET := csim.exe
 
@@ -88,6 +88,12 @@ $(ObjDir)/tb_processor.o: ../../../../tb_processor.c $(ObjDir)/.dir csim.mk
 	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD -Wno-unknown-pragmas -Wno-unknown-pragmas  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
 -include $(ObjDir)/tb_processor.d
+
+$(ObjDir)/decode.o: ../../../../decode.c $(ObjDir)/.dir csim.mk
+	$(Echo) "   Compiling ../../../../decode.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
+	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
+
+-include $(ObjDir)/decode.d
 
 $(ObjDir)/execute.o: ../../../../execute.c $(ObjDir)/.dir csim.mk
 	$(Echo) "   Compiling ../../../../execute.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
