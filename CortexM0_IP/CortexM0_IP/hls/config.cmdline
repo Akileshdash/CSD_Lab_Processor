@@ -1,0 +1,3 @@
+relativeroot=/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP
+original_argv=--mode hls --csim --config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg --work_dir CortexM0_IP 
+

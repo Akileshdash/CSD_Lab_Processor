@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CortexM0_IP",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/CortexM0_IP/CortexM0_IP/hls/csim/build/csim.exe",
+      "cwd": "${workspaceFolder}/CortexM0_IP/CortexM0_IP/hls/csim/build",
+      "gdbpath": "${env:XILINX_VITIS}/lnx64/tools/gdb/gdb-15.2/bin/gdb",
+      "debugger_args": [
+        "--init-command=${env:XILINX_VITIS}/lnx64/tools/gdb/gdb-15.2/bin/gdbinit"
+      ],
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "LD_LIBRARY_PATH": "/tools/2025.1/Vitis/lnx64/tools/fpo_v7_1:/tools/2025.1/Vitis/lnx64/tools/fft_v9_1:/tools/2025.1/Vitis/lnx64/tools/fir_v7_0:/tools/2025.1/Vitis/lnx64/tools/dds_v6_0:/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0/lib:/tools/2025.1/Vitis/lib/lnx64.o/Ubuntu:/usr/lib/x86_64-linux-gnu:${env:LD_LIBRARY_PATH}"
+      }
+    }
+  ]
+}

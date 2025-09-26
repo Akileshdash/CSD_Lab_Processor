@@ -1,0 +1,46 @@
+#ifndef STAGES_H
+#define STAGES_H
+
+#include <stdint.h>
+
+typedef uint32_t addr_t;
+
+typedef struct { 
+    addr_t pc; 
+    uint32_t instr; 
+} IF_stage;
+
+typedef struct {
+    addr_t pc; 
+    uint32_t instr; 
+    uint32_t reg_data1; 
+    uint32_t reg_data2;
+    unsigned int opcode; 
+    unsigned int rd; 
+    unsigned int rs1; 
+    unsigned int rs2;
+    uint8_t immediate_flag;   // 1 if instruction uses immediate
+    uint32_t imm_value;       // immediate value
+} ID_stage;
+
+typedef struct { 
+    unsigned int opcode; 
+    uint32_t alu_result; 
+    uint32_t reg_data2; 
+    unsigned int rd; 
+} EX_stage;
+
+typedef struct { 
+    unsigned int opcode; 
+    uint32_t alu_result; 
+    uint32_t mem_data; 
+    unsigned int rd; 
+} MEM_stage;
+
+typedef struct { 
+    unsigned int opcode; 
+    uint32_t write_data; 
+    unsigned int rd; 
+} WB_stage;
+
+#endif
