@@ -128,16 +128,11 @@ void regfile_set_lr(uint32_t value, cortex_m0_registers_t* regs) {
 }
 
 void regfile_set_pc(uint32_t value, cortex_m0_registers_t* regs) {
-    // PC must be aligned to 2-byte boundary (Thumb instruction)
+    // PC must be aligned to 2-byte boundary
     regs->pc = value & 0xFFFFFFFE;
-    
-    // Update T bit in EPSR - must be 1 for Thumb mode
-    if(value & 1) {
-        regs->epsr |= PSR_T_MASK;
-    } else {
-        regs->epsr &= ~PSR_T_MASK;
-        // If T bit is 0, this would cause HardFault in real processor
-    }
+
+    // Force T-bit for Cortex-M0 (Thumb-only)
+    regs->epsr |= PSR_T_MASK;
 }
 
 uint32_t regfile_get_pc(cortex_m0_registers_t* regs) {

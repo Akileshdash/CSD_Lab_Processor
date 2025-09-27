@@ -27,7 +27,7 @@ HLS_SOURCES = ../../../../tb_processor.c ../../../../decode.c ../../../../execut
 
 override TARGET := csim.exe
 
-AUTOPILOT_ROOT := /tools/2025.1/Vitis
+AUTOPILOT_ROOT := /tools/Xilinx/2025.1/Vitis
 AUTOPILOT_MACH := lnx64
 ifdef AP_GCC_M32
   AUTOPILOT_MACH := Linux_x86
@@ -35,7 +35,7 @@ ifdef AP_GCC_M32
 endif
 IFLAG += -fPIC
 ifndef AP_GCC_PATH
-  AP_GCC_PATH := /tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0/bin
+  AP_GCC_PATH := /tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0/bin
 endif
 AUTOPILOT_TOOL := ${AUTOPILOT_ROOT}/${AUTOPILOT_MACH}/tools
 AP_CLANG_PATH := ${XILINX_VCXX}/libexec
@@ -69,11 +69,11 @@ DFLAG += -D__xilinx_ip_top= -DAESL_TB
 CCFLAG += -Werror=return-type
 CCFLAG += -Wno-abi
 CCFLAG += -fdebug-default-version=4
-CCFLAG += --gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0
+CCFLAG += --gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0
 CCFLAG += -Werror=uninitialized
 CCFLAG += -Wno-c++11-narrowing
 CCFLAG += -Wno-error=sometimes-uninitialized
-LFLAG += --gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0
+LFLAG += --gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0
 
 
 

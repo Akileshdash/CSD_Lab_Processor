@@ -4,6 +4,9 @@
 #include "execute.h"
 #include "decode.h"
 #include "regfile.h"
+#include "stdio.h"
+
+#define OS_START_ADDR 0x00000009
 
 static inline int thumb_writes_register(thumb_operation_t op) {
     switch (op) {
@@ -121,9 +124,9 @@ void cortex_m0_top(
         // Initialize core registers according to ARM spec
         // MSP loaded from address 0x00000000, PC from 0x00000004
         uint32_t msp_init = data_mem[0];  // Stack pointer initial value
-        uint32_t reset_vector = instr_mem[1];  // Reset vector from address 0x00000004
         
-        regfile_init(&core_regs, reset_vector, msp_init);
+        // Initialize PC and SP
+        regfile_init(&core_regs, OS_START_ADDR, msp_init);
 
         // // Set initial PC for pipeline
         // IF.pc = regfile_get_pc(&core_regs);
@@ -237,12 +240,32 @@ void cortex_m0_top(
     }
 
     // -------- Instruction Fetch Stage --------
-    
-    next_IF.instr = instr_mem[IF.pc];
+
+    // IF stage: fetch 16-bit Thumb instruction
+    uint32_t word_index = IF.pc >> 1;   // divide by 2: 2 halfwords per 32-bit word
+    uint32_t word = instr_mem[word_index];  // read full 32-bit word from DDR
+
+    uint16_t instr16;
+    if ((IF.pc & 1) == 0) {
+        // even halfword → lower 16 bits
+        instr16 = word & 0xFFFF;
+    } else {
+        // odd halfword → upper 16 bits
+        instr16 = (word >> 16) & 0xFFFF;
+    }
+
+    // pass instruction to ID stage
+    next_IF.instr = instr16;
+
+    // increment PC in halfwords
     next_IF.pc = IF.pc + 1;
-    
-    // Update PC in register file
-    regfile_set_pc(next_IF.pc * 4, &core_regs);  // Convert word address to byte address
+
+    // update PC in regfile in bytes
+    regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
+
+    //   --- DEBUG STATEMENT ---
+    printf("[DEBUG] IF.pc=%d (halfword) | word_index=%d | instr16=0x%04X | PC=0x%08X\n",
+       IF.pc, word_index, instr16, regfile_get_pc(&core_regs));
 
     // -------- Update WB Stage --------
     next_WB.opcode = MEM.opcode;

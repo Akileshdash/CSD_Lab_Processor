@@ -2119,3 +2119,987 @@ Execute   close_project
 Execute     close_solution 
 Execute       cleanup_all 
 Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:12:11 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.22 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.28 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.3 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.31 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+Command     ap_source done; error code: 1; 1.08 sec.
+INFO-FLOW: AESL_CSIM::c_sim errorInfo:
+
+    while executing
+"::AESL_CSIM::c_sim "$argn" "
+ERROR: [SIM 211-100] CSim failed with errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO-FLOW: AESL_CSIM::csim_cmd_wrap errorInfo:
+4
+    while executing
+"::AESL_CSIM::csim_cmd_wrap $args"
+INFO-FLOW: Caught error in csim_design: 4
+    while executing
+"ap_internal_csim_design "
+Command   csim_design done; error code: 2; 1.62 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:24:36 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.22 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.28 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.29 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.31 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+Command     ap_source done; error code: 1; 1.09 sec.
+INFO-FLOW: AESL_CSIM::c_sim errorInfo:
+
+    while executing
+"::AESL_CSIM::c_sim "$argn" "
+ERROR: [SIM 211-100] CSim failed with errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO-FLOW: AESL_CSIM::csim_cmd_wrap errorInfo:
+4
+    while executing
+"::AESL_CSIM::csim_cmd_wrap $args"
+INFO-FLOW: Caught error in csim_design: 4
+    while executing
+"ap_internal_csim_design "
+Command   csim_design done; error code: 2; 1.41 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:25:25 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.21 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.28 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.29 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.3 sec.
+Command   open_component done; 0.3 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+Command     ap_source done; error code: 1; 1.07 sec.
+INFO-FLOW: AESL_CSIM::c_sim errorInfo:
+
+    while executing
+"::AESL_CSIM::c_sim "$argn" "
+ERROR: [SIM 211-100] CSim failed with errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO-FLOW: AESL_CSIM::csim_cmd_wrap errorInfo:
+4
+    while executing
+"::AESL_CSIM::csim_cmd_wrap $args"
+INFO-FLOW: Caught error in csim_design: 4
+    while executing
+"ap_internal_csim_design "
+Command   csim_design done; error code: 2; 1.34 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:30:53 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.21 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.28 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.29 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.3 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+Command     ap_source done; error code: 1; 1.07 sec.
+INFO-FLOW: AESL_CSIM::c_sim errorInfo:
+
+    while executing
+"::AESL_CSIM::c_sim "$argn" "
+ERROR: [SIM 211-100] CSim failed with errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO-FLOW: AESL_CSIM::csim_cmd_wrap errorInfo:
+4
+    while executing
+"::AESL_CSIM::csim_cmd_wrap $args"
+INFO-FLOW: Caught error in csim_design: 4
+    while executing
+"ap_internal_csim_design "
+Command   csim_design done; error code: 2; 1.34 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:31:35 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.21 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.27 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.28 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.3 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+Command   csim_design done; 0.3 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:39:26 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.21 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.28 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.3 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.31 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+Command   csim_design done; 0.27 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:49:38 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.2 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.27 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.29 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.3 sec.
+Command   open_component done; 0.3 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+Command   csim_design done; 0.27 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
+Execute       source -notrace -encoding utf-8 /tools/Xilinx/2025.1/Vitis/tps/tcl/tcl8.6/clock.tcl 
+Execute         source -encoding utf-8 /tools/Xilinx/2025.1/tps/tcl/tcl8/8.5/msgcat-1.6.1.tm 
+INFO-FLOW: Workspace /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls opened at Sat Sep 27 10:50:06 IST 2025
+Execute       send_msg_by_id INFO @200-1505@%s%s default  vivado 
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Execute       send_msg_by_id INFO @200-2174@%s%s component /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+Execute       apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19) 
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+Execute         add_files /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c 
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8) 
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+Execute         add_files -tb /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c 
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+Execute         send_msg_by_id INFO @200-1465@%s 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4) 
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+Execute         send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute         send_msg_by_id INFO @200-1465@%s 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1) 
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+Execute         set_part xc7z020clg400-1 
+Execute           create_platform xc7z020clg400-1 -board  
+DBG:HLSDevice: Trying to load device library: /tools/Xilinx/2025.1/Vitis/lib/lnx64.o/libxv_hlsvwrap.so
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: /tools/Xilinx/2025.1/Vivado/data/parts/arch.xml
+DBG:HLSDevice: init success
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+Command           create_platform done; 0.21 sec.
+Execute           source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/common/xilinx.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/plb46.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/axi4.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute               source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/saxilite.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfir.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/dds_compiler.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/xfft.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/ip/util.gen 
+Execute             source /tools/Xilinx/2025.1/Vitis/common/technology/xilinx/DSP48/dsp48.gen 
+Execute           ap_part_info -name xc7z020-clg400-1 -data info 
+Execute           config_compile -quiet -complex-mul-dsp=0 
+Command         set_part done; 0.27 sec.
+Execute         send_msg_by_id INFO @200-1465@%s 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7) 
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+Execute         create_clock -period 148.5mhz 
+Execute           ap_set_clock -name default -period 6.734 -unit ns -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+Execute         send_msg_by_id INFO @200-1465@%s 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5) 
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+Execute         config_export -format=ip_catalog 
+Command       apply_ini done; 0.29 sec.
+Execute       write_component -config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg 
+Execute         send_msg_by_id INFO @200-2176@%s /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+Command     open_solution done; 0.31 sec.
+Command   open_component done; 0.31 sec.
+Execute   apply_ini /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/config.cmdline -iscmdline 
+Execute   ::AP::init_summary_file csim 
+Execute     AP::app_get_file_relativeroot [AP::app_get_root] {}
+Execute   csim_design 
+INFO-FLOW: Running SLX 'csim' proc: ::SLX::run_csim
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+Execute     source csim/.lst_opt.tcl 
+Execute     send_msg_by_id INFO @200-2036@%s debug 
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+Execute     ap_part_info -name xc7z020-clg400-1 -data info 
+Execute     source run_sim.tcl 
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+Command   csim_design done; 0.23 sec.
+Execute   close_project 
+Execute     close_solution 
+Execute       cleanup_all 
+Execute       cleanup_all 
