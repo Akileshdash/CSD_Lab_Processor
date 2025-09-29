@@ -13,7 +13,7 @@ static inline uint32_t sign_extend(uint32_t value, int bits) {
     return (value ^ sign_bit) - sign_bit;
 }
 
-decode_result_t decode_thumb_instruction(uint16_t instruction) {
+decode_result_t decode_thumb16_instruction(uint16_t instruction) {
     decode_result_t result = {0};
     
     // Extract main opcode fields
@@ -25,6 +25,10 @@ decode_result_t decode_thumb_instruction(uint16_t instruction) {
     uint32_t bits_15_8 = extract_bits(instruction, 8, 15);
     uint32_t bits_15_6 = extract_bits(instruction, 6, 15);
     
+    // Debug print to inspect extracted fields
+    printf("[DECODE DEBUG] instr=0x%04X | bits_15_11=0x%X | bits_15_12=0x%X | bits_15_13=0x%X | bits_15_10=0x%X | bits_15_9=0x%X | bits_15_8=0x%X | bits_15_6=0x%X\n",
+        instruction, bits_15_11, bits_15_12, bits_15_13, bits_15_10, bits_15_9, bits_15_8, bits_15_6);
+
     result.instruction = instruction;
     result.valid = 1;
     
@@ -153,7 +157,19 @@ decode_result_t decode_thumb_instruction(uint16_t instruction) {
         }
     }
     
-    // 6. Special data processing instructions [010001xx]
+    // 6. Branch and Exchange [010001xx] with specific bit pattern
+    else if (bits_15_8 == 0b01000111) {
+        uint32_t l = extract_bits(instruction, 7, 7);
+        uint32_t rm = extract_bits(instruction, 3, 0);
+        
+        if (l == 0) {
+            result.operation = THUMB_BX;
+        } else {
+            result.operation = THUMB_BLX_REG;
+        }
+    }
+    
+    // 7. Special data processing instructions [010001xx]
     else if (bits_15_10 == 0b010001) {
         uint32_t opcode = extract_bits(instruction, 8, 9);
         uint32_t h1 = extract_bits(instruction, 7, 7);
@@ -173,22 +189,7 @@ decode_result_t decode_thumb_instruction(uint16_t instruction) {
             case 0b11: result.valid = 0; break; // Reserved
         }
     }
-    
-    // 7. Branch and Exchange [010001xx] with specific bit pattern
-    else if (bits_15_8 == 0b01000111) {
-        uint32_t l = extract_bits(instruction, 7, 7);
-        uint32_t rm = extract_bits(instruction, 3, 6);
-        
-        result.rs1 = rm;
-        result.immediate_flag = 0;
-        
-        if (l == 0) {
-            result.operation = THUMB_BX;
-        } else {
-            result.operation = THUMB_BLX_REG;
-        }
-    }
-    
+
     // 8. Load from literal pool [01001xxx]
     else if (bits_15_11 == 0b01001) {
         uint32_t rd = extract_bits(instruction, 8, 10);
@@ -532,6 +533,76 @@ decode_result_t decode_thumb_instruction(uint16_t instruction) {
     
     return result;
 }
+
+decode_result_t decode_thumb32_instruction(uint32_t instr32) {
+    decode_result_t result = {0};
+    result.valid = 1;
+    result.is_32bit = 1;
+
+    // Extract high/low halfwords
+    uint16_t hw1 = (instr32 >> 16) & 0xFFFF;  // upper 16 bits
+    uint16_t hw2 = instr32 & 0xFFFF;          // lower 16 bits
+
+    // BL / BLX (immediate)
+    // High halfword: 11110 S imm10
+    // Low halfword:  11 J1 J2 imm11
+    if ((hw1 & 0xF800) == 0xF000 && (hw2 & 0xD000) == 0xD000) {
+        // Decode branch offset
+        uint32_t S  = (hw1 >> 10) & 1;
+        uint32_t J1 = (hw2 >> 13) & 1;
+        uint32_t J2 = (hw2 >> 11) & 1;
+        uint32_t imm10 = hw1 & 0x03FF;
+        uint32_t imm11 = hw2 & 0x07FF;
+
+        // Sign extension + branch offset build
+        uint32_t I1 = ~(J1 ^ S) & 1;
+        uint32_t I2 = ~(J2 ^ S) & 1;
+        uint32_t imm32 = (S << 24) | (I1 << 23) | (I2 << 22) |
+                         (imm10 << 12) | (imm11 << 1);
+
+        // Check H bit in hw2[12]
+        if ((hw2 >> 12) & 1) {
+            result.operation = THUMB_BLX_IMM;   // <-- new
+        } else {
+            result.operation = THUMB_BL;        // existing BL
+        }
+
+        result.immediate_flag = 1;
+        result.imm_value = imm32;
+        return result;
+    }
+
+    // MOVW (move 16-bit immediate to reg)
+    if ((hw1 & 0xFBF0) == 0xF240) {
+        result.operation = THUMB_MOV_IMM;
+        result.rd = hw2 >> 8 & 0xF;
+        uint32_t imm4 = hw1 & 0xF;
+        uint32_t imm3 = (hw2 >> 12) & 0x7;
+        uint32_t imm8 = hw2 & 0xFF;
+        uint32_t imm16 = (imm4 << 12) | (imm3 << 8) | imm8;
+        result.immediate_flag = 1;
+        result.imm_value = imm16;
+        return result;
+    }
+
+    // MOVT (move top 16 bits to reg)
+    if ((hw1 & 0xFBF0) == 0xF2C0) {
+        result.operation = THUMB_MOV_REG;
+        result.rd = hw2 >> 8 & 0xF;
+        uint32_t imm4 = hw1 & 0xF;
+        uint32_t imm3 = (hw2 >> 12) & 0x7;
+        uint32_t imm8 = hw2 & 0xFF;
+        uint32_t imm16 = (imm4 << 12) | (imm3 << 8) | imm8;
+        result.immediate_flag = 1;
+        result.imm_value = imm16;
+        return result;
+    }
+
+    // If we reach here: not implemented yet
+    result.valid = 0;
+    return result;
+}
+
 
 // Helper function to get operation name for debugging
 const char* get_operation_name(thumb_operation_t op) {

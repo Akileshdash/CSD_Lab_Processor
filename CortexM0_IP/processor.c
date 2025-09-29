@@ -6,7 +6,7 @@
 #include "regfile.h"
 #include "stdio.h"
 
-#define OS_START_ADDR 0x00000009
+#define OS_START_ADDR 0x00000000
 
 static inline int thumb_writes_register(thumb_operation_t op) {
     switch (op) {
@@ -64,6 +64,14 @@ static inline int thumb_writes_register(thumb_operation_t op) {
         default:
             return 0;
     }
+}
+
+static int cycle = 0;
+
+int is_32bit_thumb(uint16_t hw) {
+    return ((hw & 0xF800) == 0xE800) ||   // 11101
+           ((hw & 0xF800) == 0xF000) ||   // 11110
+           ((hw & 0xF800) == 0xF800);     // 11111
 }
 
 void cortex_m0_top(
@@ -136,6 +144,9 @@ void cortex_m0_top(
         return;
     }
 
+    cycle++;
+    printf("\n================ Cycle %d ==================\n", cycle);
+
     // -------- Next-stage temporary registers --------
     IF_stage next_IF = IF;
     ID_stage next_ID = ID;
@@ -170,18 +181,44 @@ void cortex_m0_top(
             break;
     }
 
+    printf("[WB]  opcode=%d | rd=%d | write_data=0x%08X\n",next_WB.opcode, next_WB.rd, next_WB.write_data);
 
     // -------- Memory Stage --------
     next_MEM.opcode = EX.opcode;
     next_MEM.rd = EX.rd;
     next_MEM.alu_result = EX.alu_result;
-    next_MEM.mem_data = EX.alu_result; // default
+    next_MEM.mem_data = EX.alu_result; // default value
+    next_MEM.link = EX.link;           // forward link register for BL/BLX
 
-    if(EX.opcode == 2) {          // LOAD
-        next_MEM.mem_data = data_mem[EX.alu_result];
-    } else if(EX.opcode == 3) {   // STORE
-        data_mem[EX.alu_result] = EX.reg_data2;
+    // ---------- Load instructions ----------
+    if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
+    EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
+    EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
+    EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
+    EX.opcode == THUMB_LDR_LIT) 
+    {
+        next_MEM.mem_data = data_mem[EX.alu_result]; // read from memory
     }
+
+    // ---------- Store instructions ----------
+    else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG  ||
+            EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG ||
+            EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG ||
+            EX.opcode == THUMB_STR_SP) 
+    {
+        data_mem[EX.alu_result] = EX.reg_data2; // write to memory
+    }
+
+    // ---------- Branch link (BL/BLX) forwarding ----------
+    else if(EX.opcode == THUMB_BL || EX.opcode == THUMB_BLX_IMM || 
+            EX.opcode == THUMB_BLX_REG)
+    {
+        next_MEM.mem_data = EX.alu_result; // ALU result carries target PC
+        next_MEM.link = EX.link;           // forward LR for WB
+    }
+
+    printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X | link=0x%08X\n",
+        next_MEM.opcode, next_MEM.rd, next_MEM.alu_result, next_MEM.mem_data, next_MEM.link);
 
     // -------- Execute Stage -------
     EX_input_t ex_input;
@@ -202,13 +239,44 @@ void cortex_m0_top(
     next_EX.rd = ID.rd;
     next_EX.reg_data2 = ex_input.reg_data2;  // pass along for memory/store
     next_EX.alu_result = ex_output.alu_result;
+    next_EX.link = ex_output.link;           // new
+
+    printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X\n",
+        next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2);
+
 
     // -------- Instruction Decode Stage --------
     next_ID.pc = IF.pc;
-    next_ID.instr = IF.instr;
+    uint16_t instr16_ID = IF.instr;
 
+    // Check if this halfword starts a 32-bit instruction
+    int is32bit = is_32bit_thumb(instr16_ID);
+    decode_result_t dres;
+    if (is32bit) {
+        // Fetch the next halfword
+        uint32_t word_index = (IF.pc) >> 1;
+        uint32_t word = instr_mem[word_index];
+        uint16_t instr16_next;
+
+        if (((IF.pc) & 1) == 0) {
+            instr16_next = word & 0xFFFF;
+        } else {
+            instr16_next = (word >> 16) & 0xFFFF;
+        }
+
+        uint32_t full_instr = (instr16_ID << 16) | instr16_next;
+        next_ID.instr = full_instr;
+
+        dres = decode_thumb32_instruction(full_instr);
+        
+    } else {
+        // Normal 16-bit Thumb instruction
+        next_ID.instr = instr16_ID;
+
+        dres = decode_thumb16_instruction(instr16_ID);
+    }
     // Use our Thumb instruction decoder
-    decode_result_t dres = decode_thumb_instruction(IF.instr);
+    // decode_result_t dres = decode_thumb_instruction(IF.instr);
 
     if (!dres.valid) {
         // Unknown/invalid instruction — you might want to stall, trap, or NOP
@@ -239,6 +307,21 @@ void cortex_m0_top(
         }
     }
 
+    // -------- DEBUG STATEMENT for ID stage --------
+    printf("[ID]  instr16=0x%04X | is32bit=%d\n",
+            instr16_ID, is32bit);
+
+    if (is32bit) {
+        printf("     full_instr=0x%08X \n", next_ID.instr);
+    } else {
+        printf("     16-bit instr=0x%04X \n", next_ID.instr);
+    }
+
+    printf("     Decoded: opcode=%d, rd=%d, rs1=%d, rs2=%d, imm_flag=%d, imm=0x%08X\n",
+           next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2,
+           next_ID.immediate_flag, next_ID.imm_value);
+
+
     // -------- Instruction Fetch Stage --------
 
     // IF stage: fetch 16-bit Thumb instruction
@@ -247,7 +330,7 @@ void cortex_m0_top(
 
     uint16_t instr16;
     if ((IF.pc & 1) == 0) {
-        // even halfword → lower 16 bits
+        // Even halfword → next halfword is upper 16 bits of the same word
         instr16 = word & 0xFFFF;
     } else {
         // odd halfword → upper 16 bits
@@ -257,15 +340,15 @@ void cortex_m0_top(
     // pass instruction to ID stage
     next_IF.instr = instr16;
 
-    // increment PC in halfwords
+    // ---- Use override from ID if available ----
     next_IF.pc = IF.pc + 1;
 
     // update PC in regfile in bytes
     regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
 
     //   --- DEBUG STATEMENT ---
-    printf("[DEBUG] IF.pc=%d (halfword) | word_index=%d | instr16=0x%04X | PC=0x%08X\n",
-       IF.pc, word_index, instr16, regfile_get_pc(&core_regs));
+    printf("[IF]  pc=%d (halfword) | word_index=%d | instr16=0x%04X | next_pc=%d | regfile_PC=0x%08X\n",
+           IF.pc, word_index, instr16, next_IF.pc, regfile_get_pc(&core_regs));
 
     // -------- Update WB Stage --------
     next_WB.opcode = MEM.opcode;
@@ -294,4 +377,13 @@ void cortex_m0_top(
     // reg_out[16] = regfile_get_psr(&core_regs);   // Program Status Register
     // reg_out[17] = regfile_get_control(&core_regs); // CONTROL register
     // reg_out[18] = core_regs.primask;             // PRIMASK register
+
+    printf("[REGFILE] R0-R12:\n");
+    for(int i = 0; i < 13; i++) {
+        printf(" R%-2d=0x%08X", i, reg_out[i]);
+        if ((i+1) % 4 == 0) printf("\n");
+    }
+    printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
+           reg_out[13], reg_out[14], reg_out[15]);
+
 }

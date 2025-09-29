@@ -28,6 +28,7 @@ typedef struct {
     thumb_operation_t opcode;   // Use Thumb ISA enum
     uint32_t alu_result; 
     uint32_t reg_data2; 
+    uint32_t link;
     unsigned int rd; 
 } EX_stage;
 
@@ -35,6 +36,7 @@ typedef struct {
     thumb_operation_t opcode;   // Use Thumb ISA enum
     uint32_t alu_result; 
     uint32_t mem_data; 
+    uint32_t link;
     unsigned int rd; 
 } MEM_stage;
 

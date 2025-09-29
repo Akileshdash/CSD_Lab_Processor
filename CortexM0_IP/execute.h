@@ -18,6 +18,7 @@ typedef struct {
     uint32_t alu_result;
     uint32_t carry;
     uint32_t overflow;
+    uint32_t link;       // for BL/BLX storing LR
 } EX_output_t;
 
 // Execute function prototype
