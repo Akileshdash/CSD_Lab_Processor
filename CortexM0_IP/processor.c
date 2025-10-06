@@ -73,12 +73,125 @@ static inline int thumb_writes_register(thumb_operation_t op) {
     }
 }
 
+static inline int is_load_instruction(thumb_operation_t op) {
+    switch (op) {
+        case THUMB_LDR_REG:
+        case THUMB_LDR_IMM:
+        case THUMB_LDR_LIT:
+        case THUMB_LDR_SP:
+        case THUMB_LDRB_REG:
+        case THUMB_LDRB_IMM:
+        case THUMB_LDRH_REG:
+        case THUMB_LDRH_IMM:
+        case THUMB_LDRSB_REG:
+        case THUMB_LDRSH_REG:
+        case THUMB_LDMIA:
+        case THUMB_POP:
+            return 1;
+        default:
+            return 0;
+    }
+}
+
 static int cycle = 0;
 
 int is_32bit_thumb(uint16_t hw) {
     return ((hw & 0xF800) == 0xE800) ||   // 11101
            ((hw & 0xF800) == 0xF000) ||   // 11110
            ((hw & 0xF800) == 0xF800);     // 11111
+}
+
+// Hazard Detection Unit
+typedef struct {
+    int stall;              // 1 = insert bubble (stall IF and ID)
+    int flush_ID;           // 1 = flush ID stage
+} hazard_control_t;
+
+hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM) {
+    hazard_control_t ctrl;
+    ctrl.stall = 0;
+    ctrl.flush_ID = 0;
+
+    // Load-Use Hazard Detection
+    // If EX stage has a load instruction that writes to a register
+    // and ID stage needs that register, we must stall
+    if (is_load_instruction(EX.opcode) && thumb_writes_register(EX.opcode)) {
+        // Check if ID stage uses EX.rd as source operand
+        if ((EX.rd == ID.rs1 || EX.rd == ID.rs2) && EX.rd != 0) {
+            ctrl.stall = 1;
+            printf("[HAZARD] Load-Use detected! EX.rd=%d matches ID source register. STALLING.\n", EX.rd);
+        }
+    }
+
+    return ctrl;
+}
+
+// Data Forwarding Unit
+typedef struct {
+    uint32_t forward_data1;  // Forwarded data for rs1
+    uint32_t forward_data2;  // Forwarded data for rs2
+    int forward_src1;        // 0=no forward, 1=from EX, 2=from MEM, 3=from WB
+    int forward_src2;        // 0=no forward, 1=from EX, 2=from MEM, 3=from WB
+} forward_control_t;
+
+forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stage WB) {
+    forward_control_t fwd;
+    fwd.forward_data1 = ID.reg_data1;
+    fwd.forward_data2 = ID.reg_data2;
+    fwd.forward_src1 = 0;
+    fwd.forward_src2 = 0;
+
+    // Forward rs1
+    if (ID.rs1 != 0) {
+        // EX hazard (highest priority - most recent)
+        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs1 && EX.rd != 0) {
+            // For loads, we can't forward yet (data not available)
+            if (!is_load_instruction(EX.opcode)) {
+                fwd.forward_data1 = EX.alu_result;
+                fwd.forward_src1 = 1;
+                printf("[FORWARD] EX->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, EX.alu_result);
+            }
+        }
+        // MEM hazard
+        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs1 && MEM.rd != 0) {
+            fwd.forward_data1 = MEM.mem_data;
+            fwd.forward_src1 = 2;
+            printf("[FORWARD] MEM->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, MEM.mem_data);
+        }
+        // WB hazard (lowest priority)
+        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs1 && WB.rd != 0) {
+            fwd.forward_data1 = WB.write_data;
+            fwd.forward_src1 = 3;
+            printf("[FORWARD] WB->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, WB.write_data);
+        }
+    }
+
+    // Forward rs2
+    if (ID.rs2 != 0) {
+        // EX hazard (highest priority)
+        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs2 && EX.rd != 0) {
+            // For loads, we can't forward yet (data not available)
+            if (!is_load_instruction(EX.opcode)) {
+                fwd.forward_data2 = EX.alu_result;
+                fwd.forward_src2 = 1;
+                printf("[FORWARD] EX->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, EX.alu_result);
+            }
+        }
+        // MEM hazard
+        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs2 && MEM.rd != 0) {
+            fwd.forward_data2 = MEM.mem_data;
+            fwd.forward_src2 = 2;
+            printf("[FORWARD] MEM->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, MEM.mem_data);
+        }
+        // WB hazard (lowest priority)
+        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs2 && WB.rd != 0) {
+            fwd.forward_data2 = WB.write_data;
+            fwd.forward_src2 = 3;
+            printf("[FORWARD] WB->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, WB.write_data);
+        }
+    }
+
+    return fwd;
 }
 
 void cortex_m0_top(
@@ -124,12 +237,14 @@ void cortex_m0_top(
         EX.alu_result = 0;
         EX.reg_data2 = 0;
         EX.rd = 0;
+        EX.link = 0;
 
         // Reset MEM stage
         MEM.opcode = THUMB_INVALID;
         MEM.alu_result = 0;
         MEM.mem_data = 0;
         MEM.rd = 0;
+        MEM.link = 0;
 
         // Reset WB stage
         WB.opcode = THUMB_INVALID;
@@ -137,22 +252,26 @@ void cortex_m0_top(
         WB.rd = 0;
         
         // Initialize core registers according to ARM spec
-        // MSP loaded from address 0x00000000, PC from 0x00000004
         uint32_t msp_init = data_mem[0];  // Stack pointer initial value
         
         // Initialize PC and SP
         regfile_init(&core_regs, OS_START_ADDR, msp_init);
 
-        // // Set initial PC for pipeline
-        // IF.pc = regfile_get_pc(&core_regs);
-        
         // **Convert PC from byte address to word index for IF stage**
         IF.pc = regfile_get_pc(&core_regs) >> 2;  
+        
+        cycle = 0;  // Reset cycle counter
         return;
     }
 
     cycle++;
     printf("\n================ Cycle %d ==================\n", cycle);
+
+    // -------- Hazard Detection --------
+    hazard_control_t hazard = detect_hazards(ID, EX, MEM);
+
+    // -------- Data Forwarding --------
+    forward_control_t forward = detect_forwarding(ID, EX, MEM, WB);
 
     // -------- Next-stage temporary registers --------
     IF_stage next_IF = IF;
@@ -188,23 +307,27 @@ void cortex_m0_top(
             break;
     }
 
-    printf("[WB]  opcode=%d | rd=%d | write_data=0x%08X\n",next_WB.opcode, next_WB.rd, next_WB.write_data);
+    printf("[WB]  opcode=%d | rd=%d | write_data=0x%08X\n", WB.opcode, WB.rd, WB.write_data);
 
     // -------- Memory Stage --------
     next_MEM.opcode = EX.opcode;
     next_MEM.rd = EX.rd;
     next_MEM.alu_result = EX.alu_result;
-    next_MEM.mem_data = EX.alu_result; // default value
-    next_MEM.link = EX.link;           // forward link register for BL/BLX
+    next_MEM.link = EX.link;
+
+    // Default: pass ALU result as mem_data
+    next_MEM.mem_data = EX.alu_result; 
 
     // ---------- Load instructions ----------
     if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
-    EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
-    EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
-    EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
-    EX.opcode == THUMB_LDR_LIT) 
+       EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
+       EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
+       EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
+       EX.opcode == THUMB_LDR_LIT) 
     {
-        next_MEM.mem_data = data_mem[EX.alu_result]; // read from memory
+        // For loads, mem_data comes from memory
+        uint32_t addr = EX.alu_result >> 2;  // Convert byte address to word index
+        next_MEM.mem_data = data_mem[addr];
     }
 
     // ---------- Store instructions ----------
@@ -213,7 +336,8 @@ void cortex_m0_top(
             EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG ||
             EX.opcode == THUMB_STR_SP) 
     {
-        data_mem[EX.alu_result] = EX.reg_data2; // write to memory
+        uint32_t addr = EX.alu_result >> 2;  // Convert byte address to word index
+        data_mem[addr] = EX.reg_data2;       // write to memory
     }
 
     // ---------- Branch with Link (BL) ----------
@@ -223,81 +347,62 @@ void cortex_m0_top(
         next_MEM.link = EX.link;           // return address for LR
     }
 
-    // ---------- Other Branches ----------
-    else if (EX.opcode == THUMB_B || EX.opcode == THUMB_B_COND || EX.opcode == THUMB_BX)
-    {
-        next_MEM.mem_data = EX.alu_result; // branch target
-        next_MEM.link = 0;                 // no link register update
-    }
-
     printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X | link=0x%08X\n",
         next_MEM.opcode, next_MEM.rd, next_MEM.alu_result, next_MEM.mem_data, next_MEM.link);
 
     // -------- Execute Stage -------
-    EX_input_t ex_input;
-    ex_input.opcode = ID.opcode;
-    ex_input.rd = ID.rd;
-    ex_input.reg_data1 = ID.reg_data1;
-
-    printf("[EX PROCESSOR DEBUG] ADD | reg_data1=0x%08X | reg_data2=0x%08X | imm_flag=%d\n",
-        ex_input.reg_data1, ex_input.reg_data2,ID.immediate_flag);
-
-    if(ID.immediate_flag) {
-        ex_input.reg_data2 = ID.imm_value;
+    // If stalling, insert bubble in EX stage
+    if (hazard.stall) {
+        next_EX.opcode = THUMB_INVALID;
+        next_EX.rd = 0;
+        next_EX.alu_result = 0;
+        next_EX.reg_data2 = 0;
+        next_EX.link = 0;
+        printf("[EX]  **BUBBLE INSERTED DUE TO STALL**\n");
     } else {
-        ex_input.reg_data2 = ID.reg_data2;
-    }
-
-    printf("[EX PROCESSOR DEBUG] ADD | reg_data1=0x%08X | reg_data2=0x%08X \n",
-        ex_input.reg_data1, ex_input.reg_data2);
-
-    EX_output_t ex_output = execute(ex_input, &core_regs);
-
-    next_EX.opcode = ID.opcode;
-    next_EX.rd = ID.rd;
-    next_EX.reg_data2 = ex_input.reg_data2;  // pass along for memory/store
-    next_EX.alu_result = ex_output.alu_result;
-    next_EX.link = ex_output.link;           // new
-
-    printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X\n",
-        next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2);
-
-
-    // -------- Instruction Decode Stage --------
-    next_ID.pc = IF.pc;
-    uint16_t instr16_ID = IF.instr;
-
-    // Check if this halfword starts a 32-bit instruction
-    int is32bit = is_32bit_thumb(instr16_ID);
-    decode_result_t dres;
-    if (is32bit) {
-        // Fetch the next halfword
-        uint32_t word_index = (IF.pc) >> 1;
-        uint32_t word = instr_mem[word_index];
-        uint16_t instr16_next;
-
-        if (((IF.pc) & 1) == 0) {
-            instr16_next = word & 0xFFFF;
+        EX_input_t ex_input;
+        ex_input.opcode = ID.opcode;
+        ex_input.rd = ID.rd;
+        
+        // Apply forwarding for reg_data1
+        ex_input.reg_data1 = forward.forward_data1;
+        
+        // **FIX: For MOV_REG, reg_data2 should be the source register (rs1), not immediate**
+        if(ID.opcode == THUMB_MOV_REG) {
+            // MOV Rd, Rs - the source is in rs1, passed as reg_data2 to execute
+            ex_input.reg_data2 = forward.forward_data1;  // Use forwarded rs1 value
+        }
+        else if(ID.immediate_flag) {
+            ex_input.reg_data2 = ID.imm_value;
         } else {
-            instr16_next = (word >> 16) & 0xFFFF;
+            ex_input.reg_data2 = forward.forward_data2;
         }
 
-        uint32_t full_instr = (instr16_ID << 16) | instr16_next;
-        next_ID.instr = full_instr;
+        printf("[EX PROCESSOR DEBUG] | reg_data1=0x%08X | reg_data2=0x%08X | imm_flag=%d\n",
+            ex_input.reg_data1, ex_input.reg_data2, ID.immediate_flag);
 
-        dres = decode_thumb32_instruction(full_instr);
-        
-    } else {
-        // Normal 16-bit Thumb instruction
-        next_ID.instr = instr16_ID;
+        EX_output_t ex_output = execute(ex_input, &core_regs);
 
-        dres = decode_thumb16_instruction(instr16_ID);
+        next_EX.opcode = ID.opcode;
+        next_EX.rd = ID.rd;
+        next_EX.reg_data2 = ex_input.reg_data2;  // pass along for memory/store
+        next_EX.alu_result = ex_output.alu_result;
+        next_EX.link = ex_output.link;
+
+        printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X\n",
+            next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2);
     }
-    // Use our Thumb instruction decoder
-    // decode_result_t dres = decode_thumb_instruction(IF.instr);
 
-    if (!dres.valid) {
-        // Unknown/invalid instruction — you might want to stall, trap, or NOP
+    // -------- Instruction Decode Stage --------
+    // If stalling, keep ID stage frozen (don't advance)
+    if (hazard.stall) {
+        // Keep ID stage unchanged
+        next_ID = ID;
+        printf("[ID]  **STALLED - REPEATING CURRENT INSTRUCTION**\n");
+    } else if (hazard.flush_ID) {
+        // Insert bubble in ID stage
+        next_ID.pc = IF.pc;
+        next_ID.instr = 0;
         next_ID.opcode = THUMB_INVALID;
         next_ID.rd = 0;
         next_ID.rs1 = 0;
@@ -306,67 +411,125 @@ void cortex_m0_top(
         next_ID.imm_value = 0;
         next_ID.reg_data1 = 0;
         next_ID.reg_data2 = 0;
+        printf("[ID]  **BUBBLE INSERTED (FLUSH)**\n");
     } else {
-        // Fill ID stage with decoded values
-        next_ID.opcode = dres.operation;
-        next_ID.rd     = dres.rd;
-        next_ID.rs1    = dres.rs1;
-        next_ID.rs2    = dres.rs2;
-        next_ID.immediate_flag = dres.immediate_flag;
-        next_ID.imm_value      = dres.imm_value;
+        next_ID.pc = IF.pc;
+        uint16_t instr16_ID = IF.instr;
 
-        // Read operands from register file
-        next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
+        // Debug decode bits
+        uint16_t bits_15_13 = (instr16_ID >> 13) & 0x7;
+        uint16_t bits_15_12 = (instr16_ID >> 12) & 0xF;
+        uint16_t bits_15_11 = (instr16_ID >> 11) & 0x1F;
+        uint16_t bits_15_10 = (instr16_ID >> 10) & 0x3F;
+        uint16_t bits_15_9  = (instr16_ID >> 9) & 0x7F;
+        uint16_t bits_15_8  = (instr16_ID >> 8) & 0xFF;
+        uint16_t bits_15_6  = (instr16_ID >> 6) & 0x3FF;
+        
+        printf("[DECODE DEBUG] instr=0x%04X | bits_15_13=0x%X | bits_15_12=0x%X | bits_15_11=0x%X | bits_15_10=0x%X | bits_15_9=0x%X | bits_15_8=0x%X | bits_15_6=0x%X\n",
+               instr16_ID, bits_15_13, bits_15_12, bits_15_11, bits_15_10, bits_15_9, bits_15_8, bits_15_6);
 
-        if (dres.immediate_flag) {
-            next_ID.reg_data2 = dres.imm_value;
+        // Check if this halfword starts a 32-bit instruction
+        int is32bit = is_32bit_thumb(instr16_ID);
+        decode_result_t dres;
+        if (is32bit) {
+            // Fetch the next halfword
+            uint32_t word_index = (IF.pc) >> 1;
+            uint32_t word = instr_mem[word_index];
+            uint16_t instr16_next;
+
+            if (((IF.pc) & 1) == 0) {
+                instr16_next = word & 0xFFFF;
+            } else {
+                instr16_next = (word >> 16) & 0xFFFF;
+            }
+
+            uint32_t full_instr = (instr16_ID << 16) | instr16_next;
+            next_ID.instr = full_instr;
+
+            dres = decode_thumb32_instruction(full_instr);
+            
         } else {
-            next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
+            // Normal 16-bit Thumb instruction
+            next_ID.instr = instr16_ID;
+
+            dres = decode_thumb16_instruction(instr16_ID);
         }
+
+        if (!dres.valid) {
+            // Unknown/invalid instruction
+            next_ID.opcode = THUMB_INVALID;
+            next_ID.rd = 0;
+            next_ID.rs1 = 0;
+            next_ID.rs2 = 0;
+            next_ID.immediate_flag = 0;
+            next_ID.imm_value = 0;
+            next_ID.reg_data1 = 0;
+            next_ID.reg_data2 = 0;
+        } else {
+            // Fill ID stage with decoded values
+            next_ID.opcode = dres.operation;
+            next_ID.rd     = dres.rd;
+            next_ID.rs1    = dres.rs1;
+            next_ID.rs2    = dres.rs2;
+            next_ID.immediate_flag = dres.immediate_flag;
+            next_ID.imm_value      = dres.imm_value;
+
+            // Read operands from register file
+            next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
+
+            if (dres.immediate_flag) {
+                next_ID.reg_data2 = dres.imm_value;
+            } else {
+                next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
+            }
+        }
+
+        // -------- DEBUG STATEMENT for ID stage --------
+        printf("[ID]  instr16=0x%04X | is32bit=%d\n", instr16_ID, is32bit);
+
+        if (is32bit) {
+            printf("     full_instr=0x%08X \n", next_ID.instr);
+        } else {
+            printf("     16-bit instr=0x%04X \n", next_ID.instr);
+        }
+
+        printf("     Decoded: opcode=%d, rd=%d, rs1=%d, rs2=%d, imm_flag=%d, imm=0x%08X\n",
+               next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2,
+               next_ID.immediate_flag, next_ID.imm_value);
     }
-
-    // -------- DEBUG STATEMENT for ID stage --------
-    printf("[ID]  instr16=0x%04X | is32bit=%d\n",
-            instr16_ID, is32bit);
-
-    if (is32bit) {
-        printf("     full_instr=0x%08X \n", next_ID.instr);
-    } else {
-        printf("     16-bit instr=0x%04X \n", next_ID.instr);
-    }
-
-    printf("     Decoded: opcode=%d, rd=%d, rs1=%d, rs2=%d, imm_flag=%d, imm=0x%08X\n",
-           next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2,
-           next_ID.immediate_flag, next_ID.imm_value);
-
 
     // -------- Instruction Fetch Stage --------
-
-    // IF stage: fetch 16-bit Thumb instruction
-    uint32_t word_index = IF.pc >> 1;   // divide by 2: 2 halfwords per 32-bit word
-    uint32_t word = instr_mem[word_index];  // read full 32-bit word from DDR
-
-    uint16_t instr16;
-    if ((IF.pc & 1) == 0) {
-        // Even halfword → next halfword is upper 16 bits of the same word
-        instr16 = word & 0xFFFF;
+    // If stalling, keep IF stage frozen (don't fetch new instruction)
+    if (hazard.stall) {
+        // Keep IF stage unchanged
+        next_IF = IF;
+        printf("[IF]  **STALLED - NOT FETCHING NEW INSTRUCTION**\n");
     } else {
-        // odd halfword → upper 16 bits
-        instr16 = (word >> 16) & 0xFFFF;
+        // IF stage: fetch 16-bit Thumb instruction
+        uint32_t word_index = IF.pc >> 1;   // divide by 2: 2 halfwords per 32-bit word
+        uint32_t word = instr_mem[word_index];  // read full 32-bit word from DDR
+
+        uint16_t instr16;
+        if ((IF.pc & 1) == 0) {
+            // Even halfword → lower 16 bits
+            instr16 = word & 0xFFFF;
+        } else {
+            // odd halfword → upper 16 bits
+            instr16 = (word >> 16) & 0xFFFF;
+        }
+
+        // pass instruction to ID stage
+        next_IF.instr = instr16;
+
+        // Increment PC
+        next_IF.pc = IF.pc + 1;
+
+        // update PC in regfile in bytes
+        regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
+
+        printf("[IF]  pc=%d (halfword) | word_index=%d | instr16=0x%04X | next_pc=%d | regfile_PC=0x%08X\n",
+               IF.pc, word_index, instr16, next_IF.pc, regfile_get_pc(&core_regs));
     }
-
-    // pass instruction to ID stage
-    next_IF.instr = instr16;
-
-    // ---- Use override from ID if available ----
-    next_IF.pc = IF.pc + 1;
-
-    // update PC in regfile in bytes
-    regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
-
-    //   --- DEBUG STATEMENT ---
-    printf("[IF]  pc=%d (halfword) | word_index=%d | instr16=0x%04X | next_pc=%d | regfile_PC=0x%08X\n",
-           IF.pc, word_index, instr16, next_IF.pc, regfile_get_pc(&core_regs));
 
     // -------- Update WB Stage --------
     next_WB.opcode = MEM.opcode;
@@ -390,11 +553,6 @@ void cortex_m0_top(
     reg_out[13] = regfile_get_sp(&core_regs);    // Current stack pointer
     reg_out[14] = core_regs.lr;                  // Link register
     reg_out[15] = regfile_get_pc(&core_regs);    // Program counter
-    
-    // Additional debug outputs (if reg_out array is large enough)
-    // reg_out[16] = regfile_get_psr(&core_regs);   // Program Status Register
-    // reg_out[17] = regfile_get_control(&core_regs); // CONTROL register
-    // reg_out[18] = core_regs.primask;             // PRIMASK register
 
     printf("[REGFILE] R0-R12:\n");
     for(int i = 0; i < 13; i++) {
@@ -403,5 +561,4 @@ void cortex_m0_top(
     }
     printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
            reg_out[13], reg_out[14], reg_out[15]);
-
 }

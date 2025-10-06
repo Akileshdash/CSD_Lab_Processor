@@ -37,9 +37,9 @@ void test_basic_arithmetic() {
 
     instr_mem[0] = 0x2105 | (0x220A << 16);   // MOV R1,#5 | MOV R2,#10
     instr_mem[1] = 0x188B | (0x1A54 << 16);   // ADD R3,R1,R2 | SUB R4,R2,R1
-    instr_mem[2] = 0x1C15 | (0x1C16 << 16);   // MOV R5,R2 | MOV R6,R2
-    instr_mem[3] = 0x1C17 | (0x1C15 << 16);   // MOV R7,R2 | AND R5,R5,R1
-    instr_mem[4] = 0x430E | (0x404F << 16);   // ORR R6,R6,R1 | EOR R7,R7,R1
+    instr_mem[2] = 0x1C15 | (0x400D << 16);   // MOV R5, R2 | AND R5,R1,R2
+    instr_mem[3] = 0x1C16 | (0x430E << 16);   // MOV R6, R2 | ORR R6,R1,R2
+    instr_mem[4] = 0x1C17 | (0x404F << 16);   // MOV R7, R2 |  EOR R7,R1,R2
 
     cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
@@ -76,7 +76,7 @@ void test_load_store() {
     reg_out[3] = 0xAABBCCDD;
 
     cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
-    for (int i = 0; i < 4; i++) cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+    for (int i = 0; i < 20; i++) cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
 
     PRINT_REGS(reg_out);
     printf("Memory[0] = 0x%08X\n", data_mem[0]);
