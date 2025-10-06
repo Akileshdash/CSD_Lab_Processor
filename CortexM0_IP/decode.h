@@ -7,169 +7,137 @@
 extern "C" {
 #endif
 
-// Enumeration of all Thumb instruction operations
+// Enumeration of Cortex-M0 Thumb operations (ARMv6-M)
 typedef enum {
-    THUMB_INVALID = 0,      // 0
+    THUMB_INVALID = 0,                   // 0  INVALID — Unknown or unsupported instruction
 
-    // Shift and move operations
-    THUMB_MOV_REG,           // 1
-    THUMB_LSL_IMM,           // 2
-    THUMB_LSR_IMM,           // 3
-    THUMB_ASR_IMM,           // 4
+    // ───────────────────────────────────────────────
+    // Shift and Move (1–9)
+    THUMB_MOV_REG,                      // 1  MOV (register) — Copy value from one register to another
+    THUMB_MOV_IMM,                      // 2  MOV (immediate) — Load an immediate value into a register
+    THUMB_MOV_HIGH,                     // 3  MOV (high registers) — Move between high registers (R8–R15)
+    THUMB_LSL_IMM,                      // 4  LSL (immediate) — Logical shift left by an immediate amount
+    THUMB_LSL_REG,                      // 5  LSL (register) — Logical shift left by value in another register
+    THUMB_LSR_IMM,                      // 6  LSR (immediate) — Logical shift right by an immediate amount
+    THUMB_LSR_REG,                      // 7  LSR (register) — Logical shift right by value in another register
+    THUMB_ASR_IMM,                      // 8  ASR (immediate) — Arithmetic shift right by an immediate amount (preserves sign)
+    THUMB_ASR_REG,                      // 9  ASR (register) — Arithmetic shift right by value in another register
 
-    // Add/subtract register
-    THUMB_ADD_REG,           // 5
-    THUMB_SUB_REG,           // 6
+    // ───────────────────────────────────────────────
+    // Add/Subtract (10–19)
+    THUMB_ADD_REG,                      // 10 ADD (register) — Add two registers
+    THUMB_ADD_IMM3,                     // 11 ADD (imm3) — Add small immediate (3-bit)
+    THUMB_ADD_IMM8,                     // 12 ADD (imm8) — Add large immediate (8-bit)
+    THUMB_ADD_SP_IMM,                   // 13 ADD (SP + imm8) — Add immediate to stack pointer
+    THUMB_ADD_SP_IMM7,                  // 14 ADD (SP + imm7) — Adjust SP upwards by immediate
+    THUMB_SUB_REG,                      // 15 SUB (register) — Subtract one register from another
+    THUMB_SUB_IMM3,                     // 16 SUB (imm3) — Subtract small immediate
+    THUMB_SUB_IMM8,                     // 17 SUB (imm8) — Subtract large immediate
+    THUMB_SUB_SP_IMM7,                  // 18 SUB (SP - imm7) — Adjust SP downwards by immediate
+    THUMB_ADR,                          // 19 ADR — Form address relative to PC
 
-    // Add/subtract immediate (3-bit)
-    THUMB_ADD_IMM3,          // 7
-    THUMB_SUB_IMM3,          // 8
+    // ───────────────────────────────────────────────
+    // Compare / Negate (20–25)
+    THUMB_CMP_REG,                      // 20 CMP (register) — Compare two registers (sets flags)
+    THUMB_CMP_IMM,                      // 21 CMP (immediate) — Compare register with immediate (sets flags)
+    THUMB_CMP_HIGH,                     // 22 CMP (high registers) — Compare high registers (R8–R15)
+    THUMB_CMN,                          // 23 CMN — Compare Negative (add and set flags)
+    THUMB_TST,                          // 24 TST — Bitwise AND, update flags (test bits)
+    THUMB_NEG,                          // 25 NEG — Two’s complement negate (R = 0 - Rn)
 
-    // Move/compare/add/subtract immediate (8-bit)
-    THUMB_MOV_IMM,           // 9
-    THUMB_CMP_IMM,           // 10
-    THUMB_ADD_IMM8,          // 11
-    THUMB_SUB_IMM8,          // 12
+    // ───────────────────────────────────────────────
+    // Data Processing (26–35)
+    THUMB_AND,                          // 26 AND — Bitwise AND of two registers
+    THUMB_EOR,                          // 27 EOR — Bitwise exclusive OR
+    THUMB_ORR,                          // 28 ORR — Bitwise inclusive OR
+    THUMB_BIC,                          // 29 BIC — Bit clear (R = Rn AND NOT Rm)
+    THUMB_MVN,                          // 30 MVN — Move NOT (bitwise invert source)
+    THUMB_ADC,                          // 31 ADC — Add with carry
+    THUMB_SBC,                          // 32 SBC — Subtract with carry
+    THUMB_RSB,                          // 33 RSB — Reverse subtract (R = 0 - Rn)
+    THUMB_ROR,                          // 34 ROR — Rotate right
+    THUMB_MUL,                          // 35 MUL — Multiply two registers
 
-    // Data processing register operations
-    THUMB_AND,               // 13
-    THUMB_EOR,               // 14
-    THUMB_LSL_REG,           // 15
-    THUMB_LSR_REG,           // 16
-    THUMB_ASR_REG,           // 17
-    THUMB_ADC,               // 18
-    THUMB_SBC,               // 19
-    THUMB_ROR,               // 20
-    THUMB_TST,               // 21
-    THUMB_RSB,               // 22
-    THUMB_CMP_REG,           // 23
-    THUMB_CMN,               // 24
-    THUMB_ORR,               // 25
-    THUMB_MUL,               // 26
-    THUMB_BIC,               // 27
-    THUMB_MVN,               // 28
+    // ───────────────────────────────────────────────
+    // Branches (36–39)
+    THUMB_B_COND,                       // 36 B<cond> — Conditional branch (based on flags)
+    THUMB_B,                            // 37 B — Unconditional branch (relative jump)
+    THUMB_BL,                           // 38 BL — Branch with link (call subroutine)
+    THUMB_BX,                           // 39 BX — Branch and exchange to address in register
 
-    // Special data processing
-    THUMB_ADD_HIGH,          // 29
-    THUMB_CMP_HIGH,          // 30
-    THUMB_MOV_HIGH,          // 31
+    // ───────────────────────────────────────────────
+    // Load / Store Single (40–56)
+    THUMB_LDR_REG,                      // 40 LDR (register offset) — Load from address in register
+    THUMB_LDR_IMM,                      // 41 LDR (immediate offset) — Load from address with offset
+    THUMB_LDR_LIT,                      // 42 LDR (literal) — Load from PC-relative address
+    THUMB_LDR_SP,                       // 43 LDR (SP-relative) — Load from SP + offset
+    THUMB_STR_REG,                      // 44 STR (register offset) — Store to address in register
+    THUMB_STR_IMM,                      // 45 STR (immediate offset) — Store to address with offset
+    THUMB_STR_SP,                       // 46 STR (SP-relative) — Store to SP + offset
+    THUMB_LDRB_REG,                     // 47 LDRB (register offset) — Load byte from memory
+    THUMB_LDRB_IMM,                     // 48 LDRB (immediate offset) — Load byte with offset
+    THUMB_STRB_REG,                     // 49 STRB (register offset) — Store byte to memory
+    THUMB_STRB_IMM,                     // 50 STRB (immediate offset) — Store byte with offset
+    THUMB_LDRH_REG,                     // 51 LDRH (register offset) — Load halfword from memory
+    THUMB_LDRH_IMM,                     // 52 LDRH (immediate offset) — Load halfword with offset
+    THUMB_STRH_REG,                     // 53 STRH (register offset) — Store halfword to memory
+    THUMB_STRH_IMM,                     // 54 STRH (immediate offset) — Store halfword with offset
+    THUMB_LDRSB_REG,                    // 55 LDRSB — Load signed byte
+    THUMB_LDRSH_REG,                    // 56 LDRSH — Load signed halfword
 
-    // Branch and exchange
-    THUMB_BX,                // 32
-    THUMB_BLX_REG,           // 33
+    // ───────────────────────────────────────────────
+    // Load / Store Multiple (57–60)
+    THUMB_LDMIA,                        // 57 LDMIA — Load multiple registers incrementing after
+    THUMB_STMIA,                        // 58 STMIA — Store multiple registers incrementing after
+    THUMB_PUSH,                         // 59 PUSH — Push registers onto stack
+    THUMB_POP,                          // 60 POP — Pop registers from stack
 
-    // Load from literal pool
-    THUMB_LDR_LIT,           // 34
+    // ───────────────────────────────────────────────
+    // Miscellaneous (61–69)
+    THUMB_SXTB,                         // 61 SXTB — Sign-extend byte to 32-bit
+    THUMB_SXTH,                         // 62 SXTH — Sign-extend halfword to 32-bit
+    THUMB_UXTB,                         // 63 UXTB — Zero-extend byte to 32-bit
+    THUMB_UXTH,                         // 64 UXTH — Zero-extend halfword to 32-bit
+    THUMB_REV,                          // 65 REV — Reverse byte order in a 32-bit word
+    THUMB_REV16,                        // 66 REV16 — Reverse byte order within each halfword
+    THUMB_REVSH,                        // 67 REVSH — Reverse bytes in a halfword and sign-extend
+    THUMB_CBZ,                          // 68 CBZ — Compare register with zero, branch if zero
+    THUMB_CBNZ,                         // 69 CBNZ — Compare register with zero, branch if non-zero
 
-    // Load/store register offset
-    THUMB_STR_REG,           // 35
-    THUMB_STRH_REG,          // 36
-    THUMB_STRB_REG,          // 37
-    THUMB_LDRSB_REG,         // 38
-    THUMB_LDR_REG,           // 39
-    THUMB_LDRH_REG,          // 40
-    THUMB_LDRB_REG,          // 41
-    THUMB_LDRSH_REG,         // 42
-
-    // Load/store immediate offset (word/byte)
-    THUMB_STR_IMM,           // 43
-    THUMB_LDR_IMM,           // 44
-    THUMB_STRB_IMM,          // 45
-    THUMB_LDRB_IMM,          // 46
-
-    // Load/store halfword immediate offset
-    THUMB_STRH_IMM,          // 47
-    THUMB_LDRH_IMM,          // 48
-
-    // Stack load/store
-    THUMB_STR_SP,            // 49
-    THUMB_LDR_SP,            // 50
-
-    // ADR / Add to PC/SP
-    THUMB_ADR,               // 51
-    THUMB_ADD_SP_IMM,        // 52
-    THUMB_ADD_SP_IMM7,       // 53
-    THUMB_SUB_SP_IMM7,       // 54
-
-    // Sign/zero extend
-    THUMB_SXTH,              // 55
-    THUMB_SXTB,              // 56
-    THUMB_UXTH,              // 57
-    THUMB_UXTB,              // 58
-
-    // Compare and branch on zero / non-zero
-    THUMB_CBZ,               // 59
-    THUMB_CBNZ,              // 60
-
-    // Push/Pop
-    THUMB_PUSH,              // 61
-    THUMB_POP,               // 62
-
-    // SETEND / CPS
-    THUMB_SETEND,            // 63
-    THUMB_CPS,               // 64
-
-    // Byte-swapping / reverse
-    THUMB_REV,               // 65
-    THUMB_REV16,             // 66
-    THUMB_REVSH,             // 67
-
-    // BKPT / IT / hints
-    THUMB_BKPT,              // 68
-    THUMB_IT,                // 69
-    THUMB_NOP,               // 70
-    THUMB_YIELD,             // 71
-    THUMB_WFE,               // 72
-    THUMB_WFI,               // 73
-    THUMB_SEV,               // 74
-
-    // Load/store multiple
-    THUMB_STMIA,             // 75
-    THUMB_LDMIA,             // 76
-
-    // Conditional branch / SVC / B
-    THUMB_BCC,               // 77
-    THUMB_SVC,               // 78
-    THUMB_B,                  // 79
-
-    // 32-bit branch instructions
-    THUMB_BL,                // 80
-    THUMB_BLX_IMM            // 81
+    // ───────────────────────────────────────────────
+    // Hints / Control (70–76)
+    THUMB_NOP,                          // 70 NOP — No operation
+    THUMB_YIELD,                        // 71 YIELD — Hint for thread yield
+    THUMB_WFE,                          // 72 WFE — Wait for event
+    THUMB_WFI,                          // 73 WFI — Wait for interrupt
+    THUMB_SEV,                          // 74 SEV — Send event to all cores
+    THUMB_BKPT,                         // 75 BKPT — Breakpoint instruction (debug)
+    THUMB_SVC                           // 76 SVC — Supervisor call (software interrupt)
+    // Total: 77 entries including INVALID
 } thumb_operation_t;
 
-// Result of decoding a single 16-bit Thumb instruction
+// Decoded result structure
 typedef struct {
-    uint16_t instruction;      // raw 16-bit instruction word
-    uint8_t valid;             // non-zero if the decode is valid
-    uint8_t is_32bit;          // non-zero if this belongs to a 32-bit instruction prefix (not handled)
+    uint16_t instruction;      // Raw 16-bit instruction
+    uint8_t valid;             // 1 = valid decode
+    uint8_t is_32bit;          // 1 = 32-bit (only BL)
     thumb_operation_t operation;
 
-    // Register operands (small ints are sufficient)
     uint8_t rd;
     uint8_t rs1;
     uint8_t rs2;
 
-    // Immediate handling
-    uint8_t immediate_flag;    // 1 if instruction uses immediate
-    uint32_t imm_value;        // immediate value (already shifted/aligned as decode.c does)
-    int size;   // 1 = 16-bit Thumb, 2 = 32-bit Thumb
-
-    // For conditional branches
-    uint8_t condition;         // condition code for BCC (0-15)
-
+    uint8_t immediate_flag;
+    uint32_t imm_value;
+    int size;                  // 1 = 16-bit, 2 = 32-bit
+    uint8_t condition;         // For conditional branches
 } decode_result_t;
 
-/* Decode a single 16-bit Thumb instruction.
- * Returns a populated decode_result_t. If the instruction is unknown or
- * a 32-bit instruction prefix, result.valid will be 0 (or is_32bit = 1).
- */
+// Function prototypes
 decode_result_t decode_thumb16_instruction(uint16_t instruction);
 decode_result_t decode_thumb32_instruction(uint32_t instruction);
 
-/* Return human-readable name for an operation (used by decode.c debug helpers) */
 const char* get_operation_name(thumb_operation_t op);
-
-/* Debug helper to print a decode_result_t */
 void print_decode_result(decode_result_t* result);
 
 #ifdef __cplusplus

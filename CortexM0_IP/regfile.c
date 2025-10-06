@@ -100,27 +100,30 @@ void regfile_set_apsr(uint32_t value, cortex_m0_registers_t* regs) {
 }
 
 void regfile_update_flags(cortex_m0_registers_t* regs, uint32_t result, uint32_t carry, uint32_t overflow) {
-    regs->apsr = 0;
-    
-    // Set N flag if result is negative (bit 31 set)
-    if(result & 0x80000000) {
-        regs->apsr |= PSR_N_MASK;
+    // Preserve non-NZCV bits (if any extensions exist in future)
+    uint32_t apsr = regs->apsr & ~(PSR_N_MASK | PSR_Z_MASK | PSR_C_MASK | PSR_V_MASK);
+
+    // N flag (bit 31) — set if result bit[31] == 1
+    if (result & 0x80000000U) {
+        apsr |= PSR_N_MASK;
     }
-    
-    // Set Z flag if result is zero
-    if(result == 0) {
-        regs->apsr |= PSR_Z_MASK;
+
+    // Z flag — set if result == 0
+    if (result == 0) {
+        apsr |= PSR_Z_MASK;
     }
-    
-    // Set C flag if carry occurred
-    if(carry) {
-        regs->apsr |= PSR_C_MASK;
+
+    // C flag — set if carry out of bit 31 occurred
+    if (carry) {
+        apsr |= PSR_C_MASK;
     }
-    
-    // Set V flag if overflow occurred
-    if(overflow) {
-        regs->apsr |= PSR_V_MASK;
+
+    // V flag — set if signed overflow occurred
+    if (overflow) {
+        apsr |= PSR_V_MASK;
     }
+
+    regs->apsr = apsr;
 }
 
 void regfile_set_lr(uint32_t value, cortex_m0_registers_t* regs) {

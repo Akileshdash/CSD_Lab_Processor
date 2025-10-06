@@ -7,7 +7,7 @@
 
 // EX stage input structure
 typedef struct {
-    thumb_operation_t opcode;  // Now we use the Thumb enum
+    thumb_operation_t opcode;  // Thumb enum opcode
     uint32_t reg_data1;
     uint32_t reg_data2;
     uint32_t rd;
@@ -18,7 +18,7 @@ typedef struct {
     uint32_t alu_result;
     uint32_t carry;
     uint32_t overflow;
-    uint32_t link;       // for BL/BLX storing LR
+    uint32_t link;       // for BL (LR value)
 } EX_output_t;
 
 // Execute function prototype

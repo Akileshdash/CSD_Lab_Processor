@@ -1,6 +1,5 @@
 #include "processor.h"
 #include "stages.h"
-#include "alu.h"
 #include "execute.h"
 #include "decode.h"
 #include "regfile.h"
@@ -10,56 +9,64 @@
 
 static inline int thumb_writes_register(thumb_operation_t op) {
     switch (op) {
-        // Arithmetic / data-processing (that write Rd)
+        // Register-writing arithmetic and data-processing
         case THUMB_MOV_REG:
         case THUMB_MOV_IMM:
+        case THUMB_MOV_HIGH:
+        case THUMB_LSL_IMM:
+        case THUMB_LSL_REG:
+        case THUMB_LSR_IMM:
+        case THUMB_LSR_REG:
+        case THUMB_ASR_IMM:
+        case THUMB_ASR_REG:
         case THUMB_ADD_REG:
         case THUMB_ADD_IMM3:
         case THUMB_ADD_IMM8:
+        case THUMB_ADD_SP_IMM:
+        case THUMB_ADD_SP_IMM7:
         case THUMB_SUB_REG:
         case THUMB_SUB_IMM3:
         case THUMB_SUB_IMM8:
+        case THUMB_SUB_SP_IMM7:
+        case THUMB_ADR:
+        case THUMB_NEG:
         case THUMB_AND:
         case THUMB_EOR:
         case THUMB_ORR:
         case THUMB_BIC:
         case THUMB_MVN:
-        case THUMB_LSL_IMM:
-        case THUMB_LSR_IMM:
-        case THUMB_ASR_IMM:
-        case THUMB_LSL_REG:
-        case THUMB_LSR_REG:
-        case THUMB_ASR_REG:
         case THUMB_ADC:
         case THUMB_SBC:
-        case THUMB_ROR:
         case THUMB_RSB:
+        case THUMB_ROR:
+        case THUMB_MUL:
+        case THUMB_SXTB:
+        case THUMB_SXTH:
+        case THUMB_UXTB:
+        case THUMB_UXTH:
+        case THUMB_REV:
+        case THUMB_REV16:
+        case THUMB_REVSH:
             return 1;
 
-        // Memory loads
-        case THUMB_LDR_IMM:
+        // Memory loads (write to Rd)
         case THUMB_LDR_REG:
-        case THUMB_LDRB_IMM:
+        case THUMB_LDR_IMM:
+        case THUMB_LDR_LIT:
+        case THUMB_LDR_SP:
         case THUMB_LDRB_REG:
-        case THUMB_LDRH_IMM:
+        case THUMB_LDRB_IMM:
         case THUMB_LDRH_REG:
+        case THUMB_LDRH_IMM:
         case THUMB_LDRSB_REG:
         case THUMB_LDRSH_REG:
-        case THUMB_LDR_LIT:
-            return 1;
-
-        // Special high register ops
-        case THUMB_MOV_HIGH:
-        case THUMB_ADD_HIGH:
-            return 1;
-
-        // Branches / PC-affecting ops handled separately in WB stage
-        case THUMB_B:
-        case THUMB_BCC:
-        case THUMB_BX:
-        case THUMB_BLX_REG:
+        case THUMB_LDMIA:
         case THUMB_POP:
-            return 0;
+            return 1;
+
+        // Branch with link writes LR
+        case THUMB_BL:
+            return 1;
 
         default:
             return 0;
@@ -158,9 +165,9 @@ void cortex_m0_top(
     switch (WB.opcode) {
         // ---- Branches ----
         case THUMB_B:
-        case THUMB_BCC:
         case THUMB_BX:
-        case THUMB_BLX_REG:
+        case THUMB_B_COND:
+        case THUMB_BL:
             // PC update
             regfile_set_pc(WB.write_data, &core_regs);
             IF.pc = WB.write_data >> 2;   // convert byte addr → word index
@@ -209,12 +216,18 @@ void cortex_m0_top(
         data_mem[EX.alu_result] = EX.reg_data2; // write to memory
     }
 
-    // ---------- Branch link (BL/BLX) forwarding ----------
-    else if(EX.opcode == THUMB_BL || EX.opcode == THUMB_BLX_IMM || 
-            EX.opcode == THUMB_BLX_REG)
+    // ---------- Branch with Link (BL) ----------
+    else if (EX.opcode == THUMB_BL)
     {
-        next_MEM.mem_data = EX.alu_result; // ALU result carries target PC
-        next_MEM.link = EX.link;           // forward LR for WB
+        next_MEM.mem_data = EX.alu_result; // target PC
+        next_MEM.link = EX.link;           // return address for LR
+    }
+
+    // ---------- Other Branches ----------
+    else if (EX.opcode == THUMB_B || EX.opcode == THUMB_B_COND || EX.opcode == THUMB_BX)
+    {
+        next_MEM.mem_data = EX.alu_result; // branch target
+        next_MEM.link = 0;                 // no link register update
     }
 
     printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X | link=0x%08X\n",
@@ -226,12 +239,17 @@ void cortex_m0_top(
     ex_input.rd = ID.rd;
     ex_input.reg_data1 = ID.reg_data1;
 
-    // Use immediate if the instruction has it
+    printf("[EX PROCESSOR DEBUG] ADD | reg_data1=0x%08X | reg_data2=0x%08X | imm_flag=%d\n",
+        ex_input.reg_data1, ex_input.reg_data2,ID.immediate_flag);
+
     if(ID.immediate_flag) {
         ex_input.reg_data2 = ID.imm_value;
     } else {
         ex_input.reg_data2 = ID.reg_data2;
     }
+
+    printf("[EX PROCESSOR DEBUG] ADD | reg_data1=0x%08X | reg_data2=0x%08X \n",
+        ex_input.reg_data1, ex_input.reg_data2);
 
     EX_output_t ex_output = execute(ex_input, &core_regs);
 

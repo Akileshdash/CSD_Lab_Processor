@@ -3,14 +3,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define MEM_SIZE 1024          // Adjust according to your OS size / testbench
+#define MEM_SIZE 1024*2*8*16          // Adjust according to your OS size / testbench
 
 int main() {
     uint32_t instr_mem[MEM_SIZE] = {0};
     uint32_t data_mem[MEM_SIZE] = {0};
     uint32_t reg_out[32] = {0};
 
-    FILE *fp = fopen("hello_app.bin", "rb");
+    FILE *fp = fopen("OS.bin", "rb");
     if (!fp) {
         perror("Cannot open vm.bin");
         return 1;
