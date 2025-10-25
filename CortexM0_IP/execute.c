@@ -111,7 +111,65 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             regfile_update_flags(regs, out.alu_result, 0, 0);
             break;
         case THUMB_CMP_REG:
+        {
+            // Compare: R1 - R2, set flags
+            int32_t val1 = (int32_t)input.reg_data1;
+            int32_t val2 = (int32_t)input.reg_data2;
+            int32_t result = val1 - val2;
+            
+            out.alu_result = result;
+            
+            // Calculate flags
+            uint32_t flags = 0;
+            
+            // Z flag: Set if result is zero
+            if (result == 0) flags |= FLAG_Z;
+            
+            // N flag: Set if result is negative (bit 31)
+            if (result < 0) flags |= FLAG_N;
+            
+            // C flag: Set if there was NO borrow (unsigned comparison: R1 >= R2)
+            if ((uint32_t)val1 >= (uint32_t)val2) flags |= FLAG_C;
+            
+            // V flag: Set if signed overflow occurred
+            // Overflow when: (R1 and R2 have opposite signs) and (result has different sign from R1)
+            int sign1 = (val1 >> 31) & 1;
+            int sign2 = (val2 >> 31) & 1;
+            int sign_result = (result >> 31) & 1;
+            if ((sign1 != sign2) && (sign_result != sign1)) flags |= FLAG_V;
+            
+            out.cpsr = flags;  // Store flags to be propagated
+            
+            printf("[EX DEBUG CMP] CMP: 0x%08X - 0x%08X = 0x%08X, flags=0x%08X (N=%d Z=%d C=%d V=%d)\n",
+                val1, val2, result, flags,
+                (flags & FLAG_N) ? 1 : 0,
+                (flags & FLAG_Z) ? 1 : 0,
+                (flags & FLAG_C) ? 1 : 0,
+                (flags & FLAG_V) ? 1 : 0);
+            break;
+        }
         case THUMB_CMP_IMM:
+        {
+            // Compare immediate
+            int32_t val1 = (int32_t)input.reg_data1;
+            int32_t val2 = (int32_t)input.reg_data2;  // Immediate value
+            int32_t result = val1 - val2;
+            
+            out.alu_result = result;
+            
+            uint32_t flags = 0;
+            if (result == 0) flags |= FLAG_Z;
+            if (result < 0) flags |= FLAG_N;
+            if ((uint32_t)val1 >= (uint32_t)val2) flags |= FLAG_C;
+            
+            int sign1 = (val1 >> 31) & 1;
+            int sign2 = (val2 >> 31) & 1;
+            int sign_result = (result >> 31) & 1;
+            if ((sign1 != sign2) && (sign_result != sign1)) flags |= FLAG_V;
+            
+            out.cpsr = flags;
+            break;
+        }
         case THUMB_CMP_HIGH:
         {
             uint32_t result = input.reg_data1 - input.reg_data2;
@@ -178,20 +236,89 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // Branches
         // ────────────────────────────────
         case THUMB_B_COND:
-        case THUMB_B:
-            out.alu_result = regfile_get_pc(regs) + (int32_t)input.reg_data2; // Branch target
+        {
+            // Conditional branch - check flags
+            // The condition code comes from the instruction
+            // We'll need to pass it through decode -> pipeline
+            
+            // For now, assume it's available in input.condition
+            uint32_t cond = input.condition;  // From decode
+            uint32_t apsr = input.cpsr;       // Current flags from previous instruction
+            
+            int condition_met = 0;
+            
+            switch (cond) {
+                case 0x0: condition_met = (apsr & FLAG_Z) != 0; break;              // EQ: Z==1
+                case 0x1: condition_met = (apsr & FLAG_Z) == 0; break;              // NE: Z==0
+                case 0x2: condition_met = (apsr & FLAG_C) != 0; break;              // CS/HS: C==1
+                case 0x3: condition_met = (apsr & FLAG_C) == 0; break;              // CC/LO: C==0
+                case 0x4: condition_met = (apsr & FLAG_N) != 0; break;              // MI: N==1
+                case 0x5: condition_met = (apsr & FLAG_N) == 0; break;              // PL: N==0
+                case 0x6: condition_met = (apsr & FLAG_V) != 0; break;              // VS: V==1
+                case 0x7: condition_met = (apsr & FLAG_V) == 0; break;              // VC: V==0
+                case 0x8: // HI: C==1 AND Z==0
+                    condition_met = ((apsr & FLAG_C) != 0) && ((apsr & FLAG_Z) == 0);
+                    break;
+                case 0x9: // LS: C==0 OR Z==1
+                    condition_met = ((apsr & FLAG_C) == 0) || ((apsr & FLAG_Z) != 0);
+                    break;
+                case 0xA: // GE: N==V
+                    condition_met = (((apsr & FLAG_N) != 0) == ((apsr & FLAG_V) != 0));
+                    break;
+                case 0xB: // LT: N!=V
+                    condition_met = (((apsr & FLAG_N) != 0) != ((apsr & FLAG_V) != 0));
+                    break;
+                case 0xC: // GT: Z==0 AND N==V
+                    condition_met = ((apsr & FLAG_Z) == 0) && 
+                                (((apsr & FLAG_N) != 0) == ((apsr & FLAG_V) != 0));
+                    break;
+                case 0xD: // LE: Z==1 OR N!=V
+                    condition_met = ((apsr & FLAG_Z) != 0) || 
+                                (((apsr & FLAG_N) != 0) != ((apsr & FLAG_V) != 0));
+                    break;
+                case 0xE: // AL: Always
+                    condition_met = 1;
+                    break;
+                default:
+                    condition_met = 0;
+                    break;
+            }
+            
+            if (condition_met) {
+                out.alu_result = input.pc + 4 + (int32_t)input.reg_data2;
+                printf("[EX DEBUG B_COND] Branch TAKEN - Condition 0x%X met, target=0x%08X\n",
+                    cond, out.alu_result);
+            } else {
+                out.alu_result = input.pc + 4;  // Fall through to next instruction
+                printf("[EX DEBUG B_COND] Branch NOT TAKEN - Condition 0x%X not met, fall through to 0x%08X\n",
+                    cond, out.alu_result);
+            }
+            
+            out.cpsr = apsr;  // Preserve flags
             break;
+        }
+        case THUMB_B:
+            // Branch offset is already scaled by 2 in decode (sign-extended)
+            // For ARM: PC = instruction address + 4 (pointing to instruction after next)
+            // Target = (PC of branch + 4) + offset
+            out.alu_result = input.pc + 4 + (int32_t)input.reg_data2;
+            printf("[EX DEBUG BRANCH] Branch at PC=0x%08X, offset=%d, target=0x%08X\n",
+                input.pc, (int32_t)input.reg_data2, out.alu_result);
+            break;
+
         case THUMB_BX:
             out.alu_result = input.reg_data1 & ~1U; // Target (aligned)
             break;
+
         case THUMB_BL:
         {
-            uint32_t pc = regfile_get_pc(regs);
-            out.alu_result = pc + (int32_t)input.reg_data2;
-            out.link = pc + 4; // Return address (Thumb mode)
+            // PC points to the instruction address
+            out.alu_result = (input.pc) + 4 + (int32_t)input.reg_data2;
+            out.link = input.pc + 4; // Return address (next instruction after BL)
+            printf("[EX DEBUG BL] BL at PC=0x%08X, target=0x%08X, LR=0x%08X\n",
+                input.pc, out.alu_result, out.link);
             break;
-        }
-
+        }        
         // ────────────────────────────────
         // Stack instructions (address setup)
         // ────────────────────────────────

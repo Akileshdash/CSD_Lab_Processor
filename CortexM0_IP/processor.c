@@ -105,21 +105,56 @@ int is_32bit_thumb(uint16_t hw) {
 typedef struct {
     int stall;              // 1 = insert bubble (stall IF and ID)
     int flush_ID;           // 1 = flush ID stage
+    int flush_EX;           // 1 = flush EX stage
+    int flush_MEM;          // 1 = flush MEM stage
 } hazard_control_t;
 
-hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM) {
+// -------- Hazard Detection -------
+hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stage WB) {
     hazard_control_t ctrl;
     ctrl.stall = 0;
     ctrl.flush_ID = 0;
+    ctrl.flush_EX = 0;
+    ctrl.flush_MEM = 0;
 
-    // Load-Use Hazard Detection
-    // If EX stage has a load instruction that writes to a register
-    // and ID stage needs that register, we must stall
-    if (is_load_instruction(EX.opcode) && thumb_writes_register(EX.opcode)) {
-        // Check if ID stage uses EX.rd as source operand
-        if ((EX.rd == ID.rs1 || EX.rd == ID.rs2) && EX.rd != 0) {
+    // Branch handling strategy:
+    // - Unconditional branches (B, BX, BL): Flush pipeline as they advance
+    // - Conditional branches (B_COND): DON'T flush - let them execute and only flush if taken
+    // - Branch target is calculated in EX, taken in WB
+    
+    // Check if it's an UNCONDITIONAL branch (not B_COND)
+    int is_unconditional_branch_WB = (WB.opcode == THUMB_B || WB.opcode == THUMB_BX || WB.opcode == THUMB_BL);
+    int is_unconditional_branch_MEM = (MEM.opcode == THUMB_B || MEM.opcode == THUMB_BX || MEM.opcode == THUMB_BL);
+    int is_unconditional_branch_EX = (EX.opcode == THUMB_B || EX.opcode == THUMB_BX || EX.opcode == THUMB_BL);
+    
+    if (is_unconditional_branch_WB) {
+        // Unconditional branch about to be taken - flush all speculative work
+        ctrl.flush_ID = 1;
+        ctrl.flush_EX = 1;
+        ctrl.flush_MEM = 1;
+        printf("[HAZARD] Unconditional branch in WB - flushing pipeline.\n");
+    }
+    else if (is_unconditional_branch_MEM) {
+        // Unconditional branch in MEM - flush speculative instructions
+        ctrl.flush_ID = 1;
+        ctrl.flush_EX = 1;
+        printf("[HAZARD] Unconditional branch in MEM - flushing ID, EX.\n");
+    }
+    else if (is_unconditional_branch_EX) {
+        // Unconditional branch in EX - flush speculative instruction
+        ctrl.flush_ID = 1;
+        printf("[HAZARD] Unconditional branch in EX - flushing ID.\n");
+    }
+    
+    // For CONDITIONAL branches (B_COND), we don't flush the pipeline preemptively
+    // The branch decision is made in EX stage, and if taken, we handle it in WB
+    // No flushing needed here - the WB stage will handle it if the branch is actually taken
+
+    // Load-Use Hazard Detection (only check if not flushing)
+    if (!ctrl.flush_ID && is_load_instruction(EX.opcode) && thumb_writes_register(EX.opcode)) {
+        if ((EX.rd == ID.rs1 || EX.rd == ID.rs2)) {
             ctrl.stall = 1;
-            printf("[HAZARD] Load-Use detected! EX.rd=%d matches ID source register. STALLING.\n", EX.rd);
+            printf("[HAZARD] Load-Use hazard - stalling.\n");
         }
     }
 
@@ -128,38 +163,66 @@ hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM) {
 
 // Data Forwarding Unit
 typedef struct {
-    uint32_t forward_data1;  // Forwarded data for rs1
-    uint32_t forward_data2;  // Forwarded data for rs2
-    int forward_src1;        // 0=no forward, 1=from EX, 2=from MEM, 3=from WB
-    int forward_src2;        // 0=no forward, 1=from EX, 2=from MEM, 3=from WB
+    uint32_t forward_data1;
+    uint32_t forward_data2;
+    uint32_t forward_cpsr;     
+    int forward_src1;
+    int forward_src2;
+    int forward_cpsr_src;
 } forward_control_t;
 
 forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stage WB) {
     forward_control_t fwd;
     fwd.forward_data1 = ID.reg_data1;
     fwd.forward_data2 = ID.reg_data2;
+    fwd.forward_cpsr = ID.cpsr;  
     fwd.forward_src1 = 0;
     fwd.forward_src2 = 0;
+    fwd.forward_cpsr_src = 0;  
+
+    // Forward CPSR from comparison instructions
+    // Check MEM stage first (most recent)
+    if (MEM.opcode == THUMB_CMP_REG || MEM.opcode == THUMB_CMP_IMM || 
+        MEM.opcode == THUMB_CMP_HIGH || MEM.opcode == THUMB_TST || 
+        MEM.opcode == THUMB_CMN) {
+        fwd.forward_cpsr = MEM.cpsr;
+        fwd.forward_cpsr_src = 2;
+        printf("[FORWARD] MEM->ID forwarding CPSR=0x%08X\n", MEM.cpsr);
+    }
+    // Check EX stage next
+    else if (EX.opcode == THUMB_CMP_REG || EX.opcode == THUMB_CMP_IMM || 
+             EX.opcode == THUMB_CMP_HIGH || EX.opcode == THUMB_TST || 
+             EX.opcode == THUMB_CMN) {
+        fwd.forward_cpsr = EX.cpsr;
+        fwd.forward_cpsr_src = 1;
+        printf("[FORWARD] EX->ID forwarding CPSR=0x%08X\n", EX.cpsr);
+    }
+    // Check WB stage last
+    else if (WB.opcode == THUMB_CMP_REG || WB.opcode == THUMB_CMP_IMM || 
+             WB.opcode == THUMB_CMP_HIGH || WB.opcode == THUMB_TST || 
+             WB.opcode == THUMB_CMN) {
+        fwd.forward_cpsr = WB.cpsr;
+        fwd.forward_cpsr_src = 3;
+        printf("[FORWARD] WB->ID forwarding CPSR=0x%08X\n", WB.cpsr);
+    }
 
     // Forward rs1
-    if (ID.rs1 != 0) {
-        // EX hazard (highest priority - most recent)
-        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs1 && EX.rd != 0) {
-            // For loads, we can't forward yet (data not available)
+    // NOTE: rs1 CAN be 0 (R0 is a valid register), so don't skip based on rs1 value
+    // Only forward if this instruction actually uses rs1
+    if (ID.rs1 >= 0 && ID.rs1 <= 15) {
+        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs1) {
             if (!is_load_instruction(EX.opcode)) {
                 fwd.forward_data1 = EX.alu_result;
                 fwd.forward_src1 = 1;
                 printf("[FORWARD] EX->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, EX.alu_result);
             }
         }
-        // MEM hazard
-        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs1 && MEM.rd != 0) {
+        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs1 ) {
             fwd.forward_data1 = MEM.mem_data;
             fwd.forward_src1 = 2;
             printf("[FORWARD] MEM->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, MEM.mem_data);
         }
-        // WB hazard (lowest priority)
-        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs1 && WB.rd != 0) {
+        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs1 ) {
             fwd.forward_data1 = WB.write_data;
             fwd.forward_src1 = 3;
             printf("[FORWARD] WB->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, WB.write_data);
@@ -167,24 +230,21 @@ forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_
     }
 
     // Forward rs2
-    if (ID.rs2 != 0) {
-        // EX hazard (highest priority)
-        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs2 && EX.rd != 0) {
-            // For loads, we can't forward yet (data not available)
+    // NOTE: rs2 CAN be 0 (R0 is a valid register), so don't skip based on rs2 value
+    if (ID.rs2 >= 0 && ID.rs2 <= 15) {  // Valid register number
+        if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs2) {
             if (!is_load_instruction(EX.opcode)) {
                 fwd.forward_data2 = EX.alu_result;
                 fwd.forward_src2 = 1;
                 printf("[FORWARD] EX->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, EX.alu_result);
             }
         }
-        // MEM hazard
-        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs2 && MEM.rd != 0) {
+        else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs2 ) {
             fwd.forward_data2 = MEM.mem_data;
             fwd.forward_src2 = 2;
             printf("[FORWARD] MEM->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, MEM.mem_data);
         }
-        // WB hazard (lowest priority)
-        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs2 && WB.rd != 0) {
+        else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs2 ) {
             fwd.forward_data2 = WB.write_data;
             fwd.forward_src2 = 3;
             printf("[FORWARD] WB->ID forwarding for rs2=%d, data=0x%08X\n", ID.rs2, WB.write_data);
@@ -203,7 +263,7 @@ void cortex_m0_top(
 ) {
 #pragma HLS INTERFACE m_axi port=instr_mem offset=slave bundle=INSTR_BUS
 #pragma HLS INTERFACE m_axi port=data_mem offset=slave bundle=DATA_BUS
-#pragma HLS INTERFACE s_axilite port=reg_out bundle=CTRL_BUS
+#pragma HLS INTERFACE m_axi port=reg_out   offset=slave bundle=REG_BUS
 #pragma HLS INTERFACE s_axilite port=reset bundle=CTRL_BUS
 #pragma HLS INTERFACE s_axilite port=clk bundle=CTRL_BUS
 #pragma HLS INTERFACE ap_ctrl_none port=return
@@ -216,11 +276,10 @@ void cortex_m0_top(
     static cortex_m0_registers_t core_regs;
 
     if(reset) {
-        // Reset IF stage
+        // Reset all stages
         IF.pc = 0;
         IF.instr = 0;
 
-        // Reset ID stage
         ID.pc = 0;
         ID.instr = 0;
         ID.reg_data1 = 0;
@@ -232,35 +291,27 @@ void cortex_m0_top(
         ID.immediate_flag = 0;
         ID.imm_value = 0;
 
-        // Reset EX stage
         EX.opcode = THUMB_INVALID;
         EX.alu_result = 0;
         EX.reg_data2 = 0;
         EX.rd = 0;
         EX.link = 0;
 
-        // Reset MEM stage
         MEM.opcode = THUMB_INVALID;
         MEM.alu_result = 0;
         MEM.mem_data = 0;
         MEM.rd = 0;
         MEM.link = 0;
 
-        // Reset WB stage
         WB.opcode = THUMB_INVALID;
         WB.write_data = 0;
         WB.rd = 0;
         
-        // Initialize core registers according to ARM spec
-        uint32_t msp_init = data_mem[0];  // Stack pointer initial value
-        
-        // Initialize PC and SP
+        uint32_t msp_init = data_mem[0];
         regfile_init(&core_regs, OS_START_ADDR, msp_init);
-
-        // **Convert PC from byte address to word index for IF stage**
-        IF.pc = regfile_get_pc(&core_regs) >> 2;  
+        IF.pc = regfile_get_pc(&core_regs) >> 2;
         
-        cycle = 0;  // Reset cycle counter
+        cycle = 0;
         return;
     }
 
@@ -268,7 +319,7 @@ void cortex_m0_top(
     printf("\n================ Cycle %d ==================\n", cycle);
 
     // -------- Hazard Detection --------
-    hazard_control_t hazard = detect_hazards(ID, EX, MEM);
+    hazard_control_t hazard = detect_hazards(ID, EX, MEM, WB);
 
     // -------- Data Forwarding --------
     forward_control_t forward = detect_forwarding(ID, EX, MEM, WB);
@@ -281,26 +332,74 @@ void cortex_m0_top(
     WB_stage next_WB = WB;
 
     // -------- Write Back Stage --------
+    int branch_taken = 0;
+    uint32_t branch_target = 0;
+
+    // -------- Update APSR flags from CMP instructions --------
+    // CMP instructions set flags but don't write to a destination register
+    // Update APSR if this is a CMP instruction
+    if (WB.opcode == THUMB_CMP_REG || WB.opcode == THUMB_CMP_IMM || 
+        WB.opcode == THUMB_CMP_HIGH || WB.opcode == THUMB_TST || 
+        WB.opcode == THUMB_CMN) {
+        core_regs.apsr = WB.cpsr;
+        printf("[WB] Updated APSR=0x%08X from CMP instruction\n", WB.cpsr);
+    }
+
     switch (WB.opcode) {
-        // ---- Branches ----
-        case THUMB_B:
-        case THUMB_BX:
-        case THUMB_B_COND:
         case THUMB_BL:
-            // PC update
-            regfile_set_pc(WB.write_data, &core_regs);
-            IF.pc = WB.write_data >> 2;   // convert byte addr → word index
+            // BL: Branch with Link - set LR and branch
+            branch_taken = 1;
+            branch_target = WB.write_data;
+            regfile_set_pc(branch_target, &core_regs);
+            next_IF.pc = branch_target >> 1;
+            
+            // Write link register
+            if (WB.link != 0) {
+                core_regs.lr = WB.link;
+                printf("[WB] BL: Setting LR=0x%08X\n", WB.link);
+            }
+            
+            printf("[WB] BL TAKEN! Target PC=0x%08X, LR=0x%08X\n", branch_target, WB.link);
             break;
 
-        // ---- Normal register-writing instructions ----
+        case THUMB_B:
+        case THUMB_BX:
+            // Unconditional branches - always taken
+            branch_taken = 1;
+            branch_target = WB.write_data;
+            regfile_set_pc(branch_target, &core_regs);
+            next_IF.pc = branch_target >> 1;
+            printf("[WB] BRANCH TAKEN! Target PC=0x%08X (halfword=%d)\n", branch_target, next_IF.pc);
+            break;
+        case THUMB_B_COND:
+        {
+            // Check if branch was actually taken by comparing write_data with sequential PC
+            uint32_t sequential_pc = regfile_get_pc(&core_regs);
+            
+            // If the computed target differs from where we naturally are, branch was taken
+            if (WB.write_data != sequential_pc) {
+                branch_taken = 1;
+                branch_target = WB.write_data;
+                regfile_set_pc(branch_target, &core_regs);
+                next_IF.pc = branch_target >> 1;
+                printf("[WB] CONDITIONAL BRANCH TAKEN! Target PC=0x%08X (halfword=%d)\n", 
+                    branch_target, next_IF.pc);
+            } else {
+                printf("[WB] CONDITIONAL BRANCH NOT TAKEN - continuing at PC=0x%08X\n", sequential_pc);
+            }
+        }
+            break;
+
         default:
-            if (thumb_writes_register(WB.opcode) && WB.rd != 0) {
+            // Write to register if instruction writes to a register
+            if (thumb_writes_register(WB.opcode)) {
                 if (WB.rd == 15) {
-                    // Special case: write PC
+                    // Writing to PC
                     regfile_set_pc(WB.write_data, &core_regs);
-                    IF.pc = WB.write_data >> 2;
-                } else {
-                    // General-purpose register write
+                    next_IF.pc = WB.write_data >> 1;  // Convert byte address to halfword index
+                } else if (WB.opcode != THUMB_INVALID) {
+                    // Write to any register (including R0)
+                    // Note: R0 is a normal register in ARM, not a zero register
                     regfile_write(WB.rd, WB.write_data, &core_regs);
                 }
             }
@@ -310,67 +409,81 @@ void cortex_m0_top(
     printf("[WB]  opcode=%d | rd=%d | write_data=0x%08X\n", WB.opcode, WB.rd, WB.write_data);
 
     // -------- Memory Stage --------
-    next_MEM.opcode = EX.opcode;
-    next_MEM.rd = EX.rd;
-    next_MEM.alu_result = EX.alu_result;
-    next_MEM.link = EX.link;
+    if (hazard.flush_MEM) {
+        next_MEM.opcode = THUMB_INVALID;
+        next_MEM.rd = 0;
+        next_MEM.alu_result = 0;
+        next_MEM.mem_data = 0;
+        next_MEM.link = 0;
+        next_MEM.cpsr = 0;  // ← ADD THIS
+        printf("[MEM] **FLUSHED DUE TO BRANCH**\n");
+    } else {
+        next_MEM.opcode = EX.opcode;
+        next_MEM.rd = EX.rd;
+        next_MEM.alu_result = EX.alu_result;
+        next_MEM.link = EX.link;
+        next_MEM.mem_data = EX.alu_result;
+        next_MEM.cpsr = EX.cpsr;
 
-    // Default: pass ALU result as mem_data
-    next_MEM.mem_data = EX.alu_result; 
+        if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
+           EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
+           EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
+           EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
+           EX.opcode == THUMB_LDR_LIT) 
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            next_MEM.mem_data = data_mem[addr];
+        }
+        else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG  ||
+                EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG ||
+                EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG ||
+                EX.opcode == THUMB_STR_SP) 
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            data_mem[addr] = EX.reg_data2;
+        }
+        else if (EX.opcode == THUMB_BL)
+        {
+            next_MEM.mem_data = EX.alu_result;
+            next_MEM.link = EX.link;
+        }
 
-    // ---------- Load instructions ----------
-    if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
-       EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
-       EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
-       EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
-       EX.opcode == THUMB_LDR_LIT) 
-    {
-        // For loads, mem_data comes from memory
-        uint32_t addr = EX.alu_result >> 2;  // Convert byte address to word index
-        next_MEM.mem_data = data_mem[addr];
+        printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X\n",
+            next_MEM.opcode, next_MEM.rd, next_MEM.alu_result, next_MEM.mem_data);
     }
-
-    // ---------- Store instructions ----------
-    else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG  ||
-            EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG ||
-            EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG ||
-            EX.opcode == THUMB_STR_SP) 
-    {
-        uint32_t addr = EX.alu_result >> 2;  // Convert byte address to word index
-        data_mem[addr] = EX.reg_data2;       // write to memory
-    }
-
-    // ---------- Branch with Link (BL) ----------
-    else if (EX.opcode == THUMB_BL)
-    {
-        next_MEM.mem_data = EX.alu_result; // target PC
-        next_MEM.link = EX.link;           // return address for LR
-    }
-
-    printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X | link=0x%08X\n",
-        next_MEM.opcode, next_MEM.rd, next_MEM.alu_result, next_MEM.mem_data, next_MEM.link);
+    
+    // -------- Update WB Stage (AFTER MEM stage processing) --------
+    next_WB.opcode = next_MEM.opcode;      // Use next_MEM instead of MEM
+    next_WB.rd = next_MEM.rd;
+    next_WB.write_data = next_MEM.mem_data;
+    next_WB.link = next_MEM.link;  // *** ADD THIS: Propagate link value ***
+    next_WB.cpsr = next_MEM.cpsr;
 
     // -------- Execute Stage -------
-    // If stalling, insert bubble in EX stage
-    if (hazard.stall) {
+    if (hazard.stall || hazard.flush_EX) {
         next_EX.opcode = THUMB_INVALID;
         next_EX.rd = 0;
         next_EX.alu_result = 0;
         next_EX.reg_data2 = 0;
         next_EX.link = 0;
-        printf("[EX]  **BUBBLE INSERTED DUE TO STALL**\n");
+        next_EX.pc = 0;
+        next_EX.cpsr = 0;  // ← ADD THIS: Clear CPSR on flush/stall
+        if (hazard.stall) {
+            printf("[EX]  **BUBBLE INSERTED DUE TO STALL**\n");
+        } else {
+            printf("[EX]  **FLUSHED DUE TO BRANCH**\n");
+        }
     } else {
         EX_input_t ex_input;
         ex_input.opcode = ID.opcode;
         ex_input.rd = ID.rd;
-        
-        // Apply forwarding for reg_data1
+        ex_input.pc = ID.pc << 1;  // Convert halfword index to byte address
         ex_input.reg_data1 = forward.forward_data1;
-        
-        // **FIX: For MOV_REG, reg_data2 should be the source register (rs1), not immediate**
+        ex_input.condition = ID.condition;  // ← PASS CONDITION TO EXECUTE
+        ex_input.cpsr = forward.forward_cpsr;            
+
         if(ID.opcode == THUMB_MOV_REG) {
-            // MOV Rd, Rs - the source is in rs1, passed as reg_data2 to execute
-            ex_input.reg_data2 = forward.forward_data1;  // Use forwarded rs1 value
+            ex_input.reg_data2 = forward.forward_data1;
         }
         else if(ID.immediate_flag) {
             ex_input.reg_data2 = ID.imm_value;
@@ -378,29 +491,28 @@ void cortex_m0_top(
             ex_input.reg_data2 = forward.forward_data2;
         }
 
-        printf("[EX PROCESSOR DEBUG] | reg_data1=0x%08X | reg_data2=0x%08X | imm_flag=%d\n",
-            ex_input.reg_data1, ex_input.reg_data2, ID.immediate_flag);
+        printf("[EX PROCESSOR DEBUG] | reg_data1=0x%08X | reg_data2=0x%08X | imm_flag=%d | pc=0x%08X\n",
+            ex_input.reg_data1, ex_input.reg_data2, ID.immediate_flag, ex_input.pc);
 
         EX_output_t ex_output = execute(ex_input, &core_regs);
 
         next_EX.opcode = ID.opcode;
         next_EX.rd = ID.rd;
-        next_EX.reg_data2 = ex_input.reg_data2;  // pass along for memory/store
+        next_EX.cpsr = ex_output.cpsr;  // Capture flags from execution
+        next_EX.reg_data2 = ex_input.reg_data2;
         next_EX.alu_result = ex_output.alu_result;
         next_EX.link = ex_output.link;
-
+        ex_input.pc = ID.pc << 1;  // Convert halfword index to byte address
+        
         printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X\n",
             next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2);
     }
 
     // -------- Instruction Decode Stage --------
-    // If stalling, keep ID stage frozen (don't advance)
     if (hazard.stall) {
-        // Keep ID stage unchanged
         next_ID = ID;
         printf("[ID]  **STALLED - REPEATING CURRENT INSTRUCTION**\n");
     } else if (hazard.flush_ID) {
-        // Insert bubble in ID stage
         next_ID.pc = IF.pc;
         next_ID.instr = 0;
         next_ID.opcode = THUMB_INVALID;
@@ -411,28 +523,17 @@ void cortex_m0_top(
         next_ID.imm_value = 0;
         next_ID.reg_data1 = 0;
         next_ID.reg_data2 = 0;
-        printf("[ID]  **BUBBLE INSERTED (FLUSH)**\n");
+        next_ID.condition = 0;  // ← ADD THIS
+        next_ID.cpsr = 0;       // ← ADD THIS
+        printf("[ID]  **FLUSHED DUE TO BRANCH**\n");
     } else {
-        next_ID.pc = IF.pc;
+        next_ID.pc = IF.pc-1;
         uint16_t instr16_ID = IF.instr;
 
-        // Debug decode bits
-        uint16_t bits_15_13 = (instr16_ID >> 13) & 0x7;
-        uint16_t bits_15_12 = (instr16_ID >> 12) & 0xF;
-        uint16_t bits_15_11 = (instr16_ID >> 11) & 0x1F;
-        uint16_t bits_15_10 = (instr16_ID >> 10) & 0x3F;
-        uint16_t bits_15_9  = (instr16_ID >> 9) & 0x7F;
-        uint16_t bits_15_8  = (instr16_ID >> 8) & 0xFF;
-        uint16_t bits_15_6  = (instr16_ID >> 6) & 0x3FF;
-        
-        printf("[DECODE DEBUG] instr=0x%04X | bits_15_13=0x%X | bits_15_12=0x%X | bits_15_11=0x%X | bits_15_10=0x%X | bits_15_9=0x%X | bits_15_8=0x%X | bits_15_6=0x%X\n",
-               instr16_ID, bits_15_13, bits_15_12, bits_15_11, bits_15_10, bits_15_9, bits_15_8, bits_15_6);
-
-        // Check if this halfword starts a 32-bit instruction
         int is32bit = is_32bit_thumb(instr16_ID);
         decode_result_t dres;
+        
         if (is32bit) {
-            // Fetch the next halfword
             uint32_t word_index = (IF.pc) >> 1;
             uint32_t word = instr_mem[word_index];
             uint16_t instr16_next;
@@ -445,18 +546,13 @@ void cortex_m0_top(
 
             uint32_t full_instr = (instr16_ID << 16) | instr16_next;
             next_ID.instr = full_instr;
-
             dres = decode_thumb32_instruction(full_instr);
-            
         } else {
-            // Normal 16-bit Thumb instruction
             next_ID.instr = instr16_ID;
-
             dres = decode_thumb16_instruction(instr16_ID);
         }
 
         if (!dres.valid) {
-            // Unknown/invalid instruction
             next_ID.opcode = THUMB_INVALID;
             next_ID.rd = 0;
             next_ID.rs1 = 0;
@@ -465,18 +561,21 @@ void cortex_m0_top(
             next_ID.imm_value = 0;
             next_ID.reg_data1 = 0;
             next_ID.reg_data2 = 0;
+            next_ID.condition = 0;  // ← ADD THIS
+            next_ID.cpsr = EX.cpsr;  // ← PROPAGATE CPSR FROM EX (for B_COND)
         } else {
-            // Fill ID stage with decoded values
             next_ID.opcode = dres.operation;
             next_ID.rd     = dres.rd;
             next_ID.rs1    = dres.rs1;
             next_ID.rs2    = dres.rs2;
             next_ID.immediate_flag = dres.immediate_flag;
             next_ID.imm_value      = dres.imm_value;
+            next_ID.condition = dres.condition;  // ← STORE CONDITION FROM DECODE
 
-            // Read operands from register file
+            // ← USE FORWARDED CPSR (includes MEM/EX/WB forwarding)
+            next_ID.cpsr = forward.forward_cpsr;
+
             next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
-
             if (dres.immediate_flag) {
                 next_ID.reg_data2 = dres.imm_value;
             } else {
@@ -484,57 +583,58 @@ void cortex_m0_top(
             }
         }
 
-        // -------- DEBUG STATEMENT for ID stage --------
-        printf("[ID]  instr16=0x%04X | is32bit=%d\n", instr16_ID, is32bit);
-
-        if (is32bit) {
-            printf("     full_instr=0x%08X \n", next_ID.instr);
-        } else {
-            printf("     16-bit instr=0x%04X \n", next_ID.instr);
-        }
-
-        printf("     Decoded: opcode=%d, rd=%d, rs1=%d, rs2=%d, imm_flag=%d, imm=0x%08X\n",
-               next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2,
-               next_ID.immediate_flag, next_ID.imm_value);
+        printf("[ID]  instr16=0x%04X | is32bit=%d | opcode=%u | rd=%d | rs1=%d | rs2=%d\n",
+               instr16_ID, is32bit, next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2);
     }
 
     // -------- Instruction Fetch Stage --------
-    // If stalling, keep IF stage frozen (don't fetch new instruction)
     if (hazard.stall) {
-        // Keep IF stage unchanged
         next_IF = IF;
         printf("[IF]  **STALLED - NOT FETCHING NEW INSTRUCTION**\n");
-    } else {
-        // IF stage: fetch 16-bit Thumb instruction
-        uint32_t word_index = IF.pc >> 1;   // divide by 2: 2 halfwords per 32-bit word
-        uint32_t word = instr_mem[word_index];  // read full 32-bit word from DDR
-
+    } else if (branch_taken) {
+        // Branch was taken in WB, IF.pc already updated
+        uint32_t word_index = next_IF.pc >> 1;
+        uint32_t word = instr_mem[word_index];
         uint16_t instr16;
-        if ((IF.pc & 1) == 0) {
-            // Even halfword → lower 16 bits
+
+        if ((next_IF.pc & 1) == 0) {
             instr16 = word & 0xFFFF;
         } else {
-            // odd halfword → upper 16 bits
             instr16 = (word >> 16) & 0xFFFF;
         }
 
-        // pass instruction to ID stage
         next_IF.instr = instr16;
-
-        // Increment PC
-        next_IF.pc = IF.pc + 1;
-
-        // update PC in regfile in bytes
+        next_IF.pc = next_IF.pc + 1;
         regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
 
-        printf("[IF]  pc=%d (halfword) | word_index=%d | instr16=0x%04X | next_pc=%d | regfile_PC=0x%08X\n",
-               IF.pc, word_index, instr16, next_IF.pc, regfile_get_pc(&core_regs));
-    }
+        printf("[IF]  BRANCH TARGET FETCH | pc=%d | instr16=0x%04X | next_pc=%d\n",
+               next_IF.pc - 1, instr16, next_IF.pc);
+    } else {
+        uint32_t word_index = IF.pc >> 1;
+        uint32_t word = instr_mem[word_index];
+        uint16_t instr16;
 
-    // -------- Update WB Stage --------
-    next_WB.opcode = MEM.opcode;
-    next_WB.rd = MEM.rd;
-    next_WB.write_data = MEM.mem_data;
+        if ((IF.pc & 1) == 0) {
+            instr16 = word & 0xFFFF;
+        } else {
+            instr16 = (word >> 16) & 0xFFFF;
+        }
+
+        next_IF.instr = instr16;
+        
+        int is32bit = is_32bit_thumb(instr16);
+        if (is32bit) {
+            next_IF.pc = IF.pc + 2;   // skip both halfwords (4 bytes)
+        } else {
+            next_IF.pc = IF.pc + 1;   // normal 16-bit instruction
+        }
+
+        // Update PC in architectural register file (convert to byte address)
+        regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
+
+        printf("[IF]  pc=%d | word_index=%d | instr16=0x%04X | next_pc=%d\n",
+               IF.pc, word_index, instr16, next_IF.pc);
+    }
 
     // -------- Commit all stage updates --------
     IF = next_IF;
@@ -544,15 +644,13 @@ void cortex_m0_top(
     WB = next_WB;
 
     // -------- Update debug output --------
-    // Output general-purpose registers R0-R12
     for(int i = 0; i < 13; i++) {
         reg_out[i] = core_regs.gpr[i];
     }
     
-    // Output special registers
-    reg_out[13] = regfile_get_sp(&core_regs);    // Current stack pointer
-    reg_out[14] = core_regs.lr;                  // Link register
-    reg_out[15] = regfile_get_pc(&core_regs);    // Program counter
+    reg_out[13] = regfile_get_sp(&core_regs);
+    reg_out[14] = core_regs.lr;
+    reg_out[15] = regfile_get_pc(&core_regs);
 
     printf("[REGFILE] R0-R12:\n");
     for(int i = 0; i < 13; i++) {

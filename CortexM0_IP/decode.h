@@ -130,7 +130,7 @@ typedef struct {
     uint8_t immediate_flag;
     uint32_t imm_value;
     int size;                  // 1 = 16-bit, 2 = 32-bit
-    uint8_t condition;         // For conditional branches
+    uint32_t condition;        // For conditional branches: 0=EQ, 1=NE, 2=CS, 3=CC, etc.
 } decode_result_t;
 
 // Function prototypes

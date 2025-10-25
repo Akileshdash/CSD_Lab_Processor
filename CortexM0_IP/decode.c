@@ -236,7 +236,6 @@ decode_result_t decode_thumb32_instruction(uint32_t instr32) {
 
     uint16_t hw1 = (instr32 >> 16) & 0xFFFF;
     uint16_t hw2 = instr32 & 0xFFFF;
-
     // BL
     if ((hw1 & 0xF800) == 0xF000 && (hw2 & 0xD000) == 0xD000) {
         uint32_t S = (hw1 >> 10) & 1;
@@ -254,6 +253,11 @@ decode_result_t decode_thumb32_instruction(uint32_t instr32) {
         result.operation = THUMB_BL;
         result.immediate_flag = 1;
         result.imm_value = sign_extend(imm32, 25);
+
+        // Debug info
+        printf("[DECODE32 BL] hw1=0x%04X hw2=0x%04X | S=%u J1=%u J2=%u | I1=%u I2=%u | imm10=0x%03X imm11=0x%03X | imm32=0x%08X | signext=0x%08X\n",
+            hw1, hw2, S, J1, J2, I1, I2, imm10, imm11, imm32, result.imm_value);
+
         return result;
     }
 
