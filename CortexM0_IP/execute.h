@@ -29,6 +29,7 @@ typedef struct {
     uint32_t overflow;
     uint32_t link;       // for BL (LR value)
     uint32_t cpsr; 
+    int flags_updated;    // 1 if this instruction updated flags
 } EX_output_t;
 
 // Execute function prototype

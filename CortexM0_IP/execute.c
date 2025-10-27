@@ -27,6 +27,10 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             uint32_t carry = (temp > 0xFFFFFFFF);
             uint32_t overflow = (((input.reg_data1 ^ out.alu_result) & (input.reg_data2 ^ out.alu_result)) & 0x80000000) != 0;
             regfile_update_flags(regs, out.alu_result, carry, overflow);
+
+            // NEW: Output flags from EX stage
+            out.flags_updated = 1;
+            out.cpsr = regs->apsr;  // Capture updated flags
             out.carry = carry;
             out.overflow = overflow;
             break;
@@ -34,11 +38,18 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
 
         case THUMB_ADC:
         {
-            uint64_t temp = (uint64_t)input.reg_data1 + input.reg_data2 + carry_in;
+            // Use forwarded carry if available, otherwise read from register file
+            uint32_t actual_carry = carry_in;
+            
+            uint64_t temp = (uint64_t)input.reg_data1 + input.reg_data2 + actual_carry;
             out.alu_result = (uint32_t)temp;
             uint32_t carry = (temp > 0xFFFFFFFF);
             uint32_t overflow = (((input.reg_data1 ^ out.alu_result) & (input.reg_data2 ^ out.alu_result)) & 0x80000000) != 0;
             regfile_update_flags(regs, out.alu_result, carry, overflow);
+
+            // NEW: Output flags
+            out.flags_updated = 1;
+            out.cpsr = regs->apsr;
             break;
         }
 
@@ -52,6 +63,10 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             uint32_t carry = (input.reg_data1 >= input.reg_data2);
             uint32_t overflow = (((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ out.alu_result)) & 0x80000000) != 0;
             regfile_update_flags(regs, out.alu_result, carry, overflow);
+
+            // NEW: Output flags
+            out.flags_updated = 1;
+            out.cpsr = regs->apsr;
             out.carry = carry;
             out.overflow = overflow;
             break;
@@ -64,6 +79,9 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             uint32_t carry = !(temp >> 32);
             uint32_t overflow = (((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ out.alu_result)) & 0x80000000) != 0;
             regfile_update_flags(regs, out.alu_result, carry, overflow);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         }
 
@@ -71,6 +89,9 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_RSB:
             out.alu_result = (uint32_t)(0 - input.reg_data2);
             regfile_update_flags(regs, out.alu_result, (input.reg_data2 != 0), 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
 
         // ────────────────────────────────
@@ -79,26 +100,42 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_AND:
             out.alu_result = input.reg_data1 & input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_ORR:
             out.alu_result = input.reg_data1 | input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_EOR:
             out.alu_result = input.reg_data1 ^ input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_BIC:
             out.alu_result = input.reg_data1 & ~input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_MVN:
             out.alu_result = ~input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_MUL:
             out.alu_result = input.reg_data1 * input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
 
         // ────────────────────────────────
@@ -109,6 +146,8 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_MOV_HIGH:
             out.alu_result = input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_CMP_REG:
         {
@@ -146,6 +185,8 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
                 (flags & FLAG_Z) ? 1 : 0,
                 (flags & FLAG_C) ? 1 : 0,
                 (flags & FLAG_V) ? 1 : 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = flags;          // Use the flags you calculated
             break;
         }
         case THUMB_CMP_IMM:
@@ -168,6 +209,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             if ((sign1 != sign2) && (sign_result != sign1)) flags |= FLAG_V;
             
             out.cpsr = flags;
+            out.flags_updated = 1;     // ADD THIS
             break;
         }
         case THUMB_CMP_HIGH:
@@ -175,17 +217,28 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             uint32_t result = input.reg_data1 - input.reg_data2;
             uint32_t carry = (input.reg_data1 >= input.reg_data2);
             uint32_t overflow = (((input.reg_data1 ^ input.reg_data2) & (input.reg_data1 ^ result)) & 0x80000000) != 0;
+            uint32_t flags = 0;
+            if (result == 0) flags |= FLAG_Z;
+            if (result < 0) flags |= FLAG_N;
+            
             regfile_update_flags(regs, result, carry, overflow);
             out.alu_result = result; // Not written back
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = flags;          // Use the flags you calculated
             break;
         }
         case THUMB_TST:
             out.alu_result = input.reg_data1 & input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_CMN:
             out.alu_result = input.reg_data1 + input.reg_data2;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
 
         // ────────────────────────────────
@@ -200,15 +253,23 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_LSR_REG:
             out.alu_result = input.reg_data1 >> (input.reg_data2 & 0x1F);
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_ASR_IMM:
         case THUMB_ASR_REG:
             out.alu_result = ((int32_t)input.reg_data1) >> (input.reg_data2 & 0x1F);
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
         case THUMB_ROR:
             out.alu_result = (input.reg_data1 >> (input.reg_data2 & 31)) | (input.reg_data1 << (32 - (input.reg_data2 & 31)));
             regfile_update_flags(regs, out.alu_result, 0, 0);
+
+            out.flags_updated = 1;     // ADD THIS
+            out.cpsr = regs->apsr;     // ADD THIS
             break;
 
         // ────────────────────────────────

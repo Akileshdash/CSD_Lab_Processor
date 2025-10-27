@@ -37,6 +37,7 @@ typedef struct {
     uint32_t link;        // For BL instruction
     uint32_t condition;  // For conditional branches
     uint32_t cpsr;       // Condition flags from previous ALU operations
+    int flags_updated;      // NEW
 } EX_stage;
 
 // MEM Stage
@@ -47,6 +48,7 @@ typedef struct {
     uint32_t mem_data;    // Data from memory (loads) or ALU result
     uint32_t link;        // For BL instruction
     uint32_t cpsr;
+    int flags_updated;      // NEW
 } MEM_stage;
 
 // WB Stage
@@ -56,6 +58,7 @@ typedef struct {
     uint32_t write_data;  // Data to write to register file
     uint32_t link;
     uint32_t cpsr;
+    int flags_updated;      // NEW
 } WB_stage;
 
 #endif // STAGES_H

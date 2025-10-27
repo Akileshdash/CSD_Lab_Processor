@@ -205,7 +205,13 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
 
         switch (opcode) {
             case 0b00:
-                if (imm5 == 1) result.operation = THUMB_LSL_IMM;
+                // LSL immediate - if imm5==0, it's actually MOV (register)
+                if (imm5 == 0) {
+                    result.operation = THUMB_MOV_REG;
+                    result.immediate_flag = 0;  // MOV is not an immediate operation
+                } else {
+                    result.operation = THUMB_LSL_IMM;
+                }
                 break;
             case 0b01:
                 result.operation = THUMB_LSR_IMM;
