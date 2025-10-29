@@ -1,4 +1,4 @@
-#include "processor.h"
+// #include "processor.h"
 #include "decode.h"
 #include "regfile.h"
 #include <stdio.h>
@@ -151,6 +151,7 @@ void test_find_max() {
     printf("✅ FIND MAXIMUM test passed!\n");
 }
 
+
 void test_swap_values() {
     printf("\n=== TEST: SWAP TWO VALUES ===\n");
 
@@ -161,17 +162,17 @@ void test_swap_values() {
     // Program:
     // MOVS R0, #5        ; R0 = 5
     // MOVS R1, #9        ; R1 = 9
-    // MOV  R2, R0        ; temp = R0
-    // MOV  R0, R1        ; R0 = R1
-    // MOV  R1, R2        ; R1 = temp
-    // NOP
+    // MOV  R2, R0        ; temp = R0 = 5
+    // MOV  R0, R1        ; R0 = R1 = 9
+    // MOV  R1, R2        ; R1 = temp = 5
 
     instr_mem[0] = 0x2005 | (0x2109 << 16);  // MOVS R0,#5 | MOVS R1,#9
-    instr_mem[1] = 0x4602 | (0x4608 << 16);  // MOV R2,R0 | MOV R0,R1
-    instr_mem[2] = 0x460A | (0xBF00 << 16);  // MOV R1,R2 | NOP
-
+    instr_mem[1] = 0x4602 | (0x4608 << 16);  // MOV R2,R0  | MOV R0,R1
+    instr_mem[2] = 0x4611 | (0xBF00 << 16);  // MOV R1,R2  | NOP
+    
     cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1); // Reset
-    for (int i = 0; i < 15; i++)
+    
+    for (int i = 0; i < 20; i++)
         cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
 
     PRINT_REGS(reg_out);
@@ -183,16 +184,15 @@ void test_swap_values() {
     printf("✅ SWAP TWO VALUES test passed!\n");
 }
 
-
 // ============================================================================
 // MAIN TEST RUNNER
 // ============================================================================
 
 int main() {       
-    // test_max_of_three(); // Passsed
-    // test_sum_array(); // Passed
-    // test_factorial(); // Passed
-    // test_absolute_value(); // Passed   
+    test_max_of_three(); // Passsed
+    test_sum_array(); // Passed
+    test_factorial(); // Passed
+    test_absolute_value(); // Passed   
     test_swap_values();
     return 0;
 }
