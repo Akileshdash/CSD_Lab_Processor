@@ -1,4 +1,4 @@
-// #include "processor.h"
+#include "processor.h"
 #include "decode.h"
 #include "regfile.h"
 #include <stdio.h>
@@ -193,6 +193,6 @@ int main() {
     test_sum_array(); // Passed
     test_factorial(); // Passed
     test_absolute_value(); // Passed   
-    test_swap_values();
+    test_swap_values(); // Passed
     return 0;
 }
