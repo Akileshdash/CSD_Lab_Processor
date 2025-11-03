@@ -111,7 +111,7 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
             case 0b0110: result.operation = THUMB_SBC; break;
             case 0b0111: result.operation = THUMB_ROR; break;
             case 0b1000: result.operation = THUMB_TST; break;
-            case 0b1001: result.operation = THUMB_RSB; break;
+            case 0b1001: result.operation = THUMB_NEG; break;
             case 0b1010: result.operation = THUMB_CMP_REG; break;
             case 0b1011: result.operation = THUMB_CMN; break;
             case 0b1100: result.operation = THUMB_ORR; break;
@@ -156,7 +156,114 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         result.imm_value = imm8 << 2;
     }
 
-    // 9. Load/store multiple [1100x]
+
+    // 9. Load/Store Register with immediate offset [0101]
+    // ============================================================
+    // LOAD/STORE WITH IMMEDIATE OFFSET [0110x] and [10000/10001]
+    // ============================================================
+    // Pattern: 0110 0 imm5 Rn Rd - STR (word, imm*4)
+    // Pattern: 0110 1 imm5 Rn Rd - LDR (word, imm*4)
+    // Pattern: 0111 0 imm5 Rn Rd - STRB (byte, no scaling)
+    // Pattern: 0111 1 imm5 Rn Rd - LDRB (byte, no scaling)
+    // Pattern: 10000 imm5 Rn Rd - STRH (halfword, imm*2)
+    // Pattern: 10001 imm5 Rn Rd - LDRH (halfword, imm*2)
+
+    else if (bits_15_12 == 0b0110 || bits_15_12 == 0b0111 || bits_15_12 == 0b1000) {
+        uint32_t opcode_high = extract_bits(instruction, 11, 12);  // For 0110/0111
+        uint32_t imm5 = extract_bits(instruction, 6, 10);
+        uint32_t rn = extract_bits(instruction, 3, 5);
+        uint32_t rd = extract_bits(instruction, 0, 2);
+
+        result.rd = rd;
+        result.rs1 = rn;
+        result.immediate_flag = 1;
+
+        if (bits_15_12 == 0b0110) {
+            // Word operations: [0110 L imm5 Rn Rd]
+            uint32_t l = extract_bits(instruction, 11, 11);
+            result.imm_value = imm5 << 2;  // Scale by 4
+            result.operation = (l == 0) ? THUMB_STR_IMM : THUMB_LDR_IMM;
+        }
+        else if (bits_15_12 == 0b0111) {
+            // Byte operations: [0111 L imm5 Rn Rd]
+            uint32_t l = extract_bits(instruction, 11, 11);
+            result.imm_value = imm5;  // No scaling
+            result.operation = (l == 0) ? THUMB_STRB_IMM : THUMB_LDRB_IMM;
+        }
+        else if (bits_15_12 == 0b1000) {
+            // Halfword operations: [10000 imm5 Rn Rd] or [10001 imm5 Rn Rd]
+            uint32_t l = extract_bits(instruction, 11, 11);
+            result.imm_value = imm5 << 1;  // Scale by 2
+            result.operation = (l == 0) ? THUMB_STRH_IMM : THUMB_LDRH_IMM;
+        }
+    }
+
+    // 10. Load/Store Register with register offset [0101]
+    // ============================================================
+    // LOAD/STORE WITH REGISTER OFFSET [0101]
+    // ============================================================
+    // Pattern: 0101 ooo Rm Rn Rd
+    // ooo determines the type:
+    //   000 = STR (register)
+    //   001 = STRH (register
+    //   010 = STRB (register)
+    //   011 = LDRB (register)
+    //   100 = LDR (register))
+    //   101 = LDRH (register)
+    //   110 = LDRSB (register)
+    //   111 = LDRSH (register)
+    // CORRECTED CODE:
+    else if (bits_15_12 == 0b0101) {
+        uint32_t opc = extract_bits(instruction, 9, 11);  // Bits 11-9 (3 bits)
+        uint32_t rm = extract_bits(instruction, 6, 8);    // Bits 8-6
+        uint32_t rn = extract_bits(instruction, 3, 5);    // Bits 5-3
+        uint32_t rd = extract_bits(instruction, 0, 2);    // Bits 2-0
+
+        result.rd = rd;
+        result.rs1 = rn;  // Base register
+        result.rs2 = rm;  // Offset register
+        result.immediate_flag = 0;
+
+        switch (opc) {
+            // STORE operations (rd contains the value to store)
+            case 0b000: result.operation = THUMB_STR_REG; break;
+            case 0b001: result.operation = THUMB_STRH_REG; break;
+            case 0b010: result.operation = THUMB_STRB_REG; break;
+            
+            // LOAD operations (rd receives the loaded value)
+            case 0b011: result.operation = THUMB_LDRSB_REG; break;
+            case 0b100: result.operation = THUMB_LDR_REG; break;
+            case 0b101: result.operation = THUMB_LDRH_REG; break;
+            case 0b110: result.operation = THUMB_LDRB_REG; break;
+            case 0b111: result.operation = THUMB_LDRSH_REG; break;
+            default: result.valid = 0; break;
+        }
+    }
+
+    // 11. Load/Store to/from stack [1001]
+    // ============================================================
+    // LOAD/STORE TO/FROM STACK [1001]
+    // ============================================================
+    // Pattern: 1001 L Rd imm8
+    // L=0: STR (SP-relative)
+    // L=1: LDR (SP-relative)
+    else if (bits_15_12 == 0b1001) {
+        uint32_t l = extract_bits(instruction, 11, 11);
+        uint32_t rd = extract_bits(instruction, 8, 10);
+        uint32_t imm8 = extract_bits(instruction, 0, 7);
+
+        result.rd = rd;
+        result.rs1 = 13;  // SP is R13
+        result.immediate_flag = 1;
+        result.imm_value = imm8 << 2;  // Scale by 4
+        result.operation = (l == 0) ? THUMB_STR_SP : THUMB_LDR_SP;
+    }
+
+    // 12. Load/store multiple [1100x]
+    // ============================================================
+    // LOAD/STORE MULTIPLE [1100x]
+    // ============================================================
+    // Pattern: 1100 L Rn register_list
     else if (bits_15_12 == 0b1100) {
         uint32_t l = extract_bits(instruction, 11, 11);
         uint32_t rn = extract_bits(instruction, 8, 10);
@@ -167,7 +274,38 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         result.operation = (l == 0) ? THUMB_STMIA : THUMB_LDMIA;
     }
 
-    // 10. Conditional branch [1101]
+    // 13. Push/Pop [1011]
+    // ============================================================
+    // Pattern: 1011 0x0 R register_list (PUSH)
+    //          1011 1x0 R register_list (POP)
+    // ============================================================
+    else if (bits_15_12 == 0b1011) {
+        // Extract the L bit (bit 11): 0 = PUSH, 1 = POP
+        uint32_t l_bit = extract_bits(instruction, 11, 11);
+        
+        // Extract the R bit (bit 8): 1 if LR/PC is included, 0 otherwise
+        uint32_t r_bit = extract_bits(instruction, 8, 8);
+        
+        // Extract register list (bits 7-0)
+        uint32_t reglist = extract_bits(instruction, 0, 7);
+        
+        // Bits 10-9 should be 0b00 for PUSH/POP
+        uint32_t check_bits = extract_bits(instruction, 9, 10);
+        
+        if (check_bits == 0b00) {
+            result.operation = (l_bit == 0) ? THUMB_PUSH : THUMB_POP;
+            result.immediate_flag = 1;
+            result.imm_value = reglist;
+            
+            // Store R bit for handling LR (PUSH) or PC (POP)
+            // You may want to add this to your result struct if not present
+            // result.r_bit = r_bit;
+        } else {
+            result.valid = 0;
+        }
+    }
+
+    // 14. Conditional branch [1101]
     else if (bits_15_12 == 0b1101) {
         uint32_t cond = extract_bits(instruction, 8, 11);
         uint32_t imm8 = extract_bits(instruction, 0, 7);
@@ -183,7 +321,7 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         }
     }
 
-    // 11. Unconditional branch [11100]
+    // 15. Unconditional branch [11100]
     else if (bits_15_11 == 0b11100) {
         uint32_t imm11 = extract_bits(instruction, 0, 10);
         result.operation = THUMB_B;
@@ -191,7 +329,7 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         result.imm_value = sign_extend(imm11 << 1, 12);
     }
 
-    // 12. Shift/move immediate [000xx]
+    // 16. Shift/move immediate [000xx]
     else if (bits_15_13 == 0b000) {
         uint32_t opcode = extract_bits(instruction, 11, 12);
         uint32_t imm5 = extract_bits(instruction, 6, 10);
@@ -205,13 +343,8 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
 
         switch (opcode) {
             case 0b00:
-                // LSL immediate - if imm5==0, it's actually MOV (register)
-                if (imm5 == 0) {
-                    result.operation = THUMB_MOV_REG;
-                    result.immediate_flag = 0;  // MOV is not an immediate operation
-                } else {
-                    result.operation = THUMB_LSL_IMM;
-                }
+                result.operation = THUMB_LSL_IMM;
+                if (imm5 == 0) result.imm_value = 32;
                 break;
             case 0b01:
                 result.operation = THUMB_LSR_IMM;
@@ -225,6 +358,34 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
                 result.valid = 0;
                 break;
         }
+    }
+
+    // Sign/Zero Extend and Reverse instructions
+    else if ((instruction & 0xFF00) == 0xB200) {
+        // SXTB/SXTH/UXTB/UXTH
+        uint32_t sub_op = ((instruction >> 6) & 0x3);
+        printf("[DECODE SXTB] sub_op=%u, instr=0x%04X\n", sub_op, instruction);
+        result.rd = extract_bits(instruction, 0, 2);
+        result.rs1 = extract_bits(instruction, 3, 5);
+        result.immediate_flag = 0;
+        
+        if (sub_op == 0) result.operation = THUMB_SXTB;
+        else if (sub_op == 1) result.operation = THUMB_SXTH;
+        else if (sub_op == 2) result.operation = THUMB_UXTB;
+        else if (sub_op == 3) result.operation = THUMB_UXTH;
+        else result.valid = 0;
+    }
+    else if ((instruction & 0xFF00) == 0xBA00) {
+        // REV/REV16/REVSH
+        uint32_t sub_op = ((instruction >> 6) & 0x3);
+        result.rd = extract_bits(instruction, 0, 2);
+        result.rs1 = extract_bits(instruction, 3, 5);
+        result.immediate_flag = 0;
+        
+        if (sub_op == 0) result.operation = THUMB_REV;
+        else if (sub_op == 1) result.operation = THUMB_REV16;
+        else if (sub_op == 3) result.operation = THUMB_REVSH;
+        else result.valid = 0;
     }
 
     else {

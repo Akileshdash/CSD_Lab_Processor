@@ -13,13 +13,13 @@ typedef enum {
 
     // ───────────────────────────────────────────────
     // Shift and Move (1–9)
-    THUMB_MOV_REG,                      // 1  MOV (register) — Copy value from one register to another
-    THUMB_MOV_IMM,                      // 2  MOV (immediate) — Load an immediate value into a register
-    THUMB_MOV_HIGH,                     // 3  MOV (high registers) — Move between high registers (R8–R15)
-    THUMB_LSL_IMM,                      // 4  LSL (immediate) — Logical shift left by an immediate amount
-    THUMB_LSL_REG,                      // 5  LSL (register) — Logical shift left by value in another register
-    THUMB_LSR_IMM,                      // 6  LSR (immediate) — Logical shift right by an immediate amount
-    THUMB_LSR_REG,                      // 7  LSR (register) — Logical shift right by value in another register
+    THUMB_MOV_REG,                      // 1  MOV (register) — Copy value from one register to another           Correct
+    THUMB_MOV_IMM,                      // 2  MOV (immediate) — Load an immediate value into a register           Correct
+    THUMB_MOV_HIGH,                     // 3  MOV (high registers) — Move between high registers (R8–R15)           Correct
+    THUMB_LSL_IMM,                      // 4  LSL (immediate) — Logical shift left by an immediate amount           Correct
+    THUMB_LSL_REG,                      // 5  LSL (register) — Logical shift left by value in another register           Correct
+    THUMB_LSR_IMM,                      // 6  LSR (immediate) — Logical shift right by an immediate amount           Correct
+    THUMB_LSR_REG,                      // 7  LSR (register) — Logical shift right by value in another register           Correct
     THUMB_ASR_IMM,                      // 8  ASR (immediate) — Arithmetic shift right by an immediate amount (preserves sign)
     THUMB_ASR_REG,                      // 9  ASR (register) — Arithmetic shift right by value in another register
 
@@ -43,20 +43,20 @@ typedef enum {
     THUMB_CMP_HIGH,                     // 22 CMP (high registers) — Compare high registers (R8–R15)
     THUMB_CMN,                          // 23 CMN — Compare Negative (add and set flags)
     THUMB_TST,                          // 24 TST — Bitwise AND, update flags (test bits)
-    THUMB_NEG,                          // 25 NEG — Two’s complement negate (R = 0 - Rn)
+    THUMB_NEG,                          // 25 NEG — Two’s complement negate (R = 0 - Rn)           Correct
 
     // ───────────────────────────────────────────────
     // Data Processing (26–35)
     THUMB_AND,                          // 26 AND — Bitwise AND of two registers
     THUMB_EOR,                          // 27 EOR — Bitwise exclusive OR
-    THUMB_ORR,                          // 28 ORR — Bitwise inclusive OR
+    THUMB_ORR,                          // 28 ORR — Bitwise inclusive OR           Correct
     THUMB_BIC,                          // 29 BIC — Bit clear (R = Rn AND NOT Rm)
-    THUMB_MVN,                          // 30 MVN — Move NOT (bitwise invert source)
+    THUMB_MVN,                          // 30 MVN — Move NOT (bitwise invert source)           Correct
     THUMB_ADC,                          // 31 ADC — Add with carry
-    THUMB_SBC,                          // 32 SBC — Subtract with carry
+    THUMB_SBC,                          // 32 SBC — Subtract with carry                                        Correct
     THUMB_RSB,                          // 33 RSB — Reverse subtract (R = 0 - Rn)
-    THUMB_ROR,                          // 34 ROR — Rotate right
-    THUMB_MUL,                          // 35 MUL — Multiply two registers
+    THUMB_ROR,                          // 34 ROR — Rotate right                   Correct
+    THUMB_MUL,                          // 35 MUL — Multiply two registers           Correct
 
     // ───────────────────────────────────────────────
     // Branches (36–39)
@@ -67,30 +67,30 @@ typedef enum {
 
     // ───────────────────────────────────────────────
     // Load / Store Single (40–56)
-    THUMB_LDR_REG,                      // 40 LDR (register offset) — Load from address in register
-    THUMB_LDR_IMM,                      // 41 LDR (immediate offset) — Load from address with offset
-    THUMB_LDR_LIT,                      // 42 LDR (literal) — Load from PC-relative address
-    THUMB_LDR_SP,                       // 43 LDR (SP-relative) — Load from SP + offset
-    THUMB_STR_REG,                      // 44 STR (register offset) — Store to address in register
-    THUMB_STR_IMM,                      // 45 STR (immediate offset) — Store to address with offset
-    THUMB_STR_SP,                       // 46 STR (SP-relative) — Store to SP + offset
-    THUMB_LDRB_REG,                     // 47 LDRB (register offset) — Load byte from memory
-    THUMB_LDRB_IMM,                     // 48 LDRB (immediate offset) — Load byte with offset
-    THUMB_STRB_REG,                     // 49 STRB (register offset) — Store byte to memory
-    THUMB_STRB_IMM,                     // 50 STRB (immediate offset) — Store byte with offset
-    THUMB_LDRH_REG,                     // 51 LDRH (register offset) — Load halfword from memory
-    THUMB_LDRH_IMM,                     // 52 LDRH (immediate offset) — Load halfword with offset
-    THUMB_STRH_REG,                     // 53 STRH (register offset) — Store halfword to memory
-    THUMB_STRH_IMM,                     // 54 STRH (immediate offset) — Store halfword with offset
-    THUMB_LDRSB_REG,                    // 55 LDRSB — Load signed byte
-    THUMB_LDRSH_REG,                    // 56 LDRSH — Load signed halfword
+    THUMB_LDR_REG,                      // 40 LDR (register offset) — Load from address in register                   Correct
+    THUMB_LDR_IMM,                      // 41 LDR (immediate offset) — Load from address with offset           Correct
+    THUMB_LDR_LIT,                      // 42 LDR (literal) — Load from PC-relative address           Correct
+    THUMB_LDR_SP,                       // 43 LDR (SP-relative) — Load from SP + offset           Correct
+    THUMB_STR_REG,                      // 44 STR (register offset) — Store to address in register                   Correct
+    THUMB_STR_IMM,                      // 45 STR (immediate offset) — Store to address with offset                   Correct
+    THUMB_STR_SP,                       // 46 STR (SP-relative) — Store to SP + offset                   Correct
+    THUMB_LDRB_REG,                     // 47 LDRB (register offset) — Load byte from memory           Correct
+    THUMB_LDRB_IMM,                     // 48 LDRB (immediate offset) — Load byte with offset           Correct
+    THUMB_STRB_REG,                     // 49 STRB (register offset) — Store byte to memory                   Correct
+    THUMB_STRB_IMM,                     // 50 STRB (immediate offset) — Store byte with offset                   Correct
+    THUMB_LDRH_REG,                     // 51 LDRH (register offset) — Load halfword from memory           Correct
+    THUMB_LDRH_IMM,                     // 52 LDRH (immediate offset) — Load halfword with offset           Correct
+    THUMB_STRH_REG,                     // 53 STRH (register offset) — Store halfword to memory                   Correct
+    THUMB_STRH_IMM,                     // 54 STRH (immediate offset) — Store halfword with offset                   Correct
+    THUMB_LDRSB_REG,                    // 55 LDRSB — Load signed byte           Correct
+    THUMB_LDRSH_REG,                    // 56 LDRSH — Load signed halfword           Correct
 
     // ───────────────────────────────────────────────
     // Load / Store Multiple (57–60)
-    THUMB_LDMIA,                        // 57 LDMIA — Load multiple registers incrementing after
-    THUMB_STMIA,                        // 58 STMIA — Store multiple registers incrementing after
-    THUMB_PUSH,                         // 59 PUSH — Push registers onto stack
-    THUMB_POP,                          // 60 POP — Pop registers from stack
+    THUMB_LDMIA,                        // 57 LDMIA — Load multiple registers incrementing after           Correct
+    THUMB_STMIA,                        // 58 STMIA — Store multiple registers incrementing after                   Correct
+    THUMB_PUSH,                         // 59 PUSH — Push registers onto stack                                  Correct
+    THUMB_POP,                          // 60 POP — Pop registers from stack                                Correct
 
     // ───────────────────────────────────────────────
     // Miscellaneous (61–69)
@@ -131,6 +131,7 @@ typedef struct {
     uint32_t imm_value;
     int size;                  // 1 = 16-bit, 2 = 32-bit
     uint32_t condition;        // For conditional branches: 0=EQ, 1=NE, 2=CS, 3=CC, etc.
+    uint32_t r_bit;  // For PUSH/POP: indicates if LR/PC is included
 } decode_result_t;
 
 // Function prototypes

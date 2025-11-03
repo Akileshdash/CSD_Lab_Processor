@@ -19,7 +19,7 @@
 // PRIORITY 1: ARITHMETIC OPERATIONS (ADD/SUB VARIANTS)
 // ============================================================================
 
-// === TEST 22: ADD_REG (Add two registers) ===
+// === TEST 1: ADD_REG (Add two registers) ===
 void test_add_reg() {
     printf("\n=== TEST 22: ADD_REG ===\n");
 
@@ -55,7 +55,7 @@ void test_add_reg() {
     printf("✅ ADD_REG test passed!\n");
 }
 
-// === TEST 23: ADD_IMM3 (Add 3-bit immediate) ===
+// === TEST 2: ADD_IMM3 (Add 3-bit immediate) ===
 void test_add_imm3() {
     printf("\n=== TEST 23: ADD_IMM3 ===\n");
 
@@ -1177,8 +1177,8 @@ int main() {
     printf("========== Cortex-M0 Comprehensive Instruction Test Suite ==========\n");
 
     // ====== PRIORITY 1: ARITHMETIC OPERATIONS ======
-    // printf("\n========== PRIORITY 1: ARITHMETIC OPERATIONS ==========\n");
-    // test_add_reg();           // Test 22 Passed
+    printf("\n========== PRIORITY 1: ARITHMETIC OPERATIONS ==========\n");
+    test_add_reg();           // Test 1 Passed
     // test_add_imm3();          // Test 23 Passed
     // test_sub_reg();           // Test 24 Passed
     // test_sub_imm3();          // Test 25 Passed

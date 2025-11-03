@@ -2,63 +2,78 @@
 #define STAGES_H
 
 #include <stdint.h>
-#include "decode.h"   // for thumb_operation_t
+#include "decode.h"  // for thumb_operation_t
 
-typedef uint32_t addr_t;
-
-typedef struct { 
-    addr_t pc; 
-    uint32_t instr; 
+// ──────────────────────────────────────
+// Instruction Fetch Stage
+// ──────────────────────────────────────
+typedef struct {
+    uint32_t pc;        // Program counter (in halfword units)
+    uint16_t instr;     // 16-bit instruction fetched
 } IF_stage;
 
-// ID Stage
+// ──────────────────────────────────────
+// Instruction Decode Stage
+// ──────────────────────────────────────
 typedef struct {
-    addr_t pc; 
-    uint32_t instr; 
-    uint32_t reg_data1; 
-    uint32_t reg_data2;
-    thumb_operation_t opcode;   // Use Thumb ISA enum
-    unsigned int rd; 
-    unsigned int rs1; 
-    unsigned int rs2;
-    uint8_t immediate_flag;     // 1 if instruction uses immediate
-    uint32_t imm_value;         // immediate value
-    uint32_t condition;  // For conditional branches
-    uint32_t cpsr;
+    uint32_t pc;              // Program counter
+    uint32_t instr;           // Full instruction (16 or 32-bit)
+    thumb_operation_t opcode; // Decoded operation
+    uint32_t rd;              // Destination register
+    uint32_t rs1;             // Source register 1 (base address for loads/stores)
+    uint32_t rs2;             // Source register 2 (store data or offset)
+    uint32_t immediate_flag;  // 1 if immediate is used
+    uint32_t imm_value;       // Immediate value (offset or constant)
+    uint32_t reg_data1;       // Data from rs1
+    uint32_t reg_data2;       // Data from rs2 or immediate
+    uint32_t condition;       // For B<cond> instructions (0x0-0xE)
+    uint32_t cpsr;            // Current condition flags (for conditional branches)
+    uint32_t r_bit;         // For PUSH/POP: LR/PC included flag
 } ID_stage;
 
-// EX Stage
+// ──────────────────────────────────────
+// Execute Stage
+// ──────────────────────────────────────
 typedef struct {
-    uint32_t pc;          // Program counter of this instruction
-    thumb_operation_t opcode;
-    uint8_t rd;
-    uint32_t alu_result;
-    uint32_t reg_data2;   // For stores
-    uint32_t link;        // For BL instruction
-    uint32_t condition;  // For conditional branches
-    uint32_t cpsr;       // Condition flags from previous ALU operations
-    int flags_updated;      // NEW
+    thumb_operation_t opcode; // Operation
+    uint32_t alu_result;      // ALU result or effective address
+    uint32_t reg_data2;       // Original data to be stored (for STR instructions)
+    uint32_t rd;              // Destination register
+    uint32_t link;            // LR value for BL
+    uint32_t pc;              // Program counter of this instruction
+    uint32_t cpsr;            // Updated condition flags
+    
+    // ──── Memory Operation Fields ────
+    int mem_size;             // 1=byte, 2=halfword, 4=word (0=no memory access)
+    int sign_extend;          // 1 for signed loads (LDRSB, LDRSH)
+    uint32_t r_bit;         // For PUSH/POP: LR/PC included flag
 } EX_stage;
 
-// MEM Stage
+// ──────────────────────────────────────
+// Memory Access Stage
+// ──────────────────────────────────────
 typedef struct {
-    thumb_operation_t opcode;
-    uint8_t rd;
-    uint32_t alu_result;  // Address for load/store
-    uint32_t mem_data;    // Data from memory (loads) or ALU result
-    uint32_t link;        // For BL instruction
-    uint32_t cpsr;
-    int flags_updated;      // NEW
+    thumb_operation_t opcode; // Operation
+    uint32_t alu_result;      // Effective address (for debug)
+    uint32_t mem_data;        // Data from load or data to store
+    uint32_t rd;              // Destination register
+    uint32_t link;            // LR value for BL
+    uint32_t cpsr;            // Condition flags
+    
+    // ──── Memory Operation Fields ────
+    int mem_size;             // 1=byte, 2=halfword, 4=word (0=no memory access)
+    int sign_extend;          // 1 for signed loads (LDRSB, LDRSH)
 } MEM_stage;
 
-// WB Stage
+// ──────────────────────────────────────
+// Write Back Stage
+// ──────────────────────────────────────
 typedef struct {
-    thumb_operation_t opcode;
-    uint8_t rd;
-    uint32_t write_data;  // Data to write to register file
-    uint32_t link;
-    uint32_t cpsr;
-    int flags_updated;      // NEW
+    thumb_operation_t opcode; // Operation
+    uint32_t write_data;      // Data to write back to register (from MEM.mem_data)
+    uint32_t rd;              // Destination register
+    uint32_t link;            // LR value for BL
+    uint32_t cpsr;            // Condition flags
 } WB_stage;
 
-#endif // STAGES_H
+#endif

@@ -277,20 +277,92 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // ────────────────────────────────
         case THUMB_LDR_IMM:
         case THUMB_LDR_REG:
-        case THUMB_LDRB_IMM:
-        case THUMB_LDRB_REG:
-        case THUMB_LDRH_IMM:
-        case THUMB_LDRH_REG:
-        case THUMB_LDRSB_REG:
-        case THUMB_LDRSH_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 4;
+            printf("[EX] LDR: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        case THUMB_LDR_LIT:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 4;
+            printf("[EX] LDR_LIT: PC=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        case THUMB_LDR_SP:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 4;
+            printf("[EX] LDR_SP: SP=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        // WORD STORES
         case THUMB_STR_IMM:
         case THUMB_STR_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 4;
+            printf("[EX] STR: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        case THUMB_STR_SP:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 4;
+            printf("[EX] STR_SP: SP=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        // BYTE LOADS
+        case THUMB_LDRB_IMM:
+        case THUMB_LDRB_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 1;
+            printf("[EX] LDRB: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        case THUMB_LDRSB_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 1;
+            out.sign_extend = 1;
+            printf("[EX] LDRSB: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        // BYTE STORES
         case THUMB_STRB_IMM:
         case THUMB_STRB_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 1;
+            printf("[EX] STRB: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+        
+        // HALFWORD LOADS
+        case THUMB_LDRH_IMM:
+        case THUMB_LDRH_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 2;
+            printf("[EX] LDRH: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+        
+            case THUMB_LDRSH_REG:
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 2;
+            out.sign_extend = 1;
+            printf("[EX] LDRSH: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
+            break;
+
+        // HALFWORD STORES
         case THUMB_STRH_IMM:
         case THUMB_STRH_REG:
-        case THUMB_LDR_LIT:
-            out.alu_result = input.reg_data1 + input.reg_data2; // Effective address
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            out.mem_size = 2;
+            printf("[EX] STRH: base=0x%08X + offset=0x%08X = addr=0x%08X\n", 
+                input.reg_data1, input.reg_data2, out.alu_result);
             break;
 
         // ────────────────────────────────
@@ -384,7 +456,34 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // Stack instructions (address setup)
         // ────────────────────────────────
         case THUMB_PUSH:
+        {
+            // Calculate SP adjustment
+            uint32_t reglist = input.reg_data2;
+            uint32_t num_regs = __builtin_popcount(reglist);
+            
+            // For now, just calculate the address, MEM stage will do actual work
+            out.alu_result = input.reg_data1 - (num_regs * 4);
+            out.mem_size = reglist;  // Pass register list to MEM stage
+            
+            printf("[EX] PUSH: Current SP=0x%08X, reglist=0x%02X, regs=%d, new SP=0x%08X\n",
+                input.reg_data1, reglist, num_regs, out.alu_result);
+            break;
+        }
+
         case THUMB_POP:
+        {
+            // Calculate SP adjustment
+            uint32_t reglist = input.reg_data2;
+            uint32_t num_regs = __builtin_popcount(reglist);
+            
+            // For now, just calculate the address, MEM stage will do actual work
+            out.alu_result = input.reg_data1 + (num_regs * 4);
+            out.mem_size = reglist;  // Pass register list to MEM stage
+            
+            printf("[EX] POP: Current SP=0x%08X, reglist=0x%02X, regs=%d, new SP=0x%08X\n",
+                input.reg_data1, reglist, num_regs, out.alu_result);
+            break;
+        }
         case THUMB_LDMIA:
         case THUMB_STMIA:
             out.alu_result = input.reg_data1; // Base address (SP or Rn)
@@ -402,6 +501,82 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_SVC:
             out.alu_result = 0;
             break;
+
+        // ────────────────────────────────
+        // Sign/Zero Extend Instructions
+        // ────────────────────────────────
+        case THUMB_SXTB:
+        {
+            int8_t byte_val = (int8_t)(input.reg_data1 & 0xFF);
+            out.alu_result = (int32_t)byte_val;
+            printf("[EX DEBUG SXTB] Input=0x%08X, Byte=0x%02X (%d), Result=0x%08X\n", 
+                input.reg_data1, (unsigned char)(input.reg_data1 & 0xFF), byte_val, out.alu_result);
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+        case THUMB_SXTH:
+        {
+            // Sign extend halfword (bits 15:0)
+            int16_t hw_val = (int16_t)(input.reg_data1 & 0xFFFF);
+            out.alu_result = (int32_t)hw_val;  // Sign-extended to 32-bit
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+        case THUMB_UXTB:
+        {
+            // Zero extend byte (bits 7:0)
+            out.alu_result = input.reg_data1 & 0xFF;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+        case THUMB_UXTH:
+        {
+            // Zero extend halfword (bits 15:0)
+            out.alu_result = input.reg_data1 & 0xFFFF;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+
+        // ────────────────────────────────
+        // Reverse Instructions
+        // ────────────────────────────────
+        case THUMB_REV:
+        {
+            // Reverse all 4 bytes
+            uint32_t val = input.reg_data1;
+            out.alu_result = ((val & 0xFF000000) >> 24) |
+                            ((val & 0x00FF0000) >> 8)  |
+                            ((val & 0x0000FF00) << 8)  |
+                            ((val & 0x000000FF) << 24);
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+        case THUMB_REV16:
+        {
+            // Reverse bytes in each halfword separately
+            uint32_t val = input.reg_data1;
+            uint16_t lo = val & 0xFFFF;
+            uint16_t hi = (val >> 16) & 0xFFFF;
+            
+            uint16_t lo_reversed = ((lo & 0xFF) << 8) | ((lo >> 8) & 0xFF);
+            uint16_t hi_reversed = ((hi & 0xFF) << 8) | ((hi >> 8) & 0xFF);
+            
+            out.alu_result = (hi_reversed << 16) | lo_reversed;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
+        case THUMB_REVSH:
+        {
+            // Reverse bytes in halfword and sign-extend
+            uint16_t hw = input.reg_data1 & 0xFFFF;
+            uint16_t reversed = ((hw & 0xFF) << 8) | ((hw >> 8) & 0xFF);
+            
+            // Sign-extend the reversed halfword
+            int16_t signed_val = (int16_t)reversed;
+            out.alu_result = (int32_t)signed_val;
+            regfile_update_flags(regs, out.alu_result, 0, 0);
+            break;
+        }
 
         // ────────────────────────────────
         // Default

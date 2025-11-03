@@ -93,6 +93,23 @@ static inline int is_load_instruction(thumb_operation_t op) {
     }
 }
 
+static inline int is_store_instruction(thumb_operation_t op) {
+    switch (op) {
+        case THUMB_STR_REG:
+        case THUMB_STR_IMM:
+        case THUMB_STR_SP:
+        case THUMB_STRB_REG:
+        case THUMB_STRB_IMM:
+        case THUMB_STRH_REG:
+        case THUMB_STRH_IMM:
+        case THUMB_STMIA:
+        case THUMB_PUSH:
+            return 1;
+        default:
+            return 0;
+    }
+}
+
 static int cycle = 0;
 
 int is_32bit_thumb(uint16_t hw) {
@@ -171,11 +188,12 @@ typedef struct {
     int forward_cpsr_src;
 } forward_control_t;
 
-forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stage WB) {
+forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stage WB, cortex_m0_registers_t* core_regs) {
     forward_control_t fwd;
-    fwd.forward_data1 = ID.reg_data1;
-    fwd.forward_data2 = ID.reg_data2;
-    fwd.forward_cpsr = ID.cpsr;  
+    // fwd.forward_data1 = ID.reg_data1;
+    fwd.forward_data1 = regfile_read(ID.rs1, core_regs);
+    fwd.forward_data2 = regfile_read(ID.rs2, core_regs);
+    fwd.forward_cpsr = core_regs->apsr;  // Read fresh CPSR
     fwd.forward_src1 = 0;
     fwd.forward_src2 = 0;
     fwd.forward_cpsr_src = 0;  
@@ -210,6 +228,10 @@ forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_
     // NOTE: rs1 CAN be 0 (R0 is a valid register), so don't skip based on rs1 value
     // Only forward if this instruction actually uses rs1
     if (ID.rs1 >= 0 && ID.rs1 <= 15) {
+        printf("[FORWARD DEBUG] Checking rs1=%d forwarding:\n", ID.rs1);
+        printf("[FORWARD DEBUG]   EX: opcode=%d, rd=%d, writes=%d\n", EX.opcode, EX.rd, thumb_writes_register(EX.opcode));
+        printf("[FORWARD DEBUG]   MEM: opcode=%d, rd=%d, writes=%d\n", MEM.opcode, MEM.rd, thumb_writes_register(MEM.opcode));
+        printf("[FORWARD DEBUG]   WB: opcode=%d, rd=%d, writes=%d\n", WB.opcode, WB.rd, thumb_writes_register(WB.opcode));    
         if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs1) {
             if (!is_load_instruction(EX.opcode)) {
                 fwd.forward_data1 = EX.alu_result;
@@ -220,12 +242,17 @@ forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_
         else if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs1 ) {
             fwd.forward_data1 = MEM.mem_data;
             fwd.forward_src1 = 2;
+            printf("[FORWARD DEBUG] MEM->ID for rs1: MEM.rd=%d, ID.rs1=%d, MEM.opcode=%d, match=%d\n",
+                MEM.rd, ID.rs1, MEM.opcode, (MEM.rd == ID.rs1));
             printf("[FORWARD] MEM->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, MEM.mem_data);
         }
         else if (thumb_writes_register(WB.opcode) && WB.rd == ID.rs1 ) {
             fwd.forward_data1 = WB.write_data;
             fwd.forward_src1 = 3;
             printf("[FORWARD] WB->ID forwarding for rs1=%d, data=0x%08X\n", ID.rs1, WB.write_data);
+        }
+        else {
+            printf("[FORWARD DEBUG] NO FORWARDING for rs1=%d\n", ID.rs1);
         }
     }
 
@@ -252,6 +279,40 @@ forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_
     }
 
     return fwd;
+}
+
+// Helper function: Extract memory data based on size and sign extension
+static uint32_t process_mem_data(uint32_t raw_data, uint32_t address, int mem_size, int sign_extend) {
+    uint32_t result = 0;
+    
+    switch (mem_size) {
+        case 1:  // Byte
+        {
+            uint8_t byte_val = (raw_data >> ((address & 3) * 8)) & 0xFF;
+            if (sign_extend) {
+                result = (int32_t)(int8_t)byte_val;
+            } else {
+                result = byte_val;
+            }
+            break;
+        }
+        case 2:  // Halfword
+        {
+            uint16_t hw_val = (raw_data >> ((address & 2) * 8)) & 0xFFFF;
+            if (sign_extend) {
+                result = (int32_t)(int16_t)hw_val;
+            } else {
+                result = hw_val;
+            }
+            break;
+        }
+        case 4:  // Word
+        default:
+            result = raw_data;
+            break;
+    }
+    
+    return result;
 }
 
 void cortex_m0_top(
@@ -322,7 +383,7 @@ void cortex_m0_top(
     hazard_control_t hazard = detect_hazards(ID, EX, MEM, WB);
 
     // -------- Data Forwarding --------
-    forward_control_t forward = detect_forwarding(ID, EX, MEM, WB);
+    forward_control_t forward = detect_forwarding(ID, EX, MEM, WB, &core_regs);
 
     // -------- Next-stage temporary registers --------
     IF_stage next_IF = IF;
@@ -415,39 +476,202 @@ void cortex_m0_top(
         next_MEM.alu_result = 0;
         next_MEM.mem_data = 0;
         next_MEM.link = 0;
-        next_MEM.cpsr = 0;  // ← ADD THIS
+        next_MEM.cpsr = 0;
+        next_MEM.mem_size = 0;
+        next_MEM.sign_extend = 0;
         printf("[MEM] **FLUSHED DUE TO BRANCH**\n");
     } else {
         next_MEM.opcode = EX.opcode;
         next_MEM.rd = EX.rd;
         next_MEM.alu_result = EX.alu_result;
         next_MEM.link = EX.link;
-        next_MEM.mem_data = EX.alu_result;
+        next_MEM.mem_size = EX.mem_size;
+        next_MEM.sign_extend = EX.sign_extend;
         next_MEM.cpsr = EX.cpsr;
 
-        if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
-           EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG ||
-           EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG ||
-           EX.opcode == THUMB_LDRSB_REG|| EX.opcode == THUMB_LDRSH_REG ||
-           EX.opcode == THUMB_LDR_LIT) 
+        // PUSH/POP INSTRUCTIONS
+        if (EX.opcode == THUMB_PUSH) {
+            // PUSH: Store registers to stack
+            uint32_t reglist = EX.mem_size;  // Register list from EX stage
+            uint32_t num_regs = __builtin_popcount(reglist);
+            
+            // Count if R bit is set (LR included)
+            uint32_t r_bit = (EX.rd >> 4) & 1;  // Extract from encoded value
+            if (r_bit) num_regs++;
+            
+            // Get current SP
+            uint32_t sp_value = regfile_get_sp(&core_regs);
+            uint32_t start_addr = sp_value - (num_regs * 4);
+            uint32_t address = start_addr;
+            
+            printf("[MEM] PUSH START: SP=0x%08X, reglist=0x%02X, r_bit=%d, num_regs=%d, start_addr=0x%08X\n",
+                sp_value, reglist, r_bit, num_regs, start_addr);
+            
+            // Write each register to stack in order (R0 to R7)
+            for (int i = 0; i < 8; i++) {
+                if (reglist & (1 << i)) {
+                    uint32_t reg_val = regfile_read(i, &core_regs);
+                    uint32_t addr_word = address >> 2;
+                    data_mem[addr_word] = reg_val;
+                    printf("[MEM] PUSH: R%d (0x%08X) -> addr 0x%08X\n", i, reg_val, address);
+                    address += 4;
+                }
+            }
+            
+            // If R bit set, push LR
+            if (r_bit) {
+                uint32_t lr_val = core_regs.lr;
+                uint32_t addr_word = address >> 2;
+                data_mem[addr_word] = lr_val;
+                printf("[MEM] PUSH: LR (0x%08X) -> addr 0x%08X\n", lr_val, address);
+                address += 4;
+            }
+            
+            // Update SP in register file
+            regfile_set_sp(start_addr, &core_regs);
+            printf("[MEM] PUSH END: New SP=0x%08X\n", start_addr);
+            
+            next_MEM.mem_data = 0;  // No data to return
+        }
+        else if (EX.opcode == THUMB_POP) {
+            // POP: Load registers from stack
+            uint32_t reglist = EX.mem_size;  // Register list from EX stage
+            uint32_t num_regs = __builtin_popcount(reglist);
+            
+            // Count if R bit is set (PC included)
+            uint32_t r_bit = (EX.rd >> 4) & 1;  // Extract from encoded value
+            if (r_bit) num_regs++;
+            
+            // Get current SP
+            uint32_t sp_value = regfile_get_sp(&core_regs);
+            uint32_t address = sp_value;
+            
+            printf("[MEM] POP START: SP=0x%08X, reglist=0x%02X, r_bit=%d, num_regs=%d\n",
+                sp_value, reglist, r_bit, num_regs);
+            
+            // Read each register from stack in order (R0 to R7)
+            for (int i = 0; i < 8; i++) {
+                if (reglist & (1 << i)) {
+                    uint32_t addr_word = address >> 2;
+                    uint32_t reg_val = data_mem[addr_word];
+                    regfile_write(i, reg_val, &core_regs);
+                    printf("[MEM] POP: addr 0x%08X -> R%d (0x%08X)\n", address, i, reg_val);
+                    address += 4;
+                }
+            }
+            
+            // If R bit set, pop to PC (function return)
+            if (r_bit) {
+                uint32_t addr_word = address >> 2;
+                uint32_t pc_val = data_mem[addr_word];
+                regfile_set_pc(pc_val, &core_regs);
+                printf("[MEM] POP: addr 0x%08X -> PC (0x%08X)\n", address, pc_val);
+                address += 4;
+            }
+            
+            // Update SP
+            uint32_t new_sp = sp_value + (num_regs * 4);
+            regfile_set_sp(new_sp, &core_regs);
+            printf("[MEM] POP END: New SP=0x%08X\n", new_sp);
+            
+            next_MEM.mem_data = 0;  // No data to return
+        }
+
+        // LOAD INSTRUCTIONS: Read from memory
+        else if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
+           EX.opcode == THUMB_LDR_LIT  || EX.opcode == THUMB_LDR_SP) 
         {
             uint32_t addr = EX.alu_result >> 2;
-            next_MEM.mem_data = data_mem[addr];
+            uint32_t raw_data = data_mem[addr];
+            next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 4, 0);
+            printf("[MEM] LOAD WORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
-        else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG  ||
-                EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG ||
-                EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG ||
+        else if(EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            uint32_t raw_data = data_mem[addr];
+            next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 1, 0);
+            printf("[MEM] LOAD BYTE: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
+        }
+        else if(EX.opcode == THUMB_LDRSB_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            uint32_t raw_data = data_mem[addr];
+            next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 1, 1);
+            printf("[MEM] LOAD SIGNED BYTE: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
+        }
+        else if(EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            uint32_t raw_data = data_mem[addr];
+            next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 2, 0);
+            printf("[MEM] LOAD HALFWORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
+        }
+        else if(EX.opcode == THUMB_LDRSH_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            uint32_t raw_data = data_mem[addr];
+            next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 2, 1);
+            printf("[MEM] LOAD SIGNED HALFWORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
+        }
+        // STORE INSTRUCTIONS: Write to memory
+        else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG ||
                 EX.opcode == THUMB_STR_SP) 
         {
             uint32_t addr = EX.alu_result >> 2;
-            data_mem[addr] = EX.reg_data2;
+            
+            // Check if value to store was just computed
+            uint32_t value_to_store;
+            if (WB.opcode != THUMB_INVALID && thumb_writes_register(WB.opcode) && WB.rd == EX.rd) {
+                // Value is being written back THIS cycle - use the new value
+                value_to_store = WB.write_data;
+                printf("[MEM] STORE: Using WB-forwarded value (R%d = 0x%08X)\n", EX.rd, value_to_store);
+            }
+            else {
+                // Otherwise read from register file  
+                value_to_store = regfile_read(EX.rd, &core_regs);
+            }
+            
+            data_mem[addr] = value_to_store;
+            next_MEM.mem_data = value_to_store;
+            printf("[MEM] STORE WORD: addr=0x%08X, value=0x%08X (from R%d)\n", 
+                EX.alu_result, value_to_store, EX.rd);
+        }
+        // BYTE STORE
+        else if(EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            // Read the VALUE to store from Rd register (not from reg_data2!)
+            uint32_t value_to_store = regfile_read(EX.rd, &core_regs);
+            uint32_t byte_pos = (EX.alu_result & 3) * 8;
+            uint32_t mask = ~(0xFF << byte_pos);
+            data_mem[addr] = (data_mem[addr] & mask) | ((value_to_store & 0xFF) << byte_pos);
+            next_MEM.mem_data = value_to_store & 0xFF;
+            printf("[MEM] STORE BYTE: addr=0x%08X, byte_pos=%d, data=0x%02X (from R%d=0x%08X)\n", 
+                   EX.alu_result, byte_pos, value_to_store & 0xFF, EX.rd, value_to_store);
+        }
+        // HALFWORD STORE
+        else if(EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG)
+        {
+            uint32_t addr = EX.alu_result >> 2;
+            // Read the VALUE to store from Rd register (not from reg_data2!)
+            uint32_t value_to_store = regfile_read(EX.rd, &core_regs);
+            uint32_t hw_pos = ((EX.alu_result >> 1) & 1) * 16;
+            uint32_t mask = ~(0xFFFF << hw_pos);
+            data_mem[addr] = (data_mem[addr] & mask) | ((value_to_store & 0xFFFF) << hw_pos);
+            next_MEM.mem_data = value_to_store & 0xFFFF;
+            printf("[MEM] STORE HALFWORD: addr=0x%08X, data=0x%04X (from R%d)\n", 
+                   EX.alu_result, value_to_store & 0xFFFF, EX.rd);
         }
         else if (EX.opcode == THUMB_BL)
         {
             next_MEM.mem_data = EX.alu_result;
             next_MEM.link = EX.link;
         }
-
+        else
+        {
+            next_MEM.mem_data = EX.alu_result;
+        }
         printf("[MEM] opcode=%d | rd=%d | alu_result=0x%08X | mem_data=0x%08X\n",
             next_MEM.opcode, next_MEM.rd, next_MEM.alu_result, next_MEM.mem_data);
     }
@@ -467,7 +691,9 @@ void cortex_m0_top(
         next_EX.reg_data2 = 0;
         next_EX.link = 0;
         next_EX.pc = 0;
-        next_EX.cpsr = 0;  // ← ADD THIS: Clear CPSR on flush/stall
+        next_EX.cpsr = 0;
+        next_EX.mem_size = 0;
+        next_EX.sign_extend = 0;
         if (hazard.stall) {
             printf("[EX]  **BUBBLE INSERTED DUE TO STALL**\n");
         } else {
@@ -478,11 +704,32 @@ void cortex_m0_top(
         ex_input.opcode = ID.opcode;
         ex_input.rd = ID.rd;
         ex_input.pc = ID.pc << 1;  // Convert halfword index to byte address
+
+        // ALWAYS use forwarded data for rs1 (base address register)
         ex_input.reg_data1 = forward.forward_data1;
         ex_input.condition = ID.condition;  // ← PASS CONDITION TO EXECUTE
         ex_input.cpsr = forward.forward_cpsr;            
 
-        if(ID.opcode == THUMB_MOV_REG) {
+        if (is_store_instruction(ID.opcode)) {
+            // For stores, determine if this is immediate or register offset
+            if (ID.immediate_flag) {
+                // Immediate offset store: reg_data2 is the offset value
+                ex_input.reg_data2 = ID.imm_value;
+            } else if (ID.rs2 >= 0 && ID.rs2 <= 15) {
+                // Register offset store: rs2 contains the offset register value
+                // Check if the offset register value needs forwarding...
+                if (thumb_writes_register(MEM.opcode) && MEM.rd == ID.rs2) {
+                    ex_input.reg_data2 = MEM.mem_data;
+                } else if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs2) {
+                    if (!is_load_instruction(EX.opcode)) {
+                        ex_input.reg_data2 = EX.alu_result;
+                    }
+                } else {
+                    ex_input.reg_data2 = ID.reg_data2;
+                }
+            }
+        }
+        else if(ID.opcode == THUMB_MOV_REG) {
             ex_input.reg_data2 = forward.forward_data1;
         }
         else if(ID.immediate_flag) {
@@ -502,7 +749,9 @@ void cortex_m0_top(
         next_EX.reg_data2 = ex_input.reg_data2;
         next_EX.alu_result = ex_output.alu_result;
         next_EX.link = ex_output.link;
-        ex_input.pc = ID.pc << 1;  // Convert halfword index to byte address
+        next_EX.mem_size = ex_output.mem_size;
+        next_EX.sign_extend = ex_output.sign_extend;
+        next_EX.r_bit = ID.r_bit;
         
         printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X\n",
             next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2);
@@ -523,8 +772,9 @@ void cortex_m0_top(
         next_ID.imm_value = 0;
         next_ID.reg_data1 = 0;
         next_ID.reg_data2 = 0;
-        next_ID.condition = 0;  // ← ADD THIS
-        next_ID.cpsr = 0;       // ← ADD THIS
+        next_ID.condition = 0;
+        next_ID.cpsr = 0;
+        next_ID.r_bit = 0;
         printf("[ID]  **FLUSHED DUE TO BRANCH**\n");
     } else {
         next_ID.pc = IF.pc-1;
@@ -563,6 +813,7 @@ void cortex_m0_top(
             next_ID.reg_data2 = 0;
             next_ID.condition = 0;  // ← ADD THIS
             next_ID.cpsr = EX.cpsr;  // ← PROPAGATE CPSR FROM EX (for B_COND)
+            next_ID.r_bit = 0;
         } else {
             next_ID.opcode = dres.operation;
             next_ID.rd     = dres.rd;
@@ -572,14 +823,50 @@ void cortex_m0_top(
             next_ID.imm_value      = dres.imm_value;
             next_ID.condition = dres.condition;  // ← STORE CONDITION FROM DECODE
 
+            // Store R bit for PUSH/POP
+            if (dres.operation == THUMB_PUSH || dres.operation == THUMB_POP) {
+                next_ID.r_bit = dres.r_bit;  // Store the R bit
+            } else {
+                next_ID.r_bit = 0;
+            }
             // ← USE FORWARDED CPSR (includes MEM/EX/WB forwarding)
             next_ID.cpsr = forward.forward_cpsr;
 
-            next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
+            // next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
+            // if (dres.immediate_flag) {
+            //     next_ID.reg_data2 = dres.imm_value;
+            // } else {
+            //     next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
+            // }
+            // Read rs1 from register file
+            uint32_t rs1_regfile = regfile_read(dres.rs1, &core_regs);
+            
+            // Check if forwarding is available for rs1
+            if (forward.forward_src1 > 0) {
+                next_ID.reg_data1 = forward.forward_data1;
+                printf("[ID] Forwarding rs1=%d from stage %d: 0x%08X (bypassing regfile 0x%08X)\n", 
+                       dres.rs1, forward.forward_src1, forward.forward_data1, rs1_regfile);
+            } else {
+                next_ID.reg_data1 = rs1_regfile;
+                printf("[ID] Reading rs1=%d from regfile: 0x%08X\n", dres.rs1, rs1_regfile);
+            }
+            
+            // Read rs2 from register file (or use immediate)
             if (dres.immediate_flag) {
                 next_ID.reg_data2 = dres.imm_value;
+                printf("[ID] Using immediate for rs2: 0x%08X\n", dres.imm_value);
             } else {
-                next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
+                uint32_t rs2_regfile = regfile_read(dres.rs2, &core_regs);
+                
+                // Check if forwarding is available for rs2
+                if (forward.forward_src2 > 0) {
+                    next_ID.reg_data2 = forward.forward_data2;
+                    printf("[ID] Forwarding rs2=%d from stage %d: 0x%08X (bypassing regfile 0x%08X)\n", 
+                           dres.rs2, forward.forward_src2, forward.forward_data2, rs2_regfile);
+                } else {
+                    next_ID.reg_data2 = rs2_regfile;
+                    printf("[ID] Reading rs2=%d from regfile: 0x%08X\n", dres.rs2, rs2_regfile);
+                }
             }
         }
 

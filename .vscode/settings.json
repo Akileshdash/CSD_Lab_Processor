@@ -4,6 +4,7 @@
     "*.md": "alex",
     "decode.h": "c",
     "execute.h": "c",
-    "regfile.h": "c"
+    "regfile.h": "c",
+    "stdint.h": "c"
   }
 }
