@@ -318,16 +318,16 @@ static uint32_t process_mem_data(uint32_t raw_data, uint32_t address, int mem_si
 void cortex_m0_top(
     volatile uint32_t* instr_mem,
     volatile uint32_t* data_mem,
-    volatile uint32_t* reg_out,
-    int reset,
-    int clk
+    // volatile uint32_t* reg_out,
+    int* pc_out
 ) {
 #pragma HLS INTERFACE m_axi port=instr_mem offset=slave bundle=INSTR_BUS
 #pragma HLS INTERFACE m_axi port=data_mem offset=slave bundle=DATA_BUS
-#pragma HLS INTERFACE m_axi port=reg_out   offset=slave bundle=REG_BUS
-#pragma HLS INTERFACE s_axilite port=reset bundle=CTRL_BUS
-#pragma HLS INTERFACE s_axilite port=clk bundle=CTRL_BUS
+#pragma HLS INTERFACE ap_none port=pc_out
+// #pragma HLS INTERFACE m_axi port=reg_out   offset=slave bundle=REG_BUS
 #pragma HLS INTERFACE ap_ctrl_none port=return
+
+
 
     static IF_stage IF;
     static ID_stage ID;
@@ -335,47 +335,63 @@ void cortex_m0_top(
     static MEM_stage MEM;
     static WB_stage WB;
     static cortex_m0_registers_t core_regs;
+    static bool init_done = false;
 
-    if(reset) {
         // Reset all stages
-        IF.pc = 0;
-        IF.instr = 0;
+        #pragma HLS RESET variable=IF.pc
+        #pragma HLS RESET variable=IF.instr 
+        #pragma HLS RESET variable=ID.pc 
+        #pragma HLS RESET variable=ID.instr 
+        #pragma HLS RESET variable=ID.reg_data1
+        #pragma HLS RESET variable=ID.reg_data2 
+        #pragma HLS RESET variable=ID.opcode 
+        #pragma HLS RESET variable=ID.rd 
+        #pragma HLS RESET variable=ID.rs1 
+        #pragma HLS RESET variable=ID.rs2 
+        #pragma HLS RESET variable=ID.immediate_flag 
+        #pragma HLS RESET variable=ID.imm_value 
+        #pragma HLS RESET variable=ID.condition 
+        #pragma HLS RESET variable=ID.cpsr 
+        #pragma HLS RESET variable=EX.opcode 
+        #pragma HLS RESET variable=EX.alu_result 
+        #pragma HLS RESET variable=EX.reg_data2 
+        #pragma HLS RESET variable=EX.rd 
+        #pragma HLS RESET variable=EX.link 
+        #pragma HLS RESET variable=EX.cpsr 
+        #pragma HLS RESET variable=EX.pc 
+        #pragma HLS RESET variable=MEM.opcode
+        #pragma HLS RESET variable=MEM.alu_result
+        #pragma HLS RESET variable=MEM.mem_data
+        #pragma HLS RESET variable=MEM.rd 
+        #pragma HLS RESET variable=MEM.link 
+        #pragma HLS RESET variable=MEM.cpsr 
+        #pragma HLS RESET variable=WB.opcode 
+        #pragma HLS RESET variable=WB.write_data 
+        #pragma HLS RESET variable=WB.rd 
+        #pragma HLS RESET variable=WB.link 
+        #pragma HLS RESET variable=WB.cpsr
+        #pragma HLS RESET variable=init_done
 
-        ID.pc = 0;
-        ID.instr = 0;
-        ID.reg_data1 = 0;
-        ID.reg_data2 = 0;
-        ID.opcode = THUMB_INVALID;
-        ID.rd = 0;
-        ID.rs1 = 0;
-        ID.rs2 = 0;
-        ID.immediate_flag = 0;
-        ID.imm_value = 0;
-
-        EX.opcode = THUMB_INVALID;
-        EX.alu_result = 0;
-        EX.reg_data2 = 0;
-        EX.rd = 0;
-        EX.link = 0;
-
-        MEM.opcode = THUMB_INVALID;
-        MEM.alu_result = 0;
-        MEM.mem_data = 0;
-        MEM.rd = 0;
-        MEM.link = 0;
-
-        WB.opcode = THUMB_INVALID;
-        WB.write_data = 0;
-        WB.rd = 0;
-        
+    if(!init_done) {
+        // Initialize register file
         uint32_t msp_init = data_mem[0];
-        regfile_init(&core_regs, OS_START_ADDR, msp_init);
-        IF.pc = regfile_get_pc(&core_regs) >> 2;
+        uint32_t reset_vector = data_mem[1];  // Read reset vector from address 0x00000004
+        regfile_init(&core_regs, reset_vector, msp_init);
+        
+        // Set PC to reset vector for first instruction fetch
+        IF.pc = (reset_vector & 0xFFFFFFFE) >> 1;  // Convert byte address to halfword index
         
         cycle = 0;
-        return;
+        
+        printf("\n========== PROCESSOR RESET ==========\n");
+        printf("MSP initialized to: 0x%08X\n", msp_init);
+        printf("Reset Vector: 0x%08X\n", reset_vector);
+        printf("Starting PC (halfword): %d (byte addr: 0x%08X)\n", IF.pc, reset_vector & 0xFFFFFFFE);
+        printf("=====================================\n");
+        init_done = true;
+         
     }
-
+    *pc_out = regfile_get_pc(&core_regs);
     cycle++;
     printf("\n================ Cycle %d ==================\n", cycle);
 
@@ -930,20 +946,20 @@ void cortex_m0_top(
     MEM = next_MEM;
     WB = next_WB;
 
-    // -------- Update debug output --------
-    for(int i = 0; i < 13; i++) {
-        reg_out[i] = core_regs.gpr[i];
-    }
+    // // -------- Update debug output --------
+    // for(int i = 0; i < 13; i++) {
+    //     reg_out[i] = core_regs.gpr[i];
+    // }
     
-    reg_out[13] = regfile_get_sp(&core_regs);
-    reg_out[14] = core_regs.lr;
-    reg_out[15] = regfile_get_pc(&core_regs);
+    // reg_out[13] = regfile_get_sp(&core_regs);
+    // reg_out[14] = core_regs.lr;
+    // reg_out[15] = regfile_get_pc(&core_regs);
 
-    printf("[REGFILE] R0-R12:\n");
-    for(int i = 0; i < 13; i++) {
-        printf(" R%-2d=0x%08X", i, reg_out[i]);
-        if ((i+1) % 4 == 0) printf("\n");
-    }
-    printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
-           reg_out[13], reg_out[14], reg_out[15]);
+    // printf("[REGFILE] R0-R12:\n");
+    // for(int i = 0; i < 13; i++) {
+    //     printf(" R%-2d=0x%08X", i, reg_out[i]);
+    //     if ((i+1) % 4 == 0) printf("\n");
+    // }
+    // printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
+    //        reg_out[13], reg_out[14], reg_out[15]);
 }

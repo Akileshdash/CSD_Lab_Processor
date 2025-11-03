@@ -2,10 +2,11 @@
   {
     "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
     "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
       "-fhls",
-      "-hls-syn-headers-dir=/tools/Xilinx/2025.1/Vitis/common/technology/autopilot",
+      "-hls-syn-headers-dir=/tools/2025.1/Vitis/common/technology/autopilot",
+      "-fhlstoplevel=cortex_m0_top",
       "-c",
       "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c"
     ],
@@ -14,22 +15,11 @@
   {
     "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
     "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
       "-fhls",
-      "-hls-syn-headers-dir=/tools/Xilinx/2025.1/Vitis/common/technology/autopilot",
-      "-c",
-      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c"
-    ],
-    "file": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c"
-  },
-  {
-    "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
-    "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
-      "-fhls",
-      "-hls-syn-headers-dir=/tools/Xilinx/2025.1/Vitis/common/technology/autopilot",
+      "-hls-syn-headers-dir=/tools/2025.1/Vitis/common/technology/autopilot",
+      "-fhlstoplevel=cortex_m0_top",
       "-c",
       "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c"
     ],
@@ -38,10 +28,11 @@
   {
     "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
     "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
       "-fhls",
-      "-hls-syn-headers-dir=/tools/Xilinx/2025.1/Vitis/common/technology/autopilot",
+      "-hls-syn-headers-dir=/tools/2025.1/Vitis/common/technology/autopilot",
+      "-fhlstoplevel=cortex_m0_top",
       "-c",
       "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c"
     ],
@@ -50,10 +41,11 @@
   {
     "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
     "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
       "-fhls",
-      "-hls-syn-headers-dir=/tools/Xilinx/2025.1/Vitis/common/technology/autopilot",
+      "-hls-syn-headers-dir=/tools/2025.1/Vitis/common/technology/autopilot",
+      "-fhlstoplevel=cortex_m0_top",
       "-c",
       "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c"
     ],
@@ -62,13 +54,25 @@
   {
     "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
     "arguments": [
-      "/tools/Xilinx/2025.1/Vitis/vcxx/libexec/clang++",
-      "--gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
       "-fhls-tb",
-      "-hls-sim-headers-dir=/tools/Xilinx/2025.1/Vitis/include",
+      "-hls-sim-headers-dir=/tools/2025.1/Vitis/include",
       "-c",
-      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c"
+      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/./tb_arithmetic_stmts.c"
     ],
-    "file": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c"
+    "file": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/./tb_arithmetic_stmts.c"
+  },
+  {
+    "directory": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP",
+    "arguments": [
+      "/tools/2025.1/Vitis/vcxx/libexec/clang++",
+      "--gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=/tools/2025.1/Vitis/include",
+      "-c",
+      "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/./tb_branch_stmts.c"
+    ],
+    "file": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/./tb_branch_stmts.c"
   }
 ]

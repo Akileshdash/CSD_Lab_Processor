@@ -23,11 +23,11 @@ __USE_VCXX_CLANG__ = 1
 
 ObjDir = obj
 
-HLS_SOURCES = ../../../../tb_processor.c ../../../../decode.c ../../../../execute.c ../../../../regfile.c ../../../../alu.c ../../../../processor.c
+HLS_SOURCES = ../../../../tb_branch_stmts.c ../../../../tb_arithmetic_stmts.c ../../../../decode.c ../../../../execute.c ../../../../regfile.c ../../../../processor.c
 
 override TARGET := csim.exe
 
-AUTOPILOT_ROOT := /tools/Xilinx/2025.1/Vitis
+AUTOPILOT_ROOT := /tools/2025.1/Vitis
 AUTOPILOT_MACH := lnx64
 ifdef AP_GCC_M32
   AUTOPILOT_MACH := Linux_x86
@@ -35,7 +35,7 @@ ifdef AP_GCC_M32
 endif
 IFLAG += -fPIC
 ifndef AP_GCC_PATH
-  AP_GCC_PATH := /tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0/bin
+  AP_GCC_PATH := /tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0/bin
 endif
 AUTOPILOT_TOOL := ${AUTOPILOT_ROOT}/${AUTOPILOT_MACH}/tools
 AP_CLANG_PATH := ${XILINX_VCXX}/libexec
@@ -69,11 +69,11 @@ DFLAG += -D__xilinx_ip_top= -DAESL_TB
 CCFLAG += -Werror=return-type
 CCFLAG += -Wno-abi
 CCFLAG += -fdebug-default-version=4
-CCFLAG += --gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0
+CCFLAG += --gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0
 CCFLAG += -Werror=uninitialized
 CCFLAG += -Wno-c++11-narrowing
 CCFLAG += -Wno-error=sometimes-uninitialized
-LFLAG += --gcc-toolchain=/tools/Xilinx/2025.1/Vitis/tps/lnx64/gcc-8.3.0
+LFLAG += --gcc-toolchain=/tools/2025.1/Vitis/tps/lnx64/gcc-8.3.0
 
 
 
@@ -83,11 +83,17 @@ all: $(TARGET)
 
 
 
-$(ObjDir)/tb_processor.o: ../../../../tb_processor.c $(ObjDir)/.dir csim.mk
-	$(Echo) "   Compiling ../../../../tb_processor.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
+$(ObjDir)/tb_branch_stmts.o: ../../../../tb_branch_stmts.c $(ObjDir)/.dir csim.mk
+	$(Echo) "   Compiling ../../../../tb_branch_stmts.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
 	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD -Wno-unknown-pragmas -Wno-unknown-pragmas  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
--include $(ObjDir)/tb_processor.d
+-include $(ObjDir)/tb_branch_stmts.d
+
+$(ObjDir)/tb_arithmetic_stmts.o: ../../../../tb_arithmetic_stmts.c $(ObjDir)/.dir csim.mk
+	$(Echo) "   Compiling ../../../../tb_arithmetic_stmts.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
+	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD -Wno-unknown-pragmas -Wno-unknown-pragmas  $(IFLAG) $(DFLAG) $< -o $@ ; \
+
+-include $(ObjDir)/tb_arithmetic_stmts.d
 
 $(ObjDir)/decode.o: ../../../../decode.c $(ObjDir)/.dir csim.mk
 	$(Echo) "   Compiling ../../../../decode.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
@@ -106,12 +112,6 @@ $(ObjDir)/regfile.o: ../../../../regfile.c $(ObjDir)/.dir csim.mk
 	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
 
 -include $(ObjDir)/regfile.d
-
-$(ObjDir)/alu.o: ../../../../alu.c $(ObjDir)/.dir csim.mk
-	$(Echo) "   Compiling ../../../../alu.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
-	$(Verb)  $(CC) -std=gnu99 ${CCFLAG} -c -MMD  $(IFLAG) $(DFLAG) $< -o $@ ; \
-
--include $(ObjDir)/alu.d
 
 $(ObjDir)/processor.o: ../../../../processor.c $(ObjDir)/.dir csim.mk
 	$(Echo) "   Compiling ../../../../processor.c in $(BuildMode) mode" $(AVE_DIR_DLOG)
