@@ -140,10 +140,45 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         result.immediate_flag = 0;
 
         switch (opcode) {
+            case 0b00: result.operation = THUMB_ADD_HIGH; break;
             case 0b01: result.operation = THUMB_CMP_HIGH; break;
             case 0b10: result.operation = THUMB_MOV_HIGH; break;
             default: result.valid = 0; break;
         }
+    }
+
+    // ADD (5) - PC-RELATIVE ADD
+    else if (bits_15_11 == 0b10100) {
+        // ADD (5): ADD <Rd>, PC, #<immed_8> * 4
+        // Encoding: 1010 0 Rd immed_8
+        uint32_t rd = extract_bits(instruction, 8, 10);
+        uint32_t imm8 = extract_bits(instruction, 0, 7);
+
+        result.rd = rd;
+        result.rs1 = 15;  // PC is R15
+        result.immediate_flag = 1;
+        result.imm_value = imm8 << 2;  // Scale by 4
+        result.operation = THUMB_ADD_PC_IMM;
+        
+        printf("[DECODE] ADD_PC_IMM: Rd=%d, imm8=0x%02X, scaled=0x%X\n", 
+            rd, imm8, result.imm_value);
+    }
+
+    // ADD (6) - SP-RELATIVE ADD
+    else if (bits_15_11 == 0b10101) {
+        // ADD (6): ADD <Rd>, SP, #<immed_8> * 4
+        // Encoding: 1010 1 Rd immed_8
+        uint32_t rd = extract_bits(instruction, 8, 10);
+        uint32_t imm8 = extract_bits(instruction, 0, 7);
+
+        result.rd = rd;
+        result.rs1 = 13;  // SP is R13
+        result.immediate_flag = 1;
+        result.imm_value = imm8 << 2;  // Scale by 4
+        result.operation = THUMB_ADD_SP_IMM;
+        
+        printf("[DECODE] ADD_SP_IMM: Rd=%d, SP offset=0x%X\n", 
+            rd, result.imm_value);
     }
 
     // 8. LDR literal [01001]
@@ -274,6 +309,39 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         result.operation = (l == 0) ? THUMB_STMIA : THUMB_LDMIA;
     }
 
+    // ADD (7) - ADD SP, #<immed_7> * 4
+    // Encoding: 1011 0000 0 immed_7
+    // This comes BEFORE the general PUSH/POP check
+    else if ((instruction & 0xFF80) == 0xB000) {
+        // ADD SP, #imm7*4
+        uint32_t imm7 = extract_bits(instruction, 0, 6);
+        
+        result.operation = THUMB_ADD_SP_IMM7;
+        result.rd = 13;  // SP is R13
+        result.rs1 = 13; // SP is also source
+        result.immediate_flag = 1;
+        result.imm_value = imm7 << 2;  // Scale by 4
+        
+        printf("[DECODE] ADD_SP_IMM7: SP = SP + 0x%X (imm7=0x%02X)\n", 
+            result.imm_value, imm7);
+    }
+    
+    // SUB (SP - imm7) - SUB SP, #<immed_7> * 4
+    // Encoding: 1011 0000 1 immed_7
+    else if ((instruction & 0xFF80) == 0xB080) {
+        // SUB SP, #imm7*4
+        uint32_t imm7 = extract_bits(instruction, 0, 6);
+        
+        result.operation = THUMB_SUB_SP_IMM7;
+        result.rd = 13;  // SP is R13
+        result.rs1 = 13; // SP is also source
+        result.immediate_flag = 1;
+        result.imm_value = imm7 << 2;  // Scale by 4
+        
+        printf("[DECODE] SUB_SP_IMM7: SP = SP - 0x%X (imm7=0x%02X)\n", 
+            result.imm_value, imm7);
+    }
+
     // 13. Push/Pop [1011]
     // ============================================================
     // Pattern: 1011 0x0 R register_list (PUSH)
@@ -292,14 +360,14 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         // Bits 10-9 should be 0b00 for PUSH/POP
         uint32_t check_bits = extract_bits(instruction, 9, 10);
         
-        if (check_bits == 0b00) {
+        if (check_bits == 0b10) {
             result.operation = (l_bit == 0) ? THUMB_PUSH : THUMB_POP;
             result.immediate_flag = 1;
             result.imm_value = reglist;
             
             // Store R bit for handling LR (PUSH) or PC (POP)
             // You may want to add this to your result struct if not present
-            // result.r_bit = r_bit;
+            result.r_bit = r_bit;
         } else {
             result.valid = 0;
         }
@@ -388,6 +456,75 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         else result.valid = 0;
     }
 
+
+    // BKPT - Breakpoint instruction
+    // Encoding: 1011 1110 immed_8 (0xBE00 - 0xBEFF)
+    else if ((instruction & 0xFF00) == 0xBE00) {
+        // BKPT - Breakpoint instruction
+        // Pattern: 1011 1110 immed_8
+        uint32_t imm8 = extract_bits(instruction, 0, 7);  // Bits 7-0
+        
+        result.operation = THUMB_BKPT;
+        result.valid = 1;
+        result.immediate_flag = 1;
+        result.imm_value = imm8;
+        result.rd = 0;    // BKPT doesn't write to a register
+        result.rs1 = 0;
+        result.rs2 = 0;
+        
+        printf("[DECODE] BKPT: imm8=0x%02X\n", imm8);
+    }
+
+
+    // SVC (SWI) - Supervisor Call / Software Interrupt
+    // Encoding: 1101 1111 immed_8 (0xDF00 - 0xDFFF)
+    else if ((instruction & 0xFF00) == 0xDF00) {
+        // SVC - Supervisor Call (Software Interrupt)
+        // Pattern: 1101 1111 immed_8
+        uint32_t imm8 = extract_bits(instruction, 0, 7);  // Bits 7-0
+        
+        result.operation = THUMB_SVC;
+        result.valid = 1;
+        result.immediate_flag = 1;
+        result.imm_value = imm8;  // Service call number
+        result.rd = 0;    // SVC doesn't write to a register
+        result.rs1 = 0;
+        result.rs2 = 0;
+        
+        printf("[DECODE] SVC: imm8=0x%02X (service call #%d)\n", imm8, imm8);
+    }
+
+    // CBZ / CBNZ - Compare and Branch on Zero/Nonzero
+    // Encoding: 1011 op 0 i 1 imm5 Rn
+    // Pattern: 0xB100 - 0xB9FF (op determines CBZ vs CBNZ)
+    else if ((instruction & 0xF500) == 0xB100) {
+        // CBZ / CBNZ - Compare and Branch on Zero/Nonzero
+        uint32_t op = extract_bits(instruction, 11, 11);    // Bit 11: 0=CBZ, 1=CBNZ
+        uint32_t i = extract_bits(instruction, 9, 9);       // Bit 9: high bit of offset
+        uint32_t imm5 = extract_bits(instruction, 6, 10);   // Bits 10-6: offset bits
+        uint32_t rn = extract_bits(instruction, 0, 2);      // Bits 2-0: register
+        
+        // Reconstruct the offset: i:imm5:'0' (left shifted by 1)
+        uint32_t offset = (i << 6) | (imm5 << 1);
+        
+        result.operation = (op == 0) ? THUMB_CBZ : THUMB_CBNZ;
+        result.rd = rn;           // Register to test
+        result.rs1 = rn;          // Same register
+        result.immediate_flag = 1;
+        result.imm_value = offset;
+        
+        printf("[DECODE] %s: Rn=%d, offset=0x%X\n", 
+            (op == 0) ? "CBZ" : "CBNZ", rn, offset);
+    }
+
+    // NOP - No Operation
+    // Encoding: 1011 1111 0000 0000 (0xBF00)
+    else if ((instruction & 0xFFFF) == 0xBF00) {
+        result.operation = THUMB_NOP;
+        result.valid = 1;
+        printf("[DECODE] NOP\n");
+    }
+    
     else {
         result.valid = 0;
     }

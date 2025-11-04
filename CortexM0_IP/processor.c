@@ -24,6 +24,8 @@ static inline int thumb_writes_register(thumb_operation_t op) {
         case THUMB_ADD_IMM8:
         case THUMB_ADD_SP_IMM:
         case THUMB_ADD_SP_IMM7:
+        case THUMB_ADD_HIGH:  
+        case THUMB_ADD_PC_IMM:
         case THUMB_SUB_REG:
         case THUMB_SUB_IMM3:
         case THUMB_SUB_IMM8:
@@ -228,10 +230,10 @@ forward_control_t detect_forwarding(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_
     // NOTE: rs1 CAN be 0 (R0 is a valid register), so don't skip based on rs1 value
     // Only forward if this instruction actually uses rs1
     if (ID.rs1 >= 0 && ID.rs1 <= 15) {
-        printf("[FORWARD DEBUG] Checking rs1=%d forwarding:\n", ID.rs1);
-        printf("[FORWARD DEBUG]   EX: opcode=%d, rd=%d, writes=%d\n", EX.opcode, EX.rd, thumb_writes_register(EX.opcode));
-        printf("[FORWARD DEBUG]   MEM: opcode=%d, rd=%d, writes=%d\n", MEM.opcode, MEM.rd, thumb_writes_register(MEM.opcode));
-        printf("[FORWARD DEBUG]   WB: opcode=%d, rd=%d, writes=%d\n", WB.opcode, WB.rd, thumb_writes_register(WB.opcode));    
+        // printf("[FORWARD DEBUG] Checking rs1=%d forwarding:\n", ID.rs1);
+        // printf("[FORWARD DEBUG]   EX: opcode=%d, rd=%d, writes=%d\n", EX.opcode, EX.rd, thumb_writes_register(EX.opcode));
+        // printf("[FORWARD DEBUG]   MEM: opcode=%d, rd=%d, writes=%d\n", MEM.opcode, MEM.rd, thumb_writes_register(MEM.opcode));
+        // printf("[FORWARD DEBUG]   WB: opcode=%d, rd=%d, writes=%d\n", WB.opcode, WB.rd, thumb_writes_register(WB.opcode));    
         if (thumb_writes_register(EX.opcode) && EX.rd == ID.rs1) {
             if (!is_load_instruction(EX.opcode)) {
                 fwd.forward_data1 = EX.alu_result;
@@ -466,6 +468,24 @@ void cortex_m0_top(
             }
         }
             break;
+        case THUMB_CBZ:
+        case THUMB_CBNZ:
+        {
+            // Check if branch was taken by comparing write_data with sequential PC
+            uint32_t sequential_pc = regfile_get_pc(&core_regs);
+            
+            if (WB.write_data != sequential_pc) {
+                branch_taken = 1;
+                branch_target = WB.write_data;
+                regfile_set_pc(branch_target, &core_regs);
+                next_IF.pc = branch_target >> 1;
+                printf("[WB] CBZ/CBNZ BRANCH TAKEN! Target PC=0x%08X\n", branch_target);
+            } else {
+                printf("[WB] CBZ/CBNZ BRANCH NOT TAKEN - continuing at PC=0x%08X\n", sequential_pc);
+            }
+        }
+            break;
+
 
         default:
             // Write to register if instruction writes to a register

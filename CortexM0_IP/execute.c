@@ -19,8 +19,6 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_ADD_REG:
         case THUMB_ADD_IMM3:
         case THUMB_ADD_IMM8:
-        case THUMB_ADD_SP_IMM:
-        case THUMB_ADD_SP_IMM7:
         {
             uint64_t temp = (uint64_t)input.reg_data1 + input.reg_data2;
             out.alu_result = (uint32_t)temp;
@@ -35,6 +33,80 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             out.overflow = overflow;
             break;
         }
+        case THUMB_ADD_HIGH:
+        {
+            // ADD with high registers - does NOT update flags
+            uint64_t temp = (uint64_t)input.reg_data1 + input.reg_data2;
+            out.alu_result = (uint32_t)temp;
+            
+            printf("[EX DEBUG ADD_HIGH] ADD: 0x%08X + 0x%08X = 0x%08X (Rd=%u, Rm=%u)\n",
+                input.reg_data1, input.reg_data2, out.alu_result, input.rd, 
+                (input.reg_data2 == 0) ? 0 : 1);  // Approximate Rm display
+            
+            // Important: ADD (4) does NOT update flags, unlike ADD (3)
+            out.flags_updated = 0;
+            out.cpsr = regs->apsr;  // Preserve existing flags
+            
+            // If Rd is PC (R15), this will cause a branch - handled in WB stage
+            break;
+        }
+        case THUMB_ADD_PC_IMM:
+        {
+            // ADD to PC with immediate (PC-relative addressing)
+            // input.reg_data1 contains the aligned PC value
+            // input.reg_data2 contains the scaled immediate (already shifted by 2 in decode)
+            
+            // PC must be aligned to 4-byte boundary
+            uint32_t aligned_pc = input.reg_data1 & 0xFFFFFFFC;
+            out.alu_result = aligned_pc + input.reg_data2;
+            
+            printf("[EX DEBUG ADD_PC_IMM] ADD_PC: PC=0x%08X (aligned from 0x%08X), immed=0x%08X, result=0x%08X (Rd=%u)\n",
+                aligned_pc, input.reg_data1, input.reg_data2, out.alu_result, input.rd);
+            
+            // Flags are NOT updated by this instruction
+            out.flags_updated = 0;
+            out.cpsr = regs->apsr;  // Preserve existing flags
+            
+            break;
+        }
+        
+        case THUMB_ADD_SP_IMM:
+        {
+            // ADD to SP with immediate
+            // input.reg_data1 contains SP value (R13)
+            // input.reg_data2 contains the scaled immediate (already shifted by 2 in decode)
+            
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            
+            printf("[EX DEBUG ADD_SP_IMM] ADD SP: SP=0x%08X + offset=0x%08X = result=0x%08X (Rd=%u)\n",
+                input.reg_data1, input.reg_data2, out.alu_result, input.rd);
+            
+            // Flags are NOT updated by this instruction
+            out.flags_updated = 0;
+            out.cpsr = regs->apsr;  // Preserve existing flags
+            
+            break;
+        }
+        case THUMB_ADD_SP_IMM7:
+        {
+            // ADD SP, #<immed_7> * 4
+            // This is used to adjust the stack pointer by a small positive value
+            // input.reg_data1 contains SP value (R13)
+            // input.reg_data2 contains the scaled immediate (already shifted by 2 in decode)
+            // Note: imm7 is for 7-bit immediate, but it's already scaled by 4 in decode stage
+            
+            out.alu_result = input.reg_data1 + input.reg_data2;
+            
+            printf("[EX DEBUG ADD_SP_IMM7] ADD SP: SP=0x%08X + offset=0x%08X = result=0x%08X\n",
+                input.reg_data1, input.reg_data2, out.alu_result);
+            
+            // Flags are NOT updated by this instruction
+            out.flags_updated = 0;
+            out.cpsr = regs->apsr;  // Preserve existing flags
+            
+            break;
+        }
+
 
         case THUMB_ADC:
         {
@@ -493,15 +565,87 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // Hints / NOP / Control
         // ────────────────────────────────
         case THUMB_NOP:
-        case THUMB_YIELD:
-        case THUMB_WFE:
-        case THUMB_WFI:
-        case THUMB_SEV:
-        case THUMB_BKPT:
-        case THUMB_SVC:
             out.alu_result = 0;
+            printf("[EX DEBUG NOP] No operation\n");
+            break;
+        case THUMB_YIELD:
+            out.alu_result = 0;
+            printf("[EX DEBUG YIELD] Yield Hint (NOP in simulation)\n");
+            break;
+        case THUMB_WFE:
+            out.alu_result = 0;
+            printf("[EX DEBUG WFE] Wait For Event (NOP in simulation)\n");
+        case THUMB_WFI:
+            out.alu_result = 0;
+            printf("[EX DEBUG WFI] Wait For Interrupt (NOP in simulation)\n");
+            break;
+        case THUMB_SEV:
+            out.alu_result = 0;
+            printf("[EX DEBUG SEV] Send Event (NOP in simulation)\n");
             break;
 
+        case THUMB_BKPT:
+        {
+            // BKPT - Breakpoint instruction
+            // The immediate value is in input.reg_data2 (the scaled imm8)
+            // In a real ARM system, this would trigger a prefetch abort exception
+            
+            uint32_t imm8 = input.reg_data2;  // Immediate value from instruction
+            
+            printf("[EX DEBUG BKPT] Breakpoint hit!\n");
+            printf("[EX DEBUG BKPT]   PC: 0x%08X\n", input.pc);
+            printf("[EX DEBUG BKPT]   Immediate value: 0x%02X\n", imm8);
+            printf("[EX DEBUG BKPT]   CPSR: 0x%08X\n", input.cpsr);
+            
+            // In simulation:
+            // - Log the breakpoint
+            // - Store breakpoint info for debugging
+            // - Could optionally halt execution here
+            
+            out.alu_result = input.pc + 4;  // Would set R14_abt to next instruction
+            out.cpsr = input.cpsr;          // Preserve CPSR
+            
+            printf("[EX DEBUG BKPT] Exception would be taken, R14_abt would be set to 0x%08X\n", 
+                input.pc + 4);
+            
+            break;
+        }
+        case THUMB_SVC:
+        {
+            // SVC (Supervisor Call / Software Interrupt)
+            // In a real ARM system, this would:
+            // 1. Save R14_svc = address of next instruction
+            // 2. Save SPSR_svc = current CPSR
+            // 3. Switch to Supervisor mode (CPSR[4:0] = 0b10011)
+            // 4. Jump to SVC vector (0x00000008 or 0xFFFF0008)
+            //
+            // For simulation, we:
+            // - Log the SVC call with the immediate value
+            // - Store what R14_svc would be (informational)
+            // - Simulate the exception (could halt, log, or continue)
+            
+            uint32_t service_num = input.reg_data2;  // imm8 is the service number
+            
+            printf("[EX DEBUG SVC] Supervisor Call (SVC #%d)\n", service_num);
+            printf("[EX DEBUG SVC] PC at SVC: 0x%08X\n", input.pc);
+            printf("[EX DEBUG SVC] Next instruction would be at: 0x%08X\n", input.pc + 2);
+            
+            // In a full implementation, you could:
+            // - Switch to a service handler based on service_num
+            // - Implement OS services (e.g., SVC 0 = exit, SVC 1 = print, etc.)
+            // - Save context for exception handling
+            
+            out.alu_result = input.pc + 2;  // Would set R14_svc to next instruction
+            
+            // SVC doesn't update flags
+            out.flags_updated = 0;
+            out.cpsr = regs->apsr;
+            
+            printf("[EX DEBUG SVC] SVC exception would be taken\n");
+            printf("[EX DEBUG SVC] R14_svc would be set to: 0x%08X\n", out.alu_result);
+            
+            break;
+        }
         // ────────────────────────────────
         // Sign/Zero Extend Instructions
         // ────────────────────────────────
@@ -520,6 +664,8 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             int16_t hw_val = (int16_t)(input.reg_data1 & 0xFFFF);
             out.alu_result = (int32_t)hw_val;  // Sign-extended to 32-bit
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG SXTH] Input=0x%08X, Halfword=0x%04X, Output=0x%08X\n", 
+                input.reg_data1, (uint16_t)(input.reg_data1 & 0xFFFF), out.alu_result);
             break;
         }
         case THUMB_UXTB:
@@ -527,6 +673,8 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             // Zero extend byte (bits 7:0)
             out.alu_result = input.reg_data1 & 0xFF;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG UXTB] Input=0x%08X, Output=0x%08X\n", 
+                input.reg_data1, out.alu_result);
             break;
         }
         case THUMB_UXTH:
@@ -534,6 +682,8 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             // Zero extend halfword (bits 15:0)
             out.alu_result = input.reg_data1 & 0xFFFF;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG UXTH] Input=0x%08X, Output=0x%08X\n", 
+                input.reg_data1, out.alu_result);
             break;
         }
 
@@ -542,18 +692,19 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // ────────────────────────────────
         case THUMB_REV:
         {
-            // Reverse all 4 bytes
+            // Reverse all 4 bytes: byte0<->byte3, byte1<->byte2
             uint32_t val = input.reg_data1;
             out.alu_result = ((val & 0xFF000000) >> 24) |
                             ((val & 0x00FF0000) >> 8)  |
                             ((val & 0x0000FF00) << 8)  |
                             ((val & 0x000000FF) << 24);
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG REV] Input=0x%08X, Output=0x%08X\n", val, out.alu_result);
             break;
         }
         case THUMB_REV16:
         {
-            // Reverse bytes in each halfword separately
+            // Reverse bytes in each 16-bit halfword separately
             uint32_t val = input.reg_data1;
             uint16_t lo = val & 0xFFFF;
             uint16_t hi = (val >> 16) & 0xFFFF;
@@ -563,18 +714,46 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             
             out.alu_result = (hi_reversed << 16) | lo_reversed;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG REV16] Input=0x%08X, Output=0x%08X\n", val, out.alu_result);
             break;
         }
         case THUMB_REVSH:
         {
-            // Reverse bytes in halfword and sign-extend
+            // Reverse bytes in lower halfword and sign-extend
             uint16_t hw = input.reg_data1 & 0xFFFF;
             uint16_t reversed = ((hw & 0xFF) << 8) | ((hw >> 8) & 0xFF);
-            
-            // Sign-extend the reversed halfword
             int16_t signed_val = (int16_t)reversed;
             out.alu_result = (int32_t)signed_val;
             regfile_update_flags(regs, out.alu_result, 0, 0);
+            printf("[EX DEBUG REVSH] Input=0x%04X, Reversed=0x%04X, Output=0x%08X\n", 
+                hw, reversed, out.alu_result);
+            break;
+        }
+
+        // CBZ / CBNZ - Compare and Branch on Zero/Nonzero
+        case THUMB_CBZ:
+        case THUMB_CBNZ:
+        {
+            // Compare register with zero and conditionally branch
+            uint32_t reg_value = input.reg_data1;  // Value of Rn
+            uint32_t offset = input.reg_data2;     // Branch offset
+            
+            int is_cbnz = (input.opcode == THUMB_CBNZ);
+            int condition_met = is_cbnz ? (reg_value != 0) : (reg_value == 0);
+            
+            if (condition_met) {
+                // Branch is taken
+                out.alu_result = input.pc + 4 + offset;
+                printf("[EX DEBUG %s] Branch TAKEN - Rn=0x%08X, target=0x%08X\n",
+                    is_cbnz ? "CBNZ" : "CBZ", reg_value, out.alu_result);
+            } else {
+                // Branch not taken, continue to next instruction
+                out.alu_result = input.pc + 4;
+                printf("[EX DEBUG %s] Branch NOT TAKEN - Rn=0x%08X, fall through to 0x%08X\n",
+                    is_cbnz ? "CBNZ" : "CBZ", reg_value, out.alu_result);
+            }
+            
+            out.cpsr = regs->apsr;  // Preserve flags (CBZ/CBNZ don't update flags)
             break;
         }
 

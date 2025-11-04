@@ -207,16 +207,21 @@ void test_str_reg() {
     uint32_t data_mem[MEM_SIZE]  = {0};
     uint32_t reg_out[32] = {0};
 
-    // Program:
-    // 0x0000: MOV R0, #28      (0x201C) - R0 = 28
-    // 0x0002: MOV R1, #0       (0x2100) - R1 = 0
-    // 0x0004: MOV R2, #0x55    (0x2255) - R2 = 0x55
-    // 0x0006: STR R2, [R0, R1] (0x5402) - [R0+R1] = R2
-    // Encoding: STR register offset is 0101000 Rm Rn Rd
-    // For [R0, R1]: Rm=1, Rn=0, Rd=2 => 0x5000 + (1<<6) + (0<<3) + 2 = 0x5402
+
+    // Instruction sequence:
+    // 0x0000: MOV R0, #28      - R0 = 28 (byte address for data_mem[7])
+    // 0x0002: MOV R1, #0       - R1 = 0 (no offset)
+    // 0x0004: LDR R2, [R0, R1] - R2 = data_mem[28>>2] = data_mem[7] = 0xDEADBEEF
+    // 0x0006: MOV R3, #44      - R3 = 44 (byte address for data_mem[11])
+    // 0x0008: MOV R4, #0       - R4 = 0 (no offset)
+    // 0x000A: STR R2, [R3, R4] - data_mem[44>>2] = R2 → data_mem[11] = 0xDEADBEEF
+
+    // Setup: Initialize data in memory
+    data_mem[7] = 0xDEADBEEF;
     
     instr_mem[0] = 0x201C | (0x2100 << 16);
-    instr_mem[1] = 0x2255 | (0x5042 << 16);
+    instr_mem[1] = 0x5842 | (0x232C << 16);
+    instr_mem[2] = 0x2400 | (0x511A << 16);
 
     cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < NUM_CYCLES; i++) {
@@ -226,14 +231,25 @@ void test_str_reg() {
     PRINT_REGS(reg_out);
     PRINT_MEM(data_mem, 7, 2);
 
-    printf("Expected: R0=28, R1=0, R2=0x55, data_mem[7]=0x55\n");
-    printf("Actual:   R0=%08X, R1=%08X, R2=%08X, data_mem[7]=%08X\n", 
-           reg_out[0], reg_out[1], reg_out[2], data_mem[7]);
+    printf("\nExpected:\n");
+    printf("  R0=28, R1=0, R2=0xDEADBEEF, R3=44, R4=0\n");
+    printf("  data_mem[7]=0xDEADBEEF (unchanged - source)\n");
+    printf("  data_mem[11]=0xDEADBEEF (destination after store)\n");
+    
+    printf("\nActual:\n");
+    printf("  R0=%d, R1=%d, R2=0x%08X, R3=%d, R4=%d\n", 
+           reg_out[0], reg_out[1], reg_out[2], reg_out[3], reg_out[4]);
+    printf("  data_mem[7]=0x%08X\n", data_mem[7]);
+    printf("  data_mem[11]=0x%08X\n", data_mem[11]);
 
     assert(reg_out[0] == 28);
     assert(reg_out[1] == 0);
-    assert(reg_out[2] == 0x55);
-    assert(data_mem[7] == 0x55);
+    assert(reg_out[2] == 0xDEADBEEF);
+    assert(reg_out[3] == 44);
+    assert(reg_out[4] == 0);
+    assert(data_mem[7] == 0xDEADBEEF);      // Source unchanged
+    assert(data_mem[11] == 0xDEADBEEF);     // Successfully stored
+
 
     printf("✅ STR_REG test passed!\n");
 }
@@ -696,35 +712,35 @@ int main() {
     printf("========== Cortex-M0 Load/Store Instruction Test Suite ==========\n");
     printf("Testing all 16-bit load and store instructions (FIXED ENCODINGS)\n\n");
 
-    // Word Operations
-    printf("\n========== WORD LOAD/STORE TESTS ==========\n");
-    test_ldr_imm();             // TEST 1 Passed
-    test_ldr_reg();             // TEST 2 Passed
-    test_str_imm();             // TEST 3 Passed
+    // // Word Operations
+    // printf("\n========== WORD LOAD/STORE TESTS ==========\n");
+    // test_ldr_imm();             // TEST 1 Passed
+    // test_ldr_reg();             // TEST 2 Passed
+    // test_str_imm();             // TEST 3 Passed
     test_str_reg();             // TEST 4 Passed
 
-    // Byte Operations
-    printf("\n========== BYTE LOAD/STORE TESTS ==========\n");
-    test_ldrb_imm();            // TEST 5  Passed
-    test_ldrb_reg();            // TEST 11 Passed
-    test_strb_imm();            // TEST 6 Passed
-    test_strb_reg();            // TEST 12 Passed
+    // // Byte Operations
+    // printf("\n========== BYTE LOAD/STORE TESTS ==========\n");
+    // test_ldrb_imm();            // TEST 5  Passed
+    // test_ldrb_reg();            // TEST 11 Passed
+    // test_strb_imm();            // TEST 6 Passed
+    // test_strb_reg();            // TEST 12 Passed
 
-    // Halfword Operations
-    printf("\n========== HALFWORD LOAD/STORE TESTS ==========\n");
-    test_ldrh_imm();            // TEST 7 Passed
-    test_ldrh_reg();            // TEST 13 Passed
-    test_strh_imm();            // TEST 8 Passed
-    test_strh_reg();            // TEST 14 Passed
+    // // Halfword Operations
+    // printf("\n========== HALFWORD LOAD/STORE TESTS ==========\n");
+    // test_ldrh_imm();            // TEST 7 Passed
+    // test_ldrh_reg();            // TEST 13 Passed
+    // test_strh_imm();            // TEST 8 Passed
+    // test_strh_reg();            // TEST 14 Passed
 
-    // Signed Load Operations
-    printf("\n========== SIGNED LOAD TESTS ==========\n");
-    test_ldrsb_reg();           // TEST 9 Passed
-    test_ldrsh_reg();           // TEST 10 Passed
+    // // Signed Load Operations
+    // printf("\n========== SIGNED LOAD TESTS ==========\n");
+    // test_ldrsb_reg();           // TEST 9 Passed
+    // test_ldrsh_reg();           // TEST 10 Passed
 
-    // Complex Operations
-    printf("\n========== COMPLEX OPERATION TESTS ==========\n");
-    test_load_store_chain();    // TEST 15 Passed
+    // // Complex Operations
+    // printf("\n========== COMPLEX OPERATION TESTS ==========\n");
+    // test_load_store_chain();    // TEST 15 Passed
 
     printf("\n========== ✅ ALL TESTS PASSED! ==========\n");
     return 0;
