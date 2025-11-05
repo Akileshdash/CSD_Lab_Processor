@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <inttypes.h>
 
-#define MEM_SIZE 128
+#define MEM_SIZE 600
 
 // Helper macro for printing register states
 #define PRINT_REGS(regs) do { \
@@ -23,22 +23,24 @@
 void test_add_reg() {
     printf("\n=== TEST 22: ADD_REG ===\n");
 
-    uint32_t instr_mem[MEM_SIZE] = {0};
+    uint32_t instr_mem[MEM_SIZE] = {0};  // Assume MEM_SIZE > 500
     uint32_t data_mem[MEM_SIZE]  = {0};
     uint32_t reg_out[32] = {0};
 
-    // Program:
-    // 0: MOVS R0, #15       (0x200F)
-    // 1: MOVS R1, #25       (0x2119)
-    // 2: ADDS R2, R0, R1    (0x1842) - R2 = R0 + R1 = 15 + 25 = 40
-    // 3: MOVS R3, #10       (0x230A)
+    // Set up vector table at the BEGINNING of the array
+    // These are at actual hardware addresses 0x7D0, 0x7D4, etc.
+    data_mem[500] = 0x20000400;      // Initial MSP at index 500 (HW addr 0x7D0)
+    data_mem[501] = 0x00000000 | 1;  // Reset vector = 0 (OS addr), LSB=1 for Thumb
     
-    instr_mem[0] = 0x200F | (0x2119 << 16);  // MOVS R0,#15 | MOVS R1,#25
-    instr_mem[1] = 0x1842 | (0x230A << 16);  // ADDS R2,R0,R1 | MOVS R3,#10
+    // Program starts at OS address 0x00 which maps to HW index 500
+    instr_mem[500] = 0x200F | (0x2119 << 16);  // MOVS R0,#15 | MOVS R1,#25
+    instr_mem[501] = 0x1842 | (0x230A << 16);  // ADDS R2,R0,R1 | MOVS R3,#10
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
-    for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    
+    // Run enough cycles for all instructions to complete
+    for (int i = 0; i < 20; i++) {
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -54,7 +56,6 @@ void test_add_reg() {
 
     printf("✅ ADD_REG test passed!\n");
 }
-
 // === TEST 2: ADD_IMM3 (Add 3-bit immediate) ===
 void test_add_imm3() {
     printf("\n=== TEST 23: ADD_IMM3 ===\n");
@@ -71,9 +72,9 @@ void test_add_imm3() {
     instr_mem[0] = 0x200A | (0x1DC1 << 16);  // MOVS R0,#10 | ADDS R1,R0,#7
     instr_mem[1] = 0x2205 | (0xBF00 << 16);  // MOVS R2,#5 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -105,9 +106,9 @@ void test_sub_reg() {
     instr_mem[0] = 0x2032 | (0x211E << 16);  // MOVS R0,#50 | MOVS R1,#30
     instr_mem[1] = 0x1A42 | (0x2308 << 16);  // SUBS R2,R0,R1 | MOVS R3,#8
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -140,9 +141,9 @@ void test_sub_imm3() {
     instr_mem[0] = 0x2014 | (0x1F41 << 16);  // MOVS R0,#20 | SUBS R1,R0,#5
     instr_mem[1] = 0x2207 | (0xBF00 << 16);  // MOVS R2,#7 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -177,9 +178,9 @@ void test_cmn() {
     instr_mem[1] = 0x42C8 | (0xD500 << 16);  // CMN R0,R1 | BPL +1
     instr_mem[2] = 0x2263 | (0x220C << 16);  // MOVS R2,#99 | MOVS R2,#12
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -214,9 +215,9 @@ void test_tst() {
     instr_mem[1] = 0x4208 | (0xD000 << 16);  // TST R0,R1 | BEQ +1
     instr_mem[2] = 0x2263 | (0x220D << 16);  // MOVS R2,#99 | MOVS R2,#13
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -247,9 +248,9 @@ void test_neg() {
     instr_mem[0] = 0x200A | (0x4241 << 16);  // MOVS R0,#10 | NEGS R1,R0
     instr_mem[1] = 0x2205 | (0xBF00 << 16);  // MOVS R2,#5 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -284,9 +285,9 @@ void test_mov_reg() {
     instr_mem[0] = 0x202A | (0x4601 << 16);  // MOVS R0,#42 | MOV R1,R0
     instr_mem[1] = 0x220A | (0xBF00 << 16);  // MOVS R2,#10 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -322,9 +323,9 @@ void test_lsl_imm() {
     instr_mem[0] = 0x2005 | (0x00C1 << 16);  // MOVS R0,#5 | LSLS R1,R0,#3
     instr_mem[1] = 0x2207 | (0xBF00 << 16);  // MOVS R2,#7 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -356,9 +357,9 @@ void test_lsl_reg() {
     instr_mem[0] = 0x2008 | (0x2103 << 16);  // MOVS R0,#8 | MOVS R1,#3
     instr_mem[1] = 0x4088 | (0x2205 << 16);  // LSLS R0,R0,R1 | MOVS R2,#5
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -389,9 +390,9 @@ void test_lsr_imm() {
     instr_mem[0] = 0x2040 | (0x08C1 << 16);  // MOVS R0,#64 | LSRS R1,R0,#3
     instr_mem[1] = 0x2207 | (0xBF00 << 16);  // MOVS R2,#7 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -423,9 +424,9 @@ void test_lsr_reg() {
     instr_mem[0] = 0x2080 | (0x2104 << 16);  // MOVS R0,#128 | MOVS R1,#4
     instr_mem[1] = 0x40C8 | (0x2209 << 16);  // LSRS R0,R0,R1 | MOVS R2,#9
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -457,9 +458,9 @@ void test_asr_imm() {
     instr_mem[0] = 0x2080 | (0x4240 << 16);  // MOVS R0,#128 | NEGS R0,R0
     instr_mem[1] = 0x1081 | (0x2205 << 16);  // ASRS R1,R0,#2 | MOVS R2,#5
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -493,9 +494,9 @@ void test_asr_reg() {
     instr_mem[1] = 0x2103 | (0x4108 << 16);  // MOVS R1,#3 | ASRS R0,R0,R1
     instr_mem[2] = 0x2206 | (0xBF00 << 16);  // MOVS R2,#6 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -527,9 +528,9 @@ void test_ror() {
     instr_mem[0] = 0x20C0 | (0x2104 << 16);  // MOVS R0,#192 | MOVS R1,#4
     instr_mem[1] = 0x41C8 | (0x2207 << 16);  // RORS R0,R0,R1 | MOVS R2,#7
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -565,9 +566,9 @@ void test_and() {
     instr_mem[0] = 0x20F0 | (0x21CC << 16);  // MOVS R0,#240 | MOVS R1,#204
     instr_mem[1] = 0x4008 | (0x2205 << 16);  // ANDS R0,R0,R1 | MOVS R2,#5
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -599,9 +600,9 @@ void test_eor() {
     instr_mem[0] = 0x20F0 | (0x21CC << 16);  // MOVS R0,#240 | MOVS R1,#204
     instr_mem[1] = 0x4048 | (0x2206 << 16);  // EORS R0,R0,R1 | MOVS R2,#6
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -633,9 +634,9 @@ void test_orr() {
     instr_mem[0] = 0x200F | (0x21F0 << 16);  // MOVS R0,#15 | MOVS R1,#240
     instr_mem[1] = 0x4308 | (0x2207 << 16);  // ORRS R0,R0,R1 | MOVS R2,#7
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -667,9 +668,9 @@ void test_bic() {
     instr_mem[0] = 0x20FF | (0x21F0 << 16);  // MOVS R0,#255 | MOVS R1,#240
     instr_mem[1] = 0x4388 | (0x2208 << 16);  // BICS R0,R0,R1 | MOVS R2,#8
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -700,9 +701,9 @@ void test_mvn() {
     instr_mem[0] = 0x200F | (0x43C1 << 16);  // MOVS R0,#15 | MVNS R1,R0
     instr_mem[1] = 0x2209 | (0xBF00 << 16);  // MOVS R2,#9 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -738,9 +739,9 @@ void test_adc() {
     instr_mem[1] = 0x22FF | (0x3201 << 16);  // MOVS R2,#255 | ADDS R2,R2,#1
     instr_mem[2] = 0x4148 | (0x2308 << 16);  // ADCS R0,R0,R1 | MOVS R3,#8
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -779,9 +780,9 @@ void test_sbc() {
     instr_mem[2] = 0x429A | (0x4188 << 16);  // CMP R2,R3 | SBCS R0,R0,R1
     instr_mem[3] = 0x2407 | (0xBF00 << 16);  // MOVS R4,#7 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 18; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -814,9 +815,9 @@ void test_rsb() {
     instr_mem[0] = 0x200F | (0x4241 << 16);  // MOVS R0,#15 | RSBS R1,R0,#0
     instr_mem[1] = 0x2205 | (0xBF00 << 16);  // MOVS R2,#5 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -848,9 +849,9 @@ void test_mul() {
     instr_mem[0] = 0x2007 | (0x2106 << 16);  // MOVS R0,#7 | MOVS R1,#6
     instr_mem[1] = 0x4348 | (0x2209 << 16);  // MULS R0,R0,R1 | MOVS R2,#9
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -885,9 +886,9 @@ void test_sxtb() {
     instr_mem[0] = 0x2080 | (0xB241 << 16);  // MOVS R0,#128 | SXTB R1,R0
     instr_mem[1] = 0x2205 | (0xBF00 << 16);  // MOVS R2,#5 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -919,9 +920,9 @@ void test_sxth() {
     instr_mem[0] = 0x2080 | (0x0200 << 16);  // MOVS R0,#128 | LSLS R0,R0,#8
     instr_mem[1] = 0xB201 | (0x2206 << 16);  // SXTH R1,R0 | MOVS R2,#6
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -953,9 +954,9 @@ void test_uxtb() {
     instr_mem[0] = 0x20FF | (0x4240 << 16);  // MOVS R0,#255 | NEGS R0,R0
     instr_mem[1] = 0xB2C1 | (0x2207 << 16);  // UXTB R1,R0 | MOVS R2,#7
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -989,9 +990,9 @@ void test_uxth() {
     instr_mem[1] = 0x4240 | (0xB281 << 16);  // NEGS R0,R0 | UXTH R1,R0
     instr_mem[2] = 0x2208 | (0xBF00 << 16);  // MOVS R2,#8 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -1031,9 +1032,9 @@ void test_rev() {
     instr_mem[3] = 0x3078 | (0xBA01 << 16);  // ADDS R0,#120 | REV R1,R0
     instr_mem[4] = 0x2209 | (0xBF00 << 16);  // MOVS R2,#9 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -1083,9 +1084,9 @@ void test_rev16() {
     instr_mem[3] = 0x3012 | (0xBA41 << 16);  // ADDS R0,#18 | REV16 R1,R0
     instr_mem[4] = 0x2209 | (0xBF00 << 16);  // MOVS R2,#9 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -1119,9 +1120,9 @@ void test_revsh() {
     instr_mem[1] = 0x3012 | (0xBAC1 << 16);  // ADDS R0,#18 | REVSH R1,R0
     instr_mem[2] = 0x220A | (0xBF00 << 16);  // MOVS R2,#10 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -1153,9 +1154,9 @@ void test_nop() {
     instr_mem[0] = 0x2005 | (0xBF00 << 16);  // MOVS R0,#5 | NOP
     instr_mem[1] = 0xBF00 | (0x210A << 16);  // NOP | MOVS R1,#10
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -1173,74 +1174,62 @@ void test_nop() {
 // MAIN TEST RUNNER
 // ============================================================================
 
-// int main() {
-//     printf("========== Cortex-M0 Comprehensive Instruction Test Suite ==========\n");
+int main() {
+    printf("========== Cortex-M0 Comprehensive Instruction Test Suite ==========\n");
 
-<<<<<<< Updated upstream
     // ====== PRIORITY 1: ARITHMETIC OPERATIONS ======
     printf("\n========== PRIORITY 1: ARITHMETIC OPERATIONS ==========\n");
-    test_add_reg();           // Test 1 Passed
+    test_add_reg();           // Test 22 Passed
     // test_add_imm3();          // Test 23 Passed
     // test_sub_reg();           // Test 24 Passed
     // test_sub_imm3();          // Test 25 Passed
     // test_cmn();               // Test 26 Passed
     // test_tst();               // Test 27 Passed
     // test_neg();               // Test 28 Passed
-=======
-//     // ====== PRIORITY 1: ARITHMETIC OPERATIONS ======
-//     // printf("\n========== PRIORITY 1: ARITHMETIC OPERATIONS ==========\n");
-//     test_add_reg();           // Test 22 Passed
-//     // test_add_imm3();          // Test 23 Passed
-//     // test_sub_reg();           // Test 24 Passed
-//     // test_sub_imm3();          // Test 25 Passed
-//     // test_cmn();               // Test 26 Passed
-//     // test_tst();               // Test 27 Passed
-//     // test_neg();               // Test 28 Passed
->>>>>>> Stashed changes
 
-//     // ====== PRIORITY 2: SHIFT OPERATIONS ======
-//     // printf("\n========== PRIORITY 2: SHIFT OPERATIONS ==========\n");
-//     // test_mov_reg();           // Test 29 Passed
-//     // test_lsl_imm();           // Test 30 Passed 
-//     // test_lsl_reg();           // Test 31 Passed 
-//     // test_lsr_imm();           // Test 32 Passed 
-//     // test_lsr_reg();           // Test 33 Passed 
-//     // test_asr_imm();           // Test 34 Passed 
-//     // test_asr_reg();           // Test 35 Passed 
-//     // test_ror();               // Test 36 Passed 
+    // // ====== PRIORITY 2: SHIFT OPERATIONS ======
+    // printf("\n========== PRIORITY 2: SHIFT OPERATIONS ==========\n");
+    // test_mov_reg();           // Test 29 Passed
+    // test_lsl_imm();           // Test 30 Passed 
+    // test_lsl_reg();           // Test 31 Passed 
+    // test_lsr_imm();           // Test 32 Passed 
+    // test_lsr_reg();           // Test 33 Passed 
+    // test_asr_imm();           // Test 34 Passed 
+    // test_asr_reg();           // Test 35 Passed 
+    // test_ror();               // Test 36 Passed 
 
-//     // // ====== PRIORITY 3: DATA PROCESSING (BITWISE) ======
-//     // printf("\n========== PRIORITY 3: DATA PROCESSING ==========\n");
-//     // test_and();               // Test 37 Passed
-//     // test_eor();               // Test 38 Passed
-//     // test_orr();               // Test 39 Passed
-//     // test_bic();               // Test 40 Passed
-//     // test_mvn();               // Test 41 Passed
-//     // test_adc();               // Test 42
-//     // test_sbc();               // Test 43 Passed
-//     // test_rsb();               // Test 44 Passed
-//     // test_mul();               // Test 45 Passed
+    // // ====== PRIORITY 3: DATA PROCESSING (BITWISE) ======
+    // printf("\n========== PRIORITY 3: DATA PROCESSING ==========\n");
+    // test_and();               // Test 37 Passed
+    // test_eor();               // Test 38 Passed
+    // test_orr();               // Test 39 Passed
+    // test_bic();               // Test 40 Passed
+    // test_mvn();               // Test 41 Passed
+    // // test_adc();               // Test 42
+    // test_sbc();               // Test 43 Passed
+    // test_rsb();               // Test 44 Passed
+    // test_mul();               // Test 45 Passed
 
-//     // // ====== PRIORITY 5: MISCELLANEOUS OPERATIONS ======
-//     // printf("\n========== PRIORITY 5: MISCELLANEOUS ==========\n");
-//     // test_sxtb();              // Test 46
-//     // test_sxth();              // Test 47
-//     // test_uxtb();              // Test 48
-//     // test_uxth();              // Test 49
-//     // test_rev();               // Test 50
-//     // test_rev16();             // Test 51
-//     // test_revsh();             // Test 52
-//     // test_nop();               // Test 53 Passed
+    // // ====== PRIORITY 5: MISCELLANEOUS OPERATIONS ======
+    // printf("\n========== PRIORITY 5: MISCELLANEOUS ==========\n");
+    // // test_sxtb();              // Test 46
+    // // test_sxth();              // Test 47
+    // // test_uxtb();              // Test 48
+    // // test_uxth();              // Test 49
+    // // test_rev();               // Test 50
+    // // test_rev16();             // Test 51
+    // // test_revsh();             // Test 52
+    // test_nop();               // Test 53 Passed
 
-//     // printf("\n========== TEST SUMMARY ==========\n");
-//     printf("✅ All Priority 1, 2, 3, and 5 instruction tests completed!\n");
-//     // printf("\nTotal tests run: 32 (Tests 22-53)\n");
-//     // printf("Categories covered:\n");
-//     // printf("  - Arithmetic: ADD/SUB variants, CMP, TST, NEG\n");
-//     // printf("  - Shifts: LSL, LSR, ASR, ROR (immediate & register)\n");
-//     // printf("  - Bitwise: AND, OR, XOR, BIC, MVN\n");
-//     // printf("  - Advanced: ADC, SBC, RSB, MUL\n");
-//     // printf("  - Miscellaneous: Sign/Zero extend, Byte reverse, NOP\n");
+    // printf("\n========== TEST SUMMARY ==========\n");
+    printf("✅ All Priority 1, 2, 3, and 5 instruction tests completed!\n");
+    printf("\nTotal tests run: 32 (Tests 22-53)\n");
+    printf("Categories covered:\n");
+    printf("  - Arithmetic: ADD/SUB variants, CMP, TST, NEG\n");
+    printf("  - Shifts: LSL, LSR, ASR, ROR (immediate & register)\n");
+    printf("  - Bitwise: AND, OR, XOR, BIC, MVN\n");
+    printf("  - Advanced: ADC, SBC, RSB, MUL\n");
+    printf("  - Miscellaneous: Sign/Zero extend, Byte reverse, NOP\n");
     
-//     return 0;
-// }
+    return 0;
+}

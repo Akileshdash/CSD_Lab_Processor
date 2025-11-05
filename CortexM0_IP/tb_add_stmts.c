@@ -278,12 +278,12 @@ void run_all_add_tests() {
     printf("║        COMPLETE TEST SUITE FOR ALL 6 ADD INSTRUCTIONS      ║\n");
     printf("╚════════════════════════════════════════════════════════════╝\n");
 
-    // test_add_1_imm3();
-    // test_add_2_imm8();
-    // test_add_3_reg();
-    // test_add_4_high();
-    // test_add_5_pc_imm();
-    // test_add_6_sp_imm();
+    test_add_1_imm3();
+    test_add_2_imm8();
+    test_add_3_reg();
+    test_add_4_high();
+    test_add_5_pc_imm();
+    test_add_6_sp_imm();
     test_add_combined_flags();
 
     printf("\n╔════════════════════════════════════════════════════════════╗\n");

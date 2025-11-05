@@ -712,35 +712,35 @@ int main() {
     printf("========== Cortex-M0 Load/Store Instruction Test Suite ==========\n");
     printf("Testing all 16-bit load and store instructions (FIXED ENCODINGS)\n\n");
 
-    // // Word Operations
-    // printf("\n========== WORD LOAD/STORE TESTS ==========\n");
-    // test_ldr_imm();             // TEST 1 Passed
-    // test_ldr_reg();             // TEST 2 Passed
-    // test_str_imm();             // TEST 3 Passed
+    // Word Operations
+    printf("\n========== WORD LOAD/STORE TESTS ==========\n");
+    test_ldr_imm();             // TEST 1 Passed
+    test_ldr_reg();             // TEST 2 Passed
+    test_str_imm();             // TEST 3 Passed
     test_str_reg();             // TEST 4 Passed
 
-    // // Byte Operations
-    // printf("\n========== BYTE LOAD/STORE TESTS ==========\n");
-    // test_ldrb_imm();            // TEST 5  Passed
-    // test_ldrb_reg();            // TEST 11 Passed
-    // test_strb_imm();            // TEST 6 Passed
-    // test_strb_reg();            // TEST 12 Passed
+    // Byte Operations
+    printf("\n========== BYTE LOAD/STORE TESTS ==========\n");
+    test_ldrb_imm();            // TEST 5  Passed
+    test_ldrb_reg();            // TEST 11 Passed
+    test_strb_imm();            // TEST 6 Passed
+    test_strb_reg();            // TEST 12 Passed
 
-    // // Halfword Operations
-    // printf("\n========== HALFWORD LOAD/STORE TESTS ==========\n");
-    // test_ldrh_imm();            // TEST 7 Passed
-    // test_ldrh_reg();            // TEST 13 Passed
-    // test_strh_imm();            // TEST 8 Passed
-    // test_strh_reg();            // TEST 14 Passed
+    // Halfword Operations
+    printf("\n========== HALFWORD LOAD/STORE TESTS ==========\n");
+    test_ldrh_imm();            // TEST 7 Passed
+    test_ldrh_reg();            // TEST 13 Passed
+    test_strh_imm();            // TEST 8 Passed
+    test_strh_reg();            // TEST 14 Passed
 
-    // // Signed Load Operations
-    // printf("\n========== SIGNED LOAD TESTS ==========\n");
-    // test_ldrsb_reg();           // TEST 9 Passed
-    // test_ldrsh_reg();           // TEST 10 Passed
+    // Signed Load Operations
+    printf("\n========== SIGNED LOAD TESTS ==========\n");
+    test_ldrsb_reg();           // TEST 9 Passed
+    test_ldrsh_reg();           // TEST 10 Passed
 
-    // // Complex Operations
-    // printf("\n========== COMPLEX OPERATION TESTS ==========\n");
-    // test_load_store_chain();    // TEST 15 Passed
+    // Complex Operations
+    printf("\n========== COMPLEX OPERATION TESTS ==========\n");
+    test_load_store_chain();    // TEST 15 Passed
 
     printf("\n========== ✅ ALL TESTS PASSED! ==========\n");
     return 0;

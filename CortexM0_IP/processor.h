@@ -7,8 +7,8 @@
 void cortex_m0_top(
     volatile uint32_t* instr_mem,
     volatile uint32_t* data_mem,
-    // volatile uint32_t* reg_out,
-    int* pc_out
+    volatile uint32_t* reg_out,
+    int reset,
+    int clk
 );
-
 #endif

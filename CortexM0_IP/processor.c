@@ -6,6 +6,10 @@
 #include "stdio.h"
 
 #define OS_START_ADDR 0x00000000
+#define DRAM_BASE_ADDR 0x000007D0  // 500 * 4 = 2000 = 0x7D0 (byte address for index 500) for checking test_add_reg
+
+// Add offset to memory address (address should already be in byte form)
+#define MEM_IDX(byte_addr) (((byte_addr) + DRAM_BASE_ADDR) >> 2)
 
 static inline int thumb_writes_register(thumb_operation_t op) {
     switch (op) {
@@ -320,81 +324,62 @@ static uint32_t process_mem_data(uint32_t raw_data, uint32_t address, int mem_si
 void cortex_m0_top(
     volatile uint32_t* instr_mem,
     volatile uint32_t* data_mem,
-    // volatile uint32_t* reg_out,
-    int* pc_out
-) {
-#pragma HLS INTERFACE m_axi port=instr_mem offset=slave bundle=INSTR_BUS
-#pragma HLS INTERFACE m_axi port=data_mem offset=slave bundle=DATA_BUS
-#pragma HLS INTERFACE ap_none port=pc_out
-// #pragma HLS INTERFACE m_axi port=reg_out   offset=slave bundle=REG_BUS
-#pragma HLS INTERFACE ap_ctrl_none port=return
-
-
-
+    volatile uint32_t* reg_out,
+    int reset,
+    int clk
+)  {
+    #pragma HLS INTERFACE m_axi port=instr_mem offset=slave bundle=INSTR_BUS
+    #pragma HLS INTERFACE m_axi port=data_mem offset=slave bundle=DATA_BUS
+    #pragma HLS INTERFACE m_axi port=reg_out   offset=slave bundle=REG_BUS
+    #pragma HLS INTERFACE s_axilite port=reset bundle=CTRL_BUS
+    #pragma HLS INTERFACE s_axilite port=clk bundle=CTRL_BUS
+    #pragma HLS INTERFACE ap_ctrl_none port=return
     static IF_stage IF;
     static ID_stage ID;
     static EX_stage EX;
     static MEM_stage MEM;
     static WB_stage WB;
     static cortex_m0_registers_t core_regs;
-    static bool init_done = false;
-
+    if(reset) {
         // Reset all stages
-        #pragma HLS RESET variable=IF.pc
-        #pragma HLS RESET variable=IF.instr 
-        #pragma HLS RESET variable=ID.pc 
-        #pragma HLS RESET variable=ID.instr 
-        #pragma HLS RESET variable=ID.reg_data1
-        #pragma HLS RESET variable=ID.reg_data2 
-        #pragma HLS RESET variable=ID.opcode 
-        #pragma HLS RESET variable=ID.rd 
-        #pragma HLS RESET variable=ID.rs1 
-        #pragma HLS RESET variable=ID.rs2 
-        #pragma HLS RESET variable=ID.immediate_flag 
-        #pragma HLS RESET variable=ID.imm_value 
-        #pragma HLS RESET variable=ID.condition 
-        #pragma HLS RESET variable=ID.cpsr 
-        #pragma HLS RESET variable=EX.opcode 
-        #pragma HLS RESET variable=EX.alu_result 
-        #pragma HLS RESET variable=EX.reg_data2 
-        #pragma HLS RESET variable=EX.rd 
-        #pragma HLS RESET variable=EX.link 
-        #pragma HLS RESET variable=EX.cpsr 
-        #pragma HLS RESET variable=EX.pc 
-        #pragma HLS RESET variable=MEM.opcode
-        #pragma HLS RESET variable=MEM.alu_result
-        #pragma HLS RESET variable=MEM.mem_data
-        #pragma HLS RESET variable=MEM.rd 
-        #pragma HLS RESET variable=MEM.link 
-        #pragma HLS RESET variable=MEM.cpsr 
-        #pragma HLS RESET variable=WB.opcode 
-        #pragma HLS RESET variable=WB.write_data 
-        #pragma HLS RESET variable=WB.rd 
-        #pragma HLS RESET variable=WB.link 
-        #pragma HLS RESET variable=WB.cpsr
-        #pragma HLS RESET variable=init_done
+        IF.pc = 0;
+        IF.instr = 0;
 
-    if(!init_done) {
-        // Initialize register file
-        uint32_t msp_init = data_mem[0];
-        uint32_t reset_vector = data_mem[1];  // Read reset vector from address 0x00000004
-        regfile_init(&core_regs, reset_vector, msp_init);
+        ID.pc = 0;
+        ID.instr = 0;
+        ID.reg_data1 = 0;
+        ID.reg_data2 = 0;
+        ID.opcode = THUMB_INVALID;
+        ID.rd = 0;
+        ID.rs1 = 0;
+        ID.rs2 = 0;
+        ID.immediate_flag = 0;
+        ID.imm_value = 0;
+
+        EX.opcode = THUMB_INVALID;
+        EX.alu_result = 0;
+        EX.reg_data2 = 0;
+        EX.rd = 0;
+        EX.link = 0;
+
+        MEM.opcode = THUMB_INVALID;
+        MEM.alu_result = 0;
+        MEM.mem_data = 0;
+        MEM.rd = 0;
+        MEM.link = 0;
+
+        WB.opcode = THUMB_INVALID;
+        WB.write_data = 0;
+        WB.rd = 0;
+
+        uint32_t msp_init = data_mem[MEM_IDX(0)];      // Read MSP from address 0x00000000
+        uint32_t reset_vector = data_mem[MEM_IDX(4)];  // Read reset vector from address 0x00000004
         
-        // Set PC to reset vector for first instruction fetch
-        IF.pc = (reset_vector & 0xFFFFFFFE) >> 1;  // Convert byte address to halfword index
-        
+        regfile_init(&core_regs, OS_START_ADDR, msp_init);
+        IF.pc = regfile_get_pc(&core_regs) >> 2;
         cycle = 0;
-        
-        printf("\n========== PROCESSOR RESET ==========\n");
-        printf("MSP initialized to: 0x%08X\n", msp_init);
-        printf("Reset Vector: 0x%08X\n", reset_vector);
-        printf("Starting PC (halfword): %d (byte addr: 0x%08X)\n", IF.pc, reset_vector & 0xFFFFFFFE);
-        printf("=====================================\n");
-        init_done = true;
-         
+        return;
     }
-    *pc_out = regfile_get_pc(&core_regs);
-    cycle++;
     printf("\n================ Cycle %d ==================\n", cycle);
 
     // -------- Hazard Detection --------
@@ -547,7 +532,7 @@ void cortex_m0_top(
             for (int i = 0; i < 8; i++) {
                 if (reglist & (1 << i)) {
                     uint32_t reg_val = regfile_read(i, &core_regs);
-                    uint32_t addr_word = address >> 2;
+                    uint32_t addr_word = MEM_IDX(address);
                     data_mem[addr_word] = reg_val;
                     printf("[MEM] PUSH: R%d (0x%08X) -> addr 0x%08X\n", i, reg_val, address);
                     address += 4;
@@ -557,7 +542,7 @@ void cortex_m0_top(
             // If R bit set, push LR
             if (r_bit) {
                 uint32_t lr_val = core_regs.lr;
-                uint32_t addr_word = address >> 2;
+                uint32_t addr_word = MEM_IDX(address);
                 data_mem[addr_word] = lr_val;
                 printf("[MEM] PUSH: LR (0x%08X) -> addr 0x%08X\n", lr_val, address);
                 address += 4;
@@ -588,7 +573,7 @@ void cortex_m0_top(
             // Read each register from stack in order (R0 to R7)
             for (int i = 0; i < 8; i++) {
                 if (reglist & (1 << i)) {
-                    uint32_t addr_word = address >> 2;
+                    uint32_t addr_word = MEM_IDX(address);
                     uint32_t reg_val = data_mem[addr_word];
                     regfile_write(i, reg_val, &core_regs);
                     printf("[MEM] POP: addr 0x%08X -> R%d (0x%08X)\n", address, i, reg_val);
@@ -598,7 +583,7 @@ void cortex_m0_top(
             
             // If R bit set, pop to PC (function return)
             if (r_bit) {
-                uint32_t addr_word = address >> 2;
+                uint32_t addr_word = MEM_IDX(address);
                 uint32_t pc_val = data_mem[addr_word];
                 regfile_set_pc(pc_val, &core_regs);
                 printf("[MEM] POP: addr 0x%08X -> PC (0x%08X)\n", address, pc_val);
@@ -617,45 +602,38 @@ void cortex_m0_top(
         else if(EX.opcode == THUMB_LDR_IMM  || EX.opcode == THUMB_LDR_REG  ||
            EX.opcode == THUMB_LDR_LIT  || EX.opcode == THUMB_LDR_SP) 
         {
-            uint32_t addr = EX.alu_result >> 2;
-            uint32_t raw_data = data_mem[addr];
+            uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 4, 0);
             printf("[MEM] LOAD WORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
         else if(EX.opcode == THUMB_LDRB_IMM || EX.opcode == THUMB_LDRB_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            uint32_t raw_data = data_mem[addr];
+            uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 1, 0);
             printf("[MEM] LOAD BYTE: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
         else if(EX.opcode == THUMB_LDRSB_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            uint32_t raw_data = data_mem[addr];
+            uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 1, 1);
             printf("[MEM] LOAD SIGNED BYTE: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
         else if(EX.opcode == THUMB_LDRH_IMM || EX.opcode == THUMB_LDRH_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            uint32_t raw_data = data_mem[addr];
+            uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 2, 0);
             printf("[MEM] LOAD HALFWORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
         else if(EX.opcode == THUMB_LDRSH_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            uint32_t raw_data = data_mem[addr];
+            uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 2, 1);
             printf("[MEM] LOAD SIGNED HALFWORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
         // STORE INSTRUCTIONS: Write to memory
         else if(EX.opcode == THUMB_STR_IMM  || EX.opcode == THUMB_STR_REG ||
                 EX.opcode == THUMB_STR_SP) 
-        {
-            uint32_t addr = EX.alu_result >> 2;
-            
+        {   
             // Check if value to store was just computed
             uint32_t value_to_store;
             if (WB.opcode != THUMB_INVALID && thumb_writes_register(WB.opcode) && WB.rd == EX.rd) {
@@ -668,7 +646,7 @@ void cortex_m0_top(
                 value_to_store = regfile_read(EX.rd, &core_regs);
             }
             
-            data_mem[addr] = value_to_store;
+            data_mem[MEM_IDX(EX.alu_result)] = value_to_store;
             next_MEM.mem_data = value_to_store;
             printf("[MEM] STORE WORD: addr=0x%08X, value=0x%08X (from R%d)\n", 
                 EX.alu_result, value_to_store, EX.rd);
@@ -676,28 +654,26 @@ void cortex_m0_top(
         // BYTE STORE
         else if(EX.opcode == THUMB_STRB_IMM || EX.opcode == THUMB_STRB_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            // Read the VALUE to store from Rd register (not from reg_data2!)
             uint32_t value_to_store = regfile_read(EX.rd, &core_regs);
             uint32_t byte_pos = (EX.alu_result & 3) * 8;
             uint32_t mask = ~(0xFF << byte_pos);
-            data_mem[addr] = (data_mem[addr] & mask) | ((value_to_store & 0xFF) << byte_pos);
+            uint32_t mem_idx = MEM_IDX(EX.alu_result);
+            data_mem[mem_idx] = (data_mem[mem_idx] & mask) | ((value_to_store & 0xFF) << byte_pos);
             next_MEM.mem_data = value_to_store & 0xFF;
             printf("[MEM] STORE BYTE: addr=0x%08X, byte_pos=%d, data=0x%02X (from R%d=0x%08X)\n", 
-                   EX.alu_result, byte_pos, value_to_store & 0xFF, EX.rd, value_to_store);
+                EX.alu_result, byte_pos, value_to_store & 0xFF, EX.rd, value_to_store);
         }
         // HALFWORD STORE
         else if(EX.opcode == THUMB_STRH_IMM || EX.opcode == THUMB_STRH_REG)
         {
-            uint32_t addr = EX.alu_result >> 2;
-            // Read the VALUE to store from Rd register (not from reg_data2!)
             uint32_t value_to_store = regfile_read(EX.rd, &core_regs);
             uint32_t hw_pos = ((EX.alu_result >> 1) & 1) * 16;
             uint32_t mask = ~(0xFFFF << hw_pos);
-            data_mem[addr] = (data_mem[addr] & mask) | ((value_to_store & 0xFFFF) << hw_pos);
+            uint32_t mem_idx = MEM_IDX(EX.alu_result);
+            data_mem[mem_idx] = (data_mem[mem_idx] & mask) | ((value_to_store & 0xFFFF) << hw_pos);
             next_MEM.mem_data = value_to_store & 0xFFFF;
             printf("[MEM] STORE HALFWORD: addr=0x%08X, data=0x%04X (from R%d)\n", 
-                   EX.alu_result, value_to_store & 0xFFFF, EX.rd);
+                EX.alu_result, value_to_store & 0xFFFF, EX.rd);
         }
         else if (EX.opcode == THUMB_BL)
         {
@@ -820,8 +796,8 @@ void cortex_m0_top(
         decode_result_t dres;
         
         if (is32bit) {
-            uint32_t word_index = (IF.pc) >> 1;
-            uint32_t word = instr_mem[word_index];
+            uint32_t byte_addr = IF.pc * 2;  // Convert halfword to byte address
+            uint32_t word = instr_mem[MEM_IDX(byte_addr)];
             uint16_t instr16_next;
 
             if (((IF.pc) & 1) == 0) {
@@ -916,8 +892,8 @@ void cortex_m0_top(
         printf("[IF]  **STALLED - NOT FETCHING NEW INSTRUCTION**\n");
     } else if (branch_taken) {
         // Branch was taken in WB, IF.pc already updated
-        uint32_t word_index = next_IF.pc >> 1;
-        uint32_t word = instr_mem[word_index];
+        uint32_t byte_addr = next_IF.pc * 2;  // Convert halfword to byte address
+        uint32_t word = instr_mem[MEM_IDX(byte_addr)];
         uint16_t instr16;
 
         if ((next_IF.pc & 1) == 0) {
@@ -933,8 +909,10 @@ void cortex_m0_top(
         printf("[IF]  BRANCH TARGET FETCH | pc=%d | instr16=0x%04X | next_pc=%d\n",
                next_IF.pc - 1, instr16, next_IF.pc);
     } else {
-        uint32_t word_index = IF.pc >> 1;
-        uint32_t word = instr_mem[word_index];
+        uint32_t byte_addr = IF.pc * 2;
+        uint32_t hw_addr = byte_addr + DRAM_BASE_ADDR;  // Hardware address
+        uint32_t word = instr_mem[MEM_IDX(byte_addr)];
+
         uint16_t instr16;
 
         if ((IF.pc & 1) == 0) {
@@ -955,8 +933,8 @@ void cortex_m0_top(
         // Update PC in architectural register file (convert to byte address)
         regfile_set_pc(OS_START_ADDR + next_IF.pc * 2, &core_regs);
 
-        printf("[IF]  pc=%d | word_index=%d | instr16=0x%04X | next_pc=%d\n",
-               IF.pc, word_index, instr16, next_IF.pc);
+        printf("[IF]  pc=%d | byte_addr=0x%08X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=%d\n",
+            IF.pc, byte_addr, hw_addr, MEM_IDX(byte_addr), instr16, next_IF.pc);
     }
 
     // -------- Commit all stage updates --------
@@ -966,20 +944,20 @@ void cortex_m0_top(
     MEM = next_MEM;
     WB = next_WB;
 
-    // // -------- Update debug output --------
-    // for(int i = 0; i < 13; i++) {
-    //     reg_out[i] = core_regs.gpr[i];
-    // }
+    // -------- Update debug output --------
+    for(int i = 0; i < 13; i++) {
+        reg_out[i] = core_regs.gpr[i];
+    }
     
-    // reg_out[13] = regfile_get_sp(&core_regs);
-    // reg_out[14] = core_regs.lr;
-    // reg_out[15] = regfile_get_pc(&core_regs);
+    reg_out[13] = regfile_get_sp(&core_regs);
+    reg_out[14] = core_regs.lr;
+    reg_out[15] = regfile_get_pc(&core_regs);
 
-    // printf("[REGFILE] R0-R12:\n");
-    // for(int i = 0; i < 13; i++) {
-    //     printf(" R%-2d=0x%08X", i, reg_out[i]);
-    //     if ((i+1) % 4 == 0) printf("\n");
-    // }
-    // printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
-    //        reg_out[13], reg_out[14], reg_out[15]);
+    printf("[REGFILE] R0-R12:\n");
+    for(int i = 0; i < 13; i++) {
+        printf(" R%-2d=0x%08X", i, reg_out[i]);
+        if ((i+1) % 4 == 0) printf("\n");
+    }
+    printf(" SP=0x%08X | LR=0x%08X | PC=0x%08X\n",
+           reg_out[13], reg_out[14], reg_out[15]);
 }

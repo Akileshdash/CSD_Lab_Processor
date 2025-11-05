@@ -42,9 +42,9 @@ void test_branch_forward() {
     instr_mem[2] = 0x2205 | (0x2307 << 16);  // MOVS R2,#5 | MOVS R3,#7
 
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 13; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -93,9 +93,9 @@ void test_branch_with_link() {
     instr_mem[2] = 0x2307 | (0xBF00 << 16);  // MOVS R3,#7 | NOP
     instr_mem[3] = 0xBF00 | (0x4770 << 16);  // NOP | BX LR
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 25; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -136,9 +136,9 @@ void test_branch_conditional_eq() {
     instr_mem[1] = 0x4288 | (0xD000 << 16);  // CMP R0,R1 | BEQ +1
     instr_mem[2] = 0x2263 | (0x2201 << 16);  // MOVS R2,#99 | MOVS R2,#1
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -174,9 +174,9 @@ void test_branch_conditional_ne() {
     instr_mem[1] = 0x4288 | (0xD102 << 16);  // CMP R0,R1 | BNE +2 
     instr_mem[2] = 0x2207 | (0x2309 << 16);  // MOVS R2,#7 | MOVS R3,#9
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 12; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -218,9 +218,9 @@ void test_branch_backward() {
     instr_mem[1] = 0x2803 | (0xD1FC << 16);  // CMP R0,#3 | BNE -4
     instr_mem[2] = 0x210A | (0xBF00 << 16);  // MOVS R1,#10 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 30; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -259,9 +259,9 @@ void test_branch_bcs() {
     instr_mem[1] = 0x4288 | (0xD200 << 16);  // CMP R0,R1 | BCS +1
     instr_mem[2] = 0x2263 | (0x2207 << 16);  // MOVS R2,#99 | MOVS R2,#7
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -295,9 +295,9 @@ void test_branch_bcc() {
     instr_mem[1] = 0xD300 | (0x2163 << 16);  // BCC +1 | MOVS R1,#99
     instr_mem[2] = 0x2108 | (0xBF00 << 16);  // MOVS R1,#8 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -330,9 +330,9 @@ void test_branch_bmi() {
     instr_mem[1] = 0xD400 | (0x2163 << 16);  // BMI +1 | MOVS R1,#99
     instr_mem[2] = 0x2109 | (0xBF00 << 16);  // MOVS R1,#9 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -365,9 +365,9 @@ void test_branch_bpl() {
     instr_mem[1] = 0xD500 | (0x2163 << 16);  // BPL +1 | MOVS R1,#99
     instr_mem[2] = 0x210B | (0xBF00 << 16);  // MOVS R1,#11 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -400,9 +400,9 @@ void test_branch_bvs() {
     instr_mem[1] = 0xD600 | (0x2163 << 16);  // BVS +1 | MOVS R1,#99
     instr_mem[2] = 0x210C | (0xBF00 << 16);  // MOVS R1,#12 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -435,9 +435,9 @@ void test_branch_bvc() {
     instr_mem[1] = 0xD700 | (0x2163 << 16);  // BVC +1 | MOVS R1,#99
     instr_mem[2] = 0x210D | (0xBF00 << 16);  // MOVS R1,#13 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -471,9 +471,9 @@ void test_branch_bhi() {
     instr_mem[1] = 0x4288 | (0xD800 << 16);  // CMP R0,R1 | BHI +1
     instr_mem[2] = 0x2263 | (0x220E << 16);  // MOVS R2,#99 | MOVS R2,#14
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -508,9 +508,9 @@ void test_branch_bls() {
     instr_mem[1] = 0x4288 | (0xD900 << 16);  // CMP R0,R1 | BLS +1
     instr_mem[2] = 0x2263 | (0x220F << 16);  // MOVS R2,#99 | MOVS R2,#15
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -545,9 +545,9 @@ void test_branch_bge() {
     instr_mem[1] = 0x4288 | (0xDA00 << 16);  // CMP R0,R1 | BGE +1
     instr_mem[2] = 0x2263 | (0x2210 << 16);  // MOVS R2,#99 | MOVS R2,#16
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -582,9 +582,9 @@ void test_branch_blt() {
     instr_mem[1] = 0x4288 | (0xDB00 << 16);  // CMP R0,R1 | BLT +1
     instr_mem[2] = 0x2263 | (0x2211 << 16);  // MOVS R2,#99 | MOVS R2,#17
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -619,9 +619,9 @@ void test_branch_bgt() {
     instr_mem[1] = 0x4288 | (0xDC00 << 16);  // CMP R0,R1 | BGT +1
     instr_mem[2] = 0x2263 | (0x2212 << 16);  // MOVS R2,#99 | MOVS R2,#18
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -656,9 +656,9 @@ void test_branch_ble() {
     instr_mem[1] = 0x4288 | (0xDD00 << 16);  // CMP R0,R1 | BLE +1
     instr_mem[2] = 0x2263 | (0x2213 << 16);  // MOVS R2,#99 | MOVS R2,#19
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -693,9 +693,9 @@ void test_branch_bx() {
     instr_mem[1] = 0x2163 | (0x2158 << 16);  // MOVS R1,#99 | MOVS R1,#88
     instr_mem[2] = 0x2114 | (0x2215 << 16);  // MOVS R1,#20 | MOVS R2,#21
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 15; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -733,9 +733,9 @@ void test_branch_multiple_conditions() {
     instr_mem[2] = 0x2205 | (0xD000 << 16);  // MOVS R2,#5 | BEQ +1
     instr_mem[3] = 0x2363 | (0x2319 << 16);  // MOVS R3,#99 | MOVS R3,#25
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -774,9 +774,9 @@ void test_branch_nop() {
     instr_mem[1] = 0xE7FE | (0x2203 << 16);  // B -2 (to self) | MOVS R2,#3
     instr_mem[2] = 0x2304 | (0xBF00 << 16);  // MOVS R3,#4 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
         // Break if we're in an infinite loop (R2 never gets set)
         if (i > 15 && reg_out[2] == 0) {
             printf("⚠️  Detected infinite loop - breaking\n");
@@ -816,9 +816,9 @@ void test_branch_nested() {
     instr_mem[2] = 0xDA01 | (0x210A << 16);  // BGE +1 | MOVS R1,#10
     instr_mem[3] = 0x221E | (0xBF00 << 16);  // MOVS R2,#30 | NOP
 
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1);
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
     for (int i = 0; i < 20; i++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0);
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
     }
 
     PRINT_REGS(reg_out);
@@ -836,24 +836,24 @@ void test_branch_nested() {
 int main() {
     printf("========== Cortex-M0 Branch Test Suite (Corrected) ==========\n");
 
-    // test_branch_forward();       // Test Case 1 Passed
+    test_branch_forward();       // Test Case 1 Passed
     test_branch_with_link();     // Test Case 2 Passed
-    // test_branch_conditional_eq(); // Test Case 3 Passed
-    // test_branch_conditional_ne(); // Test Case 4 Passed
-    // test_branch_backward();      // Test Case 5 Passed
+    test_branch_conditional_eq(); // Test Case 3 Passed
+    test_branch_conditional_ne(); // Test Case 4 Passed
+    test_branch_backward();      // Test Case 5 Passed
     // test_branch_bcs();           // Test Case 6
-    // test_branch_bcc();           // Test Case 7 Passed
-    // test_branch_bmi();           // Test Case 8 Passed
-    // test_branch_bpl();           // Test Case 9 Passed
-    // test_branch_bvs();           // Test Case 10 Passed
-    // test_branch_bvc();           // Test Case 11 Passed
-    // test_branch_bhi();           // Test Case 12 Passed
-    // test_branch_bls();           // Test Case 13 Passed
-    // test_branch_bge();           // Test Case 14 Passed
-    // test_branch_blt();           // Test Case 15 Passed
-    // test_branch_bgt();           // Test Case 16 Passed
-    // test_branch_ble();           // Test Case 17 Passed
-    // test_branch_bx();            // Test Case 18 Passed
+    test_branch_bcc();           // Test Case 7 Passed
+    test_branch_bmi();           // Test Case 8 Passed
+    test_branch_bpl();           // Test Case 9 Passed
+    test_branch_bvs();           // Test Case 10 Passed
+    test_branch_bvc();           // Test Case 11 Passed
+    test_branch_bhi();           // Test Case 12 Passed
+    test_branch_bls();           // Test Case 13 Passed
+    test_branch_bge();           // Test Case 14 Passed
+    test_branch_blt();           // Test Case 15 Passed
+    test_branch_bgt();           // Test Case 16 Passed
+    test_branch_ble();           // Test Case 17 Passed
+    test_branch_bx();            // Test Case 18 Passed
     // test_branch_multiple_conditions(); // Test Case 19
     // test_branch_nested();        // Test Case 20
     printf("\n✅ All branch tests completed successfully!\n");
