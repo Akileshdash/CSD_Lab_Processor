@@ -1,0 +1,99 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../tb_processor.c in debug mode
+../../../../tb_processor.c:6:5: error: use of undeclared identifier 'data_t'
+    data_t instr_mem[MEM_SIZE];
+    ^
+../../../../tb_processor.c:7:5: error: use of undeclared identifier 'data_t'
+    data_t data_mem[MEM_SIZE];
+    ^
+../../../../tb_processor.c:8:5: error: use of undeclared identifier 'data_t'
+    data_t reg_out[16];
+    ^
+../../../../tb_processor.c:11:5: error: use of undeclared identifier 'instr_mem'
+    instr_mem[0] = (7<<28)|(1<<24)|(0<<20)|(0<<16); // MOV R1, R0
+    ^
+../../../../tb_processor.c:12:5: error: use of undeclared identifier 'instr_mem'
+    instr_mem[1] = (7<<28)|(2<<24)|(0<<20)|(0<<16); // MOV R2, R0
+    ^
+../../../../tb_processor.c:13:5: error: use of undeclared identifier 'instr_mem'
+    instr_mem[2] = (1<<28)|(3<<24)|(1<<20)|(2<<16); // ADD R3, R1, R2
+    ^
+../../../../tb_processor.c:14:5: error: use of undeclared identifier 'instr_mem'
+    instr_mem[3] = (7<<28)|(1<<24)|(0<<20)|(0<<16); // MOV R1, R0
+    ^
+../../../../tb_processor.c:15:5: error: use of undeclared identifier 'instr_mem'
+    instr_mem[4] = (4<<28)|(4<<24)|(1<<20)|(2<<16); // SUB R4, R1, R2
+    ^
+../../../../tb_processor.c:18:33: error: use of undeclared identifier 'data_mem'
+    for(int i=0;i<MEM_SIZE;i++) data_mem[i]=i+1;
+                                ^
+../../../../tb_processor.c:21:19: error: use of undeclared identifier 'instr_mem'
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+                  ^
+../../../../tb_processor.c:21:30: error: use of undeclared identifier 'data_mem'
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+                             ^
+../../../../tb_processor.c:21:40: error: use of undeclared identifier 'reg_out'
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+                                       ^
+../../../../tb_processor.c:25:23: error: use of undeclared identifier 'instr_mem'
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+                      ^
+../../../../tb_processor.c:25:34: error: use of undeclared identifier 'data_mem'
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+                                 ^
+../../../../tb_processor.c:25:44: error: use of undeclared identifier 'reg_out'
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+                                           ^
+../../../../tb_processor.c:27:23: error: use of undeclared identifier 'reg_out'
+               cycle, reg_out[1], reg_out[2], reg_out[3], reg_out[4]);
+                      ^
+../../../../tb_processor.c:27:35: error: use of undeclared identifier 'reg_out'
+               cycle, reg_out[1], reg_out[2], reg_out[3], reg_out[4]);
+                                  ^
+../../../../tb_processor.c:27:47: error: use of undeclared identifier 'reg_out'
+               cycle, reg_out[1], reg_out[2], reg_out[3], reg_out[4]);
+                                              ^
+../../../../tb_processor.c:27:59: error: use of undeclared identifier 'reg_out'
+               cycle, reg_out[1], reg_out[2], reg_out[3], reg_out[4]);
+                                                          ^
+19 errors generated.
+make: *** [csim.mk:88: obj/tb_processor.o] Error 1
+ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s).
+INFO: [SIM 211-3] *************** CSIM finish ***************
+ERROR: 4
+INFO: [HLS 200-112] Total CPU user time: 0.67 seconds. Total CPU system time: 0.23 seconds. Total elapsed time: 0.8 seconds; peak allocated memory: 242.598 MB.

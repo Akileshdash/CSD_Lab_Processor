@@ -1,0 +1,164 @@
+<ENTRY>
+{
+ "thisFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/CortexM0_IP.hlsrun_csim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Fri Oct 31 17:23:03 2025",
+ "timestampMillis": "1761911583985",
+ "buildStep": {
+  "cmdId": "29438bed-d0bc-446e-b339-2381c8b9b9ec",
+  "name": "vitis-run",
+  "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/logs/CortexM0_IP.steps.log",
+  "commandLine": "/tools/2025.1/Vitis/bin/unwrapped/lnx64.o/vitis-run  --mode hls --csim --config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg --work_dir CortexM0_IP ",
+  "args": [
+   "--mode",
+   "hls",
+   "--csim",
+   "--config",
+   "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg",
+   "--work_dir",
+   "CortexM0_IP"
+  ],
+  "iniFiles": [],
+  "cwd": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Oct 31 17:23:03 2025",
+ "timestampMillis": "1761911583986",
+ "status": {
+  "cmdId": "29438bed-d0bc-446e-b339-2381c8b9b9ec",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585415",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_C_SIM",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "cortex_m0_top",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2025.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585416",
+ "buildStep": {
+  "cmdId": "5aaed23f-9b84-419d-98f6-5cbfcffe6869",
+  "name": "",
+  "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585416",
+ "status": {
+  "cmdId": "5aaed23f-9b84-419d-98f6-5cbfcffe6869",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585759",
+ "status": {
+  "cmdId": "5aaed23f-9b84-419d-98f6-5cbfcffe6869",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585791",
+ "status": {
+  "cmdId": "29438bed-d0bc-446e-b339-2381c8b9b9ec",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585791",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Fri Oct 31 17:23:05 2025",
+ "timestampMillis": "1761911585791",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

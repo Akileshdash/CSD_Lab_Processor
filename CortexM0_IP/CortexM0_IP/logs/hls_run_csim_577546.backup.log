@@ -1,0 +1,99 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=alu.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/alu.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=tb_processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../tb_processor.c in debug mode
+   Compiling ../../../../regfile.c in debug mode
+   Compiling ../../../../alu.c in debug mode
+   Compiling ../../../../processor.c in debug mode
+   Generating csim.exe
+=== ARM Cortex-M0 Processor Test ===
+Initial MSP: 0x20001000
+Reset Vector: 0x00000009
+
+Resetting processor...
+After Reset:
+R0-R4:      2048        0 20971520        0    32768
+R5-R9:         0 41943040        0 41943040        0
+R10-R12: 4194304        0    32768
+SP:     0x00000000
+LR:     0xF1E42958
+PC:     0x00007FFD
+
+Running processor cycles...
+Cycle | R0      R1      R2      R3      R4      R5      R6    | SP       PC
+------|-----------------------------------------------------|------------------
+   0  |       0       0       0       0       0       0       0 | 20001000 00000024
+   1  |       0       0       0       0       0       0       0 | 20001000 00000028
+   2  |       0       0       0       0       0       0       0 | 20001000 0000002C
+   3  |       0       0       0       0       0       0       0 | 20001000 00000030
+   4  |       0       0       0       0       0       0       0 | 20001000 00000034
+      |                                                     |
+   5  |       0       0       0       0       0       0       0 | 20001000 00000038
+   6  |       0       0       0       0       0       0       0 | 20001000 0000003C
+   7  |       0       0       0       0       0       0       0 | 20001000 00000040
+   8  |       0       0       0       0       0       0       0 | 20001000 00000044
+      |                                                     |
+   9  |       0       0       0       0       0       0       0 | 20001000 00000048
+  10  |       0       0       0       0       0       0       0 | 20001000 0000004C
+  11  |       0       0       0       0       0       0       0 | 20001000 00000050
+
+=== Final Register State ===
+General Purpose Registers:
+R 0-R 3:        0        0        0        0
+R 4-R 7:        0        0        0        0
+R 8-R11:        0        0        0        0
+R12-R12:        0
+
+Special Registers:
+Stack Pointer (R13): 0x20001000
+Link Register (R14): 0xFFFFFFFF
+Program Counter(R15): 0x00000050
+
+Memory Test Results:
+Data at address 3: 4
+Data at address 4: 5
+Data at address reg_out[4]: 0
+
+=== Verification ===
+Expected: R1=R2=0 (copied from R0)
+Expected: R3=0 (R1+R2)
+Expected: R4=0 (R1-R2)
+✓ MOV operations successful
+✓ ADD operation successful
+✓ SUB operation successful
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-112] Total CPU user time: 0.82 seconds. Total CPU system time: 0.24 seconds. Total elapsed time: 0.94 seconds; peak allocated memory: 242.598 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 4s

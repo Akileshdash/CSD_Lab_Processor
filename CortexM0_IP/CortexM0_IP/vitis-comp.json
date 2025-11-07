@@ -1,0 +1,9 @@
+{
+  "name": "CortexM0_IP",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": ["..\/hls_config.cfg"],
+    "work_dir": "."
+  }
+}

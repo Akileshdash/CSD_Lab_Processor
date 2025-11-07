@@ -1,0 +1,13 @@
+{
+  "name": "CortexM0_IP",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "CortexM0_IP"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component"
+}
