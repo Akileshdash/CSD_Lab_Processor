@@ -36,35 +36,35 @@ typedef enum {
     THUMB_SUB_IMM3,                     // 18 SUB (imm3) — Subtract small immediate                             Correct SUB (1)
     THUMB_SUB_IMM8,                     // 19 SUB (imm8) — Subtract large immediate                             Correct SUB (2)
     THUMB_SUB_SP_IMM7,                  // 20 SUB (SP - imm7) — Adjust SP downwards by immediate                Correct SUB (4)
-    THUMB_ADR,                          // 21 ADR — Form address relative to PC
 
     // ───────────────────────────────────────────────
     // Compare / Negate (20–25)
-    THUMB_CMP_REG,                      // 22 CMP (register) — Compare two registers (sets flags)               Correct
-    THUMB_CMP_IMM,                      // 23 CMP (immediate) — Compare register with immediate (sets flags)    Correct
-    THUMB_CMP_HIGH,                     // 24 CMP (high registers) — Compare high registers (R8–R15)            Correct
-    THUMB_CMN,                          // 25 CMN — Compare Negative (add and set flags)                        Correct
-    THUMB_TST,                          // 26 TST — Bitwise AND, update flags (test bits)                       Correct
-    THUMB_NEG,                          // 27 NEG — Two's complement negate (R = 0 - Rn)                        Correct
+    THUMB_CMP_REG,                      // 21 CMP (register) — Compare two registers (sets flags)               Correct
+    THUMB_CMP_IMM,                      // 22 CMP (immediate) — Compare register with immediate (sets flags)    Correct
+    THUMB_CMP_HIGH,                     // 23 CMP (high registers) — Compare high registers (R8–R15)            Correct
+    THUMB_CMN,                          // 24 CMN — Compare Negative (add and set flags)                        Correct
+    THUMB_TST,                          // 25 TST — Bitwise AND, update flags (test bits)                       Correct
+    THUMB_NEG,                          // 26 NEG — Two's complement negate (R = 0 - Rn)                        Correct
 
     // ───────────────────────────────────────────────
     // Data Processing (26–35)
-    THUMB_AND,                          // 28 AND — Bitwise AND of two registers                                Correct 
-    THUMB_EOR,                          // 29 EOR — Bitwise exclusive OR                                        Correct
-    THUMB_ORR,                          // 30 ORR — Bitwise inclusive OR                                        Correct
-    THUMB_BIC,                          // 31 BIC — Bit clear (R = Rn AND NOT Rm)                               Correct
-    THUMB_MVN,                          // 32 MVN — Move NOT (bitwise invert source)                            Correct
-    THUMB_ADC,                          // 33 ADC — Add with carry                                              Correct
-    THUMB_SBC,                          // 34 SBC — Subtract with carry                                         Correct
-    THUMB_RSB,                          // 35 RSB — Reverse subtract (R = 0 - Rn)
-    THUMB_ROR,                          // 36 ROR — Rotate right                                                Correct
-    THUMB_MUL,                          // 37 MUL — Multiply two registers                                      Correct
+    THUMB_AND,                          // 27 AND — Bitwise AND of two registers                                Correct 
+    THUMB_EOR,                          // 28 EOR — Bitwise exclusive OR                                        Correct
+    THUMB_ORR,                          // 39 ORR — Bitwise inclusive OR                                        Correct
+    THUMB_BIC,                          // 30 BIC — Bit clear (R = Rn AND NOT Rm)                               Correct
+    THUMB_MVN,                          // 31 MVN — Move NOT (bitwise invert source)                            Correct
+    THUMB_ADC,                          // 32 ADC — Add with carry                                              Correct
+    THUMB_SBC,                          // 33 SBC — Subtract with carry                                         Correct
+    THUMB_RSB,                          // 34 RSB — Reverse subtract (R = 0 - Rn)
+    THUMB_ROR,                          // 35 ROR — Rotate right                                                Correct
+    THUMB_MUL,                          // 36 MUL — Multiply two registers                                      Correct
 
     // ───────────────────────────────────────────────
     // Branches (36–39)
-    THUMB_B_COND,                       // 38 B<cond> — Conditional branch (based on flags)                     Correct
-    THUMB_B,                            // 39 B — Unconditional branch (relative jump)                          Correct
-    THUMB_BL,                           // 40 BL — Branch with link (call subroutine)                           Correct
+    THUMB_B_COND,                       // 37 B<cond> — Conditional branch (based on flags)                     Correct
+    THUMB_B,                            // 38 B — Unconditional branch (relative jump)                          Correct
+    THUMB_BL,                           // 39 BL — Branch with link (call subroutine)                           Correct
+    THUMB_BLX,                          // 40 BLX 
     THUMB_BX,                           // 41 BX — Branch and exchange to address in register                   Correct
 
     // ───────────────────────────────────────────────

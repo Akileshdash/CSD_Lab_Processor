@@ -524,6 +524,22 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
                 input.pc, out.alu_result, out.link);
             break;
         }        
+        case THUMB_BLX:
+        {
+            // BLX - Branch with Link and Exchange (Thumb to ARM)
+            // Key difference: Force word-alignment by clearing bit[1] for ARM mode
+            uint32_t target = (input.pc) + 4 + (int32_t)input.reg_data2;
+            
+            // Force word-alignment for ARM (clear bits [1:0])
+            out.alu_result = target & 0xFFFFFFFC;
+            
+            // LR still has bit[0]=1 to indicate return to Thumb mode
+            out.link = (input.pc + 4) | 1;
+            
+            printf("[EX DEBUG BLX] BLX at PC=0x%08X, offset=0x%08X, target=0x%08X (ARM), LR=0x%08X\n",
+                input.pc, (int32_t)input.reg_data2, out.alu_result, out.link);
+            break;
+        }
         // ────────────────────────────────
         // Stack instructions (address setup)
         // ────────────────────────────────

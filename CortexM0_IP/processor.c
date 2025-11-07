@@ -6,7 +6,7 @@
 #include "stdio.h"
 
 #define OS_START_ADDR 0x00000000
-#define DRAM_BASE_ADDR 0x000007D0  // 500 * 4 = 2000 = 0x7D0 (byte address for index 500) for checking test_add_reg
+#define DRAM_BASE_ADDR 0x00000000  // 500 * 4 = 2000 = 0x7D0 (byte address for index 500) for checking test_add_reg
 
 // Add offset to memory address (address should already be in byte form)
 #define MEM_IDX(byte_addr) (((byte_addr) + DRAM_BASE_ADDR) >> 2)
@@ -34,7 +34,6 @@ static inline int thumb_writes_register(thumb_operation_t op) {
         case THUMB_SUB_IMM3:
         case THUMB_SUB_IMM8:
         case THUMB_SUB_SP_IMM7:
-        case THUMB_ADR:
         case THUMB_NEG:
         case THUMB_AND:
         case THUMB_EOR:
@@ -72,6 +71,7 @@ static inline int thumb_writes_register(thumb_operation_t op) {
 
         // Branch with link writes LR
         case THUMB_BL:
+        case THUMB_BLX:
             return 1;
 
         default:
@@ -146,9 +146,9 @@ hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stag
     // - Branch target is calculated in EX, taken in WB
     
     // Check if it's an UNCONDITIONAL branch (not B_COND)
-    int is_unconditional_branch_WB = (WB.opcode == THUMB_B || WB.opcode == THUMB_BX || WB.opcode == THUMB_BL);
-    int is_unconditional_branch_MEM = (MEM.opcode == THUMB_B || MEM.opcode == THUMB_BX || MEM.opcode == THUMB_BL);
-    int is_unconditional_branch_EX = (EX.opcode == THUMB_B || EX.opcode == THUMB_BX || EX.opcode == THUMB_BL);
+    int is_unconditional_branch_WB = (WB.opcode == THUMB_B || WB.opcode == THUMB_BX || WB.opcode == THUMB_BL || WB.opcode == THUMB_BLX);
+    int is_unconditional_branch_MEM = (MEM.opcode == THUMB_B || MEM.opcode == THUMB_BX || MEM.opcode == THUMB_BL || MEM.opcode == THUMB_BLX);
+    int is_unconditional_branch_EX = (EX.opcode == THUMB_B || EX.opcode == THUMB_BX || EX.opcode == THUMB_BL || EX.opcode == THUMB_BLX);
     
     if (is_unconditional_branch_WB) {
         // Unconditional branch about to be taken - flush all speculative work
@@ -381,6 +381,7 @@ void cortex_m0_top(
         return;
     }
     printf("\n================ Cycle %d ==================\n", cycle);
+    cycle++;
 
     // -------- Hazard Detection --------
     hazard_control_t hazard = detect_hazards(ID, EX, MEM, WB);
@@ -425,7 +426,21 @@ void cortex_m0_top(
             
             printf("[WB] BL TAKEN! Target PC=0x%08X, LR=0x%08X\n", branch_target, WB.link);
             break;
-
+            case THUMB_BLX:
+                // BLX: Branch with Link and Exchange - call ARM subroutine
+                branch_taken = 1;
+                branch_target = WB.write_data;
+                regfile_set_pc(branch_target, &core_regs);
+                next_IF.pc = branch_target >> 1;
+                
+                // Write link register
+                if (WB.link != 0) {
+                    core_regs.lr = WB.link;
+                    printf("[WB] BLX: Setting LR=0x%08X\n", WB.link);
+                }
+                
+                printf("[WB] BLX TAKEN! Target PC=0x%08X (ARM mode), LR=0x%08X\n", branch_target, WB.link);
+                break;
         case THUMB_B:
         case THUMB_BX:
             // Unconditional branches - always taken
@@ -675,7 +690,7 @@ void cortex_m0_top(
             printf("[MEM] STORE HALFWORD: addr=0x%08X, data=0x%04X (from R%d)\n", 
                 EX.alu_result, value_to_store & 0xFFFF, EX.rd);
         }
-        else if (EX.opcode == THUMB_BL)
+        else if (EX.opcode == THUMB_BL || EX.opcode == THUMB_BLX)
         {
             next_MEM.mem_data = EX.alu_result;
             next_MEM.link = EX.link;
