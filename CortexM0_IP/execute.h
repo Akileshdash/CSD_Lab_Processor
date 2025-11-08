@@ -20,6 +20,7 @@ typedef struct {
     uint32_t rd;          // Destination register
     uint32_t condition;   // For conditional branches (0x0-0xE)
     uint32_t cpsr;        // Condition flags from previous ALU operations
+    uint32_t r_bit;  
 } EX_input_t;
 
 // EX stage output structure
@@ -30,6 +31,7 @@ typedef struct {
     uint32_t link;                // For BL (Link Register value = PC + 4)
     uint32_t cpsr;                // Updated condition flags
     int flags_updated;            // 1 if this instruction updated flags
+    uint32_t r_bit;  
     
     // ──── Memory Operation Fields ────
     int mem_size;                 // 1=byte, 2=halfword, 4=word (0=no memory access)

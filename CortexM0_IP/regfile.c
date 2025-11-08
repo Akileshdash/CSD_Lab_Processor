@@ -12,7 +12,7 @@ void regfile_init(cortex_m0_registers_t* regs, uint32_t reset_vector, uint32_t m
     
     // Initialize special registers
     regs->lr = 0xFFFFFFFF;  // Unknown value as per ARM spec
-    regs->pc = reset_vector & 0xFFFFFFFE;  // Load PC from reset vector, clear bit[0]
+    regs->pc = reset_vector;  // Load PC from reset vector, clear bit[0]
     
     // Initialize PSR components
     regs->apsr = 0;

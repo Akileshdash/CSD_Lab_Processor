@@ -487,6 +487,8 @@ decode_result_t decode_thumb16_instruction(uint16_t instruction) {
         
         if (check_bits == 0b10) {
             result.operation = (l_bit == 0) ? THUMB_PUSH : THUMB_POP;
+            result.rs1 = 13;  
+            result.rd = 13;   
             result.immediate_flag = 1;
             result.imm_value = reglist;
             
@@ -647,10 +649,10 @@ const char* get_operation_name(thumb_operation_t op) {
         "LSL_IMM", "LSL_REG", "LSR_IMM", "LSR_REG", "ASR_IMM", "ASR_REG",
         "ADD_REG", "ADD_IMM3", "ADD_IMM8", "ADD_SP_IMM", "ADD_HIGH", 
         "ADD_PC_IMM", "ADD_SP_IMM7",
-        "SUB_REG", "SUB_IMM3", "SUB_IMM8", "SUB_SP_IMM7", "ADR",
+        "SUB_REG", "SUB_IMM3", "SUB_IMM8", "SUB_SP_IMM7",
         "CMP_REG", "CMP_IMM", "CMP_HIGH", "CMN", "TST", "NEG",
         "AND", "EOR", "ORR", "BIC", "MVN", "ADC", "SBC", "RSB", "ROR", "MUL",
-        "B_COND", "B", "BL", "BX",
+        "B_COND", "B", "BL", "BLX","BX",
         "LDR_REG", "LDR_IMM", "LDR_LIT", "LDR_SP",
         "STR_REG", "STR_IMM", "STR_SP",
         "LDRB_REG", "LDRB_IMM", "STRB_REG", "STRB_IMM",

@@ -9,7 +9,7 @@
 // ──────────────────────────────────────
 typedef struct {
     uint32_t pc;        // Program counter (in halfword units)
-    uint16_t instr;     // 16-bit instruction fetched
+    uint32_t instr;     // 16-bit instruction fetched
 } IF_stage;
 
 // ──────────────────────────────────────
