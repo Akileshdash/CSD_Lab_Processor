@@ -1,0 +1,80 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_arithmetic_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(23)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_arithmetic_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_branch_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(24)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_branch_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.top=cortex_m0_top' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'cosim.rtl=verilog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(21)
+INFO: [HLS 200-1465] Applying config ini 'cosim.wave_debug=1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(22)
+INFO: [HLS 200-1465] Applying config ini 'package.ip.display_name=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+INFO: [HLS 200-1465] Applying config ini 'package.output.file=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-1465] Applying config ini 'sim.O=0' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(20)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2025.1 (64-bit)
+  **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
+  **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+  **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+  **** Start of session at: Wed Nov  5 11:45:05 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+Sourcing tcl script '/home/ssladmin/.Xilinx/Vivado/Vivado_init.tcl'
+source run_ippack.tcl -notrace
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/hls_data.json outdir=/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip srcdir=/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls ippack_options_dict= ippack_options_dict=
+INFO: Copied 1 ipmisc file(s) to /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/misc
+INFO: Copied 20 verilog file(s) to /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/hdl/verilog
+INFO: Copied 19 vhdl file(s) to /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/hdl/vhdl
+INFO: Copied 10 swdriver file(s) to /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/drivers
+INFO: Import ports from HDL: /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/hdl/vhdl/cortex_m0_top.vhd (cortex_m0_top)
+INFO: Add axi4lite interface s_axi_control
+INFO: Add clock interface ap_clk
+INFO: Add reset interface ap_rst_n
+INFO: Add axi4full interface m_axi_INSTR_BUS
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/2025.1/Vivado/data/ip'.
+INFO: Add axi4full interface m_axi_DATA_BUS
+INFO: Add data interface pc_out
+INFO: Calling post_process_vitis to specialize IP
+INFO: Calling post_process_sysgen to specialize IP
+Generating sysgen info xml from json file
+INFO: Created IP /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/component.xml
+INFO: Created IP archive /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/impl/ip/xilinx_com_hls_cortex_m0_top_1_0.zip
+INFO: [Common 17-206] Exiting Vivado at Wed Nov  5 11:45:10 2025...
+INFO: [HLS 200-802] Generated output file cotex_27Oct_IP.zip
+INFO: [HLS 200-112] Total CPU user time: 10.96 seconds. Total CPU system time: 0.62 seconds. Total elapsed time: 27.35 seconds; peak allocated memory: 332.629 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 30s

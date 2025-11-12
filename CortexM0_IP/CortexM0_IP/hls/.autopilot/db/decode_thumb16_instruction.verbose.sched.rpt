@@ -1,0 +1,1115 @@
+
+
+================================================================
+== Vitis HLS Report for 'decode_thumb16_instruction'
+================================================================
+* Date:           Sun Nov  9 20:17:52 2025
+
+* Version:        2025.1 (Build 6135595 on May 21 2025)
+* Project:        CortexM0_IP
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  6.73 ns|  4.791 ns|     1.82 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max   | min | max |   Type  |
+    +---------+---------+-----------+----------+-----+-----+---------+
+    |        5|       16|  33.670 ns|  0.108 us|    5|   16|       no|
+    +---------+---------+-----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 76
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 45 3 6 11 73 
+3 --> 4 
+4 --> 5 
+5 --> 45 
+6 --> 7 
+7 --> 8 
+8 --> 9 45 10 
+9 --> 45 
+10 --> 45 
+11 --> 70 12 66 62 58 54 16 19 23 30 33 36 41 46 50 
+12 --> 13 
+13 --> 14 
+14 --> 15 
+15 --> 45 
+16 --> 17 
+17 --> 18 
+18 --> 45 
+19 --> 20 
+20 --> 21 
+21 --> 22 
+22 --> 45 
+23 --> 24 
+24 --> 25 
+25 --> 26 45 27 28 29 
+26 --> 45 
+27 --> 45 
+28 --> 45 
+29 --> 45 
+30 --> 31 
+31 --> 32 
+32 --> 45 
+33 --> 34 
+34 --> 35 
+35 --> 45 
+36 --> 37 
+37 --> 38 
+38 --> 39 40 45 
+39 --> 45 
+40 --> 45 
+41 --> 42 
+42 --> 43 
+43 --> 44 
+44 --> 45 
+45 --> 
+46 --> 45 47 
+47 --> 48 
+48 --> 45 49 
+49 --> 45 
+50 --> 51 
+51 --> 52 
+52 --> 53 
+53 --> 45 
+54 --> 55 
+55 --> 56 
+56 --> 57 
+57 --> 45 
+58 --> 59 
+59 --> 60 
+60 --> 61 
+61 --> 45 
+62 --> 63 
+63 --> 64 
+64 --> 45 65 
+65 --> 45 
+66 --> 67 
+67 --> 68 
+68 --> 45 69 
+69 --> 45 
+70 --> 71 
+71 --> 72 
+72 --> 45 
+73 --> 74 
+74 --> 75 
+75 --> 76 
+76 --> 45 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 4.72>
+ST_1 : Operation 77 [1/1] (0.00ns)   --->   "%conv487_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %conv487" [decode.c:16->processor.c:901]   --->   Operation 77 'read' 'conv487_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 78 [2/2] (4.72ns)   --->   "%bits_15_13 = call i16 @extract_bits, i16 %conv487_read, i4 13, i4 15" [decode.c:20->processor.c:901]   --->   Operation 78 'call' 'bits_15_13' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 79 [2/2] (4.72ns)   --->   "%bits_15_12 = call i16 @extract_bits, i16 %conv487_read, i4 12, i4 15" [decode.c:21->processor.c:901]   --->   Operation 79 'call' 'bits_15_12' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 80 [2/2] (4.72ns)   --->   "%bits_15_11 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 15" [decode.c:22->processor.c:901]   --->   Operation 80 'call' 'bits_15_11' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 81 [2/2] (4.72ns)   --->   "%bits_15_10 = call i16 @extract_bits, i16 %conv487_read, i4 10, i4 15" [decode.c:23->processor.c:901]   --->   Operation 81 'call' 'bits_15_10' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 82 [2/2] (4.72ns)   --->   "%bits_15_9 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 15" [decode.c:24->processor.c:901]   --->   Operation 82 'call' 'bits_15_9' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 83 [2/2] (4.72ns)   --->   "%bits_15_8 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 15" [decode.c:25->processor.c:901]   --->   Operation 83 'call' 'bits_15_8' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_1 : Operation 84 [2/2] (4.72ns)   --->   "%bits_15_6 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 15" [decode.c:27->processor.c:901]   --->   Operation 84 'call' 'bits_15_6' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 2 <SV = 1> <Delay = 3.20>
+ST_2 : Operation 85 [1/2] (3.06ns)   --->   "%bits_15_13 = call i16 @extract_bits, i16 %conv487_read, i4 13, i4 15" [decode.c:20->processor.c:901]   --->   Operation 85 'call' 'bits_15_13' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 86 [1/2] (3.06ns)   --->   "%bits_15_12 = call i16 @extract_bits, i16 %conv487_read, i4 12, i4 15" [decode.c:21->processor.c:901]   --->   Operation 86 'call' 'bits_15_12' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 87 [1/1] (0.00ns)   --->   "%trunc_ln21 = trunc i16 %bits_15_12" [decode.c:21->processor.c:901]   --->   Operation 87 'trunc' 'trunc_ln21' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 88 [1/2] (3.06ns)   --->   "%bits_15_11 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 15" [decode.c:22->processor.c:901]   --->   Operation 88 'call' 'bits_15_11' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 89 [1/2] (3.06ns)   --->   "%bits_15_10 = call i16 @extract_bits, i16 %conv487_read, i4 10, i4 15" [decode.c:23->processor.c:901]   --->   Operation 89 'call' 'bits_15_10' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 90 [1/2] (3.06ns)   --->   "%bits_15_9 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 15" [decode.c:24->processor.c:901]   --->   Operation 90 'call' 'bits_15_9' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 91 [1/2] (3.06ns)   --->   "%bits_15_8 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 15" [decode.c:25->processor.c:901]   --->   Operation 91 'call' 'bits_15_8' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 92 [1/2] (3.06ns)   --->   "%bits_15_6 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 15" [decode.c:27->processor.c:901]   --->   Operation 92 'call' 'bits_15_6' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_2 : Operation 93 [1/1] (3.20ns)   --->   "%switch_ln35 = switch i16 %conv487_read, void %if.else26.i, i16 0, void %decode_thumb16_instruction.48.exit, i16 48896, void %if.end723.i" [decode.c:35->processor.c:901]   --->   Operation 93 'switch' 'switch_ln35' <Predicate = true> <Delay = 3.20>
+ST_2 : Operation 94 [1/1] (0.00ns)   --->   "%tmp_92 = partselect i8 @_ssdm_op_PartSelect.i8.i16.i32.i32, i16 %conv487_read, i32 8, i32 15" [decode.c:54->processor.c:901]   --->   Operation 94 'partselect' 'tmp_92' <Predicate = (conv487_read != 0 & conv487_read != 48896)> <Delay = 0.00>
+ST_2 : Operation 95 [1/1] (0.00ns)   --->   "%and_ln = bitconcatenate i16 @_ssdm_op_BitConcatenate.i16.i8.i8, i8 %tmp_92, i8 0" [decode.c:54->processor.c:901]   --->   Operation 95 'bitconcatenate' 'and_ln' <Predicate = (conv487_read != 0 & conv487_read != 48896)> <Delay = 0.00>
+ST_2 : Operation 96 [1/1] (2.07ns)   --->   "%switch_ln54 = switch i16 %and_ln, void %if.else127.i, i16 45568, void %if.then29.i, i16 47616, void %if.then66.i, i16 48640, void %if.then100.i, i16 57088, void %if.then115.i" [decode.c:54->processor.c:901]   --->   Operation 96 'switch' 'switch_ln54' <Predicate = (conv487_read != 0 & conv487_read != 48896)> <Delay = 2.07>
+ST_2 : Operation 97 [1/1] (0.00ns)   --->   "%tmp_93 = partselect i4 @_ssdm_op_PartSelect.i4.i16.i32.i32, i16 %conv487_read, i32 12, i32 15" [decode.c:121->processor.c:901]   --->   Operation 97 'partselect' 'tmp_93' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 0.00>
+ST_2 : Operation 98 [1/1] (0.00ns)   --->   "%tmp_133 = bitselect i1 @_ssdm_op_BitSelect.i1.i16.i32, i16 %conv487_read, i32 10" [decode.c:121->processor.c:901]   --->   Operation 98 'bitselect' 'tmp_133' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 0.00>
+ST_2 : Operation 99 [1/1] (0.00ns)   --->   "%tmp_134 = bitselect i1 @_ssdm_op_BitSelect.i1.i16.i32, i16 %conv487_read, i32 8" [decode.c:121->processor.c:901]   --->   Operation 99 'bitselect' 'tmp_134' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 0.00>
+ST_2 : Operation 100 [1/1] (0.00ns)   --->   "%and_ln6 = bitconcatenate i16 @_ssdm_op_BitConcatenate.i16.i4.i1.i1.i1.i1.i8, i4 %tmp_93, i1 0, i1 %tmp_133, i1 0, i1 %tmp_134, i8 0" [decode.c:121->processor.c:901]   --->   Operation 100 'bitconcatenate' 'and_ln6' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 0.00>
+ST_2 : Operation 101 [1/1] (2.07ns)   --->   "%icmp_ln121 = icmp_eq  i16 %and_ln6, i16 45312" [decode.c:121->processor.c:901]   --->   Operation 101 'icmp' 'icmp_ln121' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 102 [1/1] (0.00ns)   --->   "%br_ln121 = br i1 %icmp_ln121, void %if.else154.i, void %if.then131.i" [decode.c:121->processor.c:901]   --->   Operation 102 'br' 'br_ln121' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088)> <Delay = 0.00>
+
+State 3 <SV = 4> <Delay = 4.72>
+ST_3 : Operation 103 [2/2] (4.72ns)   --->   "%imm8_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:105->processor.c:901]   --->   Operation 103 'call' 'imm8_9' <Predicate = (and_ln == 57088)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_3 : Operation 104 [2/2] (4.72ns)   --->   "%imm8_8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:87->processor.c:901]   --->   Operation 104 'call' 'imm8_8' <Predicate = (and_ln == 48640)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 4 <SV = 5> <Delay = 3.06>
+ST_4 : Operation 105 [1/2] (3.06ns)   --->   "%imm8_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:105->processor.c:901]   --->   Operation 105 'call' 'imm8_9' <Predicate = (and_ln == 57088)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_4 : Operation 106 [1/2] (3.06ns)   --->   "%imm8_8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:87->processor.c:901]   --->   Operation 106 'call' 'imm8_8' <Predicate = (and_ln == 48640)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 5 <SV = 6> <Delay = 3.20>
+ST_5 : Operation 107 [1/1] (0.00ns)   --->   "%zext_ln105 = zext i16 %imm8_9" [decode.c:105->processor.c:901]   --->   Operation 107 'zext' 'zext_ln105' <Predicate = (and_ln == 57088)> <Delay = 0.00>
+ST_5 : Operation 108 [1/1] (3.20ns)   --->   "%br_ln116 = br void %if.end723.i" [decode.c:116->processor.c:901]   --->   Operation 108 'br' 'br_ln116' <Predicate = (and_ln == 57088)> <Delay = 3.20>
+ST_5 : Operation 109 [1/1] (0.00ns)   --->   "%zext_ln87 = zext i16 %imm8_8" [decode.c:87->processor.c:901]   --->   Operation 109 'zext' 'zext_ln87' <Predicate = (and_ln == 48640)> <Delay = 0.00>
+ST_5 : Operation 110 [1/1] (3.20ns)   --->   "%br_ln98 = br void %if.end723.i" [decode.c:98->processor.c:901]   --->   Operation 110 'br' 'br_ln98' <Predicate = (and_ln == 48640)> <Delay = 3.20>
+
+State 6 <SV = 3> <Delay = 4.72>
+ST_6 : Operation 111 [2/2] (4.72ns)   --->   "%tmp_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:72->processor.c:901]   --->   Operation 111 'call' 'tmp_9' <Predicate = (and_ln == 47616)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_6 : Operation 112 [2/2] (4.72ns)   --->   "%tmp_s = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:73->processor.c:901]   --->   Operation 112 'call' 'tmp_s' <Predicate = (and_ln == 47616)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_6 : Operation 113 [2/2] (4.72ns)   --->   "%tmp = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:58->processor.c:901]   --->   Operation 113 'call' 'tmp' <Predicate = (and_ln == 45568)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_6 : Operation 114 [2/2] (4.72ns)   --->   "%tmp_8 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:59->processor.c:901]   --->   Operation 114 'call' 'tmp_8' <Predicate = (and_ln == 45568)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 7 <SV = 4> <Delay = 3.06>
+ST_7 : Operation 115 [1/1] (0.00ns)   --->   "%trunc_ln1 = partselect i2 @_ssdm_op_PartSelect.i2.i16.i32.i32, i16 %conv487_read, i32 6, i32 7" [decode.c:71->processor.c:901]   --->   Operation 115 'partselect' 'trunc_ln1' <Predicate = (and_ln == 47616)> <Delay = 0.00>
+ST_7 : Operation 116 [1/2] (3.06ns)   --->   "%tmp_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:72->processor.c:901]   --->   Operation 116 'call' 'tmp_9' <Predicate = (and_ln == 47616)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_7 : Operation 117 [1/1] (0.00ns)   --->   "%result_rd_1 = trunc i16 %tmp_9" [decode.c:72->processor.c:901]   --->   Operation 117 'trunc' 'result_rd_1' <Predicate = (and_ln == 47616)> <Delay = 0.00>
+ST_7 : Operation 118 [1/2] (3.06ns)   --->   "%tmp_s = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:73->processor.c:901]   --->   Operation 118 'call' 'tmp_s' <Predicate = (and_ln == 47616)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_7 : Operation 119 [1/1] (0.00ns)   --->   "%result_rs1_1 = trunc i16 %tmp_s" [decode.c:73->processor.c:901]   --->   Operation 119 'trunc' 'result_rs1_1' <Predicate = (and_ln == 47616)> <Delay = 0.00>
+ST_7 : Operation 120 [1/1] (0.00ns)   --->   "%trunc_ln = partselect i2 @_ssdm_op_PartSelect.i2.i16.i32.i32, i16 %conv487_read, i32 6, i32 7" [decode.c:56->processor.c:901]   --->   Operation 120 'partselect' 'trunc_ln' <Predicate = (and_ln == 45568)> <Delay = 0.00>
+ST_7 : Operation 121 [1/2] (3.06ns)   --->   "%tmp = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:58->processor.c:901]   --->   Operation 121 'call' 'tmp' <Predicate = (and_ln == 45568)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_7 : Operation 122 [1/1] (0.00ns)   --->   "%result_rd = trunc i16 %tmp" [decode.c:58->processor.c:901]   --->   Operation 122 'trunc' 'result_rd' <Predicate = (and_ln == 45568)> <Delay = 0.00>
+ST_7 : Operation 123 [1/2] (3.06ns)   --->   "%tmp_8 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:59->processor.c:901]   --->   Operation 123 'call' 'tmp_8' <Predicate = (and_ln == 45568)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_7 : Operation 124 [1/1] (0.00ns)   --->   "%result_rs1 = trunc i16 %tmp_8" [decode.c:59->processor.c:901]   --->   Operation 124 'trunc' 'result_rs1' <Predicate = (and_ln == 45568)> <Delay = 0.00>
+
+State 8 <SV = 5> <Delay = 3.20>
+ST_8 : Operation 125 [1/1] (3.20ns)   --->   "%switch_ln76 = switch i2 %trunc_ln1, void %if.end723.i, i2 0, void %if.then81.i, i2 1, void %if.then85.i, i2 3, void %if.then89.i" [decode.c:76->processor.c:901]   --->   Operation 125 'switch' 'switch_ln76' <Predicate = (and_ln == 47616)> <Delay = 3.20>
+ST_8 : Operation 126 [1/1] (3.20ns)   --->   "%switch_ln62 = switch i2 %trunc_ln, void %if.end723.i, i2 0, void %if.then43.i, i2 1, void %if.then47.i, i2 2, void %if.then51.i" [decode.c:62->processor.c:901]   --->   Operation 126 'switch' 'switch_ln62' <Predicate = (and_ln == 45568)> <Delay = 3.20>
+
+State 9 <SV = 6> <Delay = 3.20>
+ST_9 : Operation 127 [1/1] (3.20ns)   --->   "%br_ln78 = br void %if.end723.i" [decode.c:78->processor.c:901]   --->   Operation 127 'br' 'br_ln78' <Predicate = (trunc_ln1 == 3)> <Delay = 3.20>
+ST_9 : Operation 128 [1/1] (3.20ns)   --->   "%br_ln77 = br void %if.end723.i" [decode.c:77->processor.c:901]   --->   Operation 128 'br' 'br_ln77' <Predicate = (trunc_ln1 == 1)> <Delay = 3.20>
+ST_9 : Operation 129 [1/1] (3.20ns)   --->   "%br_ln76 = br void %if.end723.i" [decode.c:76->processor.c:901]   --->   Operation 129 'br' 'br_ln76' <Predicate = (trunc_ln1 == 0)> <Delay = 3.20>
+
+State 10 <SV = 6> <Delay = 3.20>
+ST_10 : Operation 130 [1/1] (3.20ns)   --->   "%br_ln64 = br void %if.end723.i" [decode.c:64->processor.c:901]   --->   Operation 130 'br' 'br_ln64' <Predicate = (trunc_ln == 2)> <Delay = 3.20>
+ST_10 : Operation 131 [1/1] (3.20ns)   --->   "%br_ln63 = br void %if.end723.i" [decode.c:63->processor.c:901]   --->   Operation 131 'br' 'br_ln63' <Predicate = (trunc_ln == 1)> <Delay = 3.20>
+ST_10 : Operation 132 [1/1] (3.20ns)   --->   "%br_ln62 = br void %if.end723.i" [decode.c:62->processor.c:901]   --->   Operation 132 'br' 'br_ln62' <Predicate = (trunc_ln == 0)> <Delay = 3.20>
+
+State 11 <SV = 2> <Delay = 2.07>
+ST_11 : Operation 133 [1/1] (2.07ns)   --->   "%icmp_ln142 = icmp_eq  i16 %bits_15_6, i16 112" [decode.c:142->processor.c:901]   --->   Operation 133 'icmp' 'icmp_ln142' <Predicate = true> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 134 [1/1] (0.00ns)   --->   "%br_ln142 = br i1 %icmp_ln142, void %if.else169.i, void %if.then156.i" [decode.c:142->processor.c:901]   --->   Operation 134 'br' 'br_ln142' <Predicate = true> <Delay = 0.00>
+ST_11 : Operation 135 [1/1] (2.07ns)   --->   "%switch_ln154 = switch i16 %bits_15_9, void %if.else224.i, i16 12, void %if.then174.i, i16 13, void %if.then174.i, i16 14, void %if.then202.i, i16 15, void %if.then202.i" [decode.c:154->processor.c:901]   --->   Operation 135 'switch' 'switch_ln154' <Predicate = (!icmp_ln142)> <Delay = 2.07>
+ST_11 : Operation 136 [1/1] (2.07ns)   --->   "%icmp_ln182 = icmp_eq  i16 %bits_15_13, i16 1" [decode.c:182->processor.c:901]   --->   Operation 136 'icmp' 'icmp_ln182' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 137 [1/1] (0.00ns)   --->   "%br_ln182 = br i1 %icmp_ln182, void %if.else248.i, void %if.then226.i" [decode.c:182->processor.c:901]   --->   Operation 137 'br' 'br_ln182' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15)> <Delay = 0.00>
+ST_11 : Operation 138 [1/1] (2.07ns)   --->   "%icmp_ln201 = icmp_eq  i16 %bits_15_10, i16 16" [decode.c:201->processor.c:901]   --->   Operation 138 'icmp' 'icmp_ln201' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 139 [1/1] (0.00ns)   --->   "%br_ln201 = br i1 %icmp_ln201, void %if.else300.i, void %if.then250.i" [decode.c:201->processor.c:901]   --->   Operation 139 'br' 'br_ln201' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182)> <Delay = 0.00>
+ST_11 : Operation 140 [1/1] (2.07ns)   --->   "%icmp_ln234 = icmp_eq  i16 %bits_15_8, i16 71" [decode.c:234->processor.c:901]   --->   Operation 140 'icmp' 'icmp_ln234' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 141 [1/1] (0.00ns)   --->   "%br_ln234 = br i1 %icmp_ln234, void %if.else323.i, void %if.then302.i" [decode.c:234->processor.c:901]   --->   Operation 141 'br' 'br_ln234' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201)> <Delay = 0.00>
+ST_11 : Operation 142 [1/1] (2.07ns)   --->   "%icmp_ln255 = icmp_eq  i16 %bits_15_10, i16 17" [decode.c:255->processor.c:901]   --->   Operation 142 'icmp' 'icmp_ln255' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 143 [1/1] (0.00ns)   --->   "%br_ln255 = br i1 %icmp_ln255, void %if.else360.i, void %if.then325.i" [decode.c:255->processor.c:901]   --->   Operation 143 'br' 'br_ln255' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234)> <Delay = 0.00>
+ST_11 : Operation 144 [1/1] (2.07ns)   --->   "%switch_ln276 = switch i16 %bits_15_11, void %if.else411.i, i16 20, void %if.then362.i, i16 21, void %if.then380.i, i16 9, void %if.then398.i" [decode.c:276->processor.c:901]   --->   Operation 144 'switch' 'switch_ln276' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255)> <Delay = 2.07>
+ST_11 : Operation 145 [1/1] (2.07ns)   --->   "%switch_ln331 = switch i16 %bits_15_12, void %if.else555.i, i16 6, void %if.then420.i, i16 7, void %if.then420.i, i16 8, void %if.then420.i, i16 5, void %if.then475.i, i16 9, void %if.then516.i, i16 12, void %if.then538.i" [decode.c:331->processor.c:901]   --->   Operation 145 'switch' 'switch_ln331' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9)> <Delay = 2.07>
+ST_11 : Operation 146 [1/1] (0.00ns)   --->   "%tmp_94 = partselect i9 @_ssdm_op_PartSelect.i9.i16.i32.i32, i16 %conv487_read, i32 7, i32 15" [decode.c:440->processor.c:901]   --->   Operation 146 'partselect' 'tmp_94' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12)> <Delay = 0.00>
+ST_11 : Operation 147 [1/1] (0.00ns)   --->   "%and_ln7 = bitconcatenate i16 @_ssdm_op_BitConcatenate.i16.i9.i7, i9 %tmp_94, i7 0" [decode.c:440->processor.c:901]   --->   Operation 147 'bitconcatenate' 'and_ln7' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12)> <Delay = 0.00>
+ST_11 : Operation 148 [1/1] (2.07ns)   --->   "%switch_ln440 = switch i16 %and_ln7, void %if.else586.i, i16 45056, void %if.then559.i, i16 45184, void %if.then574.i" [decode.c:440->processor.c:901]   --->   Operation 148 'switch' 'switch_ln440' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12)> <Delay = 2.07>
+ST_11 : Operation 149 [1/1] (2.07ns)   --->   "%switch_ln475 = switch i16 %bits_15_12, void %if.else641.i, i16 11, void %if.then588.i, i16 13, void %if.then614.i" [decode.c:475->processor.c:901]   --->   Operation 149 'switch' 'switch_ln475' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12 & and_ln7 != 45056 & and_ln7 != 45184)> <Delay = 2.07>
+ST_11 : Operation 150 [1/1] (2.07ns)   --->   "%icmp_ln524 = icmp_eq  i16 %bits_15_11, i16 28" [decode.c:524->processor.c:901]   --->   Operation 150 'icmp' 'icmp_ln524' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12 & and_ln7 != 45056 & and_ln7 != 45184 & bits_15_12 != 11 & bits_15_12 != 13)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 151 [1/1] (0.00ns)   --->   "%br_ln524 = br i1 %icmp_ln524, void %if.else653.i, void %if.then643.i" [decode.c:524->processor.c:901]   --->   Operation 151 'br' 'br_ln524' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12 & and_ln7 != 45056 & and_ln7 != 45184 & bits_15_12 != 11 & bits_15_12 != 13)> <Delay = 0.00>
+ST_11 : Operation 152 [1/1] (2.07ns)   --->   "%icmp_ln533 = icmp_eq  i16 %bits_15_13, i16 0" [decode.c:533->processor.c:901]   --->   Operation 152 'icmp' 'icmp_ln533' <Predicate = (!icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & bits_15_12 != 6 & bits_15_12 != 7 & bits_15_12 != 8 & bits_15_12 != 5 & bits_15_12 != 9 & bits_15_12 != 12 & and_ln7 != 45056 & and_ln7 != 45184 & bits_15_12 != 11 & bits_15_12 != 13 & !icmp_ln524)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 12 <SV = 3> <Delay = 4.72>
+ST_12 : Operation 153 [2/2] (4.72ns)   --->   "%opc_1 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:169->processor.c:901]   --->   Operation 153 'call' 'opc_1' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_12 : Operation 154 [2/2] (4.72ns)   --->   "%opc = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:155->processor.c:901]   --->   Operation 154 'call' 'opc' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 13 <SV = 4> <Delay = 4.72>
+ST_13 : Operation 155 [1/2] (3.06ns)   --->   "%opc_1 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:169->processor.c:901]   --->   Operation 155 'call' 'opc_1' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 156 [2/2] (4.72ns)   --->   "%imm3 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:170->processor.c:901]   --->   Operation 156 'call' 'imm3' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 157 [2/2] (4.72ns)   --->   "%rn_3 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:171->processor.c:901]   --->   Operation 157 'call' 'rn_3' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 158 [2/2] (4.72ns)   --->   "%rd_2 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:172->processor.c:901]   --->   Operation 158 'call' 'rd_2' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 159 [1/2] (3.06ns)   --->   "%opc = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:155->processor.c:901]   --->   Operation 159 'call' 'opc' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 160 [2/2] (4.72ns)   --->   "%rm = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:156->processor.c:901]   --->   Operation 160 'call' 'rm' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 161 [2/2] (4.72ns)   --->   "%rn_2 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:157->processor.c:901]   --->   Operation 161 'call' 'rn_2' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_13 : Operation 162 [2/2] (4.72ns)   --->   "%rd_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:158->processor.c:901]   --->   Operation 162 'call' 'rd_1' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 14 <SV = 5> <Delay = 3.06>
+ST_14 : Operation 163 [1/2] (3.06ns)   --->   "%imm3 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:170->processor.c:901]   --->   Operation 163 'call' 'imm3' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 164 [1/2] (3.06ns)   --->   "%rn_3 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:171->processor.c:901]   --->   Operation 164 'call' 'rn_3' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 165 [1/2] (3.06ns)   --->   "%rd_2 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:172->processor.c:901]   --->   Operation 165 'call' 'rd_2' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 166 [1/1] (0.00ns)   --->   "%result_rd_5 = trunc i16 %rd_2" [decode.c:174->processor.c:901]   --->   Operation 166 'trunc' 'result_rd_5' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 0.00>
+ST_14 : Operation 167 [1/1] (0.00ns)   --->   "%result_rs1_5 = trunc i16 %rn_3" [decode.c:175->processor.c:901]   --->   Operation 167 'trunc' 'result_rs1_5' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 0.00>
+ST_14 : Operation 168 [1/1] (2.07ns)   --->   "%icmp_ln178 = icmp_eq  i16 %opc_1, i16 0" [decode.c:178->processor.c:901]   --->   Operation 168 'icmp' 'icmp_ln178' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_14 : Operation 169 [1/2] (3.06ns)   --->   "%rm = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:156->processor.c:901]   --->   Operation 169 'call' 'rm' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 170 [1/2] (3.06ns)   --->   "%rn_2 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:157->processor.c:901]   --->   Operation 170 'call' 'rn_2' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 171 [1/2] (3.06ns)   --->   "%rd_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:158->processor.c:901]   --->   Operation 171 'call' 'rd_1' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_14 : Operation 172 [1/1] (0.00ns)   --->   "%result_rd_4 = trunc i16 %rd_1" [decode.c:160->processor.c:901]   --->   Operation 172 'trunc' 'result_rd_4' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 0.00>
+ST_14 : Operation 173 [1/1] (0.00ns)   --->   "%result_rs1_4 = trunc i16 %rn_2" [decode.c:161->processor.c:901]   --->   Operation 173 'trunc' 'result_rs1_4' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 0.00>
+ST_14 : Operation 174 [1/1] (0.00ns)   --->   "%result_rs2 = trunc i16 %rm" [decode.c:162->processor.c:901]   --->   Operation 174 'trunc' 'result_rs2' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 0.00>
+ST_14 : Operation 175 [1/1] (2.07ns)   --->   "%icmp_ln164 = icmp_eq  i16 %opc, i16 0" [decode.c:164->processor.c:901]   --->   Operation 175 'icmp' 'icmp_ln164' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 15 <SV = 6> <Delay = 3.20>
+ST_15 : Operation 176 [1/1] (0.00ns)   --->   "%zext_ln170 = zext i16 %imm3" [decode.c:170->processor.c:901]   --->   Operation 176 'zext' 'zext_ln170' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 0.00>
+ST_15 : Operation 177 [1/1] (1.18ns)   --->   "%select_ln179 = select i1 %icmp_ln178, i7 11, i7 18" [decode.c:179->processor.c:901]   --->   Operation 177 'select' 'select_ln179' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 1.18> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 1.18> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_15 : Operation 178 [1/1] (3.20ns)   --->   "%br_ln179 = br void %if.end723.i" [decode.c:179->processor.c:901]   --->   Operation 178 'br' 'br_ln179' <Predicate = (bits_15_9 == 15) | (bits_15_9 == 14)> <Delay = 3.20>
+ST_15 : Operation 179 [1/1] (1.18ns)   --->   "%select_ln165 = select i1 %icmp_ln164, i7 10, i7 17" [decode.c:165->processor.c:901]   --->   Operation 179 'select' 'select_ln165' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 1.18> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 1.18> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_15 : Operation 180 [1/1] (3.20ns)   --->   "%br_ln165 = br void %if.end723.i" [decode.c:165->processor.c:901]   --->   Operation 180 'br' 'br_ln165' <Predicate = (bits_15_9 == 13) | (bits_15_9 == 12)> <Delay = 3.20>
+
+State 16 <SV = 4> <Delay = 4.72>
+ST_16 : Operation 181 [2/2] (4.72ns)   --->   "%rd_7 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:311->processor.c:901]   --->   Operation 181 'call' 'rd_7' <Predicate = (bits_15_11 == 9)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_16 : Operation 182 [2/2] (4.72ns)   --->   "%imm8_2 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:312->processor.c:901]   --->   Operation 182 'call' 'imm8_2' <Predicate = (bits_15_11 == 9)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_16 : Operation 183 [2/2] (4.72ns)   --->   "%rd_6 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:296->processor.c:901]   --->   Operation 183 'call' 'rd_6' <Predicate = (bits_15_11 == 21)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_16 : Operation 184 [2/2] (4.72ns)   --->   "%imm8_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:297->processor.c:901]   --->   Operation 184 'call' 'imm8_1' <Predicate = (bits_15_11 == 21)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_16 : Operation 185 [2/2] (4.72ns)   --->   "%rd_5 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:279->processor.c:901]   --->   Operation 185 'call' 'rd_5' <Predicate = (bits_15_11 == 20)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_16 : Operation 186 [2/2] (4.72ns)   --->   "%imm8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:280->processor.c:901]   --->   Operation 186 'call' 'imm8' <Predicate = (bits_15_11 == 20)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 17 <SV = 5> <Delay = 3.06>
+ST_17 : Operation 187 [1/2] (3.06ns)   --->   "%rd_7 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:311->processor.c:901]   --->   Operation 187 'call' 'rd_7' <Predicate = (bits_15_11 == 9)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 188 [1/2] (3.06ns)   --->   "%imm8_2 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:312->processor.c:901]   --->   Operation 188 'call' 'imm8_2' <Predicate = (bits_15_11 == 9)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 189 [1/1] (0.00ns)   --->   "%result_rd_11 = trunc i16 %rd_7" [decode.c:314->processor.c:901]   --->   Operation 189 'trunc' 'result_rd_11' <Predicate = (bits_15_11 == 9)> <Delay = 0.00>
+ST_17 : Operation 190 [1/2] (3.06ns)   --->   "%rd_6 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:296->processor.c:901]   --->   Operation 190 'call' 'rd_6' <Predicate = (bits_15_11 == 21)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 191 [1/2] (3.06ns)   --->   "%imm8_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:297->processor.c:901]   --->   Operation 191 'call' 'imm8_1' <Predicate = (bits_15_11 == 21)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 192 [1/1] (0.00ns)   --->   "%result_rd_10 = trunc i16 %rd_6" [decode.c:299->processor.c:901]   --->   Operation 192 'trunc' 'result_rd_10' <Predicate = (bits_15_11 == 21)> <Delay = 0.00>
+ST_17 : Operation 193 [1/2] (3.06ns)   --->   "%rd_5 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:279->processor.c:901]   --->   Operation 193 'call' 'rd_5' <Predicate = (bits_15_11 == 20)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 194 [1/2] (3.06ns)   --->   "%imm8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:280->processor.c:901]   --->   Operation 194 'call' 'imm8' <Predicate = (bits_15_11 == 20)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_17 : Operation 195 [1/1] (0.00ns)   --->   "%result_rd_9 = trunc i16 %rd_5" [decode.c:282->processor.c:901]   --->   Operation 195 'trunc' 'result_rd_9' <Predicate = (bits_15_11 == 20)> <Delay = 0.00>
+
+State 18 <SV = 6> <Delay = 3.20>
+ST_18 : Operation 196 [1/1] (0.00ns)   --->   "%result_imm_value_7 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm8_2, i2 0" [decode.c:316->processor.c:901]   --->   Operation 196 'bitconcatenate' 'result_imm_value_7' <Predicate = (bits_15_11 == 9)> <Delay = 0.00>
+ST_18 : Operation 197 [1/1] (0.00ns)   --->   "%zext_ln17_2 = zext i18 %result_imm_value_7" [decode.c:17->processor.c:901]   --->   Operation 197 'zext' 'zext_ln17_2' <Predicate = (bits_15_11 == 9)> <Delay = 0.00>
+ST_18 : Operation 198 [1/1] (3.20ns)   --->   "%br_ln317 = br void %if.end723.i" [decode.c:317->processor.c:901]   --->   Operation 198 'br' 'br_ln317' <Predicate = (bits_15_11 == 9)> <Delay = 3.20>
+ST_18 : Operation 199 [1/1] (0.00ns)   --->   "%result_imm_value_6 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm8_1, i2 0" [decode.c:302->processor.c:901]   --->   Operation 199 'bitconcatenate' 'result_imm_value_6' <Predicate = (bits_15_11 == 21)> <Delay = 0.00>
+ST_18 : Operation 200 [1/1] (0.00ns)   --->   "%zext_ln17_1 = zext i18 %result_imm_value_6" [decode.c:17->processor.c:901]   --->   Operation 200 'zext' 'zext_ln17_1' <Predicate = (bits_15_11 == 21)> <Delay = 0.00>
+ST_18 : Operation 201 [1/1] (3.20ns)   --->   "%br_ln307 = br void %if.end723.i" [decode.c:307->processor.c:901]   --->   Operation 201 'br' 'br_ln307' <Predicate = (bits_15_11 == 21)> <Delay = 3.20>
+ST_18 : Operation 202 [1/1] (0.00ns)   --->   "%result_imm_value_5 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm8, i2 0" [decode.c:285->processor.c:901]   --->   Operation 202 'bitconcatenate' 'result_imm_value_5' <Predicate = (bits_15_11 == 20)> <Delay = 0.00>
+ST_18 : Operation 203 [1/1] (0.00ns)   --->   "%zext_ln17 = zext i18 %result_imm_value_5" [decode.c:17->processor.c:901]   --->   Operation 203 'zext' 'zext_ln17' <Predicate = (bits_15_11 == 20)> <Delay = 0.00>
+ST_18 : Operation 204 [1/1] (3.20ns)   --->   "%br_ln290 = br void %if.end723.i" [decode.c:290->processor.c:901]   --->   Operation 204 'br' 'br_ln290' <Predicate = (bits_15_11 == 20)> <Delay = 3.20>
+
+State 19 <SV = 3> <Delay = 4.72>
+ST_19 : Operation 205 [2/2] (4.72ns)   --->   "%l_1 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:428->processor.c:901]   --->   Operation 205 'call' 'l_1' <Predicate = (bits_15_12 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_19 : Operation 206 [2/2] (4.72ns)   --->   "%l = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:411->processor.c:901]   --->   Operation 206 'call' 'l' <Predicate = (bits_15_12 == 9)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 20 <SV = 4> <Delay = 4.72>
+ST_20 : Operation 207 [1/2] (3.06ns)   --->   "%l_1 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:428->processor.c:901]   --->   Operation 207 'call' 'l_1' <Predicate = (bits_15_12 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_20 : Operation 208 [2/2] (4.72ns)   --->   "%rn_6 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:429->processor.c:901]   --->   Operation 208 'call' 'rn_6' <Predicate = (bits_15_12 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_20 : Operation 209 [2/2] (4.72ns)   --->   "%reglist = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:430->processor.c:901]   --->   Operation 209 'call' 'reglist' <Predicate = (bits_15_12 == 12)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_20 : Operation 210 [1/2] (3.06ns)   --->   "%l = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:411->processor.c:901]   --->   Operation 210 'call' 'l' <Predicate = (bits_15_12 == 9)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_20 : Operation 211 [2/2] (4.72ns)   --->   "%rd_10 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:412->processor.c:901]   --->   Operation 211 'call' 'rd_10' <Predicate = (bits_15_12 == 9)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_20 : Operation 212 [2/2] (4.72ns)   --->   "%imm8_3 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:413->processor.c:901]   --->   Operation 212 'call' 'imm8_3' <Predicate = (bits_15_12 == 9)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 21 <SV = 5> <Delay = 3.06>
+ST_21 : Operation 213 [1/2] (3.06ns)   --->   "%rn_6 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:429->processor.c:901]   --->   Operation 213 'call' 'rn_6' <Predicate = (bits_15_12 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_21 : Operation 214 [1/2] (3.06ns)   --->   "%reglist = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:430->processor.c:901]   --->   Operation 214 'call' 'reglist' <Predicate = (bits_15_12 == 12)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_21 : Operation 215 [1/1] (0.00ns)   --->   "%result_rs1_12 = trunc i16 %rn_6" [decode.c:431->processor.c:901]   --->   Operation 215 'trunc' 'result_rs1_12' <Predicate = (bits_15_12 == 12)> <Delay = 0.00>
+ST_21 : Operation 216 [1/1] (2.07ns)   --->   "%icmp_ln434 = icmp_eq  i16 %l_1, i16 0" [decode.c:434->processor.c:901]   --->   Operation 216 'icmp' 'icmp_ln434' <Predicate = (bits_15_12 == 12)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_21 : Operation 217 [1/2] (3.06ns)   --->   "%rd_10 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:412->processor.c:901]   --->   Operation 217 'call' 'rd_10' <Predicate = (bits_15_12 == 9)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_21 : Operation 218 [1/2] (3.06ns)   --->   "%imm8_3 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:413->processor.c:901]   --->   Operation 218 'call' 'imm8_3' <Predicate = (bits_15_12 == 9)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_21 : Operation 219 [1/1] (0.00ns)   --->   "%result_rd_14 = trunc i16 %rd_10" [decode.c:415->processor.c:901]   --->   Operation 219 'trunc' 'result_rd_14' <Predicate = (bits_15_12 == 9)> <Delay = 0.00>
+ST_21 : Operation 220 [1/1] (2.07ns)   --->   "%icmp_ln419 = icmp_eq  i16 %l, i16 0" [decode.c:419->processor.c:901]   --->   Operation 220 'icmp' 'icmp_ln419' <Predicate = (bits_15_12 == 9)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 22 <SV = 6> <Delay = 3.20>
+ST_22 : Operation 221 [1/1] (0.00ns)   --->   "%zext_ln430 = zext i16 %reglist" [decode.c:430->processor.c:901]   --->   Operation 221 'zext' 'zext_ln430' <Predicate = (bits_15_12 == 12)> <Delay = 0.00>
+ST_22 : Operation 222 [1/1] (0.99ns)   --->   "%select_ln435 = select i1 %icmp_ln434, i7 60, i7 59" [decode.c:435->processor.c:901]   --->   Operation 222 'select' 'select_ln435' <Predicate = (bits_15_12 == 12)> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_22 : Operation 223 [1/1] (3.20ns)   --->   "%br_ln435 = br void %if.end723.i" [decode.c:435->processor.c:901]   --->   Operation 223 'br' 'br_ln435' <Predicate = (bits_15_12 == 12)> <Delay = 3.20>
+ST_22 : Operation 224 [1/1] (0.00ns)   --->   "%result_imm_value_8 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm8_3, i2 0" [decode.c:418->processor.c:901]   --->   Operation 224 'bitconcatenate' 'result_imm_value_8' <Predicate = (bits_15_12 == 9)> <Delay = 0.00>
+ST_22 : Operation 225 [1/1] (0.00ns)   --->   "%zext_ln17_3 = zext i18 %result_imm_value_8" [decode.c:17->processor.c:901]   --->   Operation 225 'zext' 'zext_ln17_3' <Predicate = (bits_15_12 == 9)> <Delay = 0.00>
+ST_22 : Operation 226 [1/1] (0.99ns)   --->   "%select_ln420 = select i1 %icmp_ln419, i7 48, i7 45" [decode.c:420->processor.c:901]   --->   Operation 226 'select' 'select_ln420' <Predicate = (bits_15_12 == 9)> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_22 : Operation 227 [1/1] (3.20ns)   --->   "%br_ln420 = br void %if.end723.i" [decode.c:420->processor.c:901]   --->   Operation 227 'br' 'br_ln420' <Predicate = (bits_15_12 == 9)> <Delay = 3.20>
+
+State 23 <SV = 3> <Delay = 4.72>
+ST_23 : Operation 228 [2/2] (4.72ns)   --->   "%opc_2 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 11" [decode.c:377->processor.c:901]   --->   Operation 228 'call' 'opc_2' <Predicate = (bits_15_12 == 5)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_23 : Operation 229 [2/2] (4.72ns)   --->   "%rm_2 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:378->processor.c:901]   --->   Operation 229 'call' 'rm_2' <Predicate = (bits_15_12 == 5)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_23 : Operation 230 [2/2] (4.72ns)   --->   "%rn_5 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:379->processor.c:901]   --->   Operation 230 'call' 'rn_5' <Predicate = (bits_15_12 == 5)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_23 : Operation 231 [2/2] (4.72ns)   --->   "%rd_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:380->processor.c:901]   --->   Operation 231 'call' 'rd_9' <Predicate = (bits_15_12 == 5)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_23 : Operation 232 [2/2] (4.72ns)   --->   "%l_2 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:343->processor.c:901]   --->   Operation 232 'call' 'l_2' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 24 <SV = 4> <Delay = 4.72>
+ST_24 : Operation 233 [1/2] (3.06ns)   --->   "%opc_2 = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 11" [decode.c:377->processor.c:901]   --->   Operation 233 'call' 'opc_2' <Predicate = (bits_15_12 == 5)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 234 [1/2] (3.06ns)   --->   "%rm_2 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 8" [decode.c:378->processor.c:901]   --->   Operation 234 'call' 'rm_2' <Predicate = (bits_15_12 == 5)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 235 [1/2] (3.06ns)   --->   "%rn_5 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:379->processor.c:901]   --->   Operation 235 'call' 'rn_5' <Predicate = (bits_15_12 == 5)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 236 [1/2] (3.06ns)   --->   "%rd_9 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:380->processor.c:901]   --->   Operation 236 'call' 'rd_9' <Predicate = (bits_15_12 == 5)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 237 [1/1] (0.00ns)   --->   "%result_rd_13 = trunc i16 %rd_9" [decode.c:382->processor.c:901]   --->   Operation 237 'trunc' 'result_rd_13' <Predicate = (bits_15_12 == 5)> <Delay = 0.00>
+ST_24 : Operation 238 [1/1] (0.00ns)   --->   "%result_rs1_11 = trunc i16 %rn_5" [decode.c:383->processor.c:901]   --->   Operation 238 'trunc' 'result_rs1_11' <Predicate = (bits_15_12 == 5)> <Delay = 0.00>
+ST_24 : Operation 239 [1/1] (0.00ns)   --->   "%result_rs2_3 = trunc i16 %rm_2" [decode.c:384->processor.c:901]   --->   Operation 239 'trunc' 'result_rs2_3' <Predicate = (bits_15_12 == 5)> <Delay = 0.00>
+ST_24 : Operation 240 [2/2] (4.72ns)   --->   "%imm5_3 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:333->processor.c:901]   --->   Operation 240 'call' 'imm5_3' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 241 [2/2] (4.72ns)   --->   "%rn_4 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:334->processor.c:901]   --->   Operation 241 'call' 'rn_4' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 242 [2/2] (4.72ns)   --->   "%rd_8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:335->processor.c:901]   --->   Operation 242 'call' 'rd_8' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_24 : Operation 243 [1/2] (3.06ns)   --->   "%l_2 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:343->processor.c:901]   --->   Operation 243 'call' 'l_2' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 25 <SV = 5> <Delay = 3.20>
+ST_25 : Operation 244 [1/1] (3.20ns)   --->   "%switch_ln387 = switch i16 %opc_2, void %sw.default511.i, i16 0, void %sw.bb495.i, i16 1, void %sw.bb497.i, i16 2, void %sw.bb499.i, i16 3, void %sw.bb501.i, i16 4, void %sw.bb503.i, i16 5, void %sw.bb505.i, i16 6, void %sw.bb507.i, i16 7, void %if.end723.i" [decode.c:387->processor.c:901]   --->   Operation 244 'switch' 'switch_ln387' <Predicate = (bits_15_12 == 5)> <Delay = 3.20>
+ST_25 : Operation 245 [1/2] (3.06ns)   --->   "%imm5_3 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:333->processor.c:901]   --->   Operation 245 'call' 'imm5_3' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_25 : Operation 246 [1/1] (0.00ns)   --->   "%zext_ln333 = zext i16 %imm5_3" [decode.c:333->processor.c:901]   --->   Operation 246 'zext' 'zext_ln333' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 0.00>
+ST_25 : Operation 247 [1/2] (3.06ns)   --->   "%rn_4 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:334->processor.c:901]   --->   Operation 247 'call' 'rn_4' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_25 : Operation 248 [1/2] (3.06ns)   --->   "%rd_8 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:335->processor.c:901]   --->   Operation 248 'call' 'rd_8' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_25 : Operation 249 [1/1] (0.00ns)   --->   "%result_rd_12 = trunc i16 %rd_8" [decode.c:337->processor.c:901]   --->   Operation 249 'trunc' 'result_rd_12' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 0.00>
+ST_25 : Operation 250 [1/1] (0.00ns)   --->   "%result_rs1_10 = trunc i16 %rn_4" [decode.c:338->processor.c:901]   --->   Operation 250 'trunc' 'result_rs1_10' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 0.00>
+ST_25 : Operation 251 [1/1] (2.07ns)   --->   "%icmp_ln345 = icmp_eq  i16 %l_2, i16 0" [decode.c:345->processor.c:901]   --->   Operation 251 'icmp' 'icmp_ln345' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_25 : Operation 252 [1/1] (1.73ns)   --->   "%switch_ln341 = switch i4 %trunc_ln21, void %if.then460.i, i4 6, void %if.then438.i, i4 7, void %if.then449.i" [decode.c:341->processor.c:901]   --->   Operation 252 'switch' 'switch_ln341' <Predicate = (bits_15_12 == 8) | (bits_15_12 == 7) | (bits_15_12 == 6)> <Delay = 1.73>
+
+State 26 <SV = 6> <Delay = 3.20>
+ST_26 : Operation 253 [1/1] (3.20ns)   --->   "%br_ln397 = br void %if.end723.i" [decode.c:397->processor.c:901]   --->   Operation 253 'br' 'br_ln397' <Predicate = (opc_2 == 6)> <Delay = 3.20>
+ST_26 : Operation 254 [1/1] (3.20ns)   --->   "%br_ln396 = br void %if.end723.i" [decode.c:396->processor.c:901]   --->   Operation 254 'br' 'br_ln396' <Predicate = (opc_2 == 5)> <Delay = 3.20>
+ST_26 : Operation 255 [1/1] (3.20ns)   --->   "%br_ln395 = br void %if.end723.i" [decode.c:395->processor.c:901]   --->   Operation 255 'br' 'br_ln395' <Predicate = (opc_2 == 4)> <Delay = 3.20>
+ST_26 : Operation 256 [1/1] (3.20ns)   --->   "%br_ln394 = br void %if.end723.i" [decode.c:394->processor.c:901]   --->   Operation 256 'br' 'br_ln394' <Predicate = (opc_2 == 3)> <Delay = 3.20>
+ST_26 : Operation 257 [1/1] (3.20ns)   --->   "%br_ln391 = br void %if.end723.i" [decode.c:391->processor.c:901]   --->   Operation 257 'br' 'br_ln391' <Predicate = (opc_2 == 2)> <Delay = 3.20>
+ST_26 : Operation 258 [1/1] (3.20ns)   --->   "%br_ln390 = br void %if.end723.i" [decode.c:390->processor.c:901]   --->   Operation 258 'br' 'br_ln390' <Predicate = (opc_2 == 1)> <Delay = 3.20>
+ST_26 : Operation 259 [1/1] (3.20ns)   --->   "%br_ln389 = br void %if.end723.i" [decode.c:389->processor.c:901]   --->   Operation 259 'br' 'br_ln389' <Predicate = (opc_2 == 0)> <Delay = 3.20>
+ST_26 : Operation 260 [1/1] (3.20ns)   --->   "%br_ln399 = br void %if.end723.i" [decode.c:399->processor.c:901]   --->   Operation 260 'br' 'br_ln399' <Predicate = (opc_2 != 0 & opc_2 != 1 & opc_2 != 2 & opc_2 != 3 & opc_2 != 4 & opc_2 != 5 & opc_2 != 6 & opc_2 != 7)> <Delay = 3.20>
+
+State 27 <SV = 6> <Delay = 3.20>
+ST_27 : Operation 261 [1/1] (0.99ns)   --->   "%select_ln352 = select i1 %icmp_ln345, i7 52, i7 50" [decode.c:352->processor.c:901]   --->   Operation 261 'select' 'select_ln352' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_27 : Operation 262 [1/1] (3.20ns)   --->   "%br_ln352 = br void %if.end723.i" [decode.c:352->processor.c:901]   --->   Operation 262 'br' 'br_ln352' <Predicate = true> <Delay = 3.20>
+
+State 28 <SV = 6> <Delay = 3.20>
+ST_28 : Operation 263 [1/1] (0.00ns)   --->   "%result_imm_value_13 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm5_3, i2 0" [decode.c:344->processor.c:901]   --->   Operation 263 'bitconcatenate' 'result_imm_value_13' <Predicate = true> <Delay = 0.00>
+ST_28 : Operation 264 [1/1] (0.00ns)   --->   "%zext_ln17_7 = zext i18 %result_imm_value_13" [decode.c:17->processor.c:901]   --->   Operation 264 'zext' 'zext_ln17_7' <Predicate = true> <Delay = 0.00>
+ST_28 : Operation 265 [1/1] (0.99ns)   --->   "%select_ln346 = select i1 %icmp_ln345, i7 47, i7 43" [decode.c:346->processor.c:901]   --->   Operation 265 'select' 'select_ln346' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_28 : Operation 266 [1/1] (3.20ns)   --->   "%br_ln346 = br void %if.end723.i" [decode.c:346->processor.c:901]   --->   Operation 266 'br' 'br_ln346' <Predicate = true> <Delay = 3.20>
+
+State 29 <SV = 6> <Delay = 3.20>
+ST_29 : Operation 267 [1/1] (0.00ns)   --->   "%result_imm_value_12 = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i16.i1, i16 %imm5_3, i1 0" [decode.c:356->processor.c:901]   --->   Operation 267 'bitconcatenate' 'result_imm_value_12' <Predicate = true> <Delay = 0.00>
+ST_29 : Operation 268 [1/1] (0.00ns)   --->   "%zext_ln17_6 = zext i17 %result_imm_value_12" [decode.c:17->processor.c:901]   --->   Operation 268 'zext' 'zext_ln17_6' <Predicate = true> <Delay = 0.00>
+ST_29 : Operation 269 [1/1] (0.99ns)   --->   "%select_ln17_5_cast_cast = select i1 %icmp_ln345, i7 56, i7 54" [decode.c:345->processor.c:901]   --->   Operation 269 'select' 'select_ln17_5_cast_cast' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_29 : Operation 270 [1/1] (3.20ns)   --->   "%br_ln0 = br void %if.end723.i"   --->   Operation 270 'br' 'br_ln0' <Predicate = true> <Delay = 3.20>
+
+State 30 <SV = 4> <Delay = 4.72>
+ST_30 : Operation 271 [2/2] (4.72ns)   --->   "%imm7_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 6" [decode.c:458->processor.c:901]   --->   Operation 271 'call' 'imm7_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 31 <SV = 5> <Delay = 3.06>
+ST_31 : Operation 272 [1/2] (3.06ns)   --->   "%imm7_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 6" [decode.c:458->processor.c:901]   --->   Operation 272 'call' 'imm7_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 32 <SV = 6> <Delay = 3.20>
+ST_32 : Operation 273 [1/1] (0.00ns)   --->   "%result_imm_value_11 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm7_1, i2 0" [decode.c:464->processor.c:901]   --->   Operation 273 'bitconcatenate' 'result_imm_value_11' <Predicate = true> <Delay = 0.00>
+ST_32 : Operation 274 [1/1] (0.00ns)   --->   "%zext_ln17_5 = zext i18 %result_imm_value_11" [decode.c:17->processor.c:901]   --->   Operation 274 'zext' 'zext_ln17_5' <Predicate = true> <Delay = 0.00>
+ST_32 : Operation 275 [1/1] (3.20ns)   --->   "%br_ln468 = br void %if.end723.i" [decode.c:468->processor.c:901]   --->   Operation 275 'br' 'br_ln468' <Predicate = true> <Delay = 3.20>
+
+State 33 <SV = 4> <Delay = 4.72>
+ST_33 : Operation 276 [2/2] (4.72ns)   --->   "%imm7 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 6" [decode.c:442->processor.c:901]   --->   Operation 276 'call' 'imm7' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 34 <SV = 5> <Delay = 3.06>
+ST_34 : Operation 277 [1/2] (3.06ns)   --->   "%imm7 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 6" [decode.c:442->processor.c:901]   --->   Operation 277 'call' 'imm7' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 35 <SV = 6> <Delay = 3.20>
+ST_35 : Operation 278 [1/1] (0.00ns)   --->   "%result_imm_value_10 = bitconcatenate i18 @_ssdm_op_BitConcatenate.i18.i16.i2, i16 %imm7, i2 0" [decode.c:448->processor.c:901]   --->   Operation 278 'bitconcatenate' 'result_imm_value_10' <Predicate = true> <Delay = 0.00>
+ST_35 : Operation 279 [1/1] (0.00ns)   --->   "%zext_ln17_4 = zext i18 %result_imm_value_10" [decode.c:17->processor.c:901]   --->   Operation 279 'zext' 'zext_ln17_4' <Predicate = true> <Delay = 0.00>
+ST_35 : Operation 280 [1/1] (3.20ns)   --->   "%br_ln452 = br void %if.end723.i" [decode.c:452->processor.c:901]   --->   Operation 280 'br' 'br_ln452' <Predicate = true> <Delay = 3.20>
+
+State 36 <SV = 3> <Delay = 4.72>
+ST_36 : Operation 281 [2/2] (4.72ns)   --->   "%cond = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 11" [decode.c:504->processor.c:901]   --->   Operation 281 'call' 'cond' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_36 : Operation 282 [2/2] (4.72ns)   --->   "%imm8_11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:505->processor.c:901]   --->   Operation 282 'call' 'imm8_11' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 37 <SV = 4> <Delay = 3.06>
+ST_37 : Operation 283 [1/2] (3.06ns)   --->   "%cond = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 11" [decode.c:504->processor.c:901]   --->   Operation 283 'call' 'cond' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_37 : Operation 284 [1/2] (3.06ns)   --->   "%imm8_11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:505->processor.c:901]   --->   Operation 284 'call' 'imm8_11' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 38 <SV = 5> <Delay = 3.20>
+ST_38 : Operation 285 [1/1] (0.00ns)   --->   "%zext_ln505 = zext i16 %imm8_11" [decode.c:505->processor.c:901]   --->   Operation 285 'zext' 'zext_ln505' <Predicate = true> <Delay = 0.00>
+ST_38 : Operation 286 [1/1] (3.20ns)   --->   "%switch_ln506 = switch i16 %cond, void %if.else631.i, i16 15, void %if.then622.i, i16 14, void %if.end723.i" [decode.c:506->processor.c:901]   --->   Operation 286 'switch' 'switch_ln506' <Predicate = true> <Delay = 3.20>
+ST_38 : Operation 287 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%bit_sel = bitselect i1 @_ssdm_op_BitSelect.i1.i16.i32, i16 %imm8_11, i32 7" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 287 'bitselect' 'bit_sel' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00>
+ST_38 : Operation 288 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%xor_ln13 = xor i1 %bit_sel, i1 1" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 288 'xor' 'xor_ln13' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_38 : Operation 289 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%trunc_ln13_1 = trunc i16 %imm8_11" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 289 'trunc' 'trunc_ln13_1' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00>
+ST_38 : Operation 290 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%part_sel1 = partselect i8 @_ssdm_op_PartSelect.i8.i16.i32.i32, i16 %imm8_11, i32 8, i32 15" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 290 'partselect' 'part_sel1' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00>
+ST_38 : Operation 291 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%xor_ln13_1 = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i8.i1.i7.i1, i8 %part_sel1, i1 %xor_ln13, i7 %trunc_ln13_1, i1 0" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 291 'bitconcatenate' 'xor_ln13_1' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00>
+ST_38 : Operation 292 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_17)   --->   "%zext_ln13_1 = zext i17 %xor_ln13_1" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 292 'zext' 'zext_ln13_1' <Predicate = (cond != 15 & cond != 14)> <Delay = 0.00>
+ST_38 : Operation 293 [1/1] (2.10ns) (out node of the LUT)   --->   "%result_imm_value_17 = add i18 %zext_ln13_1, i18 261888" [decode.c:13->decode.c:516->processor.c:901]   --->   Operation 293 'add' 'result_imm_value_17' <Predicate = (cond != 15 & cond != 14)> <Delay = 2.10> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.10> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+
+State 39 <SV = 6> <Delay = 3.20>
+ST_39 : Operation 294 [1/1] (3.20ns)   --->   "%br_ln510 = br void %if.end723.i" [decode.c:510->processor.c:901]   --->   Operation 294 'br' 'br_ln510' <Predicate = true> <Delay = 3.20>
+
+State 40 <SV = 6> <Delay = 3.20>
+ST_40 : Operation 295 [1/1] (0.00ns)   --->   "%sext_ln17_1 = sext i18 %result_imm_value_17" [decode.c:17->processor.c:901]   --->   Operation 295 'sext' 'sext_ln17_1' <Predicate = true> <Delay = 0.00>
+ST_40 : Operation 296 [1/1] (3.20ns)   --->   "%br_ln0 = br void %if.end723.i"   --->   Operation 296 'br' 'br_ln0' <Predicate = true> <Delay = 3.20>
+
+State 41 <SV = 3> <Delay = 4.72>
+ST_41 : Operation 297 [2/2] (4.72ns)   --->   "%check_bits = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 10" [decode.c:486->processor.c:901]   --->   Operation 297 'call' 'check_bits' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 42 <SV = 4> <Delay = 4.72>
+ST_42 : Operation 298 [2/2] (4.72ns)   --->   "%l_bit = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:477->processor.c:901]   --->   Operation 298 'call' 'l_bit' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_42 : Operation 299 [2/2] (4.72ns)   --->   "%r_bit = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 8" [decode.c:480->processor.c:901]   --->   Operation 299 'call' 'r_bit' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_42 : Operation 300 [2/2] (4.72ns)   --->   "%reglist_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:483->processor.c:901]   --->   Operation 300 'call' 'reglist_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_42 : Operation 301 [1/2] (3.06ns)   --->   "%check_bits = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 10" [decode.c:486->processor.c:901]   --->   Operation 301 'call' 'check_bits' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 43 <SV = 5> <Delay = 3.06>
+ST_43 : Operation 302 [1/2] (3.06ns)   --->   "%l_bit = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:477->processor.c:901]   --->   Operation 302 'call' 'l_bit' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_43 : Operation 303 [1/2] (3.06ns)   --->   "%r_bit = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 8" [decode.c:480->processor.c:901]   --->   Operation 303 'call' 'r_bit' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_43 : Operation 304 [1/2] (3.06ns)   --->   "%reglist_1 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:483->processor.c:901]   --->   Operation 304 'call' 'reglist_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_43 : Operation 305 [1/1] (2.07ns)   --->   "%icmp_ln488 = icmp_eq  i16 %check_bits, i16 2" [decode.c:488->processor.c:901]   --->   Operation 305 'icmp' 'icmp_ln488' <Predicate = true> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 44 <SV = 6> <Delay = 3.20>
+ST_44 : Operation 306 [1/1] (0.00ns)   --->   "%zext_ln483 = zext i16 %reglist_1" [decode.c:483->processor.c:901]   --->   Operation 306 'zext' 'zext_ln483' <Predicate = true> <Delay = 0.00>
+ST_44 : Operation 307 [1/1] (3.20ns)   --->   "%br_ln488 = br i1 %icmp_ln488, void %if.end723.i, void %if.then599.i" [decode.c:488->processor.c:901]   --->   Operation 307 'br' 'br_ln488' <Predicate = true> <Delay = 3.20>
+ST_44 : Operation 308 [1/1] (2.07ns)   --->   "%icmp_ln489 = icmp_eq  i16 %l_bit, i16 0" [decode.c:489->processor.c:901]   --->   Operation 308 'icmp' 'icmp_ln489' <Predicate = (icmp_ln488)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_44 : Operation 309 [1/1] (0.99ns)   --->   "%select_ln17_1 = select i1 %icmp_ln489, i7 61, i7 62" [decode.c:17->processor.c:901]   --->   Operation 309 'select' 'select_ln17_1' <Predicate = (icmp_ln488)> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+
+State 45 <SV = 7> <Delay = 4.79>
+ST_45 : Operation 310 [1/1] (3.20ns)   --->   "%br_ln497 = br void %if.end723.i" [decode.c:497->processor.c:901]   --->   Operation 310 'br' 'br_ln497' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088 & !icmp_ln121 & !icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & !icmp_ln255 & bits_15_11 != 20 & bits_15_11 != 21 & bits_15_11 != 9 & and_ln7 != 45056 & and_ln7 != 45184 & bits_15_12 == 11 & icmp_ln488)> <Delay = 3.20>
+ST_45 : Operation 311 [1/1] (3.20ns)   --->   "%br_ln269 = br void %if.end723.i" [decode.c:269->processor.c:901]   --->   Operation 311 'br' 'br_ln269' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088 & !icmp_ln121 & !icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & icmp_ln255 & opcode_2 == 1)> <Delay = 3.20>
+ST_45 : Operation 312 [1/1] (3.20ns)   --->   "%br_ln268 = br void %if.end723.i" [decode.c:268->processor.c:901]   --->   Operation 312 'br' 'br_ln268' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088 & !icmp_ln121 & !icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & icmp_ln255 & opcode_2 == 0)> <Delay = 3.20>
+ST_45 : Operation 313 [1/1] (3.20ns)   --->   "%br_ln271 = br void %if.end723.i" [decode.c:271->processor.c:901]   --->   Operation 313 'br' 'br_ln271' <Predicate = (conv487_read != 0 & conv487_read != 48896 & and_ln != 45568 & and_ln != 47616 & and_ln != 48640 & and_ln != 57088 & !icmp_ln121 & !icmp_ln142 & bits_15_9 != 12 & bits_15_9 != 13 & bits_15_9 != 14 & bits_15_9 != 15 & !icmp_ln182 & !icmp_ln201 & !icmp_ln234 & icmp_ln255 & opcode_2 != 0 & opcode_2 != 1 & opcode_2 != 2)> <Delay = 3.20>
+ST_45 : Operation 314 [1/1] (0.00ns)   --->   "%result_condition_1 = phi i16 0, void %if.then100.i, i16 0, void %if.then115.i, i16 0, void %if.then131.i, i16 0, void %if.then156.i, i16 0, void %if.then174.i, i16 0, void %if.then202.i, i16 0, void %if.then302.i, i16 0, void %if.then362.i, i16 0, void %if.then380.i, i16 0, void %if.then398.i, i16 0, void %if.then516.i, i16 0, void %if.then538.i, i16 0, void %if.then559.i, i16 0, void %if.then574.i, i16 0, void %sw.bb686.i, i16 0, void %sw.bb680.i, i16 0, void %sw.bb674.i, i16 0, void %if.then643.i, i16 0, void %if.then622.i, i16 %cond, void %if.else631.i, i16 0, void %if.then599.i, i16 0, void %sw.default511.i, i16 0, void %sw.bb507.i, i16 0, void %sw.bb505.i, i16 0, void %sw.bb503.i, i16 0, void %sw.bb501.i, i16 0, void %sw.bb499.i, i16 0, void %sw.bb497.i, i16 0, void %sw.bb495.i, i16 0, void %if.then449.i, i16 0, void %if.then460.i, i16 0, void %if.then438.i, i16 0, void %sw.default.i, i16 0, void %sw.bb354.i, i16 0, void %sw.bb352.i, i16 0, void %sw.bb297.i, i16 0, void %sw.bb295.i, i16 0, void %sw.bb293.i, i16 0, void %sw.bb291.i, i16 0, void %sw.bb289.i, i16 0, void %sw.bb287.i, i16 0, void %sw.bb285.i, i16 0, void %sw.bb283.i, i16 0, void %sw.bb281.i, i16 0, void %sw.bb279.i, i16 0, void %sw.bb277.i, i16 0, void %sw.bb275.i, i16 0, void %sw.bb273.i, i16 0, void %sw.bb271.i, i16 0, void %sw.bb269.i, i16 0, void %sw.bb267.i, i16 0, void %sw.bb246.i, i16 0, void %sw.bb244.i, i16 0, void %sw.bb242.i, i16 0, void %sw.bb.i, i16 0, void %if.then85.i, i16 0, void %if.then89.i, i16 0, void %if.then81.i, i16 0, void %if.then47.i, i16 0, void %if.then51.i, i16 0, void %if.then43.i, i16 0, void %newFuncRoot, i16 0, void %if.then29.i, i16 0, void %if.then66.i, i16 0, void %if.then226.i, i16 0, void %if.then250.i, i16 0, void %if.then325.i, i16 0, void %if.then475.i, i16 0, void %if.then588.i, i16 0, void %if.then614.i, i16 0, void %if.else653.i, i16 0, void %if.then655.i"   --->   Operation 314 'phi' 'result_condition_1' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 315 [1/1] (0.00ns)   --->   "%result_imm_value_23 = phi i23 %zext_ln87, void %if.then100.i, i23 %zext_ln105, void %if.then115.i, i23 %zext_ln129, void %if.then131.i, i23 0, void %if.then156.i, i23 0, void %if.then174.i, i23 %zext_ln170, void %if.then202.i, i23 0, void %if.then302.i, i23 %zext_ln17, void %if.then362.i, i23 %zext_ln17_1, void %if.then380.i, i23 %zext_ln17_2, void %if.then398.i, i23 %zext_ln17_3, void %if.then516.i, i23 %zext_ln430, void %if.then538.i, i23 %zext_ln17_4, void %if.then559.i, i23 %zext_ln17_5, void %if.then574.i, i23 %zext_ln17_10, void %sw.bb686.i, i23 %zext_ln17_9, void %sw.bb680.i, i23 %zext_ln17_8, void %sw.bb674.i, i23 %sext_ln17, void %if.then643.i, i23 %zext_ln505, void %if.then622.i, i23 %sext_ln17_1, void %if.else631.i, i23 %zext_ln483, void %if.then599.i, i23 0, void %sw.default511.i, i23 0, void %sw.bb507.i, i23 0, void %sw.bb505.i, i23 0, void %sw.bb503.i, i23 0, void %sw.bb501.i, i23 0, void %sw.bb499.i, i23 0, void %sw.bb497.i, i23 0, void %sw.bb495.i, i23 %zext_ln333, void %if.then449.i, i23 %zext_ln17_6, void %if.then460.i, i23 %zext_ln17_7, void %if.then438.i, i23 0, void %sw.default.i, i23 0, void %sw.bb354.i, i23 0, void %sw.bb352.i, i23 0, void %sw.bb297.i, i23 0, void %sw.bb295.i, i23 0, void %sw.bb293.i, i23 0, void %sw.bb291.i, i23 0, void %sw.bb289.i, i23 0, void %sw.bb287.i, i23 0, void %sw.bb285.i, i23 0, void %sw.bb283.i, i23 0, void %sw.bb281.i, i23 0, void %sw.bb279.i, i23 0, void %sw.bb277.i, i23 0, void %sw.bb275.i, i23 0, void %sw.bb273.i, i23 0, void %sw.bb271.i, i23 0, void %sw.bb269.i, i23 0, void %sw.bb267.i, i23 %zext_ln185, void %sw.bb246.i, i23 %zext_ln185, void %sw.bb244.i, i23 %zext_ln185, void %sw.bb242.i, i23 %zext_ln185, void %sw.bb.i, i23 0, void %if.then85.i, i23 0, void %if.then89.i, i23 0, void %if.then81.i, i23 0, void %if.then47.i, i23 0, void %if.then51.i, i23 0, void %if.then43.i, i23 0, void %newFuncRoot, i23 0, void %if.then29.i, i23 0, void %if.then66.i, i23 %zext_ln185, void %if.then226.i, i23 0, void %if.then250.i, i23 0, void %if.then325.i, i23 0, void %if.then475.i, i23 0, void %if.then588.i, i23 0, void %if.then614.i, i23 0, void %if.else653.i, i23 %zext_ln535, void %if.then655.i" [decode.c:87->processor.c:901]   --->   Operation 315 'phi' 'result_imm_value_23' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 316 [1/1] (0.00ns)   --->   "%result_immediate_flag = phi i1 1, void %if.then100.i, i1 1, void %if.then115.i, i1 1, void %if.then131.i, i1 0, void %if.then156.i, i1 0, void %if.then174.i, i1 1, void %if.then202.i, i1 0, void %if.then302.i, i1 1, void %if.then362.i, i1 1, void %if.then380.i, i1 1, void %if.then398.i, i1 1, void %if.then516.i, i1 1, void %if.then538.i, i1 1, void %if.then559.i, i1 1, void %if.then574.i, i1 1, void %sw.bb686.i, i1 1, void %sw.bb680.i, i1 1, void %sw.bb674.i, i1 1, void %if.then643.i, i1 1, void %if.then622.i, i1 1, void %if.else631.i, i1 1, void %if.then599.i, i1 0, void %sw.default511.i, i1 0, void %sw.bb507.i, i1 0, void %sw.bb505.i, i1 0, void %sw.bb503.i, i1 0, void %sw.bb501.i, i1 0, void %sw.bb499.i, i1 0, void %sw.bb497.i, i1 0, void %sw.bb495.i, i1 1, void %if.then449.i, i1 1, void %if.then460.i, i1 1, void %if.then438.i, i1 0, void %sw.default.i, i1 0, void %sw.bb354.i, i1 0, void %sw.bb352.i, i1 0, void %sw.bb297.i, i1 0, void %sw.bb295.i, i1 0, void %sw.bb293.i, i1 0, void %sw.bb291.i, i1 0, void %sw.bb289.i, i1 0, void %sw.bb287.i, i1 0, void %sw.bb285.i, i1 0, void %sw.bb283.i, i1 0, void %sw.bb281.i, i1 0, void %sw.bb279.i, i1 0, void %sw.bb277.i, i1 0, void %sw.bb275.i, i1 0, void %sw.bb273.i, i1 0, void %sw.bb271.i, i1 0, void %sw.bb269.i, i1 0, void %sw.bb267.i, i1 1, void %sw.bb246.i, i1 1, void %sw.bb244.i, i1 1, void %sw.bb242.i, i1 1, void %sw.bb.i, i1 0, void %if.then85.i, i1 0, void %if.then89.i, i1 0, void %if.then81.i, i1 0, void %if.then47.i, i1 0, void %if.then51.i, i1 0, void %if.then43.i, i1 0, void %newFuncRoot, i1 0, void %if.then29.i, i1 0, void %if.then66.i, i1 1, void %if.then226.i, i1 0, void %if.then250.i, i1 0, void %if.then325.i, i1 0, void %if.then475.i, i1 0, void %if.then588.i, i1 0, void %if.then614.i, i1 0, void %if.else653.i, i1 1, void %if.then655.i"   --->   Operation 316 'phi' 'result_immediate_flag' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 317 [1/1] (0.00ns)   --->   "%result_rs2_4 = phi i8 0, void %if.then100.i, i8 0, void %if.then115.i, i8 0, void %if.then131.i, i8 0, void %if.then156.i, i8 %result_rs2, void %if.then174.i, i8 0, void %if.then202.i, i8 0, void %if.then302.i, i8 0, void %if.then362.i, i8 0, void %if.then380.i, i8 0, void %if.then398.i, i8 0, void %if.then516.i, i8 0, void %if.then538.i, i8 0, void %if.then559.i, i8 0, void %if.then574.i, i8 0, void %sw.bb686.i, i8 0, void %sw.bb680.i, i8 0, void %sw.bb674.i, i8 0, void %if.then643.i, i8 0, void %if.then622.i, i8 0, void %if.else631.i, i8 0, void %if.then599.i, i8 %result_rs2_3, void %sw.default511.i, i8 %result_rs2_3, void %sw.bb507.i, i8 %result_rs2_3, void %sw.bb505.i, i8 %result_rs2_3, void %sw.bb503.i, i8 %result_rs2_3, void %sw.bb501.i, i8 %result_rs2_3, void %sw.bb499.i, i8 %result_rs2_3, void %sw.bb497.i, i8 %result_rs2_3, void %sw.bb495.i, i8 0, void %if.then449.i, i8 0, void %if.then460.i, i8 0, void %if.then438.i, i8 %result_rs2_2, void %sw.default.i, i8 %result_rs2_2, void %sw.bb354.i, i8 %result_rs2_2, void %sw.bb352.i, i8 %result_rs2_1, void %sw.bb297.i, i8 %result_rs2_1, void %sw.bb295.i, i8 %result_rs2_1, void %sw.bb293.i, i8 %result_rs2_1, void %sw.bb291.i, i8 %result_rs2_1, void %sw.bb289.i, i8 %result_rs2_1, void %sw.bb287.i, i8 %result_rs2_1, void %sw.bb285.i, i8 %result_rs2_1, void %sw.bb283.i, i8 %result_rs2_1, void %sw.bb281.i, i8 %result_rs2_1, void %sw.bb279.i, i8 %result_rs2_1, void %sw.bb277.i, i8 %result_rs2_1, void %sw.bb275.i, i8 %result_rs2_1, void %sw.bb273.i, i8 %result_rs2_1, void %sw.bb271.i, i8 %result_rs2_1, void %sw.bb269.i, i8 %result_rs2_1, void %sw.bb267.i, i8 0, void %sw.bb246.i, i8 0, void %sw.bb244.i, i8 0, void %sw.bb242.i, i8 0, void %sw.bb.i, i8 0, void %if.then85.i, i8 0, void %if.then89.i, i8 0, void %if.then81.i, i8 0, void %if.then47.i, i8 0, void %if.then51.i, i8 0, void %if.then43.i, i8 0, void %newFuncRoot, i8 0, void %if.then29.i, i8 0, void %if.then66.i, i8 0, void %if.then226.i, i8 %result_rs2_1, void %if.then250.i, i8 %result_rs2_2, void %if.then325.i, i8 %result_rs2_3, void %if.then475.i, i8 0, void %if.then588.i, i8 0, void %if.then614.i, i8 0, void %if.else653.i, i8 0, void %if.then655.i"   --->   Operation 317 'phi' 'result_rs2_4' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 318 [1/1] (0.00ns)   --->   "%result_rs1_14 = phi i8 0, void %if.then100.i, i8 0, void %if.then115.i, i8 %result_rd_17, void %if.then131.i, i8 %result_rs1_3, void %if.then156.i, i8 %result_rs1_4, void %if.then174.i, i8 %result_rs1_5, void %if.then202.i, i8 %result_rs1_8, void %if.then302.i, i8 15, void %if.then362.i, i8 13, void %if.then380.i, i8 0, void %if.then398.i, i8 13, void %if.then516.i, i8 %result_rs1_12, void %if.then538.i, i8 13, void %if.then559.i, i8 13, void %if.then574.i, i8 %result_rs1_13, void %sw.bb686.i, i8 %result_rs1_13, void %sw.bb680.i, i8 %result_rs1_13, void %sw.bb674.i, i8 0, void %if.then643.i, i8 0, void %if.then622.i, i8 0, void %if.else631.i, i8 13, void %if.then599.i, i8 %result_rs1_11, void %sw.default511.i, i8 %result_rs1_11, void %sw.bb507.i, i8 %result_rs1_11, void %sw.bb505.i, i8 %result_rs1_11, void %sw.bb503.i, i8 %result_rs1_11, void %sw.bb501.i, i8 %result_rs1_11, void %sw.bb499.i, i8 %result_rs1_11, void %sw.bb497.i, i8 %result_rs1_11, void %sw.bb495.i, i8 %result_rs1_10, void %if.then449.i, i8 %result_rs1_10, void %if.then460.i, i8 %result_rs1_10, void %if.then438.i, i8 %result_rd_20, void %sw.default.i, i8 %result_rd_20, void %sw.bb354.i, i8 %result_rd_20, void %sw.bb352.i, i8 %result_rd_19, void %sw.bb297.i, i8 %result_rd_19, void %sw.bb295.i, i8 %result_rd_19, void %sw.bb293.i, i8 %result_rd_19, void %sw.bb291.i, i8 %result_rd_19, void %sw.bb289.i, i8 %result_rd_19, void %sw.bb287.i, i8 %result_rd_19, void %sw.bb285.i, i8 %result_rd_19, void %sw.bb283.i, i8 %result_rd_19, void %sw.bb281.i, i8 %result_rd_19, void %sw.bb279.i, i8 %result_rd_19, void %sw.bb277.i, i8 %result_rd_19, void %sw.bb275.i, i8 %result_rd_19, void %sw.bb273.i, i8 %result_rd_19, void %sw.bb271.i, i8 %result_rd_19, void %sw.bb269.i, i8 %result_rd_19, void %sw.bb267.i, i8 %result_rd_18, void %sw.bb246.i, i8 %result_rd_18, void %sw.bb244.i, i8 %result_rd_18, void %sw.bb242.i, i8 %result_rd_18, void %sw.bb.i, i8 %result_rs1_1, void %if.then85.i, i8 %result_rs1_1, void %if.then89.i, i8 %result_rs1_1, void %if.then81.i, i8 %result_rs1, void %if.then47.i, i8 %result_rs1, void %if.then51.i, i8 %result_rs1, void %if.then43.i, i8 0, void %newFuncRoot, i8 %result_rs1, void %if.then29.i, i8 %result_rs1_1, void %if.then66.i, i8 %result_rd_18, void %if.then226.i, i8 %result_rd_19, void %if.then250.i, i8 %result_rd_20, void %if.then325.i, i8 %result_rs1_11, void %if.then475.i, i8 0, void %if.then588.i, i8 0, void %if.then614.i, i8 0, void %if.else653.i, i8 %result_rs1_13, void %if.then655.i"   --->   Operation 318 'phi' 'result_rs1_14' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 319 [1/1] (0.00ns)   --->   "%result_rd_16 = phi i8 0, void %if.then100.i, i8 0, void %if.then115.i, i8 %result_rd_17, void %if.then131.i, i8 %result_rd_3, void %if.then156.i, i8 %result_rd_4, void %if.then174.i, i8 %result_rd_5, void %if.then202.i, i8 %select_ln17, void %if.then302.i, i8 %result_rd_9, void %if.then362.i, i8 %result_rd_10, void %if.then380.i, i8 %result_rd_11, void %if.then398.i, i8 %result_rd_14, void %if.then516.i, i8 0, void %if.then538.i, i8 13, void %if.then559.i, i8 13, void %if.then574.i, i8 %result_rd_15, void %sw.bb686.i, i8 %result_rd_15, void %sw.bb680.i, i8 %result_rd_15, void %sw.bb674.i, i8 0, void %if.then643.i, i8 0, void %if.then622.i, i8 0, void %if.else631.i, i8 13, void %if.then599.i, i8 %result_rd_13, void %sw.default511.i, i8 %result_rd_13, void %sw.bb507.i, i8 %result_rd_13, void %sw.bb505.i, i8 %result_rd_13, void %sw.bb503.i, i8 %result_rd_13, void %sw.bb501.i, i8 %result_rd_13, void %sw.bb499.i, i8 %result_rd_13, void %sw.bb497.i, i8 %result_rd_13, void %sw.bb495.i, i8 %result_rd_12, void %if.then449.i, i8 %result_rd_12, void %if.then460.i, i8 %result_rd_12, void %if.then438.i, i8 %result_rd_20, void %sw.default.i, i8 %result_rd_20, void %sw.bb354.i, i8 %result_rd_20, void %sw.bb352.i, i8 %result_rd_19, void %sw.bb297.i, i8 %result_rd_19, void %sw.bb295.i, i8 %result_rd_19, void %sw.bb293.i, i8 %result_rd_19, void %sw.bb291.i, i8 %result_rd_19, void %sw.bb289.i, i8 %result_rd_19, void %sw.bb287.i, i8 %result_rd_19, void %sw.bb285.i, i8 %result_rd_19, void %sw.bb283.i, i8 %result_rd_19, void %sw.bb281.i, i8 %result_rd_19, void %sw.bb279.i, i8 %result_rd_19, void %sw.bb277.i, i8 %result_rd_19, void %sw.bb275.i, i8 %result_rd_19, void %sw.bb273.i, i8 %result_rd_19, void %sw.bb271.i, i8 %result_rd_19, void %sw.bb269.i, i8 %result_rd_19, void %sw.bb267.i, i8 %result_rd_18, void %sw.bb246.i, i8 %result_rd_18, void %sw.bb244.i, i8 %result_rd_18, void %sw.bb242.i, i8 %result_rd_18, void %sw.bb.i, i8 %result_rd_1, void %if.then85.i, i8 %result_rd_1, void %if.then89.i, i8 %result_rd_1, void %if.then81.i, i8 %result_rd, void %if.then47.i, i8 %result_rd, void %if.then51.i, i8 %result_rd, void %if.then43.i, i8 0, void %newFuncRoot, i8 %result_rd, void %if.then29.i, i8 %result_rd_1, void %if.then66.i, i8 %result_rd_18, void %if.then226.i, i8 %result_rd_19, void %if.then250.i, i8 %result_rd_20, void %if.then325.i, i8 %result_rd_13, void %if.then475.i, i8 0, void %if.then588.i, i8 0, void %if.then614.i, i8 0, void %if.else653.i, i8 %result_rd_15, void %if.then655.i"   --->   Operation 319 'phi' 'result_rd_16' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 320 [1/1] (0.00ns)   --->   "%result_operation_1 = phi i7 77, void %if.then100.i, i7 78, void %if.then115.i, i7 %result_operation, void %if.then131.i, i7 1, void %if.then156.i, i7 %select_ln165, void %if.then174.i, i7 %select_ln179, void %if.then202.i, i7 %select_ln252, void %if.then302.i, i7 15, void %if.then362.i, i7 13, void %if.then380.i, i7 44, void %if.then398.i, i7 %select_ln420, void %if.then516.i, i7 %select_ln435, void %if.then538.i, i7 16, void %if.then559.i, i7 20, void %if.then574.i, i7 8, void %sw.bb686.i, i7 6, void %sw.bb680.i, i7 4, void %sw.bb674.i, i7 38, void %if.then643.i, i7 78, void %if.then622.i, i7 37, void %if.else631.i, i7 %select_ln17_1, void %if.then599.i, i7 0, void %sw.default511.i, i7 49, void %sw.bb507.i, i7 53, void %sw.bb505.i, i7 42, void %sw.bb503.i, i7 57, void %sw.bb501.i, i7 51, void %sw.bb499.i, i7 55, void %sw.bb497.i, i7 46, void %sw.bb495.i, i7 %select_ln352, void %if.then449.i, i7 %select_ln17_5_cast_cast, void %if.then460.i, i7 %select_ln346, void %if.then438.i, i7 0, void %sw.default.i, i7 23, void %sw.bb354.i, i7 14, void %sw.bb352.i, i7 31, void %sw.bb297.i, i7 30, void %sw.bb295.i, i7 36, void %sw.bb293.i, i7 29, void %sw.bb291.i, i7 24, void %sw.bb289.i, i7 21, void %sw.bb287.i, i7 26, void %sw.bb285.i, i7 25, void %sw.bb283.i, i7 35, void %sw.bb281.i, i7 33, void %sw.bb279.i, i7 32, void %sw.bb277.i, i7 9, void %sw.bb275.i, i7 7, void %sw.bb273.i, i7 5, void %sw.bb271.i, i7 28, void %sw.bb269.i, i7 27, void %sw.bb267.i, i7 19, void %sw.bb246.i, i7 12, void %sw.bb244.i, i7 22, void %sw.bb242.i, i7 2, void %sw.bb.i, i7 68, void %if.then85.i, i7 69, void %if.then89.i, i7 67, void %if.then81.i, i7 64, void %if.then47.i, i7 66, void %if.then51.i, i7 63, void %if.then43.i, i7 72, void %newFuncRoot, i7 65, void %if.then29.i, i7 0, void %if.then66.i, i7 0, void %if.then226.i, i7 0, void %if.then250.i, i7 3, void %if.then325.i, i7 58, void %if.then475.i, i7 0, void %if.then588.i, i7 0, void %if.then614.i, i7 0, void %if.else653.i, i7 0, void %if.then655.i"   --->   Operation 320 'phi' 'result_operation_1' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 321 [1/1] (0.00ns)   --->   "%result_r_bit_1 = phi i16 0, void %if.then100.i, i16 0, void %if.then115.i, i16 0, void %if.then131.i, i16 0, void %if.then156.i, i16 0, void %if.then174.i, i16 0, void %if.then202.i, i16 0, void %if.then302.i, i16 0, void %if.then362.i, i16 0, void %if.then380.i, i16 0, void %if.then398.i, i16 0, void %if.then516.i, i16 0, void %if.then538.i, i16 0, void %if.then559.i, i16 0, void %if.then574.i, i16 0, void %sw.bb686.i, i16 0, void %sw.bb680.i, i16 0, void %sw.bb674.i, i16 0, void %if.then643.i, i16 0, void %if.then622.i, i16 0, void %if.else631.i, i16 %r_bit, void %if.then599.i, i16 0, void %sw.default511.i, i16 0, void %sw.bb507.i, i16 0, void %sw.bb505.i, i16 0, void %sw.bb503.i, i16 0, void %sw.bb501.i, i16 0, void %sw.bb499.i, i16 0, void %sw.bb497.i, i16 0, void %sw.bb495.i, i16 0, void %if.then449.i, i16 0, void %if.then460.i, i16 0, void %if.then438.i, i16 0, void %sw.default.i, i16 0, void %sw.bb354.i, i16 0, void %sw.bb352.i, i16 0, void %sw.bb297.i, i16 0, void %sw.bb295.i, i16 0, void %sw.bb293.i, i16 0, void %sw.bb291.i, i16 0, void %sw.bb289.i, i16 0, void %sw.bb287.i, i16 0, void %sw.bb285.i, i16 0, void %sw.bb283.i, i16 0, void %sw.bb281.i, i16 0, void %sw.bb279.i, i16 0, void %sw.bb277.i, i16 0, void %sw.bb275.i, i16 0, void %sw.bb273.i, i16 0, void %sw.bb271.i, i16 0, void %sw.bb269.i, i16 0, void %sw.bb267.i, i16 0, void %sw.bb246.i, i16 0, void %sw.bb244.i, i16 0, void %sw.bb242.i, i16 0, void %sw.bb.i, i16 0, void %if.then85.i, i16 0, void %if.then89.i, i16 0, void %if.then81.i, i16 0, void %if.then47.i, i16 0, void %if.then51.i, i16 0, void %if.then43.i, i16 0, void %newFuncRoot, i16 0, void %if.then29.i, i16 0, void %if.then66.i, i16 0, void %if.then226.i, i16 0, void %if.then250.i, i16 0, void %if.then325.i, i16 0, void %if.then475.i, i16 0, void %if.then588.i, i16 0, void %if.then614.i, i16 0, void %if.else653.i, i16 0, void %if.then655.i"   --->   Operation 321 'phi' 'result_r_bit_1' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 322 [1/1] (0.00ns)   --->   "%result_valid = phi i1 1, void %if.then100.i, i1 1, void %if.then115.i, i1 1, void %if.then131.i, i1 1, void %if.then156.i, i1 1, void %if.then174.i, i1 1, void %if.then202.i, i1 1, void %if.then302.i, i1 1, void %if.then362.i, i1 1, void %if.then380.i, i1 1, void %if.then398.i, i1 1, void %if.then516.i, i1 1, void %if.then538.i, i1 1, void %if.then559.i, i1 1, void %if.then574.i, i1 1, void %sw.bb686.i, i1 1, void %sw.bb680.i, i1 1, void %sw.bb674.i, i1 1, void %if.then643.i, i1 1, void %if.then622.i, i1 1, void %if.else631.i, i1 1, void %if.then599.i, i1 0, void %sw.default511.i, i1 1, void %sw.bb507.i, i1 1, void %sw.bb505.i, i1 1, void %sw.bb503.i, i1 1, void %sw.bb501.i, i1 1, void %sw.bb499.i, i1 1, void %sw.bb497.i, i1 1, void %sw.bb495.i, i1 1, void %if.then449.i, i1 1, void %if.then460.i, i1 1, void %if.then438.i, i1 0, void %sw.default.i, i1 1, void %sw.bb354.i, i1 1, void %sw.bb352.i, i1 1, void %sw.bb297.i, i1 1, void %sw.bb295.i, i1 1, void %sw.bb293.i, i1 1, void %sw.bb291.i, i1 1, void %sw.bb289.i, i1 1, void %sw.bb287.i, i1 1, void %sw.bb285.i, i1 1, void %sw.bb283.i, i1 1, void %sw.bb281.i, i1 1, void %sw.bb279.i, i1 1, void %sw.bb277.i, i1 1, void %sw.bb275.i, i1 1, void %sw.bb273.i, i1 1, void %sw.bb271.i, i1 1, void %sw.bb269.i, i1 1, void %sw.bb267.i, i1 1, void %sw.bb246.i, i1 1, void %sw.bb244.i, i1 1, void %sw.bb242.i, i1 1, void %sw.bb.i, i1 1, void %if.then85.i, i1 1, void %if.then89.i, i1 1, void %if.then81.i, i1 1, void %if.then47.i, i1 1, void %if.then51.i, i1 1, void %if.then43.i, i1 1, void %newFuncRoot, i1 1, void %if.then29.i, i1 0, void %if.then66.i, i1 1, void %if.then226.i, i1 1, void %if.then250.i, i1 1, void %if.then325.i, i1 1, void %if.then475.i, i1 0, void %if.then588.i, i1 0, void %if.then614.i, i1 0, void %if.else653.i, i1 0, void %if.then655.i"   --->   Operation 322 'phi' 'result_valid' <Predicate = (conv487_read != 0)> <Delay = 0.00>
+ST_45 : Operation 323 [1/1] (1.58ns)   --->   "%br_ln567 = br void %decode_thumb16_instruction.48.exit" [decode.c:567->processor.c:901]   --->   Operation 323 'br' 'br_ln567' <Predicate = (conv487_read != 0)> <Delay = 1.58>
+ST_45 : Operation 324 [1/1] (0.00ns)   --->   "%tmp534_1_0 = phi i1 %result_valid, void %if.end723.i, i1 1, void %newFuncRoot"   --->   Operation 324 'phi' 'tmp534_1_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 325 [1/1] (0.00ns)   --->   "%tmp534_3_0 = phi i7 %result_operation_1, void %if.end723.i, i7 1, void %newFuncRoot"   --->   Operation 325 'phi' 'tmp534_3_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 326 [1/1] (0.00ns)   --->   "%tmp534_4_0 = phi i8 %result_rd_16, void %if.end723.i, i8 0, void %newFuncRoot"   --->   Operation 326 'phi' 'tmp534_4_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 327 [1/1] (0.00ns)   --->   "%tmp534_5_0 = phi i8 %result_rs1_14, void %if.end723.i, i8 0, void %newFuncRoot"   --->   Operation 327 'phi' 'tmp534_5_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 328 [1/1] (0.00ns)   --->   "%tmp534_6_0 = phi i8 %result_rs2_4, void %if.end723.i, i8 0, void %newFuncRoot"   --->   Operation 328 'phi' 'tmp534_6_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 329 [1/1] (0.00ns)   --->   "%tmp534_7_0 = phi i1 %result_immediate_flag, void %if.end723.i, i1 0, void %newFuncRoot"   --->   Operation 329 'phi' 'tmp534_7_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 330 [1/1] (0.00ns)   --->   "%tmp534_8_0 = phi i23 %result_imm_value_23, void %if.end723.i, i23 0, void %newFuncRoot"   --->   Operation 330 'phi' 'tmp534_8_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 331 [1/1] (0.00ns)   --->   "%tmp534_10_0 = phi i16 %result_condition_1, void %if.end723.i, i16 0, void %newFuncRoot"   --->   Operation 331 'phi' 'tmp534_10_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 332 [1/1] (0.00ns)   --->   "%tmp534_1127_0 = phi i16 %result_r_bit_1, void %if.end723.i, i16 0, void %newFuncRoot"   --->   Operation 332 'phi' 'tmp534_1127_0' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 333 [1/1] (0.00ns)   --->   "%tmp534_1127_0_cast = zext i16 %tmp534_1127_0" [decode.c:480->processor.c:901]   --->   Operation 333 'zext' 'tmp534_1127_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 334 [1/1] (0.00ns)   --->   "%tmp534_10_0_cast = zext i16 %tmp534_10_0" [decode.c:504->processor.c:901]   --->   Operation 334 'zext' 'tmp534_10_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 335 [1/1] (0.00ns)   --->   "%tmp534_8_0_cast = sext i23 %tmp534_8_0" [decode.c:87->processor.c:901]   --->   Operation 335 'sext' 'tmp534_8_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 336 [1/1] (0.00ns)   --->   "%tmp534_7_0_cast = zext i1 %tmp534_7_0"   --->   Operation 336 'zext' 'tmp534_7_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 337 [1/1] (0.00ns)   --->   "%tmp534_3_0_cast = zext i7 %tmp534_3_0" [decode.c:131->processor.c:901]   --->   Operation 337 'zext' 'tmp534_3_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 338 [1/1] (0.00ns)   --->   "%tmp534_1_0_cast = zext i1 %tmp534_1_0"   --->   Operation 338 'zext' 'tmp534_1_0_cast' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 339 [1/1] (0.00ns)   --->   "%mrv = insertvalue i168 <undef>, i8 %tmp534_1_0_cast"   --->   Operation 339 'insertvalue' 'mrv' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 340 [1/1] (0.00ns)   --->   "%mrv_1 = insertvalue i168 %mrv, i32 %tmp534_3_0_cast" [decode.c:131->processor.c:901]   --->   Operation 340 'insertvalue' 'mrv_1' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 341 [1/1] (0.00ns)   --->   "%mrv_2 = insertvalue i168 %mrv_1, i8 %tmp534_4_0" [decode.c:131->processor.c:901]   --->   Operation 341 'insertvalue' 'mrv_2' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 342 [1/1] (0.00ns)   --->   "%mrv_3 = insertvalue i168 %mrv_2, i8 %tmp534_5_0" [decode.c:131->processor.c:901]   --->   Operation 342 'insertvalue' 'mrv_3' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 343 [1/1] (0.00ns)   --->   "%mrv_4 = insertvalue i168 %mrv_3, i8 %tmp534_6_0" [decode.c:131->processor.c:901]   --->   Operation 343 'insertvalue' 'mrv_4' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 344 [1/1] (0.00ns)   --->   "%mrv_5 = insertvalue i168 %mrv_4, i8 %tmp534_7_0_cast" [decode.c:131->processor.c:901]   --->   Operation 344 'insertvalue' 'mrv_5' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 345 [1/1] (0.00ns)   --->   "%mrv_6 = insertvalue i168 %mrv_5, i32 %tmp534_8_0_cast" [decode.c:131->processor.c:901]   --->   Operation 345 'insertvalue' 'mrv_6' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 346 [1/1] (0.00ns)   --->   "%mrv_7 = insertvalue i168 %mrv_6, i32 %tmp534_10_0_cast" [decode.c:131->processor.c:901]   --->   Operation 346 'insertvalue' 'mrv_7' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 347 [1/1] (0.00ns)   --->   "%mrv_8 = insertvalue i168 %mrv_7, i32 %tmp534_1127_0_cast" [decode.c:131->processor.c:901]   --->   Operation 347 'insertvalue' 'mrv_8' <Predicate = true> <Delay = 0.00>
+ST_45 : Operation 348 [1/1] (0.00ns)   --->   "%ret_ln131 = ret i168 %mrv_8" [decode.c:131->processor.c:901]   --->   Operation 348 'ret' 'ret_ln131' <Predicate = true> <Delay = 0.00>
+
+State 46 <SV = 3> <Delay = 4.72>
+ST_46 : Operation 349 [1/1] (3.20ns)   --->   "%br_ln533 = br i1 %icmp_ln533, void %if.end723.i, void %if.then655.i" [decode.c:533->processor.c:901]   --->   Operation 349 'br' 'br_ln533' <Predicate = true> <Delay = 3.20>
+ST_46 : Operation 350 [2/2] (4.72ns)   --->   "%opcode_3 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 12" [decode.c:534->processor.c:901]   --->   Operation 350 'call' 'opcode_3' <Predicate = (icmp_ln533)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_46 : Operation 351 [2/2] (4.72ns)   --->   "%imm5_4 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:535->processor.c:901]   --->   Operation 351 'call' 'imm5_4' <Predicate = (icmp_ln533)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_46 : Operation 352 [2/2] (4.72ns)   --->   "%rm_3 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:536->processor.c:901]   --->   Operation 352 'call' 'rm_3' <Predicate = (icmp_ln533)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_46 : Operation 353 [2/2] (4.72ns)   --->   "%rd_11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:537->processor.c:901]   --->   Operation 353 'call' 'rd_11' <Predicate = (icmp_ln533)> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 47 <SV = 4> <Delay = 3.06>
+ST_47 : Operation 354 [1/2] (3.06ns)   --->   "%opcode_3 = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 12" [decode.c:534->processor.c:901]   --->   Operation 354 'call' 'opcode_3' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_47 : Operation 355 [1/2] (3.06ns)   --->   "%imm5_4 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:535->processor.c:901]   --->   Operation 355 'call' 'imm5_4' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_47 : Operation 356 [1/2] (3.06ns)   --->   "%rm_3 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:536->processor.c:901]   --->   Operation 356 'call' 'rm_3' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_47 : Operation 357 [1/2] (3.06ns)   --->   "%rd_11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:537->processor.c:901]   --->   Operation 357 'call' 'rd_11' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_47 : Operation 358 [1/1] (0.00ns)   --->   "%result_rd_15 = trunc i16 %rd_11" [decode.c:539->processor.c:901]   --->   Operation 358 'trunc' 'result_rd_15' <Predicate = true> <Delay = 0.00>
+ST_47 : Operation 359 [1/1] (0.00ns)   --->   "%result_rs1_13 = trunc i16 %rm_3" [decode.c:540->processor.c:901]   --->   Operation 359 'trunc' 'result_rs1_13' <Predicate = true> <Delay = 0.00>
+
+State 48 <SV = 5> <Delay = 3.20>
+ST_48 : Operation 360 [1/1] (0.00ns)   --->   "%zext_ln535 = zext i16 %imm5_4" [decode.c:535->processor.c:901]   --->   Operation 360 'zext' 'zext_ln535' <Predicate = true> <Delay = 0.00>
+ST_48 : Operation 361 [1/1] (3.20ns)   --->   "%switch_ln544 = switch i16 %opcode_3, void %if.end723.i, i16 0, void %sw.bb674.i, i16 1, void %sw.bb680.i, i16 2, void %sw.bb686.i" [decode.c:544->processor.c:901]   --->   Operation 361 'switch' 'switch_ln544' <Predicate = true> <Delay = 3.20>
+ST_48 : Operation 362 [1/1] (2.07ns)   --->   "%icmp_ln555 = icmp_eq  i16 %imm5_4, i16 0" [decode.c:555->processor.c:901]   --->   Operation 362 'icmp' 'icmp_ln555' <Predicate = (opcode_3 == 2)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_48 : Operation 363 [1/1] (2.07ns)   --->   "%icmp_ln551 = icmp_eq  i16 %imm5_4, i16 0" [decode.c:551->processor.c:901]   --->   Operation 363 'icmp' 'icmp_ln551' <Predicate = (opcode_3 == 1)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_48 : Operation 364 [1/1] (2.07ns)   --->   "%icmp_ln547 = icmp_eq  i16 %imm5_4, i16 0" [decode.c:547->processor.c:901]   --->   Operation 364 'icmp' 'icmp_ln547' <Predicate = (opcode_3 == 0)> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 49 <SV = 6> <Delay = 3.20>
+ST_49 : Operation 365 [1/1] (0.80ns)   --->   "%result_imm_value_22 = select i1 %icmp_ln555, i16 32, i16 %imm5_4" [decode.c:555->processor.c:901]   --->   Operation 365 'select' 'result_imm_value_22' <Predicate = (opcode_3 == 2)> <Delay = 0.80> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.80> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_49 : Operation 366 [1/1] (0.00ns)   --->   "%zext_ln17_10 = zext i16 %result_imm_value_22" [decode.c:17->processor.c:901]   --->   Operation 366 'zext' 'zext_ln17_10' <Predicate = (opcode_3 == 2)> <Delay = 0.00>
+ST_49 : Operation 367 [1/1] (3.20ns)   --->   "%br_ln556 = br void %if.end723.i" [decode.c:556->processor.c:901]   --->   Operation 367 'br' 'br_ln556' <Predicate = (opcode_3 == 2)> <Delay = 3.20>
+ST_49 : Operation 368 [1/1] (0.80ns)   --->   "%result_imm_value_21 = select i1 %icmp_ln551, i16 32, i16 %imm5_4" [decode.c:551->processor.c:901]   --->   Operation 368 'select' 'result_imm_value_21' <Predicate = (opcode_3 == 1)> <Delay = 0.80> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.80> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_49 : Operation 369 [1/1] (0.00ns)   --->   "%zext_ln17_9 = zext i16 %result_imm_value_21" [decode.c:17->processor.c:901]   --->   Operation 369 'zext' 'zext_ln17_9' <Predicate = (opcode_3 == 1)> <Delay = 0.00>
+ST_49 : Operation 370 [1/1] (3.20ns)   --->   "%br_ln552 = br void %if.end723.i" [decode.c:552->processor.c:901]   --->   Operation 370 'br' 'br_ln552' <Predicate = (opcode_3 == 1)> <Delay = 3.20>
+ST_49 : Operation 371 [1/1] (0.80ns)   --->   "%result_imm_value_20 = select i1 %icmp_ln547, i16 32, i16 %imm5_4" [decode.c:547->processor.c:901]   --->   Operation 371 'select' 'result_imm_value_20' <Predicate = (opcode_3 == 0)> <Delay = 0.80> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.80> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_49 : Operation 372 [1/1] (0.00ns)   --->   "%zext_ln17_8 = zext i16 %result_imm_value_20" [decode.c:17->processor.c:901]   --->   Operation 372 'zext' 'zext_ln17_8' <Predicate = (opcode_3 == 0)> <Delay = 0.00>
+ST_49 : Operation 373 [1/1] (3.20ns)   --->   "%br_ln548 = br void %if.end723.i" [decode.c:548->processor.c:901]   --->   Operation 373 'br' 'br_ln548' <Predicate = (opcode_3 == 0)> <Delay = 3.20>
+
+State 50 <SV = 3> <Delay = 4.72>
+ST_50 : Operation 374 [2/2] (4.72ns)   --->   "%imm11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 10" [decode.c:525->processor.c:901]   --->   Operation 374 'call' 'imm11' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 51 <SV = 4> <Delay = 3.06>
+ST_51 : Operation 375 [1/2] (3.06ns)   --->   "%imm11 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 10" [decode.c:525->processor.c:901]   --->   Operation 375 'call' 'imm11' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+
+State 52 <SV = 5> <Delay = 2.10>
+ST_52 : Operation 376 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%bit_sel3 = bitselect i1 @_ssdm_op_BitSelect.i1.i16.i32, i16 %imm11, i32 10" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 376 'bitselect' 'bit_sel3' <Predicate = true> <Delay = 0.00>
+ST_52 : Operation 377 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%xor_ln13_2 = xor i1 %bit_sel3, i1 1" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 377 'xor' 'xor_ln13_2' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_52 : Operation 378 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%trunc_ln13 = trunc i16 %imm11" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 378 'trunc' 'trunc_ln13' <Predicate = true> <Delay = 0.00>
+ST_52 : Operation 379 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%part_sel5 = partselect i5 @_ssdm_op_PartSelect.i5.i16.i32.i32, i16 %imm11, i32 11, i32 15" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 379 'partselect' 'part_sel5' <Predicate = true> <Delay = 0.00>
+ST_52 : Operation 380 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%xor_ln = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i5.i1.i10.i1, i5 %part_sel5, i1 %xor_ln13_2, i10 %trunc_ln13, i1 0" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 380 'bitconcatenate' 'xor_ln' <Predicate = true> <Delay = 0.00>
+ST_52 : Operation 381 [1/1] (0.00ns) (grouped into LUT with out node result_imm_value_15)   --->   "%zext_ln13 = zext i17 %xor_ln" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 381 'zext' 'zext_ln13' <Predicate = true> <Delay = 0.00>
+ST_52 : Operation 382 [1/1] (2.10ns) (out node of the LUT)   --->   "%result_imm_value_15 = add i18 %zext_ln13, i18 260096" [decode.c:13->decode.c:528->processor.c:901]   --->   Operation 382 'add' 'result_imm_value_15' <Predicate = true> <Delay = 2.10> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.10> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+
+State 53 <SV = 6> <Delay = 3.20>
+ST_53 : Operation 383 [1/1] (0.00ns)   --->   "%sext_ln17 = sext i18 %result_imm_value_15" [decode.c:17->processor.c:901]   --->   Operation 383 'sext' 'sext_ln17' <Predicate = true> <Delay = 0.00>
+ST_53 : Operation 384 [1/1] (3.20ns)   --->   "%br_ln530 = br void %if.end723.i" [decode.c:530->processor.c:901]   --->   Operation 384 'br' 'br_ln530' <Predicate = true> <Delay = 3.20>
+
+State 54 <SV = 3> <Delay = 4.72>
+ST_54 : Operation 385 [2/2] (4.72ns)   --->   "%h1_1 = call i16 @extract_bits, i16 %conv487_read, i4 7, i4 7" [decode.c:257->processor.c:901]   --->   Operation 385 'call' 'h1_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_54 : Operation 386 [2/2] (4.72ns)   --->   "%h2_1 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 6" [decode.c:258->processor.c:901]   --->   Operation 386 'call' 'h2_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_54 : Operation 387 [2/2] (4.72ns)   --->   "%tmp_2 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:259->processor.c:901]   --->   Operation 387 'call' 'tmp_2' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_54 : Operation 388 [2/2] (4.72ns)   --->   "%tmp_3 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:260->processor.c:901]   --->   Operation 388 'call' 'tmp_3' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 55 <SV = 4> <Delay = 4.72>
+ST_55 : Operation 389 [2/2] (4.72ns)   --->   "%opcode_2 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 9" [decode.c:256->processor.c:901]   --->   Operation 389 'call' 'opcode_2' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_55 : Operation 390 [1/2] (3.06ns)   --->   "%h1_1 = call i16 @extract_bits, i16 %conv487_read, i4 7, i4 7" [decode.c:257->processor.c:901]   --->   Operation 390 'call' 'h1_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_55 : Operation 391 [1/2] (3.06ns)   --->   "%h2_1 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 6" [decode.c:258->processor.c:901]   --->   Operation 391 'call' 'h2_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_55 : Operation 392 [1/2] (3.06ns)   --->   "%tmp_2 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:259->processor.c:901]   --->   Operation 392 'call' 'tmp_2' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_55 : Operation 393 [1/1] (0.00ns)   --->   "%trunc_ln259 = trunc i16 %h2_1" [decode.c:259->processor.c:901]   --->   Operation 393 'trunc' 'trunc_ln259' <Predicate = true> <Delay = 0.00>
+ST_55 : Operation 394 [1/1] (0.00ns)   --->   "%trunc_ln259_1 = trunc i16 %tmp_2" [decode.c:259->processor.c:901]   --->   Operation 394 'trunc' 'trunc_ln259_1' <Predicate = true> <Delay = 0.00>
+ST_55 : Operation 395 [1/2] (3.06ns)   --->   "%tmp_3 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:260->processor.c:901]   --->   Operation 395 'call' 'tmp_3' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_55 : Operation 396 [1/1] (0.00ns)   --->   "%trunc_ln260 = trunc i16 %h1_1" [decode.c:260->processor.c:901]   --->   Operation 396 'trunc' 'trunc_ln260' <Predicate = true> <Delay = 0.00>
+ST_55 : Operation 397 [1/1] (0.00ns)   --->   "%trunc_ln260_1 = trunc i16 %tmp_3" [decode.c:260->processor.c:901]   --->   Operation 397 'trunc' 'trunc_ln260_1' <Predicate = true> <Delay = 0.00>
+
+State 56 <SV = 5> <Delay = 3.06>
+ST_56 : Operation 398 [1/2] (3.06ns)   --->   "%opcode_2 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 9" [decode.c:256->processor.c:901]   --->   Operation 398 'call' 'opcode_2' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_56 : Operation 399 [1/1] (0.00ns)   --->   "%shl_ln3 = bitconcatenate i8 @_ssdm_op_BitConcatenate.i8.i5.i3, i5 %trunc_ln259, i3 0" [decode.c:259->processor.c:901]   --->   Operation 399 'bitconcatenate' 'shl_ln3' <Predicate = true> <Delay = 0.00>
+ST_56 : Operation 400 [1/1] (0.00ns)   --->   "%shl_ln4 = bitconcatenate i8 @_ssdm_op_BitConcatenate.i8.i5.i3, i5 %trunc_ln260, i3 0" [decode.c:260->processor.c:901]   --->   Operation 400 'bitconcatenate' 'shl_ln4' <Predicate = true> <Delay = 0.00>
+ST_56 : Operation 401 [1/1] (1.91ns)   --->   "%result_rd_20 = add i8 %trunc_ln260_1, i8 %shl_ln4" [decode.c:262->processor.c:901]   --->   Operation 401 'add' 'result_rd_20' <Predicate = true> <Delay = 1.91> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_56 : Operation 402 [1/1] (1.91ns)   --->   "%result_rs2_2 = add i8 %trunc_ln259_1, i8 %shl_ln3" [decode.c:264->processor.c:901]   --->   Operation 402 'add' 'result_rs2_2' <Predicate = true> <Delay = 1.91> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+
+State 57 <SV = 6> <Delay = 3.20>
+ST_57 : Operation 403 [1/1] (3.20ns)   --->   "%switch_ln267 = switch i16 %opcode_2, void %sw.default.i, i16 0, void %sw.bb352.i, i16 1, void %sw.bb354.i, i16 2, void %if.end723.i" [decode.c:267->processor.c:901]   --->   Operation 403 'switch' 'switch_ln267' <Predicate = true> <Delay = 3.20>
+
+State 58 <SV = 3> <Delay = 4.72>
+ST_58 : Operation 404 [2/2] (4.72ns)   --->   "%h1 = call i16 @extract_bits, i16 %conv487_read, i4 7, i4 7" [decode.c:235->processor.c:901]   --->   Operation 404 'call' 'h1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_58 : Operation 405 [2/2] (4.72ns)   --->   "%h2 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 6" [decode.c:236->processor.c:901]   --->   Operation 405 'call' 'h2' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_58 : Operation 406 [2/2] (4.72ns)   --->   "%tmp_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:237->processor.c:901]   --->   Operation 406 'call' 'tmp_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 59 <SV = 4> <Delay = 3.06>
+ST_59 : Operation 407 [1/2] (3.06ns)   --->   "%h1 = call i16 @extract_bits, i16 %conv487_read, i4 7, i4 7" [decode.c:235->processor.c:901]   --->   Operation 407 'call' 'h1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_59 : Operation 408 [1/2] (3.06ns)   --->   "%h2 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 6" [decode.c:236->processor.c:901]   --->   Operation 408 'call' 'h2' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_59 : Operation 409 [1/2] (3.06ns)   --->   "%tmp_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:237->processor.c:901]   --->   Operation 409 'call' 'tmp_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_59 : Operation 410 [1/1] (0.00ns)   --->   "%trunc_ln237 = trunc i16 %h2" [decode.c:237->processor.c:901]   --->   Operation 410 'trunc' 'trunc_ln237' <Predicate = true> <Delay = 0.00>
+ST_59 : Operation 411 [1/1] (0.00ns)   --->   "%trunc_ln237_1 = trunc i16 %tmp_1" [decode.c:237->processor.c:901]   --->   Operation 411 'trunc' 'trunc_ln237_1' <Predicate = true> <Delay = 0.00>
+
+State 60 <SV = 5> <Delay = 2.07>
+ST_60 : Operation 412 [1/1] (0.00ns)   --->   "%shl_ln2 = bitconcatenate i8 @_ssdm_op_BitConcatenate.i8.i5.i3, i5 %trunc_ln237, i3 0" [decode.c:237->processor.c:901]   --->   Operation 412 'bitconcatenate' 'shl_ln2' <Predicate = true> <Delay = 0.00>
+ST_60 : Operation 413 [1/1] (1.91ns)   --->   "%result_rs1_8 = add i8 %trunc_ln237_1, i8 %shl_ln2" [decode.c:239->processor.c:901]   --->   Operation 413 'add' 'result_rs1_8' <Predicate = true> <Delay = 1.91> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.91> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_60 : Operation 414 [1/1] (2.07ns)   --->   "%icmp_ln242 = icmp_eq  i16 %h1, i16 0" [decode.c:242->processor.c:901]   --->   Operation 414 'icmp' 'icmp_ln242' <Predicate = true> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+
+State 61 <SV = 6> <Delay = 3.20>
+ST_61 : Operation 415 [1/1] (1.21ns)   --->   "%select_ln17 = select i1 %icmp_ln242, i8 0, i8 14" [decode.c:17->processor.c:901]   --->   Operation 415 'select' 'select_ln17' <Predicate = true> <Delay = 1.21> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 1.21> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_61 : Operation 416 [1/1] (0.99ns)   --->   "%select_ln252 = select i1 %icmp_ln242, i7 41, i7 40" [decode.c:252->processor.c:901]   --->   Operation 416 'select' 'select_ln252' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_61 : Operation 417 [1/1] (3.20ns)   --->   "%br_ln252 = br void %if.end723.i" [decode.c:252->processor.c:901]   --->   Operation 417 'br' 'br_ln252' <Predicate = true> <Delay = 3.20>
+
+State 62 <SV = 3> <Delay = 4.72>
+ST_62 : Operation 418 [2/2] (4.72ns)   --->   "%opcode_1 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 9" [decode.c:202->processor.c:901]   --->   Operation 418 'call' 'opcode_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_62 : Operation 419 [2/2] (4.72ns)   --->   "%rm_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:203->processor.c:901]   --->   Operation 419 'call' 'rm_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_62 : Operation 420 [2/2] (4.72ns)   --->   "%rd_4 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:204->processor.c:901]   --->   Operation 420 'call' 'rd_4' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 63 <SV = 4> <Delay = 3.06>
+ST_63 : Operation 421 [1/2] (3.06ns)   --->   "%opcode_1 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 9" [decode.c:202->processor.c:901]   --->   Operation 421 'call' 'opcode_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_63 : Operation 422 [1/2] (3.06ns)   --->   "%rm_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:203->processor.c:901]   --->   Operation 422 'call' 'rm_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_63 : Operation 423 [1/2] (3.06ns)   --->   "%rd_4 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:204->processor.c:901]   --->   Operation 423 'call' 'rd_4' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_63 : Operation 424 [1/1] (0.00ns)   --->   "%result_rd_19 = trunc i16 %rd_4" [decode.c:206->processor.c:901]   --->   Operation 424 'trunc' 'result_rd_19' <Predicate = true> <Delay = 0.00>
+ST_63 : Operation 425 [1/1] (0.00ns)   --->   "%result_rs2_1 = trunc i16 %rm_1" [decode.c:208->processor.c:901]   --->   Operation 425 'trunc' 'result_rs2_1' <Predicate = true> <Delay = 0.00>
+
+State 64 <SV = 5> <Delay = 3.20>
+ST_64 : Operation 426 [1/1] (3.20ns)   --->   "%switch_ln211 = switch i16 %opcode_1, void %if.end723.i, i16 0, void %sw.bb267.i, i16 1, void %sw.bb269.i, i16 2, void %sw.bb271.i, i16 3, void %sw.bb273.i, i16 4, void %sw.bb275.i, i16 5, void %sw.bb277.i, i16 6, void %sw.bb279.i, i16 7, void %sw.bb281.i, i16 8, void %sw.bb283.i, i16 9, void %sw.bb285.i, i16 10, void %sw.bb287.i, i16 11, void %sw.bb289.i, i16 12, void %sw.bb291.i, i16 13, void %sw.bb293.i, i16 14, void %sw.bb295.i, i16 15, void %sw.bb297.i" [decode.c:211->processor.c:901]   --->   Operation 426 'switch' 'switch_ln211' <Predicate = true> <Delay = 3.20>
+
+State 65 <SV = 6> <Delay = 3.20>
+ST_65 : Operation 427 [1/1] (3.20ns)   --->   "%br_ln227 = br void %if.end723.i" [decode.c:227->processor.c:901]   --->   Operation 427 'br' 'br_ln227' <Predicate = (opcode_1 == 15)> <Delay = 3.20>
+ST_65 : Operation 428 [1/1] (3.20ns)   --->   "%br_ln226 = br void %if.end723.i" [decode.c:226->processor.c:901]   --->   Operation 428 'br' 'br_ln226' <Predicate = (opcode_1 == 14)> <Delay = 3.20>
+ST_65 : Operation 429 [1/1] (3.20ns)   --->   "%br_ln225 = br void %if.end723.i" [decode.c:225->processor.c:901]   --->   Operation 429 'br' 'br_ln225' <Predicate = (opcode_1 == 13)> <Delay = 3.20>
+ST_65 : Operation 430 [1/1] (3.20ns)   --->   "%br_ln224 = br void %if.end723.i" [decode.c:224->processor.c:901]   --->   Operation 430 'br' 'br_ln224' <Predicate = (opcode_1 == 12)> <Delay = 3.20>
+ST_65 : Operation 431 [1/1] (3.20ns)   --->   "%br_ln223 = br void %if.end723.i" [decode.c:223->processor.c:901]   --->   Operation 431 'br' 'br_ln223' <Predicate = (opcode_1 == 11)> <Delay = 3.20>
+ST_65 : Operation 432 [1/1] (3.20ns)   --->   "%br_ln222 = br void %if.end723.i" [decode.c:222->processor.c:901]   --->   Operation 432 'br' 'br_ln222' <Predicate = (opcode_1 == 10)> <Delay = 3.20>
+ST_65 : Operation 433 [1/1] (3.20ns)   --->   "%br_ln221 = br void %if.end723.i" [decode.c:221->processor.c:901]   --->   Operation 433 'br' 'br_ln221' <Predicate = (opcode_1 == 9)> <Delay = 3.20>
+ST_65 : Operation 434 [1/1] (3.20ns)   --->   "%br_ln220 = br void %if.end723.i" [decode.c:220->processor.c:901]   --->   Operation 434 'br' 'br_ln220' <Predicate = (opcode_1 == 8)> <Delay = 3.20>
+ST_65 : Operation 435 [1/1] (3.20ns)   --->   "%br_ln219 = br void %if.end723.i" [decode.c:219->processor.c:901]   --->   Operation 435 'br' 'br_ln219' <Predicate = (opcode_1 == 7)> <Delay = 3.20>
+ST_65 : Operation 436 [1/1] (3.20ns)   --->   "%br_ln218 = br void %if.end723.i" [decode.c:218->processor.c:901]   --->   Operation 436 'br' 'br_ln218' <Predicate = (opcode_1 == 6)> <Delay = 3.20>
+ST_65 : Operation 437 [1/1] (3.20ns)   --->   "%br_ln217 = br void %if.end723.i" [decode.c:217->processor.c:901]   --->   Operation 437 'br' 'br_ln217' <Predicate = (opcode_1 == 5)> <Delay = 3.20>
+ST_65 : Operation 438 [1/1] (3.20ns)   --->   "%br_ln216 = br void %if.end723.i" [decode.c:216->processor.c:901]   --->   Operation 438 'br' 'br_ln216' <Predicate = (opcode_1 == 4)> <Delay = 3.20>
+ST_65 : Operation 439 [1/1] (3.20ns)   --->   "%br_ln215 = br void %if.end723.i" [decode.c:215->processor.c:901]   --->   Operation 439 'br' 'br_ln215' <Predicate = (opcode_1 == 3)> <Delay = 3.20>
+ST_65 : Operation 440 [1/1] (3.20ns)   --->   "%br_ln214 = br void %if.end723.i" [decode.c:214->processor.c:901]   --->   Operation 440 'br' 'br_ln214' <Predicate = (opcode_1 == 2)> <Delay = 3.20>
+ST_65 : Operation 441 [1/1] (3.20ns)   --->   "%br_ln213 = br void %if.end723.i" [decode.c:213->processor.c:901]   --->   Operation 441 'br' 'br_ln213' <Predicate = (opcode_1 == 1)> <Delay = 3.20>
+ST_65 : Operation 442 [1/1] (3.20ns)   --->   "%br_ln212 = br void %if.end723.i" [decode.c:212->processor.c:901]   --->   Operation 442 'br' 'br_ln212' <Predicate = (opcode_1 == 0)> <Delay = 3.20>
+
+State 66 <SV = 3> <Delay = 4.72>
+ST_66 : Operation 443 [2/2] (4.72ns)   --->   "%opcode = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 12" [decode.c:183->processor.c:901]   --->   Operation 443 'call' 'opcode' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_66 : Operation 444 [2/2] (4.72ns)   --->   "%rd_3 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:184->processor.c:901]   --->   Operation 444 'call' 'rd_3' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_66 : Operation 445 [2/2] (4.72ns)   --->   "%imm8_10 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:185->processor.c:901]   --->   Operation 445 'call' 'imm8_10' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 67 <SV = 4> <Delay = 3.06>
+ST_67 : Operation 446 [1/2] (3.06ns)   --->   "%opcode = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 12" [decode.c:183->processor.c:901]   --->   Operation 446 'call' 'opcode' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_67 : Operation 447 [1/2] (3.06ns)   --->   "%rd_3 = call i16 @extract_bits, i16 %conv487_read, i4 8, i4 10" [decode.c:184->processor.c:901]   --->   Operation 447 'call' 'rd_3' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_67 : Operation 448 [1/2] (3.06ns)   --->   "%imm8_10 = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 7" [decode.c:185->processor.c:901]   --->   Operation 448 'call' 'imm8_10' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_67 : Operation 449 [1/1] (0.00ns)   --->   "%result_rd_18 = trunc i16 %rd_3" [decode.c:187->processor.c:901]   --->   Operation 449 'trunc' 'result_rd_18' <Predicate = true> <Delay = 0.00>
+
+State 68 <SV = 5> <Delay = 3.20>
+ST_68 : Operation 450 [1/1] (0.00ns)   --->   "%zext_ln185 = zext i16 %imm8_10" [decode.c:185->processor.c:901]   --->   Operation 450 'zext' 'zext_ln185' <Predicate = true> <Delay = 0.00>
+ST_68 : Operation 451 [1/1] (3.20ns)   --->   "%switch_ln192 = switch i16 %opcode, void %if.end723.i, i16 0, void %sw.bb.i, i16 1, void %sw.bb242.i, i16 2, void %sw.bb244.i, i16 3, void %sw.bb246.i" [decode.c:192->processor.c:901]   --->   Operation 451 'switch' 'switch_ln192' <Predicate = true> <Delay = 3.20>
+
+State 69 <SV = 6> <Delay = 3.20>
+ST_69 : Operation 452 [1/1] (3.20ns)   --->   "%br_ln196 = br void %if.end723.i" [decode.c:196->processor.c:901]   --->   Operation 452 'br' 'br_ln196' <Predicate = (opcode == 3)> <Delay = 3.20>
+ST_69 : Operation 453 [1/1] (3.20ns)   --->   "%br_ln195 = br void %if.end723.i" [decode.c:195->processor.c:901]   --->   Operation 453 'br' 'br_ln195' <Predicate = (opcode == 2)> <Delay = 3.20>
+ST_69 : Operation 454 [1/1] (3.20ns)   --->   "%br_ln194 = br void %if.end723.i" [decode.c:194->processor.c:901]   --->   Operation 454 'br' 'br_ln194' <Predicate = (opcode == 1)> <Delay = 3.20>
+ST_69 : Operation 455 [1/1] (3.20ns)   --->   "%br_ln193 = br void %if.end723.i" [decode.c:193->processor.c:901]   --->   Operation 455 'br' 'br_ln193' <Predicate = (opcode == 0)> <Delay = 3.20>
+
+State 70 <SV = 4> <Delay = 4.72>
+ST_70 : Operation 456 [2/2] (4.72ns)   --->   "%rn_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:143->processor.c:901]   --->   Operation 456 'call' 'rn_1' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_70 : Operation 457 [2/2] (4.72ns)   --->   "%rd = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:144->processor.c:901]   --->   Operation 457 'call' 'rd' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 71 <SV = 5> <Delay = 3.06>
+ST_71 : Operation 458 [1/2] (3.06ns)   --->   "%rn_1 = call i16 @extract_bits, i16 %conv487_read, i4 3, i4 5" [decode.c:143->processor.c:901]   --->   Operation 458 'call' 'rn_1' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_71 : Operation 459 [1/2] (3.06ns)   --->   "%rd = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:144->processor.c:901]   --->   Operation 459 'call' 'rd' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_71 : Operation 460 [1/1] (0.00ns)   --->   "%result_rd_3 = trunc i16 %rd" [decode.c:146->processor.c:901]   --->   Operation 460 'trunc' 'result_rd_3' <Predicate = true> <Delay = 0.00>
+ST_71 : Operation 461 [1/1] (0.00ns)   --->   "%result_rs1_3 = trunc i16 %rn_1" [decode.c:147->processor.c:901]   --->   Operation 461 'trunc' 'result_rs1_3' <Predicate = true> <Delay = 0.00>
+
+State 72 <SV = 6> <Delay = 3.20>
+ST_72 : Operation 462 [1/1] (3.20ns)   --->   "%br_ln150 = br void %if.end723.i" [decode.c:150->processor.c:901]   --->   Operation 462 'br' 'br_ln150' <Predicate = true> <Delay = 3.20>
+
+State 73 <SV = 3> <Delay = 4.72>
+ST_73 : Operation 463 [2/2] (4.72ns)   --->   "%op = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:123->processor.c:901]   --->   Operation 463 'call' 'op' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 74 <SV = 4> <Delay = 4.72>
+ST_74 : Operation 464 [1/2] (3.06ns)   --->   "%op = call i16 @extract_bits, i16 %conv487_read, i4 11, i4 11" [decode.c:123->processor.c:901]   --->   Operation 464 'call' 'op' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_74 : Operation 465 [2/2] (4.72ns)   --->   "%i = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:124->processor.c:901]   --->   Operation 465 'call' 'i' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_74 : Operation 466 [2/2] (4.72ns)   --->   "%imm5 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:125->processor.c:901]   --->   Operation 466 'call' 'imm5' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+ST_74 : Operation 467 [2/2] (4.72ns)   --->   "%rn = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:126->processor.c:901]   --->   Operation 467 'call' 'rn' <Predicate = true> <Delay = 4.72> <CoreType = "Generic">   --->   Generic Core
+
+State 75 <SV = 5> <Delay = 4.06>
+ST_75 : Operation 468 [1/2] (3.06ns)   --->   "%i = call i16 @extract_bits, i16 %conv487_read, i4 9, i4 9" [decode.c:124->processor.c:901]   --->   Operation 468 'call' 'i' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_75 : Operation 469 [1/2] (3.06ns)   --->   "%imm5 = call i16 @extract_bits, i16 %conv487_read, i4 6, i4 10" [decode.c:125->processor.c:901]   --->   Operation 469 'call' 'imm5' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_75 : Operation 470 [1/2] (3.06ns)   --->   "%rn = call i16 @extract_bits, i16 %conv487_read, i4 0, i4 2" [decode.c:126->processor.c:901]   --->   Operation 470 'call' 'rn' <Predicate = true> <Delay = 3.06> <CoreType = "Generic">   --->   Generic Core
+ST_75 : Operation 471 [1/1] (0.00ns)   --->   "%trunc_ln129 = trunc i16 %i" [decode.c:129->processor.c:901]   --->   Operation 471 'trunc' 'trunc_ln129' <Predicate = true> <Delay = 0.00>
+ST_75 : Operation 472 [1/1] (0.00ns)   --->   "%shl_ln = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i11.i6, i11 %trunc_ln129, i6 0" [decode.c:129->processor.c:901]   --->   Operation 472 'bitconcatenate' 'shl_ln' <Predicate = true> <Delay = 0.00>
+ST_75 : Operation 473 [1/1] (0.00ns)   --->   "%shl_ln129_1 = bitconcatenate i17 @_ssdm_op_BitConcatenate.i17.i16.i1, i16 %imm5, i1 0" [decode.c:129->processor.c:901]   --->   Operation 473 'bitconcatenate' 'shl_ln129_1' <Predicate = true> <Delay = 0.00>
+ST_75 : Operation 474 [1/1] (1.00ns)   --->   "%or_ln129 = or i17 %shl_ln, i17 %shl_ln129_1" [decode.c:129->processor.c:901]   --->   Operation 474 'or' 'or_ln129' <Predicate = true> <Delay = 1.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 1.00> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_75 : Operation 475 [1/1] (0.00ns)   --->   "%tmp_4 = partselect i5 @_ssdm_op_PartSelect.i5.i16.i32.i32, i16 %i, i32 11, i32 15" [decode.c:129->processor.c:901]   --->   Operation 475 'partselect' 'tmp_4' <Predicate = true> <Delay = 0.00>
+ST_75 : Operation 476 [1/1] (2.07ns)   --->   "%icmp_ln131 = icmp_eq  i16 %op, i16 0" [decode.c:131->processor.c:901]   --->   Operation 476 'icmp' 'icmp_ln131' <Predicate = true> <Delay = 2.07> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_75 : Operation 477 [1/1] (0.00ns)   --->   "%result_rd_17 = trunc i16 %rn" [decode.c:132->processor.c:901]   --->   Operation 477 'trunc' 'result_rd_17' <Predicate = true> <Delay = 0.00>
+
+State 76 <SV = 6> <Delay = 3.20>
+ST_76 : Operation 478 [1/1] (0.00ns)   --->   "%offset = bitconcatenate i22 @_ssdm_op_BitConcatenate.i22.i5.i17, i5 %tmp_4, i17 %or_ln129" [decode.c:129->processor.c:901]   --->   Operation 478 'bitconcatenate' 'offset' <Predicate = true> <Delay = 0.00>
+ST_76 : Operation 479 [1/1] (0.00ns)   --->   "%zext_ln129 = zext i22 %offset" [decode.c:129->processor.c:901]   --->   Operation 479 'zext' 'zext_ln129' <Predicate = true> <Delay = 0.00>
+ST_76 : Operation 480 [1/1] (0.99ns)   --->   "%result_operation = select i1 %icmp_ln131, i7 70, i7 71" [decode.c:131->processor.c:901]   --->   Operation 480 'select' 'result_operation' <Predicate = true> <Delay = 0.99> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_76 : Operation 481 [1/1] (3.20ns)   --->   "%br_ln139 = br void %if.end723.i" [decode.c:139->processor.c:901]   --->   Operation 481 'br' 'br_ln139' <Predicate = true> <Delay = 3.20>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 6.734ns, clock uncertainty: 1.818ns.
+
+ <State 1>: 4.720ns
+The critical path consists of the following:
+	wire read operation ('conv487_read', decode.c:16->processor.c:901) on port 'conv487' (decode.c:16->processor.c:901) [2]  (0.000 ns)
+	'call' operation 16 bit ('bits_15_13', decode.c:20->processor.c:901) to 'extract_bits' [3]  (4.720 ns)
+
+ <State 2>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 1 bit ('result.valid') [395]  (3.203 ns)
+
+ <State 3>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm8', decode.c:105->processor.c:901) to 'extract_bits' [17]  (4.720 ns)
+
+ <State 4>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm8', decode.c:87->processor.c:901) to 'extract_bits' [21]  (3.067 ns)
+
+ <State 5>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 6>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('tmp', decode.c:58->processor.c:901) to 'extract_bits' [39]  (4.720 ns)
+
+ <State 7>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('tmp', decode.c:58->processor.c:901) to 'extract_bits' [39]  (3.067 ns)
+
+ <State 8>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 9>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 10>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 11>: 2.077ns
+The critical path consists of the following:
+	'icmp' operation 1 bit ('icmp_ln182', decode.c:182->processor.c:901) [85]  (2.077 ns)
+
+ <State 12>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opc', decode.c:169->processor.c:901) to 'extract_bits' [63]  (4.720 ns)
+
+ <State 13>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm3', decode.c:170->processor.c:901) to 'extract_bits' [64]  (4.720 ns)
+
+ <State 14>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm3', decode.c:170->processor.c:901) to 'extract_bits' [64]  (3.067 ns)
+
+ <State 15>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 16>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rd', decode.c:311->processor.c:901) to 'extract_bits' [99]  (4.720 ns)
+
+ <State 17>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rd', decode.c:311->processor.c:901) to 'extract_bits' [99]  (3.067 ns)
+
+ <State 18>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 19>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('l', decode.c:428->processor.c:901) to 'extract_bits' [122]  (4.720 ns)
+
+ <State 20>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rn', decode.c:429->processor.c:901) to 'extract_bits' [123]  (4.720 ns)
+
+ <State 21>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rn', decode.c:429->processor.c:901) to 'extract_bits' [123]  (3.067 ns)
+
+ <State 22>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 23>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opc', decode.c:377->processor.c:901) to 'extract_bits' [141]  (4.720 ns)
+
+ <State 24>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm5', decode.c:333->processor.c:901) to 'extract_bits' [166]  (4.720 ns)
+
+ <State 25>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 26>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 27>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 28>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 29>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 30>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm7', decode.c:458->processor.c:901) to 'extract_bits' [193]  (4.720 ns)
+
+ <State 31>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm7', decode.c:458->processor.c:901) to 'extract_bits' [193]  (3.067 ns)
+
+ <State 32>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 33>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm7', decode.c:442->processor.c:901) to 'extract_bits' [198]  (4.720 ns)
+
+ <State 34>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm7', decode.c:442->processor.c:901) to 'extract_bits' [198]  (3.067 ns)
+
+ <State 35>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 36>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('cond', decode.c:504->processor.c:901) to 'extract_bits' [205]  (4.720 ns)
+
+ <State 37>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('cond', decode.c:504->processor.c:901) to 'extract_bits' [205]  (3.067 ns)
+
+ <State 38>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 39>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 40>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 41>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('check_bits', decode.c:486->processor.c:901) to 'extract_bits' [226]  (4.720 ns)
+
+ <State 42>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('l_bit', decode.c:477->processor.c:901) to 'extract_bits' [222]  (4.720 ns)
+
+ <State 43>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('l_bit', decode.c:477->processor.c:901) to 'extract_bits' [222]  (3.067 ns)
+
+ <State 44>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 45>: 4.791ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 1 bit ('result.valid') [392]  (3.203 ns)
+	'phi' operation 1 bit ('result.valid') [392]  (0.000 ns)
+	multiplexor before 'phi' operation 1 bit ('result.valid') [395]  (1.588 ns)
+	'phi' operation 1 bit ('result.valid') [395]  (0.000 ns)
+
+ <State 46>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:534->processor.c:901) to 'extract_bits' [240]  (4.720 ns)
+
+ <State 47>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:534->processor.c:901) to 'extract_bits' [240]  (3.067 ns)
+
+ <State 48>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 49>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 50>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm11', decode.c:525->processor.c:901) to 'extract_bits' [264]  (4.720 ns)
+
+ <State 51>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('imm11', decode.c:525->processor.c:901) to 'extract_bits' [264]  (3.067 ns)
+
+ <State 52>: 2.107ns
+The critical path consists of the following:
+	'xor' operation 1 bit ('xor_ln13_2', decode.c:13->decode.c:528->processor.c:901) [266]  (0.000 ns)
+	'add' operation 18 bit ('result.imm_value', decode.c:13->decode.c:528->processor.c:901) [271]  (2.107 ns)
+
+ <State 53>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 54>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('h1', decode.c:257->processor.c:901) to 'extract_bits' [276]  (4.720 ns)
+
+ <State 55>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:256->processor.c:901) to 'extract_bits' [275]  (4.720 ns)
+
+ <State 56>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:256->processor.c:901) to 'extract_bits' [275]  (3.067 ns)
+
+ <State 57>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 58>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('h1', decode.c:235->processor.c:901) to 'extract_bits' [296]  (4.720 ns)
+
+ <State 59>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('h1', decode.c:235->processor.c:901) to 'extract_bits' [296]  (3.067 ns)
+
+ <State 60>: 2.077ns
+The critical path consists of the following:
+	'icmp' operation 1 bit ('icmp_ln242', decode.c:242->processor.c:901) [303]  (2.077 ns)
+
+ <State 61>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 62>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:202->processor.c:901) to 'extract_bits' [308]  (4.720 ns)
+
+ <State 63>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:202->processor.c:901) to 'extract_bits' [308]  (3.067 ns)
+
+ <State 64>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 65>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 66>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:183->processor.c:901) to 'extract_bits' [347]  (4.720 ns)
+
+ <State 67>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('opcode', decode.c:183->processor.c:901) to 'extract_bits' [347]  (3.067 ns)
+
+ <State 68>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 69>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 70>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rn', decode.c:143->processor.c:901) to 'extract_bits' [362]  (4.720 ns)
+
+ <State 71>: 3.067ns
+The critical path consists of the following:
+	'call' operation 16 bit ('rn', decode.c:143->processor.c:901) to 'extract_bits' [362]  (3.067 ns)
+
+ <State 72>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+ <State 73>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('op', decode.c:123->processor.c:901) to 'extract_bits' [368]  (4.720 ns)
+
+ <State 74>: 4.720ns
+The critical path consists of the following:
+	'call' operation 16 bit ('i', decode.c:124->processor.c:901) to 'extract_bits' [369]  (4.720 ns)
+
+ <State 75>: 4.068ns
+The critical path consists of the following:
+	'call' operation 16 bit ('i', decode.c:124->processor.c:901) to 'extract_bits' [369]  (3.067 ns)
+	'or' operation 17 bit ('or_ln129', decode.c:129->processor.c:901) [375]  (1.001 ns)
+
+ <State 76>: 3.203ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation 16 bit ('result.condition') with incoming values : ('cond', decode.c:504->processor.c:901) [384]  (3.203 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+	State 27
+	State 28
+	State 29
+	State 30
+	State 31
+	State 32
+	State 33
+	State 34
+	State 35
+	State 36
+	State 37
+	State 38
+	State 39
+	State 40
+	State 41
+	State 42
+	State 43
+	State 44
+	State 45
+	State 46
+	State 47
+	State 48
+	State 49
+	State 50
+	State 51
+	State 52
+	State 53
+	State 54
+	State 55
+	State 56
+	State 57
+	State 58
+	State 59
+	State 60
+	State 61
+	State 62
+	State 63
+	State 64
+	State 65
+	State 66
+	State 67
+	State 68
+	State 69
+	State 70
+	State 71
+	State 72
+	State 73
+	State 74
+	State 75
+	State 76
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,102 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_arithmetic_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(23)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_arithmetic_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_branch_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(24)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_branch_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.top=cortex_m0_top' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'cosim.rtl=verilog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(21)
+INFO: [HLS 200-1465] Applying config ini 'cosim.wave_debug=1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(22)
+INFO: [HLS 200-1465] Applying config ini 'package.ip.display_name=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+INFO: [HLS 200-1465] Applying config ini 'package.output.file=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-1465] Applying config ini 'sim.O=0' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(20)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.68 seconds. CPU system time: 0.19 seconds. Elapsed time: 0.89 seconds; current allocated memory: 242.648 MB.
+INFO: [HLS 200-10] Analyzing design file 'decode.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'execute.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'regfile.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'processor.c' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.39 seconds. CPU system time: 0.54 seconds. Elapsed time: 1.05 seconds; current allocated memory: 245.004 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 5,589 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 4,108 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 3,004 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,764 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,612 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,557 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,557 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,557 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,557 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,453 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,409 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,407 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,407 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,407 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,430 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,413 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-178] Inlining function 'is_load_instruction' into 'detect_hazards' (processor.c:130:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'detect_hazards' (processor.c:130:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_sp' into 'regfile_read' (regfile.c:46:0)
+INFO: [HLS 214-178] Inlining function 'regfile_read' into 'detect_forwarding' (processor.c:191:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'detect_forwarding' (processor.c:191:0)
+INFO: [HLS 214-178] Inlining function 'is_load_instruction' into 'detect_forwarding' (processor.c:191:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_sp' into 'regfile_write' (regfile.c:30:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_pc' into 'regfile_write' (regfile.c:30:0)
+INFO: [HLS 214-178] Inlining function 'sign_extend' into 'decode_thumb32_instruction' (decode.c:399:0)
+INFO: [HLS 214-178] Inlining function 'sign_extend' into 'decode_thumb16_instruction' (decode.c:16:0)
+INFO: [HLS 214-178] Inlining function 'regfile_init' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_pc' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'detect_hazards' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_pc' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'regfile_write' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_sp' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_sp' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'process_mem_data' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'is_store_instruction' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'is_32bit_thumb' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-178] Inlining function 'decode_thumb32_instruction' into 'cortex_m0_top' (processor.c:323:0)
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_5_1> at regfile.c:5:21 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_569_2> at processor.c:569:31 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_527_1> at processor.c:527:31 
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2.03 seconds. CPU system time: 0.29 seconds. Elapsed time: 6.64 seconds; current allocated memory: 248.434 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 248.434 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.05 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 250.543 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+ERROR: [SYNCHK 200-21] execute.c:462: The GCC/LLVM intrinsic function 'ctpop' is not supported, only a subset of intrinsics is supported, please check the coding style guide for more information.
+INFO: [SYNCHK 200-10] 1 error(s), 0 warning(s).
+ERROR: [HLS 200-70] Synthesizability check failed.
+ERROR: 
+INFO: [HLS 200-112] Total CPU user time: 3.2 seconds. Total CPU system time: 1.02 seconds. Total elapsed time: 8.72 seconds; peak allocated memory: 252.531 MB.

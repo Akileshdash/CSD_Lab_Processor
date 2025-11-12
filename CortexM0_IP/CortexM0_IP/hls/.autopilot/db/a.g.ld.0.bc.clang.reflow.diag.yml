@@ -1,0 +1,1855 @@
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 179, Column: 27 }
+Function:        detect_hazards
+Args:            
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 179, Column: 61 }
+Function:        detect_hazards
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 52, Column: 16 }
+Function:        regfile_read
+Args:            
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 202, Column: 25 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 243, Column: 13 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 244, Column: 18 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 36, Column: 9 }
+Function:        regfile_write
+Args:            
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 42, Column: 9 }
+Function:        regfile_write
+Args:            
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 13, Column: 12 }
+Function:        execute
+Args:            
+  - Callee:          get_operation_name
+    DebugLoc:        { File: decode.c, Line: 637, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 27, Column: 13 }
+Function:        execute
+Args:            
+  - Callee:          regfile_update_flags
+    DebugLoc:        { File: regfile.c, Line: 102, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 550, Column: 33 }
+Function:        execute
+Args:            
+  - Callee:          popcount
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 622, Column: 28 }
+Function:        decode_thumb32_instruction
+Args:            
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 20, Column: 27 }
+Function:        decode_thumb16_instruction
+Args:            
+  - Callee:          extract_bits
+    DebugLoc:        { File: decode.c, Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 516, Column: 32 }
+Function:        decode_thumb16_instruction
+Args:            
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 391, Column: 9 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_init
+    DebugLoc:        { File: regfile.c, Line: 3, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 396, Column: 17 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_get_pc
+    DebugLoc:        { File: regfile.c, Line: 141, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 419, Column: 31 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 422, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 450, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 535, Column: 17 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 543, Column: 21 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 575, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          popcount.188
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 582, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 592, Column: 40 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 610, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 673, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          process_mem_data
+    DebugLoc:        { File: processor.c, Line: 293, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 793, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          is_store_instruction
+    DebugLoc:        { File: processor.c, Line: 104, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 804, Column: 26 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 824, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 867, Column: 23 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          is_32bit_thumb
+    DebugLoc:        { File: processor.c, Line: 123, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 898, Column: 20 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 901, Column: 20 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 179, Column: 27 }
+Function:        detect_hazards
+Args:            
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 179, Column: 61 }
+Function:        detect_hazards
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 52, Column: 16 }
+Function:        regfile_read
+Args:            
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 202, Column: 25 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 243, Column: 13 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 244, Column: 18 }
+Function:        detect_forwarding
+Args:            
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 36, Column: 9 }
+Function:        regfile_write
+Args:            
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: regfile.c, Line: 42, Column: 9 }
+Function:        regfile_write
+Args:            
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 27, Column: 13 }
+Function:        execute
+Args:            
+  - Callee:          regfile_update_flags
+    DebugLoc:        { File: regfile.c, Line: 102, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 550, Column: 33 }
+Function:        execute
+Args:            
+  - Callee:          popcount
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 622, Column: 28 }
+Function:        decode_thumb32_instruction
+Args:            
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 20, Column: 27 }
+Function:        decode_thumb16_instruction
+Args:            
+  - Callee:          extract_bits
+    DebugLoc:        { File: decode.c, Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 516, Column: 32 }
+Function:        decode_thumb16_instruction
+Args:            
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 391, Column: 9 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_init
+    DebugLoc:        { File: regfile.c, Line: 3, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 396, Column: 17 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_get_pc
+    DebugLoc:        { File: regfile.c, Line: 141, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 419, Column: 31 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 422, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 450, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 535, Column: 17 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 543, Column: 21 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 575, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          popcount.188
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 582, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 592, Column: 40 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 610, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 673, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          process_mem_data
+    DebugLoc:        { File: processor.c, Line: 293, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 793, Column: 13 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          is_store_instruction
+    DebugLoc:        { File: processor.c, Line: 104, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 824, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 867, Column: 23 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          is_32bit_thumb
+    DebugLoc:        { File: processor.c, Line: 123, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 898, Column: 20 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 901, Column: 20 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+Function:        apatb_cortex_m0_top_ir
+Args:            
+  - Callee:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          apatb_cortex_m0_top_ir
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+Function:        detect_hazards
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+Function:        detect_hazards
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+Function:        regfile_read
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+Function:        detect_forwarding
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+Function:        detect_forwarding
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+Function:        detect_forwarding
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          is_load_instruction
+    DebugLoc:        { File: processor.c, Line: 84, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 199, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+Function:        regfile_write
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+Function:        regfile_write
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+Function:        execute
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          popcount
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          execute
+    DebugLoc:        { File: execute.c, Line: 7, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+Function:        decode_thumb32_instruction
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+Function:        decode_thumb16_instruction
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          sign_extend
+    DebugLoc:        { File: decode.c, Line: 11, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: decode.c, Line: 16, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_init
+    DebugLoc:        { File: regfile.c, Line: 3, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_get_pc
+    DebugLoc:        { File: regfile.c, Line: 141, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          detect_hazards
+    DebugLoc:        { File: processor.c, Line: 138, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_set_pc
+    DebugLoc:        { File: regfile.c, Line: 133, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          thumb_writes_register
+    DebugLoc:        { File: processor.c, Line: 16, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_write
+    DebugLoc:        { File: regfile.c, Line: 30, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          popcount.188
+    DebugLoc:        { File: ./execute.h, Line: 43, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_get_sp
+    DebugLoc:        { File: regfile.c, Line: 63, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          regfile_set_sp
+    DebugLoc:        { File: regfile.c, Line: 77, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          process_mem_data
+    DebugLoc:        { File: processor.c, Line: 293, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          is_store_instruction
+    DebugLoc:        { File: processor.c, Line: 104, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          is_32bit_thumb
+    DebugLoc:        { File: processor.c, Line: 123, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Passed
+Pass:            reflow-inliner
+Name:            Inline
+DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Inlining function '''
+  - Callee:          decode_thumb32_instruction
+    DebugLoc:        { File: decode.c, Line: 570, Column: 0 }
+  - String:          ''' into '''
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ''''
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 387, Column: 29 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      msp_init
+    DebugLoc:        { File: processor.c, Line: 387, Column: 29 }
+  - OrigDirection:   read
+  - OrigID:          if.then.load.1
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 388, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      reset_vector
+    DebugLoc:        { File: processor.c, Line: 388, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 594, Column: 42 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 594, Column: 42 }
+  - OrigDirection:   write
+  - OrigID:          if.then98.store.7
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 604, Column: 38 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 604, Column: 38 }
+  - OrigDirection:   write
+  - OrigID:          if.then106.store.7
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 637, Column: 40 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      value
+    DebugLoc:        { File: processor.c, Line: 637, Column: 40 }
+  - OrigDirection:   read
+  - OrigID:          regfile_write.exit311.load.5
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 654, Column: 35 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      pc_return_value
+    DebugLoc:        { File: processor.c, Line: 654, Column: 35 }
+  - OrigDirection:   read
+  - OrigID:          if.then154.load.5
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 716, Column: 61 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 716, Column: 61 }
+  - OrigDirection:   write
+  - OrigID:          if.end266.store.6
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 672, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      next_MEM.mem_data
+    DebugLoc:        { File: processor.c, Line: 672, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then180.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 678, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      raw_data
+    DebugLoc:        { File: processor.c, Line: 678, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then195.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 684, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      raw_data
+    DebugLoc:        { File: processor.c, Line: 684, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then207.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 690, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      raw_data
+    DebugLoc:        { File: processor.c, Line: 690, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then223.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 696, Column: 33 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      raw_data
+    DebugLoc:        { File: processor.c, Line: 696, Column: 33 }
+  - OrigDirection:   read
+  - OrigID:          if.then235.load.4
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 728, Column: 34 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 728, Column: 34 }
+  - OrigDirection:   read
+  - OrigID:          if.then279.load.13
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 728, Column: 31 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 728, Column: 31 }
+  - OrigDirection:   write
+  - OrigID:          if.then279.store.18
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 740, Column: 34 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 740, Column: 34 }
+  - OrigDirection:   read
+  - OrigID:          if.then304.load.14
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 740, Column: 31 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 740, Column: 31 }
+  - OrigDirection:   write
+  - OrigID:          if.then304.store.19
+  - ArrayName:       data_mem
+  - String:          ' '
+  - BundleName:      DATA_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 886, Column: 38 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      next_word
+    DebugLoc:        { File: processor.c, Line: 886, Column: 38 }
+  - OrigDirection:   read
+  - OrigID:          if.else510.load.4
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 873, Column: 29 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      word
+    DebugLoc:        { File: processor.c, Line: 873, Column: 29 }
+  - OrigDirection:   read
+  - OrigID:          if.then495.load.6
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 983, Column: 25 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      word
+    DebugLoc:        { File: processor.c, Line: 983, Column: 25 }
+  - OrigDirection:   read
+  - OrigID:          if.then642.load.5
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1001, Column: 25 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      word
+    DebugLoc:        { File: processor.c, Line: 1001, Column: 25 }
+  - OrigDirection:   read
+  - OrigID:          if.else673.load.5
+  - ArrayName:       instr_mem
+  - String:          ' '
+  - BundleName:      INSTR_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1042, Column: 44 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 1042, Column: 44 }
+  - OrigDirection:   write
+  - OrigID:          for.end728.store.6
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1043, Column: 44 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 1043, Column: 44 }
+  - OrigDirection:   write
+  - OrigID:          for.end728.store.9
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1044, Column: 44 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 1044, Column: 44 }
+  - OrigDirection:   write
+  - OrigID:          for.end728.store.11
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1039, Column: 47 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      store
+    DebugLoc:        { File: processor.c, Line: 1039, Column: 47 }
+  - OrigDirection:   write
+  - OrigID:          for.inc726.store.8
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1052, Column: 12 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 1052, Column: 12 }
+  - OrigDirection:   read
+  - OrigID:          for.end750.load.1
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1052, Column: 25 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 1052, Column: 25 }
+  - OrigDirection:   read
+  - OrigID:          for.end750.load.3
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1052, Column: 38 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 1052, Column: 38 }
+  - OrigDirection:   read
+  - OrigID:          for.end750.load.5
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Missed
+Pass:            reflow-burst-inference
+Name:            NonSimpleMemoryAccess
+DebugLoc:        { File: processor.c, Line: 1048, Column: 36 }
+Function:        cortex_m0_top
+Args:            
+  - String:          Volatile or Atomic access cannot be transformed
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: processor.c, Line: 1048, Column: 36 }
+  - OrigDirection:   read
+  - OrigID:          for.body739.load.3
+  - ArrayName:       reg_out
+  - String:          ' '
+  - BundleName:      REG_BUS
+  - String:          ' '
+  - Function:        cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' '
+...
+--- !Failure
+Pass:            reflow-occurrence-analysis
+Name:            CouldNotAnalyzeBBInfo
+DebugLoc:        { File: processor.c, Line: 592, Column: 40 }
+Function:        cortex_m0_top
+Args:            
+  - String:          'Could not analyze occurrence information for '''
+  - BBName:          if.then98
+  - String:          ''' living in '''
+  - LoopName:        VITIS_LOOP_590_1
+  - String:          '''('
+  - LoopLoc:         'processor.c:590:31'
+  - String:          ') .'
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_5_1
+  - String:          '> at '
+  - LoopLoc:         'regfile.c:5:21'
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_634_2
+  - String:          '> at '
+  - LoopLoc:         'processor.c:634:31'
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_590_1
+  - String:          '> at '
+  - LoopLoc:         'processor.c:590:31'
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_1038_3
+  - String:          '> at '
+  - LoopLoc:         'processor.c:1038:24'
+  - String:          ' '
+...
+--- !HLSReportInfo
+Pass:            auto-loop-pipeline
+Name:            AutoLoopPipeline
+Args:            
+  - String:          'automatically set the pipeline for Loop< '
+  - LoopName:        VITIS_LOOP_1047_4
+  - String:          '> at '
+  - LoopLoc:         'processor.c:1047:24'
+  - String:          ' '
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: execute.c, Line: 27, Column: 13 }
+Function:        execute
+Args:            
+  - Callee:          regfile_update_flags
+    DebugLoc:        { File: regfile.c, Line: 102, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          execute
+    DebugLoc:        { File: processor.c, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: decode.c, Line: 20, Column: 27 }
+Function:        decode_thumb16_instruction
+Args:            
+  - Callee:          extract_bits
+    DebugLoc:        { File: decode.c, Line: 6, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          decode_thumb16_instruction
+    DebugLoc:        { File: processor.c, Line: 0, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 422, Column: 5 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          detect_forwarding
+    DebugLoc:        { File: processor.c, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 592, Column: 40 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          regfile_read
+    DebugLoc:        { File: regfile.c, Line: 46, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 824, Column: 9 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          execute
+    DebugLoc:        { File: processor.c, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...
+--- !Missed
+Pass:            inline
+Name:            NeverInline
+DebugLoc:        { File: processor.c, Line: 901, Column: 20 }
+Function:        cortex_m0_top
+Args:            
+  - Callee:          decode_thumb16_instruction
+    DebugLoc:        { File: processor.c, Line: 0, Column: 0 }
+  - String:          ' not inlined into '
+  - Caller:          cortex_m0_top
+    DebugLoc:        { File: processor.c, Line: 334, Column: 0 }
+  - String:          ' because it should never be inlined (cost=never)'
+...

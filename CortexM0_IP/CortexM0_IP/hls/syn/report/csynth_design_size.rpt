@@ -1,0 +1,82 @@
+================================================================
+== Design Size Report
+================================================================
+
+* Total Instructions per Compilation Phase
++---------------+-----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Phase         | Step                        | Instructions | Description                                                                            |
++---------------+-----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Compile/Link  |                             | 6,497        | After all functions are compiled and linked into a single design                       |
+|               |                             |              |                                                                                        |
+| Unroll/Inline |                             |              | After user unroll and inline pragmas are applied                                       |
+|               | (1) unroll                  | 4,747        | user unroll pragmas are applied                                                        |
+|               | (2) simplification          | 3,422        | simplification of applied user unroll pragmas                                          |
+|               | (3) inline                  | 3,157        | user inline pragmas are applied                                                        |
+|               | (4) simplification          | 2,983        | simplification of applied user inline pragmas                                          |
+|               |                             |              |                                                                                        |
+| Array/Struct  |                             |              | After user array partition and struct aggregate/disaggregate pragmas are applied       |
+|               | (1) array partition         | 2,926        | user array partition pragmas are applied                                               |
+|               | (2) simplification          | 2,926        | simplification of applied user array partition & struct aggregate/disaggregate pragmas |
+|               | (3) aggregate/disaggregate  | 2,926        | user struct aggregate/disaggregate pragmas are applied                                 |
+|               | (4) array reshape           | 2,926        | apply array reshape pragmas                                                            |
+|               | (5) access patterns         | 2,811        | array access pattern optmizations                                                      |
+|               |                             |              |                                                                                        |
+| Performance   |                             |              | After transformations are applied to meet performance pragma targets                   |
+|               | (1) loop simplification     | 2,765        | loop and instruction simplification                                                    |
+|               | (2) parallelization         | 2,763        | loops are unrolled or pipelined to meet performance targets                            |
+|               | (3) array partition         | 2,763        | arrays are partitioned to meet performance targets                                     |
+|               | (4) simplification          | 2,763        | simplification of design after performance transformations                             |
+|               |                             |              |                                                                                        |
+| HW Transforms |                             |              | After hardware transfomations                                                          |
+|               | (1) lowering                | 2,805        | initial conversion to HW specific instructions                                         |
+|               | (2) optimizations           | 2,796        | high level synthesis optimizations                                                     |
++---------------+-----------------------------+--------------+----------------------------------------------------------------------------------------+
+
+* Instructions per Function for each Compilation Phase
++-------------------------------+-----------------+-----------------+-----------------+-----------------+-----------------+----------------+
+| Function                      | Location        | Compile/Link    | Unroll/Inline   | Array/Struct    | Performance     | HW Transforms  |
++-------------------------------+-----------------+-----------------+-----------------+-----------------+-----------------+----------------+
+| + cortex_m0_top               | processor.c:326 | 6,497           | 2,983           | 2,811           | 2,763           | 2,796          |
+|    regfile_init               | regfile.c:3     |   36            |                 |                 |                 |                |
+|    regfile_get_pc             | regfile.c:141   |   15 (5 calls)  |                 |                 |                 |                |
+|  + detect_hazards             | processor.c:138 |  160            |                 |                 |                 |                |
+|     is_load_instruction       | processor.c:84  |    5            |                 |                 |                 |                |
+|     thumb_writes_register     | processor.c:16  |    7            |                 |                 |                 |                |
+|  + detect_forwarding          | processor.c:199 |  457            |  145            |  125            |  115            |                |
+|   + regfile_read              | regfile.c:46    |   96 (2 calls)  |                 |                 |                 |                |
+|      regfile_get_sp           | regfile.c:63    |   40 (2 calls)  |                 |                 |                 |                |
+|     thumb_writes_register     | processor.c:16  |   42 (6 calls)  |                 |                 |                 |                |
+|     is_load_instruction       | processor.c:84  |   10 (2 calls)  |                 |                 |                 |                |
+|    regfile_set_pc             | regfile.c:133   |   63 (9 calls)  |                 |                 |                 |                |
+|    thumb_writes_register      | processor.c:16  |   28 (4 calls)  |                 |                 |                 |                |
+|  + regfile_write              | regfile.c:30    |  100 (2 calls)  |                 |                 |                 |                |
+|     regfile_set_pc            | regfile.c:133   |   14 (2 calls)  |                 |                 |                 |                |
+|     regfile_set_sp            | regfile.c:77    |   38 (2 calls)  |                 |                 |                 |                |
+|  + regfile_read               | regfile.c:46    |  288 (6 calls)  |  162 (6 calls)  |  126 (6 calls)  |   96 (6 calls)  |   96 (6 calls) |
+|     regfile_get_sp            | regfile.c:63    |  120 (6 calls)  |                 |                 |                 |                |
+|    process_mem_data           | processor.c:293 |  155 (5 calls)  |                 |                 |                 |                |
+|    popcount                   | execute.h:43    |   32 (2 calls)  |                 |                 |                 |                |
+|    regfile_get_sp             | regfile.c:63    |   60 (3 calls)  |                 |                 |                 |                |
+|    regfile_set_sp             | regfile.c:77    |   38 (2 calls)  |                 |                 |                 |                |
+|    is_store_instruction       | processor.c:104 |    5            |                 |                 |                 |                |
+|    is_load_instruction        | processor.c:84  |    5            |                 |                 |                 |                |
+|  + execute                    | execute.c:7     | 2,156           |  874            |  874            |  874            |                |
+|     get_operation_name        | decode.c:637    |   20 (2 calls)  |                 |                 |                 |                |
+|     regfile_update_flags      | regfile.c:102   |  702 (26 calls) |  442 (26 calls) |  442 (26 calls) |  442 (26 calls) |                |
+|     popcount                  | execute.h:43    |   32 (2 calls)  |                 |                 |                 |                |
+|    is_32bit_thumb             | processor.c:123 |   30 (2 calls)  |                 |                 |                 |                |
+|  + decode_thumb16_instruction | decode.c:16     | 1,451           |  806            |  806            |  806            |                |
+|     extract_bits              | decode.c:6      |  546 (78 calls) |  518 (74 calls) |  518 (74 calls) |  518 (74 calls) |                |
+|     sign_extend               | decode.c:11     |   10 (2 calls)  |                 |                 |                 |                |
+|  + decode_thumb32_instruction | decode.c:570    |  108            |                 |                 |                 |                |
+|     sign_extend               | decode.c:11     |    5            |                 |                 |                 |                |
++-------------------------------+-----------------+-----------------+-----------------+-----------------+-----------------+----------------+
+
+* Design Size Message Settings
++---------------------------------------------+--------+------------------------------------------------------------------+
+| Message Setting                             | Value  | Description                                                      |
++---------------------------------------------+--------+------------------------------------------------------------------+
+| config_compile -design_size_maximum_warning | 100000 | Show a warning when total design instructions exceeds this value |
++---------------------------------------------+--------+------------------------------------------------------------------+
+
+

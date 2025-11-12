@@ -1,0 +1,39 @@
+<pragmas>
+<pragma file="processor.c" line="335" pragmaType="interface" parentfunction="cortex_m0_top" mode="m_axi" port="instr_mem" bundle="INSTR_BUS" offset="slave" name="" depth="-1" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="processor.c" line="336" pragmaType="interface" parentfunction="cortex_m0_top" mode="m_axi" port="data_mem" bundle="DATA_BUS" offset="slave" name="" depth="-1" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="processor.c" line="337" pragmaType="interface" parentfunction="cortex_m0_top" mode="m_axi" port="reg_out" bundle="REG_BUS" offset="slave" name="" depth="-1" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
+<pragma file="processor.c" line="340" pragmaType="interface" parentfunction="cortex_m0_top" mode="ap_ctrl_none" port="return" name=""/>
+<pragma file="processor.c" line="351" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="352" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="353" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="354" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="355" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="356" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="357" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="358" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="359" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="360" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="361" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="362" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="363" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="364" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="365" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="366" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="367" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="368" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="369" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="370" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="371" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="372" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="373" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="374" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="375" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="376" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="377" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="378" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="379" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="380" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="381" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="382" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable=""/>
+<pragma file="processor.c" line="383" pragmaType="reset" parentfunction="cortex_m0_top" off="0" variable="cortex_m0_top.init_done"/>
+</pragmas>

@@ -1,0 +1,366 @@
+{
+  "0": {
+    "basicblocks": 206,
+    "calls": "12 9 23 4 1 9 1 9 1 1 1 1 20 13 1 8 8 20 8 10 10 10 10 10 17 5 13 18 17 5 8 18 6 20 20 14 16 11 21 7 8 8 11 1 1 9 5 9",
+    "control_depth": 2,
+    "def_use_depth": 8,
+    "file": "processor.c",
+    "fileloc": 326,
+    "instructions": 1310,
+    "loads": {
+      "G": 158,
+      "L": 90,
+      "T": 19
+    },
+    "memory_accesses": 11,
+    "name": "cortex_m0_top",
+    "stores": {
+      "G": 14,
+      "L": 128,
+      "T": 10
+    },
+    "total_instructions": 6497
+  },
+  "1": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 3,
+    "file": "regfile.c",
+    "fileloc": 133,
+    "instructions": 7,
+    "loads": {
+      "L": 1
+    },
+    "memory_accesses": 0,
+    "name": "regfile_set_pc",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 7
+  },
+  "10": {
+    "basicblocks": 12,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 3,
+    "file": "processor.c",
+    "fileloc": 293,
+    "instructions": 31,
+    "memory_accesses": 0,
+    "name": "process_mem_data",
+    "total_instructions": 31
+  },
+  "11": {
+    "basicblocks": 4,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 3,
+    "file": "processor.c",
+    "fileloc": 123,
+    "instructions": 15,
+    "memory_accesses": 0,
+    "name": "is_32bit_thumb",
+    "total_instructions": 15
+  },
+  "12": {
+    "basicblocks": 7,
+    "calls": "",
+    "control_depth": 1,
+    "def_use_depth": 2,
+    "file": "regfile.c",
+    "fileloc": 3,
+    "instructions": 36,
+    "memory_accesses": 1,
+    "name": "regfile_init",
+    "stores": {
+      "L": 11
+    },
+    "total_instructions": 36
+  },
+  "13": {
+    "basicblocks": 12,
+    "calls": "1 18",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "regfile.c",
+    "fileloc": 30,
+    "instructions": 24,
+    "memory_accesses": 0,
+    "name": "regfile_write",
+    "stores": {
+      "L": 2
+    },
+    "total_instructions": 50
+  },
+  "14": {
+    "basicblocks": 4,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "processor.c",
+    "fileloc": 84,
+    "instructions": 5,
+    "memory_accesses": 0,
+    "name": "is_load_instruction",
+    "total_instructions": 5
+  },
+  "15": {
+    "basicblocks": 4,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "decode.c",
+    "fileloc": 637,
+    "instructions": 10,
+    "loads": {
+      "G": 1
+    },
+    "memory_accesses": 0,
+    "name": "get_operation_name",
+    "total_instructions": 10
+  },
+  "16": {
+    "basicblocks": 122,
+    "calls": "15 2 2 2 2 2 2 2 19 19 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 15",
+    "control_depth": 0,
+    "def_use_depth": 9,
+    "file": "execute.c",
+    "fileloc": 7,
+    "instructions": 1402,
+    "loads": {
+      "L": 277
+    },
+    "memory_accesses": 0,
+    "name": "execute",
+    "stores": {
+      "L": 140
+    },
+    "total_instructions": 2156
+  },
+  "17": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 14,
+    "file": "execute.h",
+    "fileloc": 43,
+    "instructions": 16,
+    "memory_accesses": 0,
+    "name": "popcount",
+    "total_instructions": 16
+  },
+  "18": {
+    "basicblocks": 6,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "regfile.c",
+    "fileloc": 77,
+    "instructions": 19,
+    "loads": {
+      "L": 2
+    },
+    "memory_accesses": 0,
+    "name": "regfile_set_sp",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 19
+  },
+  "19": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 14,
+    "file": "execute.h",
+    "fileloc": 43,
+    "instructions": 16,
+    "memory_accesses": 0,
+    "name": "popcount",
+    "total_instructions": 16
+  },
+  "2": {
+    "basicblocks": 9,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "regfile.c",
+    "fileloc": 102,
+    "instructions": 27,
+    "loads": {
+      "L": 1
+    },
+    "memory_accesses": 0,
+    "name": "regfile_update_flags",
+    "stores": {
+      "L": 1
+    },
+    "total_instructions": 27
+  },
+  "20": {
+    "basicblocks": 6,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "processor.c",
+    "fileloc": 16,
+    "instructions": 7,
+    "memory_accesses": 0,
+    "name": "thumb_writes_register",
+    "total_instructions": 7
+  },
+  "21": {
+    "basicblocks": 176,
+    "calls": "22 22 22 22 22 22 22 22 22 22 22 22 22 3 22 22 3 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22 22",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "decode.c",
+    "fileloc": 16,
+    "instructions": 895,
+    "loads": {
+      "L": 8
+    },
+    "memory_accesses": 0,
+    "name": "decode_thumb16_instruction",
+    "stores": {
+      "L": 186
+    },
+    "total_instructions": 1451
+  },
+  "22": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 5,
+    "file": "decode.c",
+    "fileloc": 6,
+    "instructions": 7,
+    "memory_accesses": 0,
+    "name": "extract_bits",
+    "total_instructions": 7
+  },
+  "23": {
+    "basicblocks": 34,
+    "calls": "14 20",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "processor.c",
+    "fileloc": 138,
+    "instructions": 148,
+    "loads": {
+      "L": 24
+    },
+    "memory_accesses": 0,
+    "name": "detect_hazards",
+    "stores": {
+      "L": 12
+    },
+    "total_instructions": 160
+  },
+  "3": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "decode.c",
+    "fileloc": 11,
+    "instructions": 5,
+    "memory_accesses": 0,
+    "name": "sign_extend",
+    "total_instructions": 5
+  },
+  "4": {
+    "basicblocks": 54,
+    "calls": "8 8 20 20 20 14 20 20 20 14",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "processor.c",
+    "fileloc": 199,
+    "instructions": 309,
+    "loads": {
+      "L": 73
+    },
+    "memory_accesses": 0,
+    "name": "detect_forwarding",
+    "stores": {
+      "L": 25
+    },
+    "total_instructions": 457
+  },
+  "5": {
+    "basicblocks": 6,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 4,
+    "file": "regfile.c",
+    "fileloc": 63,
+    "instructions": 20,
+    "loads": {
+      "L": 5
+    },
+    "memory_accesses": 0,
+    "name": "regfile_get_sp",
+    "total_instructions": 20
+  },
+  "6": {
+    "basicblocks": 4,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "processor.c",
+    "fileloc": 104,
+    "instructions": 5,
+    "memory_accesses": 0,
+    "name": "is_store_instruction",
+    "total_instructions": 5
+  },
+  "7": {
+    "basicblocks": 9,
+    "calls": "3",
+    "control_depth": 0,
+    "def_use_depth": 12,
+    "file": "decode.c",
+    "fileloc": 570,
+    "instructions": 103,
+    "loads": {
+      "L": 5
+    },
+    "memory_accesses": 0,
+    "name": "decode_thumb32_instruction",
+    "stores": {
+      "L": 16
+    },
+    "total_instructions": 108
+  },
+  "8": {
+    "basicblocks": 13,
+    "calls": "5",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "regfile.c",
+    "fileloc": 46,
+    "instructions": 28,
+    "loads": {
+      "L": 3
+    },
+    "memory_accesses": 0,
+    "name": "regfile_read",
+    "total_instructions": 48
+  },
+  "9": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "regfile.c",
+    "fileloc": 141,
+    "instructions": 3,
+    "loads": {
+      "L": 1
+    },
+    "memory_accesses": 0,
+    "name": "regfile_get_pc",
+    "total_instructions": 3
+  }
+}

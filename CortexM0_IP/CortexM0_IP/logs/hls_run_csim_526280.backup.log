@@ -1,0 +1,1749 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_arithmetic_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_arithmetic_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.top=cortex_m0_top' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'cosim.rtl=verilog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(22)
+INFO: [HLS 200-1465] Applying config ini 'cosim.wave_debug=1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(23)
+INFO: [HLS 200-1465] Applying config ini 'package.ip.display_name=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(20)
+INFO: [HLS 200-1465] Applying config ini 'package.output.file=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-1465] Applying config ini 'sim.O=0' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(21)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../tb_arithmetic_stmts.c in debug mode
+   Generating csim.exe
+========== Cortex-M0 Comprehensive Instruction Test Suite ==========
+
+=== TEST: MAX OF THREE ===
+
+================ Cycle 1 ==================
+[WB]  opcode=0 | rd=0 | write_data=0x00000000
+[MEM] opcode=0 | rd=0 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0x00000000
+[EX DEBUG] EXECUTE: Opcode=INVALID, Rd=0, Operand1=0x00000000, Operand2=0x00000000, CarryIn=0
+[WARN] EXECUTE: Unhandled opcode INVALID
+[EX]  opcode=0 | rd=0 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=0 | word_index=0 | instr16=0x200F | next_pc=1
+[REGFILE] R0-R12:
+ R0 =0x00000000 R1 =0x00000000 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000002
+
+================ Cycle 2 ==================
+[WB]  opcode=0 | rd=0 | write_data=0x00000000
+[MEM] opcode=0 | rd=0 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0xFFFFFFFE
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x00000000, Operand2=0x00000000, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x200F | bits_15_13=0x1 | bits_15_12=0x2 | bits_15_11=0x4 | bits_15_10=0x8 | bits_15_9=0x10 | bits_15_8=0x20 | bits_15_6=0x80
+[ID]  instr16=0x200F | is32bit=0 | opcode=2 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=1 | word_index=0 | instr16=0x2119 | next_pc=2
+[REGFILE] R0-R12:
+ R0 =0x00000000 R1 =0x00000000 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000004
+
+================ Cycle 3 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x00000000
+[FORWARD] EX->ID forwarding for rs2=0, data=0x00000000
+[WB]  opcode=0 | rd=0 | write_data=0x00000000
+[MEM] opcode=1 | rd=0 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x0000000F | imm_flag=1 | pc=0x00000000
+[EX DEBUG] EXECUTE: Opcode=MOV_IMM, Rd=0, Operand1=0x00000000, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=2 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x2119 | bits_15_13=0x1 | bits_15_12=0x2 | bits_15_11=0x4 | bits_15_10=0x8 | bits_15_9=0x10 | bits_15_8=0x21 | bits_15_6=0x84
+[ID]  instr16=0x2119 | is32bit=0 | opcode=2 | rd=1 | rs1=1 | rs2=0
+[IF]  pc=2 | word_index=1 | instr16=0x220A | next_pc=3
+[REGFILE] R0-R12:
+ R0 =0x00000000 R1 =0x00000000 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000006
+
+================ Cycle 4 ==================
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x00000000
+[MEM] opcode=2 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000019 | imm_flag=1 | pc=0x00000002
+[EX DEBUG] EXECUTE: Opcode=MOV_IMM, Rd=1, Operand1=0x00000000, Operand2=0x00000019, CarryIn=0
+[EX]  opcode=2 | rd=1 | alu_result=0x00000019 | reg_data2=0x00000019
+[DECODE DEBUG] instr=0x220A | bits_15_13=0x1 | bits_15_12=0x2 | bits_15_11=0x4 | bits_15_10=0x8 | bits_15_9=0x11 | bits_15_8=0x22 | bits_15_6=0x88
+[ID]  instr16=0x220A | is32bit=0 | opcode=2 | rd=2 | rs1=2 | rs2=0
+[IF]  pc=3 | word_index=1 | instr16=0x001B | next_pc=4
+[REGFILE] R0-R12:
+ R0 =0x00000000 R1 =0x00000000 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000008
+
+================ Cycle 5 ==================
+[FORWARD] MEM->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=2 | rd=0 | write_data=0x0000000F
+[MEM] opcode=2 | rd=1 | alu_result=0x00000019 | mem_data=0x00000019
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x0000000A | imm_flag=1 | pc=0x00000004
+[EX DEBUG] EXECUTE: Opcode=MOV_IMM, Rd=2, Operand1=0x00000000, Operand2=0x0000000A, CarryIn=0
+[EX]  opcode=2 | rd=2 | alu_result=0x0000000A | reg_data2=0x0000000A
+[DECODE DEBUG] instr=0x001B | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x001B | is32bit=0 | opcode=1 | rd=3 | rs1=3 | rs2=0
+[IF]  pc=4 | word_index=2 | instr16=0x4299 | next_pc=5
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000000 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000000A
+
+================ Cycle 6 ==================
+[WB]  opcode=2 | rd=1 | write_data=0x00000019
+[MEM] opcode=2 | rd=2 | alu_result=0x0000000A | mem_data=0x0000000A
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0x00000006
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=3, Operand1=0x00000000, Operand2=0x00000000, CarryIn=0
+[EX]  opcode=1 | rd=3 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x4299 | bits_15_13=0x2 | bits_15_12=0x4 | bits_15_11=0x8 | bits_15_10=0x10 | bits_15_9=0x21 | bits_15_8=0x42 | bits_15_6=0x10A
+[ID]  instr16=0x4299 | is32bit=0 | opcode=20 | rd=1 | rs1=1 | rs2=3
+[IF]  pc=5 | word_index=2 | instr16=0xD202 | next_pc=6
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x00000000 R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000000C
+
+================ Cycle 7 ==================
+[FORWARD] EX->ID forwarding for rs2=3, data=0x00000000
+[WB]  opcode=2 | rd=2 | write_data=0x0000000A
+[MEM] opcode=1 | rd=3 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x00000019 | reg_data2=0x00000000 | imm_flag=0 | pc=0x00000008
+[EX DEBUG] EXECUTE: Opcode=CMP_REG, Rd=1, Operand1=0x00000019, Operand2=0x00000000, CarryIn=0
+[EX DEBUG CMP] CMP: 0x00000019 - 0x00000000 = 0x00000019, flags=0x20000000 (N=0 Z=0 C=1 V=0)
+[EX]  opcode=20 | rd=1 | alu_result=0x00000019 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0xD202 | bits_15_13=0x6 | bits_15_12=0xD | bits_15_11=0x1A | bits_15_10=0x34 | bits_15_9=0x69 | bits_15_8=0xD2 | bits_15_6=0x348
+[ID]  instr16=0xD202 | is32bit=0 | opcode=36 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=6 | word_index=3 | instr16=0x001B | next_pc=7
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000000E
+
+================ Cycle 8 ==================
+[FORWARD] EX->ID forwarding CPSR=0x20000000
+[WB]  opcode=1 | rd=3 | write_data=0x00000000
+[MEM] opcode=20 | rd=1 | alu_result=0x00000019 | mem_data=0x00000019
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x00000004 | imm_flag=1 | pc=0x0000000A
+[EX DEBUG] EXECUTE: Opcode=B_COND, Rd=0, Operand1=0x0000000F, Operand2=0x00000004, CarryIn=0
+[EX DEBUG B_COND] Branch TAKEN - Condition 0x2 met, target=0x00000012
+[EX]  opcode=36 | rd=0 | alu_result=0x00000012 | reg_data2=0x00000004
+[DECODE DEBUG] instr=0x001B | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x001B | is32bit=0 | opcode=1 | rd=3 | rs1=3 | rs2=0
+[IF]  pc=7 | word_index=3 | instr16=0x429A | next_pc=8
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000010
+
+================ Cycle 9 ==================
+[FORWARD] MEM->ID forwarding CPSR=0x20000000
+[WB] Updated APSR=0x20000000 from CMP instruction
+[WB]  opcode=20 | rd=1 | write_data=0x00000019
+[MEM] opcode=36 | rd=0 | alu_result=0x00000012 | mem_data=0x00000012
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0x0000000C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=3, Operand1=0x00000000, Operand2=0x00000000, CarryIn=1
+[EX]  opcode=1 | rd=3 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x429A | bits_15_13=0x2 | bits_15_12=0x4 | bits_15_11=0x8 | bits_15_10=0x10 | bits_15_9=0x21 | bits_15_8=0x42 | bits_15_6=0x10A
+[ID]  instr16=0x429A | is32bit=0 | opcode=20 | rd=2 | rs1=2 | rs2=3
+[IF]  pc=8 | word_index=4 | instr16=0xD200 | next_pc=9
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000012
+
+================ Cycle 10 ==================
+[FORWARD] EX->ID forwarding for rs2=3, data=0x00000000
+[WB] CONDITIONAL BRANCH NOT TAKEN - continuing at PC=0x00000012
+[WB]  opcode=36 | rd=0 | write_data=0x00000012
+[MEM] opcode=1 | rd=3 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000A | reg_data2=0x00000000 | imm_flag=0 | pc=0x0000000E
+[EX DEBUG] EXECUTE: Opcode=CMP_REG, Rd=2, Operand1=0x0000000A, Operand2=0x00000000, CarryIn=0
+[EX DEBUG CMP] CMP: 0x0000000A - 0x00000000 = 0x0000000A, flags=0x20000000 (N=0 Z=0 C=1 V=0)
+[EX]  opcode=20 | rd=2 | alu_result=0x0000000A | reg_data2=0x00000000
+[DECODE DEBUG] instr=0xD200 | bits_15_13=0x6 | bits_15_12=0xD | bits_15_11=0x1A | bits_15_10=0x34 | bits_15_9=0x69 | bits_15_8=0xD2 | bits_15_6=0x348
+[ID]  instr16=0xD200 | is32bit=0 | opcode=36 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=9 | word_index=4 | instr16=0x0013 | next_pc=10
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000014
+
+================ Cycle 11 ==================
+[FORWARD] EX->ID forwarding CPSR=0x20000000
+[WB]  opcode=1 | rd=3 | write_data=0x00000000
+[MEM] opcode=20 | rd=2 | alu_result=0x0000000A | mem_data=0x0000000A
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x00000000 | imm_flag=1 | pc=0x00000010
+[EX DEBUG] EXECUTE: Opcode=B_COND, Rd=0, Operand1=0x0000000F, Operand2=0x00000000, CarryIn=0
+[EX DEBUG B_COND] Branch TAKEN - Condition 0x2 met, target=0x00000014
+[EX]  opcode=36 | rd=0 | alu_result=0x00000014 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x0013 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0013 | is32bit=0 | opcode=1 | rd=3 | rs1=2 | rs2=0
+[IF]  pc=10 | word_index=5 | instr16=0x46C0 | next_pc=11
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000016
+
+================ Cycle 12 ==================
+[FORWARD] MEM->ID forwarding CPSR=0x20000000
+[WB] Updated APSR=0x20000000 from CMP instruction
+[WB]  opcode=20 | rd=2 | write_data=0x0000000A
+[MEM] opcode=36 | rd=0 | alu_result=0x00000014 | mem_data=0x00000014
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000A | reg_data2=0x0000000A | imm_flag=0 | pc=0x00000012
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=3, Operand1=0x0000000A, Operand2=0x0000000A, CarryIn=1
+[EX]  opcode=1 | rd=3 | alu_result=0x0000000A | reg_data2=0x0000000A
+[DECODE DEBUG] instr=0x46C0 | bits_15_13=0x2 | bits_15_12=0x4 | bits_15_11=0x8 | bits_15_10=0x11 | bits_15_9=0x23 | bits_15_8=0x46 | bits_15_6=0x11B
+[ID]  instr16=0x46C0 | is32bit=0 | opcode=3 | rd=8 | rs1=8 | rs2=8
+[IF]  pc=11 | word_index=5 | instr16=0x0000 | next_pc=12
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000018
+
+================ Cycle 13 ==================
+[WB] CONDITIONAL BRANCH TAKEN! Target PC=0x00000014 (halfword=10)
+[WB]  opcode=36 | rd=0 | write_data=0x00000014
+[MEM] opcode=1 | rd=3 | alu_result=0x0000000A | mem_data=0x0000000A
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0x00000014
+[EX DEBUG] EXECUTE: Opcode=MOV_HIGH, Rd=8, Operand1=0x00000000, Operand2=0x00000000, CarryIn=0
+[EX]  opcode=3 | rd=8 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  BRANCH TARGET FETCH | pc=10 | instr16=0x46C0 | next_pc=11
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x00000000
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000016
+
+================ Cycle 14 ==================
+[WB]  opcode=1 | rd=3 | write_data=0x0000000A
+[MEM] opcode=3 | rd=8 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000016
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x46C0 | bits_15_13=0x2 | bits_15_12=0x4 | bits_15_11=0x8 | bits_15_10=0x11 | bits_15_9=0x23 | bits_15_8=0x46 | bits_15_6=0x11B
+[ID]  instr16=0x46C0 | is32bit=0 | opcode=3 | rd=8 | rs1=8 | rs2=8
+[IF]  pc=11 | word_index=5 | instr16=0x0000 | next_pc=12
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000018
+
+================ Cycle 15 ==================
+[FORWARD] MEM->ID forwarding for rs1=8, data=0x00000000
+[FORWARD] MEM->ID forwarding for rs2=8, data=0x00000000
+[WB]  opcode=3 | rd=8 | write_data=0x00000000
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x00000000 | reg_data2=0x00000000 | imm_flag=0 | pc=0x00000014
+[EX DEBUG] EXECUTE: Opcode=MOV_HIGH, Rd=8, Operand1=0x00000000, Operand2=0x00000000, CarryIn=0
+[EX]  opcode=3 | rd=8 | alu_result=0x00000000 | reg_data2=0x00000000
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=12 | word_index=6 | instr16=0x0000 | next_pc=13
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000001A
+
+================ Cycle 16 ==================
+[FORWARD] MEM->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] MEM->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=3 | rd=8 | alu_result=0x00000000 | mem_data=0x00000000
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000016
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=13 | word_index=6 | instr16=0x0000 | next_pc=14
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000001C
+
+================ Cycle 17 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=3 | rd=8 | write_data=0x00000000
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000018
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=14 | word_index=7 | instr16=0x0000 | next_pc=15
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000001E
+
+================ Cycle 18 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000001A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=15 | word_index=7 | instr16=0x0000 | next_pc=16
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000020
+
+================ Cycle 19 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000001C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=16 | word_index=8 | instr16=0x0000 | next_pc=17
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000022
+
+================ Cycle 20 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000001E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=17 | word_index=8 | instr16=0x0000 | next_pc=18
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000024
+
+================ Cycle 21 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000020
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=18 | word_index=9 | instr16=0x0000 | next_pc=19
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000026
+
+================ Cycle 22 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000022
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=19 | word_index=9 | instr16=0x0000 | next_pc=20
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000028
+
+================ Cycle 23 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000024
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=20 | word_index=10 | instr16=0x0000 | next_pc=21
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000002A
+
+================ Cycle 24 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000026
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=21 | word_index=10 | instr16=0x0000 | next_pc=22
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000002C
+
+================ Cycle 25 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000028
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=22 | word_index=11 | instr16=0x0000 | next_pc=23
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000002E
+
+================ Cycle 26 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000002A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=23 | word_index=11 | instr16=0x0000 | next_pc=24
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000030
+
+================ Cycle 27 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000002C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=24 | word_index=12 | instr16=0x0000 | next_pc=25
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000032
+
+================ Cycle 28 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000002E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=25 | word_index=12 | instr16=0x0000 | next_pc=26
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000034
+
+================ Cycle 29 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000030
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=26 | word_index=13 | instr16=0x0000 | next_pc=27
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000036
+
+================ Cycle 30 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000032
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=27 | word_index=13 | instr16=0x0000 | next_pc=28
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000038
+
+================ Cycle 31 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000034
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=28 | word_index=14 | instr16=0x0000 | next_pc=29
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000003A
+
+================ Cycle 32 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000036
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=29 | word_index=14 | instr16=0x0000 | next_pc=30
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000003C
+
+================ Cycle 33 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000038
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=30 | word_index=15 | instr16=0x0000 | next_pc=31
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000003E
+
+================ Cycle 34 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000003A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=31 | word_index=15 | instr16=0x0000 | next_pc=32
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000040
+
+================ Cycle 35 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000003C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=32 | word_index=16 | instr16=0x0000 | next_pc=33
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000042
+
+================ Cycle 36 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000003E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=33 | word_index=16 | instr16=0x0000 | next_pc=34
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000044
+
+================ Cycle 37 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000040
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=34 | word_index=17 | instr16=0x0000 | next_pc=35
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000046
+
+================ Cycle 38 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000042
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=35 | word_index=17 | instr16=0x0000 | next_pc=36
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000048
+
+================ Cycle 39 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000044
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=36 | word_index=18 | instr16=0x0000 | next_pc=37
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000004A
+
+================ Cycle 40 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000046
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=37 | word_index=18 | instr16=0x0000 | next_pc=38
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000004C
+
+================ Cycle 41 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000048
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=38 | word_index=19 | instr16=0x0000 | next_pc=39
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000004E
+
+================ Cycle 42 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000004A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=39 | word_index=19 | instr16=0x0000 | next_pc=40
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000050
+
+================ Cycle 43 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000004C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=40 | word_index=20 | instr16=0x0000 | next_pc=41
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000052
+
+================ Cycle 44 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000004E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=41 | word_index=20 | instr16=0x0000 | next_pc=42
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000054
+
+================ Cycle 45 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000050
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=42 | word_index=21 | instr16=0x0000 | next_pc=43
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000056
+
+================ Cycle 46 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000052
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=43 | word_index=21 | instr16=0x0000 | next_pc=44
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000058
+
+================ Cycle 47 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000054
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=44 | word_index=22 | instr16=0x0000 | next_pc=45
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000005A
+
+================ Cycle 48 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000056
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=45 | word_index=22 | instr16=0x0000 | next_pc=46
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000005C
+
+================ Cycle 49 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000058
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=46 | word_index=23 | instr16=0x0000 | next_pc=47
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000005E
+
+================ Cycle 50 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000005A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=47 | word_index=23 | instr16=0x0000 | next_pc=48
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000060
+
+================ Cycle 51 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000005C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=48 | word_index=24 | instr16=0x0000 | next_pc=49
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000062
+
+================ Cycle 52 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000005E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=49 | word_index=24 | instr16=0x0000 | next_pc=50
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000064
+
+================ Cycle 53 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000060
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=50 | word_index=25 | instr16=0x0000 | next_pc=51
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000066
+
+================ Cycle 54 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000062
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=51 | word_index=25 | instr16=0x0000 | next_pc=52
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000068
+
+================ Cycle 55 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000064
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=52 | word_index=26 | instr16=0x0000 | next_pc=53
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000006A
+
+================ Cycle 56 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000066
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=53 | word_index=26 | instr16=0x0000 | next_pc=54
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000006C
+
+================ Cycle 57 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000068
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=54 | word_index=27 | instr16=0x0000 | next_pc=55
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000006E
+
+================ Cycle 58 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000006A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=55 | word_index=27 | instr16=0x0000 | next_pc=56
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000070
+
+================ Cycle 59 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000006C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=56 | word_index=28 | instr16=0x0000 | next_pc=57
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000072
+
+================ Cycle 60 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000006E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=57 | word_index=28 | instr16=0x0000 | next_pc=58
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000074
+
+================ Cycle 61 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000070
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=58 | word_index=29 | instr16=0x0000 | next_pc=59
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000076
+
+================ Cycle 62 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000072
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=59 | word_index=29 | instr16=0x0000 | next_pc=60
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000078
+
+================ Cycle 63 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000074
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=60 | word_index=30 | instr16=0x0000 | next_pc=61
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000007A
+
+================ Cycle 64 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000076
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=61 | word_index=30 | instr16=0x0000 | next_pc=62
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000007C
+
+================ Cycle 65 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000078
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=62 | word_index=31 | instr16=0x0000 | next_pc=63
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000007E
+
+================ Cycle 66 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000007A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=63 | word_index=31 | instr16=0x0000 | next_pc=64
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000080
+
+================ Cycle 67 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000007C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=64 | word_index=32 | instr16=0x0000 | next_pc=65
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000082
+
+================ Cycle 68 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000007E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=65 | word_index=32 | instr16=0x0000 | next_pc=66
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000084
+
+================ Cycle 69 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000080
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=66 | word_index=33 | instr16=0x0000 | next_pc=67
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000086
+
+================ Cycle 70 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000082
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=67 | word_index=33 | instr16=0x0000 | next_pc=68
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000088
+
+================ Cycle 71 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000084
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=68 | word_index=34 | instr16=0x0000 | next_pc=69
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000008A
+
+================ Cycle 72 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000086
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=69 | word_index=34 | instr16=0x0000 | next_pc=70
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000008C
+
+================ Cycle 73 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000088
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=70 | word_index=35 | instr16=0x0000 | next_pc=71
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000008E
+
+================ Cycle 74 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000008A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=71 | word_index=35 | instr16=0x0000 | next_pc=72
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000090
+
+================ Cycle 75 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000008C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=72 | word_index=36 | instr16=0x0000 | next_pc=73
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000092
+
+================ Cycle 76 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000008E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=73 | word_index=36 | instr16=0x0000 | next_pc=74
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000094
+
+================ Cycle 77 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000090
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=74 | word_index=37 | instr16=0x0000 | next_pc=75
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000096
+
+================ Cycle 78 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000092
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=75 | word_index=37 | instr16=0x0000 | next_pc=76
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x00000098
+
+================ Cycle 79 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000094
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=76 | word_index=38 | instr16=0x0000 | next_pc=77
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000009A
+
+================ Cycle 80 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000096
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=77 | word_index=38 | instr16=0x0000 | next_pc=78
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000009C
+
+================ Cycle 81 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x00000098
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=78 | word_index=39 | instr16=0x0000 | next_pc=79
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x0000009E
+
+================ Cycle 82 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000009A
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=79 | word_index=39 | instr16=0x0000 | next_pc=80
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000A0
+
+================ Cycle 83 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000009C
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=80 | word_index=40 | instr16=0x0000 | next_pc=81
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000A2
+
+================ Cycle 84 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x0000009E
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=81 | word_index=40 | instr16=0x0000 | next_pc=82
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000A4
+
+================ Cycle 85 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000A0
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=82 | word_index=41 | instr16=0x0000 | next_pc=83
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000A6
+
+================ Cycle 86 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000A2
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=83 | word_index=41 | instr16=0x0000 | next_pc=84
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000A8
+
+================ Cycle 87 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000A4
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=84 | word_index=42 | instr16=0x0000 | next_pc=85
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000AA
+
+================ Cycle 88 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000A6
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=85 | word_index=42 | instr16=0x0000 | next_pc=86
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000AC
+
+================ Cycle 89 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000A8
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=86 | word_index=43 | instr16=0x0000 | next_pc=87
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000AE
+
+================ Cycle 90 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000AA
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=87 | word_index=43 | instr16=0x0000 | next_pc=88
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000B0
+
+================ Cycle 91 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000AC
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=88 | word_index=44 | instr16=0x0000 | next_pc=89
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000B2
+
+================ Cycle 92 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000AE
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=89 | word_index=44 | instr16=0x0000 | next_pc=90
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000B4
+
+================ Cycle 93 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000B0
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=90 | word_index=45 | instr16=0x0000 | next_pc=91
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000B6
+
+================ Cycle 94 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000B2
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=91 | word_index=45 | instr16=0x0000 | next_pc=92
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000B8
+
+================ Cycle 95 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000B4
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=92 | word_index=46 | instr16=0x0000 | next_pc=93
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000BA
+
+================ Cycle 96 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000B6
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=93 | word_index=46 | instr16=0x0000 | next_pc=94
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000BC
+
+================ Cycle 97 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000B8
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=94 | word_index=47 | instr16=0x0000 | next_pc=95
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000BE
+
+================ Cycle 98 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000BA
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=95 | word_index=47 | instr16=0x0000 | next_pc=96
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000C0
+
+================ Cycle 99 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000BC
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=96 | word_index=48 | instr16=0x0000 | next_pc=97
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000C2
+
+================ Cycle 100 ==================
+[FORWARD] EX->ID forwarding for rs1=0, data=0x0000000F
+[FORWARD] EX->ID forwarding for rs2=0, data=0x0000000F
+[WB]  opcode=1 | rd=0 | write_data=0x0000000F
+[MEM] opcode=1 | rd=0 | alu_result=0x0000000F | mem_data=0x0000000F
+[EX PROCESSOR DEBUG] | reg_data1=0x0000000F | reg_data2=0x0000000F | imm_flag=0 | pc=0x000000BE
+[EX DEBUG] EXECUTE: Opcode=MOV_REG, Rd=0, Operand1=0x0000000F, Operand2=0x0000000F, CarryIn=0
+[EX]  opcode=1 | rd=0 | alu_result=0x0000000F | reg_data2=0x0000000F
+[DECODE DEBUG] instr=0x0000 | bits_15_13=0x0 | bits_15_12=0x0 | bits_15_11=0x0 | bits_15_10=0x0 | bits_15_9=0x0 | bits_15_8=0x0 | bits_15_6=0x0
+[ID]  instr16=0x0000 | is32bit=0 | opcode=1 | rd=0 | rs1=0 | rs2=0
+[IF]  pc=97 | word_index=48 | instr16=0x0000 | next_pc=98
+[REGFILE] R0-R12:
+ R0 =0x0000000F R1 =0x00000019 R2 =0x0000000A R3 =0x0000000A
+ R4 =0x00000000 R5 =0x00000000 R6 =0x00000000 R7 =0x00000000
+ R8 =0x00000000 R9 =0x00000000 R10=0x00000000 R11=0x00000000
+ R12=0x00000000 SP=0x00000000 | LR=0xFFFFFFFF | PC=0x000000C4
+R0=0000000F R1=00000019 R2=0000000A R3=0000000A R4=00000000 R5=00000000 R6=00000000 R7=00000000
+SP=00000000 LR=FFFFFFFF PC=000000C4
+Expected R3 (max) = 25, Actual R3 = 10
+✅ All Priority 1, 2, 3, and 5 instruction tests completed!
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-112] Total CPU user time: 0.77 seconds. Total CPU system time: 0.29 seconds. Total elapsed time: 0.94 seconds; peak allocated memory: 242.738 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 4s

@@ -1,0 +1,189 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="directive:1:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=cortex_m0_top" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:335:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=instr_mem offset=slave bundle=INSTR_BUS" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:336:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=data_mem offset=slave bundle=DATA_BUS" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:337:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=reg_out offset=slave bundle=REG_BUS" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:340:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:351:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=IF.pc" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:352:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=IF.instr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:353:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.pc" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:354:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.instr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:355:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.reg_data1" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:356:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.reg_data2" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:357:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.opcode" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:358:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.rd" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:359:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.rs1" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:360:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.rs2" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:361:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.immediate_flag" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:362:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.imm_value" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:363:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.condition" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:364:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=ID.cpsr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:365:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.opcode" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:366:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.alu_result" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:367:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.reg_data2" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:368:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.rd" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:369:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.link" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:370:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.cpsr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:371:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=EX.pc" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:372:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.opcode" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:373:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.alu_result" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:374:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.mem_data" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:375:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.rd" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:376:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.link" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:377:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=MEM.cpsr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:378:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=WB.opcode" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:379:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=WB.write_data" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:380:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=WB.rd" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:381:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=WB.link" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:382:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=WB.cpsr" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="processor.c:383:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="cortex_m0_top" ARG_PragmaIsValid="1" ARG_PragmaOptions="variable=init_done" ARG_PragmaType="reset" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:138:0" msg_body="Inlining function 'is_load_instruction' into 'detect_hazards'">
+        <args Callee="is_load_instruction" Callee-DebugLoc="File processor.c Line 84 Column 0" Caller="detect_hazards" Caller-DebugLoc="File processor.c Line 138 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:138:0" msg_body="Inlining function 'thumb_writes_register' into 'detect_hazards'">
+        <args Callee="thumb_writes_register" Callee-DebugLoc="File processor.c Line 16 Column 0" Caller="detect_hazards" Caller-DebugLoc="File processor.c Line 138 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="regfile.c:46:0" msg_body="Inlining function 'regfile_get_sp' into 'regfile_read'">
+        <args Callee="regfile_get_sp" Callee-DebugLoc="File regfile.c Line 63 Column 0" Caller="regfile_read" Caller-DebugLoc="File regfile.c Line 46 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:199:0" msg_body="Inlining function 'regfile_read' into 'detect_forwarding'">
+        <args Callee="regfile_read" Callee-DebugLoc="File regfile.c Line 46 Column 0" Caller="detect_forwarding" Caller-DebugLoc="File processor.c Line 199 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:199:0" msg_body="Inlining function 'thumb_writes_register' into 'detect_forwarding'">
+        <args Callee="thumb_writes_register" Callee-DebugLoc="File processor.c Line 16 Column 0" Caller="detect_forwarding" Caller-DebugLoc="File processor.c Line 199 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:199:0" msg_body="Inlining function 'is_load_instruction' into 'detect_forwarding'">
+        <args Callee="is_load_instruction" Callee-DebugLoc="File processor.c Line 84 Column 0" Caller="detect_forwarding" Caller-DebugLoc="File processor.c Line 199 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="regfile.c:30:0" msg_body="Inlining function 'regfile_set_sp' into 'regfile_write'">
+        <args Callee="regfile_set_sp" Callee-DebugLoc="File regfile.c Line 77 Column 0" Caller="regfile_write" Caller-DebugLoc="File regfile.c Line 30 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="regfile.c:30:0" msg_body="Inlining function 'regfile_set_pc' into 'regfile_write'">
+        <args Callee="regfile_set_pc" Callee-DebugLoc="File regfile.c Line 133 Column 0" Caller="regfile_write" Caller-DebugLoc="File regfile.c Line 30 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="execute.c:7:0" msg_body="Inlining function 'popcount' into 'execute'">
+        <args Callee="popcount" Callee-DebugLoc="File ./execute.h Line 43 Column 0" Caller="execute" Caller-DebugLoc="File execute.c Line 7 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="decode.c:570:0" msg_body="Inlining function 'sign_extend' into 'decode_thumb32_instruction'">
+        <args Callee="sign_extend" Callee-DebugLoc="File decode.c Line 11 Column 0" Caller="decode_thumb32_instruction" Caller-DebugLoc="File decode.c Line 570 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="decode.c:16:0" msg_body="Inlining function 'sign_extend' into 'decode_thumb16_instruction'">
+        <args Callee="sign_extend" Callee-DebugLoc="File decode.c Line 11 Column 0" Caller="decode_thumb16_instruction" Caller-DebugLoc="File decode.c Line 16 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_init' into 'cortex_m0_top'">
+        <args Callee="regfile_init" Callee-DebugLoc="File regfile.c Line 3 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_get_pc' into 'cortex_m0_top'">
+        <args Callee="regfile_get_pc" Callee-DebugLoc="File regfile.c Line 141 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'detect_hazards' into 'cortex_m0_top'">
+        <args Callee="detect_hazards" Callee-DebugLoc="File processor.c Line 138 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_set_pc' into 'cortex_m0_top'">
+        <args Callee="regfile_set_pc" Callee-DebugLoc="File regfile.c Line 133 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'thumb_writes_register' into 'cortex_m0_top'">
+        <args Callee="thumb_writes_register" Callee-DebugLoc="File processor.c Line 16 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_write' into 'cortex_m0_top'">
+        <args Callee="regfile_write" Callee-DebugLoc="File regfile.c Line 30 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'popcount.188' into 'cortex_m0_top'">
+        <args Callee="popcount.188" Callee-DebugLoc="File ./execute.h Line 43 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_get_sp' into 'cortex_m0_top'">
+        <args Callee="regfile_get_sp" Callee-DebugLoc="File regfile.c Line 63 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'regfile_set_sp' into 'cortex_m0_top'">
+        <args Callee="regfile_set_sp" Callee-DebugLoc="File regfile.c Line 77 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'process_mem_data' into 'cortex_m0_top'">
+        <args Callee="process_mem_data" Callee-DebugLoc="File processor.c Line 293 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'is_store_instruction' into 'cortex_m0_top'">
+        <args Callee="is_store_instruction" Callee-DebugLoc="File processor.c Line 104 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'is_32bit_thumb' into 'cortex_m0_top'">
+        <args Callee="is_32bit_thumb" Callee-DebugLoc="File processor.c Line 123 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+    <msg msg_groups="PRAGMA_INLINE" msg_id="214-178" msg_severity="INFO" msg_loc="processor.c:334:0" msg_body="Inlining function 'decode_thumb32_instruction' into 'cortex_m0_top'">
+        <args Callee="decode_thumb32_instruction" Callee-DebugLoc="File decode.c Line 570 Column 0" Caller="cortex_m0_top" Caller-DebugLoc="File processor.c Line 334 Column 0"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

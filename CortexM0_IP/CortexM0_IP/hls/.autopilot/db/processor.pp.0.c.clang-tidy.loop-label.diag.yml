@@ -1,0 +1,40 @@
+---
+MainSourceFile:  /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/processor.pp.0.c
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_590_1:  '
+    FileOffset:      590
+    FilePath:        processor.c
+    Replacements:    
+      - FilePath:        /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/processor.pp.0.c
+        Offset:          51783
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_590_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_634_2:  '
+    FileOffset:      634
+    FilePath:        processor.c
+    Replacements:    
+      - FilePath:        /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/processor.pp.0.c
+        Offset:          53216
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_634_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1038_3:  '
+    FileOffset:      1038
+    FilePath:        processor.c
+    Replacements:    
+      - FilePath:        /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/processor.pp.0.c
+        Offset:          67749
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1038_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1047_4:  '
+    FileOffset:      1047
+    FilePath:        processor.c
+    Replacements:    
+      - FilePath:        /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/processor.pp.0.c
+        Offset:          68097
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1047_4: '
+...

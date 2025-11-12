@@ -1,0 +1,119 @@
+{
+  "0": {
+    "basicblocks": 129,
+    "calls": "2 5 5 5 5 4 1 5 5",
+    "control_depth": 2,
+    "def_use_depth": 17,
+    "file": "processor.c",
+    "fileloc": 326,
+    "instructions": 920,
+    "loads": {
+      "G": 97,
+      "L": 22,
+      "T": 19
+    },
+    "memory_accesses": 8,
+    "name": "cortex_m0_top",
+    "stores": {
+      "G": 80,
+      "T": 10
+    },
+    "total_instructions": 2796
+  },
+  "1": {
+    "basicblocks": 88,
+    "calls": "3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3",
+    "control_depth": 0,
+    "def_use_depth": 3,
+    "file": "processor.c",
+    "fileloc": 0,
+    "instructions": 284,
+    "memory_accesses": 0,
+    "name": "cortex_m0_top_",
+    "stores": {
+      "L": 9
+    },
+    "total_instructions": 802
+  },
+  "2": {
+    "basicblocks": 52,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "processor.c",
+    "fileloc": 0,
+    "instructions": 112,
+    "loads": {
+      "G": 9
+    },
+    "memory_accesses": 0,
+    "name": "cortex_m0_top_",
+    "stores": {
+      "L": 5
+    },
+    "total_instructions": 112
+  },
+  "3": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 5,
+    "file": "decode.c",
+    "fileloc": 6,
+    "instructions": 7,
+    "memory_accesses": 0,
+    "name": "extract_bits",
+    "total_instructions": 7
+  },
+  "4": {
+    "basicblocks": 79,
+    "calls": "6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6",
+    "control_depth": 0,
+    "def_use_depth": 17,
+    "file": "processor.c",
+    "fileloc": 0,
+    "instructions": 424,
+    "loads": {
+      "G": 18
+    },
+    "memory_accesses": 0,
+    "name": "cortex_m0_top_",
+    "stores": {
+      "L": 5
+    },
+    "total_instructions": 866
+  },
+  "5": {
+    "basicblocks": 7,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "regfile.c",
+    "fileloc": 46,
+    "instructions": 16,
+    "loads": {
+      "G": 4
+    },
+    "memory_accesses": 0,
+    "name": "regfile_read",
+    "total_instructions": 16
+  },
+  "6": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 10,
+    "file": "regfile.c",
+    "fileloc": 102,
+    "instructions": 17,
+    "loads": {
+      "G": 1
+    },
+    "memory_accesses": 0,
+    "name": "regfile_update_flags",
+    "stores": {
+      "G": 1
+    },
+    "total_instructions": 17
+  }
+}

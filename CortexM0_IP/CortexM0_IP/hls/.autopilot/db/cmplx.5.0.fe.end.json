@@ -1,0 +1,202 @@
+{
+    "0": {
+        "name": "cortex_m0_top",
+        "file": "processor.c",
+        "fileloc": "326",
+        "instructions": "1013",
+        "total_instructions": "3990",
+        "calls": "4 10 9 1 5 8 3 6",
+        "basicblocks": "95",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "17",
+        "loads": {
+            "G": "61",
+            "L": "2"
+        },
+        "stores": {
+            "G": "58"
+        }
+    },
+    "1": {
+        "name": "cortex_m0_top_Pipeline_VITIS_LOOP_590_1",
+        "file": "processor.c",
+        "fileloc": "584",
+        "instructions": "45",
+        "total_instructions": "45",
+        "calls": "",
+        "basicblocks": "6",
+        "memory_accesses": "8",
+        "control_depth": "2",
+        "def_use_depth": "1",
+        "loads": {
+            "G": "1",
+            "L": "3"
+        },
+        "stores": {
+            "L": "4"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "2": {
+        "name": "regfile_update_flags",
+        "file": "regfile.c",
+        "fileloc": "102",
+        "instructions": "25",
+        "total_instructions": "25",
+        "calls": "",
+        "basicblocks": "1",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "12",
+        "loads": {
+            "G": "1"
+        },
+        "stores": {
+            "G": "1"
+        }
+    },
+    "3": {
+        "name": "cortex_m0_top_Pipeline_VITIS_LOOP_1038_3",
+        "file": "processor.c",
+        "fileloc": "1038",
+        "instructions": "30",
+        "total_instructions": "30",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "6",
+        "control_depth": "1",
+        "def_use_depth": "1",
+        "loads": {
+            "G": "1",
+            "L": "1"
+        },
+        "stores": {
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "4": {
+        "name": "cortex_m0_top_Pipeline_VITIS_LOOP_5_1",
+        "file": "processor.c",
+        "fileloc": "391",
+        "instructions": "16",
+        "total_instructions": "16",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "3",
+        "control_depth": "1",
+        "def_use_depth": "1",
+        "loads": {
+            "L": "1"
+        },
+        "stores": {
+            "G": "1",
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "5": {
+        "name": "execute",
+        "file": "processor.c",
+        "fileloc": "824",
+        "instructions": "476",
+        "total_instructions": "1126",
+        "calls": "2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2",
+        "basicblocks": "75",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "16",
+        "loads": {
+            "G": "18"
+        }
+    },
+    "6": {
+        "name": "cortex_m0_top_Pipeline_VITIS_LOOP_1047_4",
+        "file": "processor.c",
+        "fileloc": "1047",
+        "instructions": "24",
+        "total_instructions": "24",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "4",
+        "control_depth": "1",
+        "def_use_depth": "1",
+        "loads": {
+            "L": "1"
+        },
+        "stores": {
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "7": {
+        "name": "extract_bits",
+        "file": "decode.c",
+        "fileloc": "6",
+        "instructions": "16",
+        "total_instructions": "16",
+        "calls": "",
+        "basicblocks": "1",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "6"
+    },
+    "8": {
+        "name": "decode_thumb16_instruction",
+        "file": "processor.c",
+        "fileloc": "901",
+        "instructions": "331",
+        "total_instructions": "1515",
+        "calls": "7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7",
+        "basicblocks": "88",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "10"
+    },
+    "9": {
+        "name": "cortex_m0_top_Pipeline_VITIS_LOOP_634_2",
+        "file": "processor.c",
+        "fileloc": "626",
+        "instructions": "45",
+        "total_instructions": "45",
+        "calls": "",
+        "basicblocks": "6",
+        "memory_accesses": "7",
+        "control_depth": "2",
+        "def_use_depth": "1",
+        "loads": {
+            "L": "3"
+        },
+        "stores": {
+            "G": "1",
+            "L": "4"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "10": {
+        "name": "detect_forwarding",
+        "file": "processor.c",
+        "fileloc": "422",
+        "instructions": "176",
+        "total_instructions": "176",
+        "calls": "",
+        "basicblocks": "37",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "12",
+        "loads": {
+            "G": "6"
+        }
+    }
+}

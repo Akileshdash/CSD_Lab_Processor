@@ -132,8 +132,8 @@ void regfile_set_lr(uint32_t value, cortex_m0_registers_t* regs) {
 
 void regfile_set_pc(uint32_t value, cortex_m0_registers_t* regs) {
     // PC must be aligned to 2-byte boundary
-    regs->pc = value & 0xFFFFFFFE;
-
+    // regs->pc = value & 0xFFFFFFFE;
+    regs->pc = value ;
     // Force T-bit for Cortex-M0 (Thumb-only)
     regs->epsr |= PSR_T_MASK;
 }

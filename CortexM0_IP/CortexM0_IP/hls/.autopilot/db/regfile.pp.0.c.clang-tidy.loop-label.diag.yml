@@ -1,0 +1,13 @@
+---
+MainSourceFile:  /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/regfile.pp.0.c
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_5_1:  '
+    FileOffset:      5
+    FilePath:        regfile.c
+    Replacements:    
+      - FilePath:        /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/.autopilot/db/regfile.pp.0.c
+        Offset:          14333
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_5_1: '
+...

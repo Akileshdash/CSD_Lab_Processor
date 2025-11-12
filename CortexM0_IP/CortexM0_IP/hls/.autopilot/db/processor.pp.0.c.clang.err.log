@@ -1,0 +1,115 @@
+directive:1:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=top_XLX_SEP_ PragmaContext=directive_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=name=cortex_m0_top_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLSDIRECTIVE TOP name=cortex_m0_top
+        ^
+processor.c:335:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=m_axi port=instr_mem offset=slave bundle=INSTR_BUS_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE m_axi port=instr_mem offset=slave bundle=INSTR_BUS
+        ^
+processor.c:336:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=m_axi port=data_mem offset=slave bundle=DATA_BUS_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE m_axi port=data_mem offset=slave bundle=DATA_BUS
+        ^
+processor.c:337:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=m_axi port=reg_out offset=slave bundle=REG_BUS_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE m_axi port=reg_out offset=slave bundle=REG_BUS
+        ^
+processor.c:340:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=interface_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=ap_ctrl_none port=return_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS INTERFACE ap_ctrl_none port=return
+        ^
+processor.c:351:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=IF.pc_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=IF.pc
+        ^
+processor.c:352:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=IF.instr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=IF.instr
+        ^
+processor.c:353:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.pc_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.pc
+        ^
+processor.c:354:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.instr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.instr
+        ^
+processor.c:355:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.reg_data1_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.reg_data1
+        ^
+processor.c:356:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.reg_data2_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.reg_data2
+        ^
+processor.c:357:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.opcode_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.opcode
+        ^
+processor.c:358:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.rd_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.rd
+        ^
+processor.c:359:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.rs1_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.rs1
+        ^
+processor.c:360:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.rs2_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.rs2
+        ^
+processor.c:361:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.immediate_flag_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.immediate_flag
+        ^
+processor.c:362:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.imm_value_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.imm_value
+        ^
+processor.c:363:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.condition_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.condition
+        ^
+processor.c:364:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=ID.cpsr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=ID.cpsr
+        ^
+processor.c:365:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.opcode_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.opcode
+        ^
+processor.c:366:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.alu_result_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.alu_result
+        ^
+processor.c:367:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.reg_data2_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.reg_data2
+        ^
+processor.c:368:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.rd_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.rd
+        ^
+processor.c:369:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.link_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.link
+        ^
+processor.c:370:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.cpsr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.cpsr
+        ^
+processor.c:371:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=EX.pc_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=EX.pc
+        ^
+processor.c:372:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.opcode_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.opcode
+        ^
+processor.c:373:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.alu_result_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.alu_result
+        ^
+processor.c:374:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.mem_data_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.mem_data
+        ^
+processor.c:375:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.rd_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.rd
+        ^
+processor.c:376:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.link_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.link
+        ^
+processor.c:377:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=MEM.cpsr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=MEM.cpsr
+        ^
+processor.c:378:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=WB.opcode_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=WB.opcode
+        ^
+processor.c:379:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=WB.write_data_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=WB.write_data
+        ^
+processor.c:380:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=WB.rd_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=WB.rd
+        ^
+processor.c:381:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=WB.link_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=WB.link
+        ^
+processor.c:382:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=WB.cpsr_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=WB.cpsr
+        ^
+processor.c:383:9: warning: HLS pragma dump _XLX_SEP_ PragmaIsValid=1_XLX_SEP_ PragmaType=reset_XLX_SEP_ PragmaContext=_XLX_SEP_ PragmaFunction=cortex_m0_top_XLX_SEP_ PragmaOptions=variable=init_done_XLX_SEP_ [-Wdump-hls-pragmas]
+#pragma HLS RESET variable=init_done
+        ^
+38 warnings generated.

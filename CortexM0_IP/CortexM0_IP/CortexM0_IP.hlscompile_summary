@@ -1,0 +1,253 @@
+<ENTRY>
+{
+ "thisFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/CortexM0_IP.hlscompile_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Sun Nov  9 20:17:42 2025",
+ "timestampMillis": "1762699662357",
+ "buildStep": {
+  "cmdId": "d021bc1d-4c6b-490d-abae-6c56edf87c3e",
+  "name": "v++",
+  "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/logs/CortexM0_IP.steps.log",
+  "commandLine": "/tools/2025.1/Vitis/bin/unwrapped/lnx64.o/v++  -c --mode hls --config /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg --work_dir CortexM0_IP ",
+  "args": [
+   "-c",
+   "--mode",
+   "hls",
+   "--config",
+   "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg",
+   "--work_dir",
+   "CortexM0_IP"
+  ],
+  "iniFiles": [
+   {
+    "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg",
+    "content": "part=xc7z020clg400-1\n\n[hls]\nflow_target=vivado\npackage.output.format=ip_catalog\npackage.output.syn=false\nclock=148.5MHz\nsyn.file=processor.h\nsyn.file=processor.c\nsyn.file=stages.h\nsyn.file=regfile.h\nsyn.file=regfile.c\nsyn.file=execute.h\nsyn.file=execute.c\nsyn.file=decode.h\nsyn.file=decode.c\nsyn.top=cortex_m0_top\npackage.output.file=cotex_27Oct_IP\npackage.ip.display_name=cotex_27Oct_IP\nsim.O=0\ncosim.rtl=verilog\ncosim.wave_debug=1\ntb.file=./tb_arithmetic_stmts.c\ntb.file=./tb_branch_stmts.c"
+   }
+  ],
+  "cwd": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Nov  9 20:17:42 2025",
+ "timestampMillis": "1762699662358",
+ "status": {
+  "cmdId": "d021bc1d-4c6b-490d-abae-6c56edf87c3e",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663806",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_COMPILE",
+  "target": "TT_HW",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "cortex_m0_top",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h",
+     "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2025.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663806",
+ "buildStep": {
+  "cmdId": "3787cab9-f324-4448-baf9-b99fd583ef6d",
+  "name": "",
+  "logFile": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663806",
+ "status": {
+  "cmdId": "3787cab9-f324-4448-baf9-b99fd583ef6d",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663806",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/hls_data.json",
+  "name": "",
+  "fileType": "JSON",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663806",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:43 2025",
+ "timestampMillis": "1762699663807",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth.xml",
+  "name": "",
+  "fileType": "XML",
+  "reportType": "HLS_SYNTHESIS",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675172",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675172",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675172",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_SCHEDULE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675172",
+ "status": {
+  "cmdId": "3787cab9-f324-4448-baf9-b99fd583ef6d",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675251",
+ "status": {
+  "cmdId": "d021bc1d-4c6b-490d-abae-6c56edf87c3e",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675268",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/reports/v++_compile_CortexM0_IP_guidance.html",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Sun Nov  9 20:17:55 2025",
+ "timestampMillis": "1762699675268",
+ "report": {
+  "path": "/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/reports/.db/v++_compile_CortexM0_IP_guidance.pb3",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

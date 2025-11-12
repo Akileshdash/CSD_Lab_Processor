@@ -1,0 +1,384 @@
+  **** HLS Build v2025.1 6135595
+INFO: [HLS 200-2005] Using work_dir /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP 
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=processor.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/processor.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=stages.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/stages.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=regfile.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/regfile.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=execute.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(14)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/execute.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.h' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(15)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.h' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=decode.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(16)
+INFO: [HLS 200-10] Adding design file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/decode.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_arithmetic_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(23)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_arithmetic_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.file=./tb_branch_stmts.c' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(24)
+INFO: [HLS 200-10] Adding test bench file '/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/tb_branch_stmts.c' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.top=cortex_m0_top' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(17)
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xc7z020clg400-1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1465] Applying config ini 'clock=148.5MHz' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(7)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.734ns.
+INFO: [HLS 200-1465] Applying config ini 'cosim.rtl=verilog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(21)
+INFO: [HLS 200-1465] Applying config ini 'cosim.wave_debug=1' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(22)
+INFO: [HLS 200-1465] Applying config ini 'package.ip.display_name=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(19)
+INFO: [HLS 200-1465] Applying config ini 'package.output.file=cotex_27Oct_IP' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(18)
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(5)
+INFO: [HLS 200-1465] Applying config ini 'sim.O=0' from /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/hls_config.cfg(20)
+INFO: [HLS 200-2176] Writing Vitis IDE component file /home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/vitis-comp.json
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.81 seconds. CPU system time: 0.16 seconds. Elapsed time: 0.88 seconds; current allocated memory: 272.816 MB.
+INFO: [HLS 200-10] Analyzing design file 'decode.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'execute.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'regfile.c' ... 
+INFO: [HLS 200-10] Analyzing design file 'processor.c' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.48 seconds. CPU system time: 0.49 seconds. Elapsed time: 0.97 seconds; current allocated memory: 275.203 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 6,456 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 4,748 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 3,435 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 3,172 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,999 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,942 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,942 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,942 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,942 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,827 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,781 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,779 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,779 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,779 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,821 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 2,812 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details (/home/ssladmin/Desktop/Processor_26_Sep_2025/CortexM0_IP/CortexM0_IP/hls/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-178] Inlining function 'is_load_instruction' into 'detect_hazards' (processor.c:138:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'detect_hazards' (processor.c:138:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_sp' into 'regfile_read' (regfile.c:46:0)
+INFO: [HLS 214-178] Inlining function 'regfile_read' into 'detect_forwarding' (processor.c:199:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'detect_forwarding' (processor.c:199:0)
+INFO: [HLS 214-178] Inlining function 'is_load_instruction' into 'detect_forwarding' (processor.c:199:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_sp' into 'regfile_write' (regfile.c:30:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_pc' into 'regfile_write' (regfile.c:30:0)
+INFO: [HLS 214-178] Inlining function 'popcount' into 'execute' (execute.c:7:0)
+INFO: [HLS 214-178] Inlining function 'sign_extend' into 'decode_thumb32_instruction' (decode.c:568:0)
+INFO: [HLS 214-178] Inlining function 'sign_extend' into 'decode_thumb16_instruction' (decode.c:16:0)
+INFO: [HLS 214-178] Inlining function 'regfile_init' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_pc' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'detect_hazards' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_pc' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'thumb_writes_register' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'regfile_write' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'popcount.187' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'regfile_get_sp' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'regfile_set_sp' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'process_mem_data' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'is_store_instruction' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'is_32bit_thumb' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-178] Inlining function 'decode_thumb32_instruction' into 'cortex_m0_top' (processor.c:333:0)
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_5_1> at regfile.c:5:21 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_613_2> at processor.c:613:31 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_571_1> at processor.c:571:31 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_987_3> at processor.c:987:23 
+INFO: [HLS 214-376] automatically set the pipeline for Loop< VITIS_LOOP_996_4> at processor.c:996:23 
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2.13 seconds. CPU system time: 0.26 seconds. Elapsed time: 6.55 seconds; current allocated memory: 278.914 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 278.914 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.05 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 281.238 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 284.191 MB.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (regfile.c:46:36) to (regfile.c:61:1) in function 'regfile_read'... converting 7 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (execute.c:477:44) to (execute.c:479:21) in function 'execute'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (execute.c:481:44) to (execute.c:483:21) in function 'execute'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (processor.c:199:87) to (processor.c:238:9) in function 'detect_forwarding'... converting 16 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (regfile.c:142:18) to (processor.c:179:24) in function 'cortex_m0_top'... converting 3 basic blocks.
+INFO: [XFORM 203-602] Inlining function 'regfile_read' into 'cortex_m0_top' (processor.c:573) automatically.
+INFO: [XFORM 203-11] Balancing expressions in function 'cortex_m0_top' (processor.c:327)...8 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.27 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.28 seconds; current allocated memory: 310.723 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.39 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.41 seconds; current allocated memory: 413.164 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'cortex_m0_top' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top_Pipeline_VITIS_LOOP_5_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_5_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'VITIS_LOOP_5_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.05 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 414.512 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 414.512 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'detect_forwarding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.07 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.07 seconds; current allocated memory: 418.289 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 432.766 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top_Pipeline_VITIS_LOOP_613_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_613_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 13, loop 'VITIS_LOOP_613_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 434.168 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 434.168 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top_Pipeline_VITIS_LOOP_571_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_571_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 10, loop 'VITIS_LOOP_571_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 434.621 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 434.621 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'regfile_update_flags' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 434.621 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 434.621 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'execute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.09 seconds. CPU system time: 0 seconds. Elapsed time: 0.09 seconds; current allocated memory: 441.195 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.08 seconds; current allocated memory: 441.195 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'extract_bits' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 441.195 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 441.195 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode_thumb16_instruction' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.09 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 447.883 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] After resource sharing, estimated clock period (6.840ns) exceeds the target (target clock period: 6.734ns, clock uncertainty: 1.818ns, effective delay budget: 4.916ns).
+INFO: [BIND 205-100] The critical path consists of the following:
+	wire read operation ('tmp_132', decode.c:16->processor.c:853) on port 'empty' (decode.c:16->processor.c:853) (0 ns)
+	'call' operation 16 bit ('bits_15_12', decode.c:21->processor.c:853) to 'extract_bits' (6.84034 ns)
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.03 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.04 seconds; current allocated memory: 447.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top_Pipeline_VITIS_LOOP_987_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_987_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 9, loop 'VITIS_LOOP_987_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 447.883 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 447.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top_Pipeline_VITIS_LOOP_996_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_996_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 11, loop 'VITIS_LOOP_996_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 447.883 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 447.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cortex_m0_top' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.55 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.55 seconds; current allocated memory: 463.379 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.18 seconds. CPU system time: 0 seconds. Elapsed time: 0.19 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top_Pipeline_VITIS_LOOP_5_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'cortex_m0_top_Pipeline_VITIS_LOOP_5_1' pipeline 'VITIS_LOOP_5_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top_Pipeline_VITIS_LOOP_5_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.1 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'detect_forwarding' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_11_4_32_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_7_2_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'detect_forwarding'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top_Pipeline_VITIS_LOOP_613_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'cortex_m0_top_Pipeline_VITIS_LOOP_613_2' pipeline 'VITIS_LOOP_613_2' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top_Pipeline_VITIS_LOOP_613_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.05 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top_Pipeline_VITIS_LOOP_571_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'cortex_m0_top_Pipeline_VITIS_LOOP_571_1' pipeline 'VITIS_LOOP_571_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top_Pipeline_VITIS_LOOP_571_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'regfile_update_flags' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'regfile_update_flags'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 475.352 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'execute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_32_5_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'execute'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.08 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 481.535 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'extract_bits' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'extract_bits'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.1 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.11 seconds; current allocated memory: 493.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode_thumb16_instruction' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode_thumb16_instruction'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.08 seconds. CPU system time: 0 seconds. Elapsed time: 0.09 seconds; current allocated memory: 496.383 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top_Pipeline_VITIS_LOOP_987_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'cortex_m0_top_Pipeline_VITIS_LOOP_987_3' pipeline 'VITIS_LOOP_987_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top_Pipeline_VITIS_LOOP_987_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.09 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.1 seconds; current allocated memory: 508.109 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top_Pipeline_VITIS_LOOP_996_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'cortex_m0_top_Pipeline_VITIS_LOOP_996_4' pipeline 'VITIS_LOOP_996_4' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top_Pipeline_VITIS_LOOP_996_4'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 508.109 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'cortex_m0_top' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/INSTR_BUS' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/DATA_BUS' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/REG_BUS' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/instr_mem' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/data_mem' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/reg_out' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'cortex_m0_top/pc_out' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'cortex_m0_top' to 'ap_ctrl_none'.
+WARNING: [RTGEN 206-101] Register 'init_done' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'core_regs_epsr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'IF_pc' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'cycle' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'core_regs_msp' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'core_regs_lr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'core_regs_pc' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'core_regs_apsr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_rs1' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_rs2' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_opcode' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_alu_result' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_rd' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_cpsr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'MEM_opcode' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'MEM_mem_data' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'MEM_rd' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'MEM_cpsr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'WB_opcode' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'WB_write_data' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'WB_rd' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'WB_cpsr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_pc' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_r_bit' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'WB_link' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_link' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'EX_mem_size' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_opcode' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_pc' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_condition' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_immediate_flag' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_imm_value' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_reg_data2' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_rd' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_r_bit' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'IF_instr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_instr' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_reg_data1' is power-on initialization.
+WARNING: [RTGEN 206-101] Register 'ID_cpsr' is power-on initialization.
+INFO: [RTGEN 206-100] Bundling port 'instr_mem', 'data_mem' and 'reg_out' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_11_4_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_11_4_32_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_11_4_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'srem_32ns_8ns_29_36_seq_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'cortex_m0_top'.
+INFO: [RTMG 210-278] Implementing memory 'cortex_m0_top_core_regs_gpr_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.22 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.25 seconds; current allocated memory: 526.328 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.39 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.42 seconds; current allocated memory: 548.555 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.34 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.35 seconds; current allocated memory: 560.754 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for cortex_m0_top.
+INFO: [VLOG 209-307] Generating Verilog RTL for cortex_m0_top.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 146.19 MHz
+INFO: [HLS 200-112] Total CPU user time: 7.09 seconds. Total CPU system time: 1.07 seconds. Total elapsed time: 12.26 seconds; peak allocated memory: 560.754 MB.
+INFO: [v++ 60-791] Total elapsed time: 0h 0m 15s

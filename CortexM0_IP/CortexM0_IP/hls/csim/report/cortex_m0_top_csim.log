@@ -1,0 +1,122 @@
+INFO: [SIM 2] *************** CSIM start ***************
+INFO: [SIM 4] CSIM will launch CLANG as the compiler.
+   Compiling ../../../../tb_branch_stmts.c in debug mode
+../../../../tb_branch_stmts.c:45:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:47:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:96:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:98:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:139:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:141:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:177:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:179:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:221:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:223:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:262:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:264:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:298:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:300:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:333:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:335:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:368:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:370:53: error: too many arguments to function call, expected 3, have 5
+        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+        ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+../../../../tb_branch_stmts.c:403:49: error: too many arguments to function call, expected 3, have 5
+    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);
+    ~~~~~~~~~~~~~                               ^~~~
+../../../../processor.h:7:6: note: 'cortex_m0_top' declared here
+void cortex_m0_top(
+     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make: *** [csim.mk:88: obj/tb_branch_stmts.o] Error 1
+ERR: [SIM 100] 'csim_design' failed: compilation error(s).
+INFO: [SIM 3] *************** CSIM finish ***************

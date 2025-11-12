@@ -519,7 +519,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         {
             // PC points to the instruction address
             out.alu_result = (input.pc) + 4 + (int32_t)input.reg_data2;
-            out.link = input.pc + 4 ; // Return address (next instruction after BL)
+            out.link = input.pc + 4; // Return address (next instruction after BL)
             printf("[EX DEBUG BL] BL at PC=0x%04X, target=0x%04X, LR=0x%04X\n",
                 input.pc, out.alu_result, out.link);
             break;
@@ -547,7 +547,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         {
             // Calculate SP adjustment
             uint32_t reglist = input.reg_data2;
-            uint32_t num_regs = __builtin_popcount(reglist);
+            uint32_t num_regs = popcount(reglist);
             if (input.r_bit) num_regs++;
             
             // For now, just calculate the address, MEM stage will do actual work
@@ -564,7 +564,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         {
             // Calculate SP adjustment
             uint32_t reglist = input.reg_data2;
-            uint32_t num_regs = __builtin_popcount(reglist);
+            uint32_t num_regs = popcount(reglist);
             if (input.r_bit) num_regs++;  // ← CHANGE THIS LINE
     
             // For now, just calculate the address, MEM stage will do actual work

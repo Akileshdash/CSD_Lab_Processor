@@ -1,0 +1,140 @@
+
+
+================================================================
+== Vitis HLS Report for 'extract_bits'
+================================================================
+* Date:           Sun Nov  9 20:17:52 2025
+
+* Version:        2025.1 (Build 6135595 on May 21 2025)
+* Project:        CortexM0_IP
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  6.73 ns|  4.720 ns|     1.82 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        2|        2|  13.468 ns|  13.468 ns|    2|    2|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 3
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.73>
+ST_1 : Operation 4 [1/1] (0.00ns)   --->   "%start_read = read i4 @_ssdm_op_Read.ap_auto.i4, i4 %start_r" [decode.c:6]   --->   Operation 4 'read' 'start_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "%zext_ln6_1 = zext i4 %start_read" [decode.c:6]   --->   Operation 5 'zext' 'zext_ln6_1' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (1.73ns)   --->   "%sub_ln7 = sub i5 1, i5 %zext_ln6_1" [decode.c:7]   --->   Operation 6 'sub' 'sub_ln7' <Predicate = true> <Delay = 1.73> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.73> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+
+State 2 <SV = 1> <Delay = 4.72>
+ST_2 : Operation 7 [1/1] (0.00ns)   --->   "%end_read = read i4 @_ssdm_op_Read.ap_auto.i4, i4 %end_r" [decode.c:6]   --->   Operation 7 'read' 'end_read' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 8 [1/1] (0.00ns)   --->   "%value_read = read i16 @_ssdm_op_Read.ap_auto.i16, i16 %value_r" [decode.c:6]   --->   Operation 8 'read' 'value_read' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 9 [1/1] (0.00ns)   --->   "%zext_ln6 = zext i4 %end_read" [decode.c:6]   --->   Operation 9 'zext' 'zext_ln6' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 10 [1/1] (0.00ns)   --->   "%zext_ln6_2 = zext i4 %start_read" [decode.c:6]   --->   Operation 10 'zext' 'zext_ln6_2' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 11 [1/1] (3.98ns)   --->   "%lshr_ln7 = lshr i16 %value_read, i16 %zext_ln6_2" [decode.c:7]   --->   Operation 11 'lshr' 'lshr_ln7' <Predicate = true> <Delay = 3.98> <CoreInst = "Shifter">   --->   Core 75 'Shifter' <Latency = 0> <II = 1> <Delay = 3.98> <FuncUnit> <Opcode : 'shl' 'lshr' 'ashr'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 12 [1/1] (0.00ns)   --->   "%sext_ln7 = sext i5 %sub_ln7" [decode.c:7]   --->   Operation 12 'sext' 'sext_ln7' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 13 [1/1] (1.78ns)   --->   "%add_ln7 = add i6 %sext_ln7, i6 %zext_ln6" [decode.c:7]   --->   Operation 13 'add' 'add_ln7' <Predicate = true> <Delay = 1.78> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 1.78> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 14 [1/1] (0.00ns)   --->   "%sext_ln7_1 = sext i6 %add_ln7" [decode.c:7]   --->   Operation 14 'sext' 'sext_ln7_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 15 [1/1] (2.94ns)   --->   "%shl_ln7 = shl i32 1, i32 %sext_ln7_1" [decode.c:7]   --->   Operation 15 'shl' 'shl_ln7' <Predicate = true> <Delay = 2.94> <CoreInst = "Shifter">   --->   Core 75 'Shifter' <Latency = 0> <II = 1> <Delay = 2.94> <FuncUnit> <Opcode : 'shl' 'lshr' 'ashr'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 16 [1/1] (0.00ns)   --->   "%trunc_ln7 = trunc i32 %shl_ln7" [decode.c:7]   --->   Operation 16 'trunc' 'trunc_ln7' <Predicate = true> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 3.06>
+ST_3 : Operation 17 [1/1] (2.07ns)   --->   "%add_ln7_1 = add i16 %trunc_ln7, i16 65535" [decode.c:7]   --->   Operation 17 'add' 'add_ln7_1' <Predicate = true> <Delay = 2.07> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.07> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 18 [1/1] (0.99ns)   --->   "%and_ln7 = and i16 %add_ln7_1, i16 %lshr_ln7" [decode.c:7]   --->   Operation 18 'and' 'and_ln7' <Predicate = true> <Delay = 0.99> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.99> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 19 [1/1] (0.00ns)   --->   "%ret_ln7 = ret i16 %and_ln7" [decode.c:7]   --->   Operation 19 'ret' 'ret_ln7' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 6.734ns, clock uncertainty: 1.818ns.
+
+ <State 1>: 1.735ns
+The critical path consists of the following:
+	wire read operation ('start', decode.c:6) on port 'start_r' (decode.c:6) [5]  (0.000 ns)
+	'sub' operation 5 bit ('sub_ln7', decode.c:7) [11]  (1.735 ns)
+
+ <State 2>: 4.720ns
+The critical path consists of the following:
+	wire read operation ('end', decode.c:6) on port 'end_r' (decode.c:6) [4]  (0.000 ns)
+	'add' operation 6 bit ('add_ln7', decode.c:7) [13]  (1.780 ns)
+	'shl' operation 32 bit ('shl_ln7', decode.c:7) [15]  (2.940 ns)
+
+ <State 3>: 3.067ns
+The critical path consists of the following:
+	'add' operation 16 bit ('add_ln7_1', decode.c:7) [17]  (2.077 ns)
+	'and' operation 16 bit ('and_ln7', decode.c:7) [18]  (0.990 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A
