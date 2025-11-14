@@ -6,7 +6,7 @@
 #include "stdio.h"
 
 #define OS_START_ADDR 0x00000000
-#define DRAM_BASE_ADDR 0x00000000  // 500 * 4 = 2000 = 0x7D0 (byte address for index 500) for checking test_add_reg
+#define DRAM_BASE_ADDR 0x00000000
 
 // Add offset to memory address (address should already be in byte form)
 #define MEM_IDX(byte_addr) (((byte_addr) + DRAM_BASE_ADDR) >> 2)
@@ -145,11 +145,18 @@ hazard_control_t detect_hazards(ID_stage ID, EX_stage EX, MEM_stage MEM, WB_stag
     // - Conditional branches (B_COND): DON'T flush - let them execute and only flush if taken
     // - Branch target is calculated in EX, taken in WB
     
-    // Check if it's an UNCONDITIONAL branch (not B_COND)
-// Note: POP with R bit needs special handling - check if it's popping to PC
+    // Branch handling strategy:
+    // - Unconditional branches (B, BX): Flush pipeline as they advance
+    // - BL/BLX: Calculate in EX, branch in WB
+    // - Conditional branches (B_COND): Let them execute, only flush if taken
+    // - POP with PC: Branch in WB
+
     int is_unconditional_branch_WB = (WB.opcode == THUMB_B || WB.opcode == THUMB_BX || WB.opcode == THUMB_BL || WB.opcode == THUMB_BLX || (WB.opcode == THUMB_POP && WB.write_data != 0));
     int is_unconditional_branch_MEM = (MEM.opcode == THUMB_B || MEM.opcode == THUMB_BX || MEM.opcode == THUMB_BL || MEM.opcode == THUMB_BLX || (MEM.opcode == THUMB_POP && MEM.mem_data != 0));
-    int is_unconditional_branch_EX = (EX.opcode == THUMB_B || EX.opcode == THUMB_BX || EX.opcode == THUMB_BL || EX.opcode == THUMB_BLX);
+
+    // Only B and BX cause immediate flush in EX
+    // BL/BLX need to wait until WB to update LR and branch
+    int is_unconditional_branch_EX = (EX.opcode == THUMB_B || EX.opcode == THUMB_BX);
 
     if (is_unconditional_branch_WB) {
         // Unconditional branch about to be taken - flush all speculative work
@@ -341,10 +348,11 @@ void cortex_m0_top(
     static MEM_stage MEM;
     static WB_stage WB;
     static cortex_m0_registers_t core_regs;
+    static bool passedHazard = false; 
     if(reset) {
         // Reset all stages
         IF.pc = 0;
-        IF.instr = 0;
+        IF.curr_instr16 = 0;
 
         ID.pc = 0;
         ID.instr = 0;
@@ -362,16 +370,19 @@ void cortex_m0_top(
         EX.reg_data2 = 0;
         EX.rd = 0;
         EX.link = 0;
+        EX.branch_taken = 0;
 
         MEM.opcode = THUMB_INVALID;
         MEM.alu_result = 0;
         MEM.mem_data = 0;
         MEM.rd = 0;
         MEM.link = 0;
+        MEM.branch_taken = 0;
 
         WB.opcode = THUMB_INVALID;
         WB.write_data = 0;
         WB.rd = 0;
+        WB.branch_taken = 0;
 
         uint32_t msp_init = instr_mem[MEM_IDX(0)];      // Read MSP from address 0x00000000
         uint32_t reset_vector = instr_mem[MEM_IDX(4)];  // Read reset vector from address 0x00000004
@@ -394,6 +405,7 @@ void cortex_m0_top(
 
         printf("[IF]  pc=0x%04X\n",IF.pc);
 
+        passedHazard = false; 
         cycle = 0;
         return;
     }
@@ -443,21 +455,21 @@ void cortex_m0_top(
             
             printf("[WB] BL TAKEN! Target PC=0x%08X, LR=0x%08X\n", branch_target, WB.link);
             break;
-            case THUMB_BLX:
-                // BLX: Branch with Link and Exchange - call ARM subroutine
-                branch_taken = 1;
-                branch_target = WB.write_data;
-                regfile_set_pc(branch_target, &core_regs);
-                next_IF.pc = branch_target;
-                
-                // Write link register
-                if (WB.link != 0) {
-                    core_regs.lr = WB.link;
-                    printf("[WB] BLX: Setting LR=0x%08X\n", WB.link);
-                }
-                
-                printf("[WB] BLX TAKEN! Target PC=0x%08X (ARM mode), LR=0x%08X\n", branch_target, WB.link);
-                break;
+        case THUMB_BLX:
+            // BLX: Branch with Link and Exchange - call ARM subroutine
+            branch_taken = 1;
+            branch_target = WB.write_data;
+            regfile_set_pc(branch_target, &core_regs);
+            next_IF.pc = branch_target;
+            
+            // Write link register
+            if (WB.link != 0) {
+                core_regs.lr = WB.link;
+                printf("[WB] BLX: Setting LR=0x%08X\n", WB.link);
+            }
+            
+            printf("[WB] BLX TAKEN! Target PC=0x%08X (ARM mode), LR=0x%08X\n", branch_target, WB.link);
+            break;
         case THUMB_B:
         case THUMB_BX:
             // Unconditional branches - always taken
@@ -467,21 +479,37 @@ void cortex_m0_top(
             next_IF.pc = branch_target ;
             printf("[WB] BRANCH TAKEN! Target PC=0x%08X (halfword=%d)\n", branch_target, next_IF.pc);
             break;
+        // case THUMB_B_COND:
+        // {
+        //     // Check if branch was actually taken by comparing write_data with sequential PC
+        //     uint32_t sequential_pc = regfile_get_pc(&core_regs);
+            
+        //     // If the computed target differs from where we naturally are, branch was taken
+        //     if (WB.write_data != sequential_pc) {
+        //         branch_taken = 1;
+        //         branch_target = WB.write_data;
+        //         regfile_set_pc(branch_target, &core_regs);
+        //         next_IF.pc = branch_target ;
+        //         printf("[WB] CONDITIONAL BRANCH TAKEN! Target PC=0x%08X (halfword=%d)\n", 
+        //             branch_target, next_IF.pc);
+        //     } else {
+        //         printf("[WB] CONDITIONAL BRANCH NOT TAKEN - continuing at PC=0x%08X\n", sequential_pc);
+        //     }
+        // }
+        //     break;
         case THUMB_B_COND:
         {
-            // Check if branch was actually taken by comparing write_data with sequential PC
-            uint32_t sequential_pc = regfile_get_pc(&core_regs);
-            
-            // If the computed target differs from where we naturally are, branch was taken
-            if (WB.write_data != sequential_pc) {
+            // Use the branch decision made in EX stage
+            if (WB.branch_taken) {
                 branch_taken = 1;
-                branch_target = WB.write_data;
+                branch_target = WB.write_data;  // This is the target computed in EX
                 regfile_set_pc(branch_target, &core_regs);
-                next_IF.pc = branch_target ;
+                next_IF.pc = branch_target;
                 printf("[WB] CONDITIONAL BRANCH TAKEN! Target PC=0x%08X (halfword=%d)\n", 
                     branch_target, next_IF.pc);
             } else {
-                printf("[WB] CONDITIONAL BRANCH NOT TAKEN - continuing at PC=0x%08X\n", sequential_pc);
+                printf("[WB] CONDITIONAL BRANCH NOT TAKEN - continuing at PC=0x%08X\n", 
+                    regfile_get_pc(&core_regs));
             }
         }
             break;
@@ -532,6 +560,17 @@ void cortex_m0_top(
 
     printf("[WB]  opcode=%d | rd=%d | write_data=0x%08X\n", WB.opcode, WB.rd, WB.write_data);
 
+
+    // -------- CONDITIONAL BRANCH FLUSH (after WB determines branch_taken) --------
+    if (branch_taken && (WB.opcode == THUMB_B_COND || WB.opcode == THUMB_CBZ || WB.opcode == THUMB_CBNZ)) {
+        // Override hazard flags to flush pipeline for taken conditional branch
+        hazard.flush_ID = 1;
+        hazard.flush_EX = 1;
+        hazard.flush_MEM = 1;
+        printf("[WB] Conditional branch TAKEN - setting flush flags for ID, EX, MEM\n");
+    }
+
+
     // -------- Memory Stage --------
     if (hazard.flush_MEM) {
         next_MEM.opcode = THUMB_INVALID;
@@ -551,6 +590,7 @@ void cortex_m0_top(
         next_MEM.mem_size = EX.mem_size;
         next_MEM.sign_extend = EX.sign_extend;
         next_MEM.cpsr = EX.cpsr;
+        next_MEM.branch_taken = EX.branch_taken; 
 
         // PUSH/POP INSTRUCTIONS
         if (EX.opcode == THUMB_PUSH) {
@@ -647,6 +687,7 @@ void cortex_m0_top(
            EX.opcode == THUMB_LDR_LIT  || EX.opcode == THUMB_LDR_SP) 
         {
             uint32_t raw_data = data_mem[MEM_IDX(EX.alu_result)];
+            printf("[RAW MEM] LOAD WORD: raw_data=0x%08X\n", raw_data);
             next_MEM.mem_data = process_mem_data(raw_data, EX.alu_result, 4, 0);
             printf("[MEM] LOAD WORD: addr=0x%08X, data=0x%08X\n", EX.alu_result, next_MEM.mem_data);
         }
@@ -738,6 +779,7 @@ void cortex_m0_top(
     next_WB.write_data = next_MEM.mem_data;
     next_WB.link = next_MEM.link;  // *** ADD THIS: Propagate link value ***
     next_WB.cpsr = next_MEM.cpsr;
+    next_WB.branch_taken = next_MEM.branch_taken;
 
     // -------- Execute Stage -------
     if (hazard.stall || hazard.flush_EX) {
@@ -759,11 +801,18 @@ void cortex_m0_top(
         EX_input_t ex_input;
         ex_input.opcode = ID.opcode;
         ex_input.rd = ID.rd;
-        ex_input.pc = ID.pc -1 ;  
+        ex_input.pc = ID.pc ;  
         ex_input.r_bit = ID.r_bit;
 
-        // ALWAYS use forwarded data for rs1 (base address register)
-        ex_input.reg_data1 = forward.forward_data1;
+        // For PC-relative instructions, use the calculated PC value from ID stage
+        // Don't apply forwarding to PC values!
+        if (ID.opcode == THUMB_LDR_LIT || ID.opcode == THUMB_ADD_PC_IMM) {
+            ex_input.reg_data1 = ID.reg_data1;  // Use PC value from ID stage
+            printf("[EX] Using PC-relative address: reg_data1=0x%08X\n", ex_input.reg_data1);
+        } else {
+            // ALWAYS use forwarded data for rs1 (base address register)
+            ex_input.reg_data1 = forward.forward_data1;
+        }
         ex_input.condition = ID.condition;  // ← PASS CONDITION TO EXECUTE
         ex_input.cpsr = forward.forward_cpsr;            
 
@@ -809,6 +858,7 @@ void cortex_m0_top(
         next_EX.mem_size = ex_output.mem_size;
         next_EX.sign_extend = ex_output.sign_extend;
         next_EX.r_bit = ID.r_bit;
+        next_EX.branch_taken = ex_output.branch_taken;
         
         printf("[EX]  opcode=%d | rd=%d | alu_result=0x%08X | reg_data2=0x%08X | next_EX.link=0x%08X\n",
             next_EX.opcode, next_EX.rd, next_EX.alu_result, next_EX.reg_data2,next_EX.link);
@@ -817,9 +867,11 @@ void cortex_m0_top(
     // -------- Instruction Decode Stage --------
     if (hazard.stall) {
         next_ID = ID;
+        next_ID.instr32 = IF.instr32;
+        passedHazard = true;
         printf("[ID]  **STALLED - REPEATING CURRENT INSTRUCTION**\n");
     } else if (hazard.flush_ID) {
-        next_ID.pc = IF.pc;
+        next_ID.pc = IF.instr_pc;  // Use the saved instruction PC
         next_ID.instr = 0;
         next_ID.opcode = THUMB_INVALID;
         next_ID.rd = 0;
@@ -834,11 +886,20 @@ void cortex_m0_top(
         next_ID.r_bit = 0;
         printf("[ID]  **FLUSHED DUE TO BRANCH**\n");
     } else {
+        uint16_t instr16_ID;
+        uint32_t instr32_ID;
+        if(passedHazard){
+            instr16_ID = ID.instr;
+            instr32_ID = ID.instr32;
+        }else{
+            ID.pc = IF.instr_pc;
+            instr16_ID = IF.curr_instr16;
+            instr32_ID = IF.instr32;
+        }
         next_ID.pc = IF.pc;
 
-        uint16_t instr16_ID = IF.instr;
         printf("[ID] Current ID pc=0x%04X\n",ID.pc);
-        printf("[ID Current Instr] =0x%04X\n",instr16_ID);
+        printf("[ID] Current Instr =0x%04X\n",instr16_ID);
         printf("[ID] next ID pc=0x%04X\n",next_ID.pc);
 
         int is32bit = is_32bit_thumb(instr16_ID);
@@ -846,21 +907,17 @@ void cortex_m0_top(
         
         if (is32bit) {
             printf("[ID] Yes 32 Bit Instr\n");  
-            uint32_t byte_addr = ID.pc ; 
-            uint32_t word = instr_mem[MEM_IDX(byte_addr)];
-
-            printf("[ID] byte_addr =0x%04X\n",byte_addr);
-            printf("[ID Word] Current word=0x%04X\n",word);
+            printf("[ID Word] instr32_ID=0x%08X\n",instr32_ID);
             uint16_t instr16_next;
             
-            if (((ID.pc) & 1) == 0) {
-                printf("Even\n");
-                instr16_next = (word >> 16) & 0xFFFF;
+            if ((ID.pc % 4) == 0 && (ID.pc%1) ==0) {
+                printf("LSB\n");
+                instr16_next = (instr32_ID >> 16) & 0xFFFF;
                 // even halfword index
             } else {
-                printf("Odd\n");
+                printf("MSB\n");
                 // odd halfword index
-                uint32_t next_word = instr_mem[MEM_IDX(byte_addr + 4)];
+                uint32_t next_word = instr_mem[MEM_IDX((((ID.pc)>>2)<<2) + 4)];
                 printf("[ID Word] Next word=0x%04X\n",next_word);
                 instr16_next = next_word & 0xFFFF;
             }
@@ -908,17 +965,32 @@ void cortex_m0_top(
             // ← USE FORWARDED CPSR (includes MEM/EX/WB forwarding)
             next_ID.cpsr = forward.forward_cpsr;
 
-            // next_ID.reg_data1 = regfile_read(dres.rs1, &core_regs);
-            // if (dres.immediate_flag) {
-            //     next_ID.reg_data2 = dres.imm_value;
-            // } else {
-            //     next_ID.reg_data2 = regfile_read(dres.rs2, &core_regs);
-            // }
             // Read rs1 from register file
-            uint32_t rs1_regfile = regfile_read(dres.rs1, &core_regs);
+            uint32_t rs1_regfile;
+            
+            // Special handling for PC-relative loads (LDR literal)
+            if (dres.operation == THUMB_LDR_LIT) {
+                // For LDR literal, use the instruction's PC aligned to word boundary
+                // ARM convention: Align(PC, 4) where PC points to current instruction + 4
+                uint32_t pc_value = (ID.pc + 4) & 0xFFFFFFFC;
+                rs1_regfile = pc_value;
+                printf("[ID] LDR_LIT: Using aligned PC=0x%08X (instr_pc=0x%08X)\n", 
+                    rs1_regfile, ID.pc);
+            } else if (dres.operation == THUMB_ADD_PC_IMM) {
+                // For ADD PC, #imm (ADR instruction)
+                uint32_t pc_value = (ID.pc + 4) & 0xFFFFFFFC;
+                rs1_regfile = pc_value;
+                printf("[ID] ADD_PC_IMM: Using aligned PC=0x%08X (instr_pc=0x%08X)\n", 
+                    rs1_regfile, ID.pc);
+            } else {
+                // Normal register read
+                rs1_regfile = regfile_read(dres.rs1, &core_regs);
+            }
             
             // Check if forwarding is available for rs1
-            if (forward.forward_src1 > 0) {
+            if (forward.forward_src1 > 0 && dres.operation != THUMB_LDR_LIT && 
+                dres.operation != THUMB_ADD_PC_IMM) {
+                // Don't forward for PC-relative instructions
                 next_ID.reg_data1 = forward.forward_data1;
                 printf("[ID] Forwarding rs1=%d from stage %d: 0x%08X (bypassing regfile 0x%08X)\n", 
                        dres.rs1, forward.forward_src1, forward.forward_data1, rs1_regfile);
@@ -946,61 +1018,111 @@ void cortex_m0_top(
             }
         }
 
+        next_ID.pc = IF.instr_pc;
         printf("[ID]  instr16=0x%04X | is32bit=%d | opcode=%u | rd=%d | rs1=%d | rs2=%d\n",
                instr16_ID, is32bit, next_ID.opcode, next_ID.rd, next_ID.rs1, next_ID.rs2);
     }
-
     // -------- Instruction Fetch Stage --------
     if (hazard.stall) {
         next_IF = IF;
         printf("[IF]  **STALLED - NOT FETCHING NEW INSTRUCTION**\n");
-    } else if (branch_taken) {
-        // Branch was taken in WB, IF.pc already updated
-        uint32_t byte_addr = next_IF.pc ;
-        uint32_t word = instr_mem[MEM_IDX(byte_addr)];
-        uint16_t instr16;
+    } else if (passedHazard) {
+        // Just came out of stall - re-fetch the instruction that was in IF during stall
+        printf("[IF] Coming out of stall - re-fetching from PC=0x%04X\n", IF.instr_pc);
+        
+        uint32_t instr_pc = IF.instr_pc;  // Use the saved instruction PC from stall
+        uint32_t hw_addr = instr_pc + DRAM_BASE_ADDR;
+        uint32_t word = instr_mem[MEM_IDX(instr_pc)];
 
-        if ((next_IF.pc & 1) == 0) {
+        printf("[IF WORD] instr_pc=0x%04X | hw_idx=%d | instr32=0x%08X\n",
+            instr_pc, MEM_IDX(instr_pc), word);
+    
+        uint16_t instr16;
+        if ((instr_pc % 4) == 0) {
             instr16 = word & 0xFFFF;
         } else {
+            printf("HERE\n");
             instr16 = (word >> 16) & 0xFFFF;
         }
 
-        next_IF.instr = instr16;
-        next_IF.pc = next_IF.pc + 1;
-        regfile_set_pc(OS_START_ADDR + next_IF.pc , &core_regs);
-
-        printf("[IF]  BRANCH TARGET FETCH | pc=0x%04X | instr16=0x%04X | next_pc=0x%04X\n",
-               next_IF.pc - 1, instr16, next_IF.pc);
-    } else {
-        uint32_t byte_addr = IF.pc;
-        uint32_t hw_addr = byte_addr + DRAM_BASE_ADDR;  // Hardware address
-        uint32_t word = instr_mem[MEM_IDX(byte_addr)];
-
-        uint16_t instr16;
-
-        if ((IF.pc & 1) == 0) {
-            instr16 = word & 0xFFFF;
-        } else {
-            instr16 = (word >> 16) & 0xFFFF;
-        }
-
-        next_IF.instr = instr16;
+        next_IF.curr_instr16 = instr16;
+        next_IF.instr32 = word;
         
         int is32bit = is_32bit_thumb(instr16);
         if (is32bit) {
-            next_IF.pc = IF.pc + 2;   // skip both halfwords (4 bytes)
+            next_IF.pc = IF.instr_pc + 4;   // Advance from the RE-FETCHED instruction
         } else {
-            next_IF.pc = IF.pc + 1;   // normal 16-bit instruction
+            next_IF.pc = IF.instr_pc + 2;   // Advance from the RE-FETCHED instruction
+        }
+        
+        next_IF.instr_pc = instr_pc;  // Store instruction's PC
+        regfile_set_pc(OS_START_ADDR + next_IF.pc, &core_regs);
+        
+        printf("[IF]  pc=0x%04X(%d) | instr_pc=0x%04X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=0x%04X | is_32=%d\n",
+            IF.instr_pc, IF.instr_pc, instr_pc, hw_addr, MEM_IDX(instr_pc), instr16, next_IF.pc, is32bit);
+
+        passedHazard = false;  // Clear the flag after handling
+        
+    } else if (branch_taken) {
+        // Branch was taken in WB, IF.pc already updated
+        uint32_t instr_pc = next_IF.pc ;  
+        uint32_t hw_addr = instr_pc + DRAM_BASE_ADDR;  // Hardware address
+        uint32_t word = instr_mem[MEM_IDX(instr_pc)];
+        uint16_t instr16;
+
+        if ((instr_pc % 4) == 0) {
+            instr16 = word & 0xFFFF;
+        } else {
+            instr16 = (word >> 16) & 0xFFFF;
+        }
+
+        next_IF.curr_instr16 = instr16;
+        next_IF.instr32 = word;
+        
+        int is32bit = is_32bit_thumb(instr16);
+        if (is32bit) {
+            next_IF.pc = next_IF.pc + 4;   // skip both halfwords (4 bytes)
+        } else {
+            next_IF.pc = next_IF.pc + 2;   // normal 16-bit instruction
+        }
+        
+        next_IF.instr_pc = instr_pc;  // Store instruction's PC
+        // Update PC in architectural register file (convert to byte address)
+        regfile_set_pc(OS_START_ADDR + next_IF.pc, &core_regs);
+ 
+        printf("[IF BRANCH TAKEN]  pc=0x%04X | instr_pc=0x%04X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=0x%04X | is_32=%d\n",
+            instr_pc, instr_pc, hw_addr, MEM_IDX(instr_pc), instr16, next_IF.pc, is32bit);
+   
+    } else {
+        uint32_t instr_pc = IF.pc;  // Save current PC before advancing
+        uint32_t hw_addr = instr_pc + DRAM_BASE_ADDR;  // Hardware address
+        uint32_t word = instr_mem[MEM_IDX(instr_pc)];
+        uint16_t instr16;
+
+        if ((instr_pc % 4) == 0) {
+            instr16 = word & 0xFFFF;
+        } else {
+            instr16 = (word >> 16) & 0xFFFF;
+        }
+
+        next_IF.curr_instr16 = instr16;
+        next_IF.instr32 = word;
+        
+        int is32bit = is_32bit_thumb(instr16);
+        if (is32bit) {
+            next_IF.pc = IF.pc + 4;   // skip both halfwords (4 bytes)
+        } else {
+            next_IF.pc = IF.pc + 2;   // normal 16-bit instruction
         }
 
         // next_IF.pc = IF.pc + 1;
         
+        next_IF.instr_pc = instr_pc;  // Store instruction's PC
         // Update PC in architectural register file (convert to byte address)
         regfile_set_pc(OS_START_ADDR + next_IF.pc, &core_regs);
-
-        printf("[IF]  pc=0x%04X | byte_addr=0x%08X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=0x%04X\n",
-            IF.pc, byte_addr, hw_addr, MEM_IDX(byte_addr), instr16, next_IF.pc);
+ 
+        printf("[IF]  pc=0x%04X(%d)| instr_pc=0x%04X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=0x%04X | is_32=%d\n",
+            IF.pc, IF.pc, instr_pc, hw_addr, MEM_IDX(instr_pc), instr16, next_IF.pc, is32bit);
    }
 
     // -------- Commit all stage updates --------

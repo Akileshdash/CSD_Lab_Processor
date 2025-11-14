@@ -491,10 +491,12 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
             
             if (condition_met) {
                 out.alu_result = input.pc + 4 + (int32_t)input.reg_data2;
+                out.branch_taken = 1; // Signal branch is taken
                 printf("[EX DEBUG B_COND] Branch TAKEN - Condition 0x%X met, target=0x%08X\n",
                     cond, out.alu_result);
             } else {
                 out.alu_result = input.pc + 4;  // Fall through to next instruction
+                out.branch_taken = 0;  // Signal branch is NOT taken
                 printf("[EX DEBUG B_COND] Branch NOT TAKEN - Condition 0x%X not met, fall through to 0x%08X\n",
                     cond, out.alu_result);
             }
@@ -514,16 +516,24 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         case THUMB_BX:
             out.alu_result = input.reg_data1 & ~1U; // Target (aligned)
             break;
-
         case THUMB_BL:
         {
-            // PC points to the instruction address
-            out.alu_result = (input.pc) + 4 + (int32_t)input.reg_data2;
-            out.link = input.pc + 4; // Return address (next instruction after BL)
+            // Ensure PC is halfword-aligned (clear bit 0 if set)
+            uint32_t aligned_pc = input.pc & ~1;
+            
+            // Calculate target: PC + 4 + offset
+            out.alu_result = aligned_pc + 4 + (int32_t)input.reg_data2;
+            
+            // Ensure target is halfword-aligned
+            out.alu_result = out.alu_result & ~1;
+            
+            // LR = address of next instruction after BL (PC + 4)
+            out.link = aligned_pc + 4;
+            
             printf("[EX DEBUG BL] BL at PC=0x%04X, target=0x%04X, LR=0x%04X\n",
-                input.pc, out.alu_result, out.link);
+                aligned_pc, out.alu_result, out.link);
             break;
-        }        
+        }     
         case THUMB_BLX:
         {
             // BLX - Branch with Link and Exchange (Thumb to ARM)

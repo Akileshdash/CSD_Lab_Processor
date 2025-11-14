@@ -36,6 +36,7 @@ typedef struct {
     // ──── Memory Operation Fields ────
     int mem_size;                 // 1=byte, 2=halfword, 4=word (0=no memory access)
     int sign_extend;              // 1 for signed loads (LDRSB, LDRSH), 0 for unsigned
+    int branch_taken;  
 } EX_output_t;
 
 // Execute function prototype

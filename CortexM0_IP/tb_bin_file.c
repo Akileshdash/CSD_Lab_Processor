@@ -80,11 +80,11 @@ int main() {
     printf("==========================\n\n");
 
     // === Call your cortex_m0_top function ===
-    cortex_m0_top(instr_mem, data_mem, reg_out, 1, 1);  // reset
+    cortex_m0_top(instr_mem, instr_mem, reg_out, 1, 1);  // reset
 
     // Run a few cycles
-    for (int cycle = 0; cycle < 20; cycle++) {
-        cortex_m0_top(instr_mem, data_mem, reg_out, 0, 1);
+    for (int cycle = 0; cycle < 30000000; cycle++) {
+        cortex_m0_top(instr_mem, instr_mem, reg_out, 0, 1);
     }
 
     printf("\n=== Final Register State ===\n");

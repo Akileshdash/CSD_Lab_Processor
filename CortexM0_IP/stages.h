@@ -9,7 +9,9 @@
 // ──────────────────────────────────────
 typedef struct {
     uint32_t pc;        // Program counter (in halfword units)
-    uint32_t instr;     // 16-bit instruction fetched
+    uint32_t instr_pc;        // PC of the instruction being passed to ID
+    uint16_t curr_instr16;     // 16-bit current instruction
+    uint32_t instr32;     // 32-bit instruction fetched
 } IF_stage;
 
 // ──────────────────────────────────────
@@ -18,6 +20,7 @@ typedef struct {
 typedef struct {
     uint32_t pc;              // Program counter
     uint32_t instr;           // Full instruction (16 or 32-bit)
+    uint32_t instr32;     // 32-bit instruction fetched
     thumb_operation_t opcode; // Decoded operation
     uint32_t rd;              // Destination register
     uint32_t rs1;             // Source register 1 (base address for loads/stores)
@@ -47,6 +50,7 @@ typedef struct {
     int mem_size;             // 1=byte, 2=halfword, 4=word (0=no memory access)
     int sign_extend;          // 1 for signed loads (LDRSB, LDRSH)
     uint32_t r_bit;         // For PUSH/POP: LR/PC included flag
+    int branch_taken;  
 } EX_stage;
 
 // ──────────────────────────────────────
@@ -63,17 +67,20 @@ typedef struct {
     // ──── Memory Operation Fields ────
     int mem_size;             // 1=byte, 2=halfword, 4=word (0=no memory access)
     int sign_extend;          // 1 for signed loads (LDRSB, LDRSH)
+    int branch_taken;  
 } MEM_stage;
 
 // ──────────────────────────────────────
 // Write Back Stage
 // ──────────────────────────────────────
 typedef struct {
+    uint32_t pc;              // Program counter
     thumb_operation_t opcode; // Operation
     uint32_t write_data;      // Data to write back to register (from MEM.mem_data)
     uint32_t rd;              // Destination register
     uint32_t link;            // LR value for BL
     uint32_t cpsr;            // Condition flags
+    int branch_taken;  
 } WB_stage;
 
 #endif

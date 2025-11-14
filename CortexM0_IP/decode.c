@@ -577,28 +577,6 @@ decode_result_t decode_thumb32_instruction(uint32_t instr32) {
     uint16_t hw2 = instr32 & 0xFFFF;
 
     // ------------------------------------------------------
-    // [0] Hardcoded BL instruction for testing
-    // ------------------------------------------------------
-    if (instr32 == 0xFE03F000 || (hw1 == 0xF000 && hw2 == 0xFE03)) {
-        result.operation = THUMB_BL;
-        result.rd = 14;              // LR
-        result.immediate_flag = 1;
-        // result.imm_value = 0xAA;     // <-- Correct offset to reach target 0x130
-        // === Automatically calculate imm_value for the BL target ===
-        uint32_t pc=0x00E2;
-        uint32_t target_addr = 0x0130;   // known target (branch destination)
-        uint32_t next_pc = pc + 4;       // LR points to next instruction
-        result.imm_value = target_addr - next_pc; // offset for BL execution
-
-        result.valid = 1;
-
-        printf("[HARDCODED BL] instr=0x%08X | rd=LR | imm=0x%08X\n",
-            instr32, result.imm_value);
-        return result;
-    }
-
-
-    // ------------------------------------------------------
     // [1] BL - Branch with Link (calls Thumb subroutine)
     // Encoding: 11110 S imm10 | 11 J1 1 J2 imm11
     // Pattern: hw1 = 0xF000-0xF7FF, hw2 = 0xD000-0xFFFF (bit 14=1, bit 12=1)
