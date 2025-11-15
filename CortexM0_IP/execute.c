@@ -681,19 +681,20 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         // ────────────────────────────────
         case THUMB_SXTB:
         {
+            // Sign extend byte (bits 7:0)
             int8_t byte_val = (int8_t)(input.reg_data1 & 0xFF);
             out.alu_result = (int32_t)byte_val;
+            // SXTB does NOT update flags
             printf("[EX DEBUG SXTB] Input=0x%08X, Byte=0x%02X (%d), Result=0x%08X\n", 
                 input.reg_data1, (unsigned char)(input.reg_data1 & 0xFF), byte_val, out.alu_result);
-            regfile_update_flags(regs, out.alu_result, 0, 0);
             break;
         }
         case THUMB_SXTH:
         {
             // Sign extend halfword (bits 15:0)
             int16_t hw_val = (int16_t)(input.reg_data1 & 0xFFFF);
-            out.alu_result = (int32_t)hw_val;  // Sign-extended to 32-bit
-            regfile_update_flags(regs, out.alu_result, 0, 0);
+            out.alu_result = (int32_t)hw_val;
+            // SXTH does NOT update flags
             printf("[EX DEBUG SXTH] Input=0x%08X, Halfword=0x%04X, Output=0x%08X\n", 
                 input.reg_data1, (uint16_t)(input.reg_data1 & 0xFFFF), out.alu_result);
             break;
@@ -702,7 +703,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         {
             // Zero extend byte (bits 7:0)
             out.alu_result = input.reg_data1 & 0xFF;
-            regfile_update_flags(regs, out.alu_result, 0, 0);
+            // UXTB does NOT update flags
             printf("[EX DEBUG UXTB] Input=0x%08X, Output=0x%08X\n", 
                 input.reg_data1, out.alu_result);
             break;
@@ -711,7 +712,7 @@ EX_output_t execute(EX_input_t input, cortex_m0_registers_t* regs) {
         {
             // Zero extend halfword (bits 15:0)
             out.alu_result = input.reg_data1 & 0xFFFF;
-            regfile_update_flags(regs, out.alu_result, 0, 0);
+            // UXTH does NOT update flags
             printf("[EX DEBUG UXTH] Input=0x%08X, Output=0x%08X\n", 
                 input.reg_data1, out.alu_result);
             break;

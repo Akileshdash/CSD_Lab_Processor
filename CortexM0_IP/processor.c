@@ -867,8 +867,11 @@ void cortex_m0_top(
     // -------- Instruction Decode Stage --------
     if (hazard.stall) {
         next_ID = ID;
-        next_ID.instr32 = IF.instr32;
-        passedHazard = true;
+        // next_ID.instr32 = IF.instr32;
+        // next_ID.pc = IF.instr_pc;
+        // passedHazard = true;
+        printf("[ID] Current ID pc=0x%04X\n",ID.pc);
+        printf("[ID] Next ID pc=0x%04X\n",next_ID.pc);
         printf("[ID]  **STALLED - REPEATING CURRENT INSTRUCTION**\n");
     } else if (hazard.flush_ID) {
         next_ID.pc = IF.instr_pc;  // Use the saved instruction PC
@@ -888,15 +891,18 @@ void cortex_m0_top(
     } else {
         uint16_t instr16_ID;
         uint32_t instr32_ID;
-        if(passedHazard){
-            instr16_ID = ID.instr;
-            instr32_ID = ID.instr32;
-        }else{
+        // if(passedHazard){
+        //     instr16_ID = IF.curr_instr16;
+        //     // instr16_ID = ID.instr;
+        //     instr32_ID = ID.instr32;
+        //     ID.pc = IF.instr_pc;
+        //     next_ID.pc = IF.instr_pc;
+        // }else{
             ID.pc = IF.instr_pc;
             instr16_ID = IF.curr_instr16;
             instr32_ID = IF.instr32;
-        }
-        next_ID.pc = IF.pc;
+            next_ID.pc = IF.pc;
+        // }
 
         printf("[ID] Current ID pc=0x%04X\n",ID.pc);
         printf("[ID] Current Instr =0x%04X\n",instr16_ID);
@@ -1026,43 +1032,6 @@ void cortex_m0_top(
     if (hazard.stall) {
         next_IF = IF;
         printf("[IF]  **STALLED - NOT FETCHING NEW INSTRUCTION**\n");
-    } else if (passedHazard) {
-        // Just came out of stall - re-fetch the instruction that was in IF during stall
-        printf("[IF] Coming out of stall - re-fetching from PC=0x%04X\n", IF.instr_pc);
-        
-        uint32_t instr_pc = IF.instr_pc;  // Use the saved instruction PC from stall
-        uint32_t hw_addr = instr_pc + DRAM_BASE_ADDR;
-        uint32_t word = instr_mem[MEM_IDX(instr_pc)];
-
-        printf("[IF WORD] instr_pc=0x%04X | hw_idx=%d | instr32=0x%08X\n",
-            instr_pc, MEM_IDX(instr_pc), word);
-    
-        uint16_t instr16;
-        if ((instr_pc % 4) == 0) {
-            instr16 = word & 0xFFFF;
-        } else {
-            printf("HERE\n");
-            instr16 = (word >> 16) & 0xFFFF;
-        }
-
-        next_IF.curr_instr16 = instr16;
-        next_IF.instr32 = word;
-        
-        int is32bit = is_32bit_thumb(instr16);
-        if (is32bit) {
-            next_IF.pc = IF.instr_pc + 4;   // Advance from the RE-FETCHED instruction
-        } else {
-            next_IF.pc = IF.instr_pc + 2;   // Advance from the RE-FETCHED instruction
-        }
-        
-        next_IF.instr_pc = instr_pc;  // Store instruction's PC
-        regfile_set_pc(OS_START_ADDR + next_IF.pc, &core_regs);
-        
-        printf("[IF]  pc=0x%04X(%d) | instr_pc=0x%04X | hw_addr=0x%08X | hw_idx=%d | instr16=0x%04X | next_pc=0x%04X | is_32=%d\n",
-            IF.instr_pc, IF.instr_pc, instr_pc, hw_addr, MEM_IDX(instr_pc), instr16, next_IF.pc, is32bit);
-
-        passedHazard = false;  // Clear the flag after handling
-        
     } else if (branch_taken) {
         // Branch was taken in WB, IF.pc already updated
         uint32_t instr_pc = next_IF.pc ;  
